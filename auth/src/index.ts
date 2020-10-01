@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
-require('dotenv').config({ path: './src/.env' });
+const result = require('dotenv').config({ path: '.env' });
 
+console.log(result.error);
 import { app } from './app';
 
 const start = async () => {
-  console.log(process.env);
   if (!process.env.JWT_KEY) {
     throw new Error('JWT must be defined!');
   }
@@ -16,7 +16,6 @@ const start = async () => {
     '<PASSWORD>',
     process.env.DATABASE_PASSWORD!
   );
-
   try {
     await mongoose.connect(DB, {
       useNewUrlParser: true,

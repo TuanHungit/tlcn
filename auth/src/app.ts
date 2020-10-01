@@ -1,12 +1,15 @@
 import express from 'express';
-import cookieSession from 'cookie-session';
+import 'express-async-errors';
 import { json } from 'body-parser';
+import cookieSession from 'cookie-session';
+
+import { currentUserRouter } from './routes/current-user';
+import { signinRouter } from './routes/signin';
+import { signoutRouter } from './routes/signout';
+import { signupRouter } from './routes/signup';
 import { errorHandler, NotFoundError } from '@thticket/common';
 
-import { signupRouter } from './routes/signup';
-
 const app = express();
-//config
 app.set('trust proxy', true);
 app.use(json());
 app.use(
@@ -15,14 +18,16 @@ app.use(
     secure: process.env.NODE_ENV !== 'test', // only https connection
   })
 );
-
-//routing
+app.use(currentUserRouter);
+app.use(signinRouter);
+app.use(signoutRouter);
 app.use(signupRouter);
-app.all('*', () => {
+
+app.all('*', async () => {
   throw new NotFoundError();
 });
 
-//global error handler
+//global error
 app.use(errorHandler);
 
 export { app };

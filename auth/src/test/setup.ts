@@ -41,7 +41,7 @@ global.signup = async () => {
   const response = await request(app)
     .post('/api/users/signup')
     .send({
-      hung: 'hung',
+      name: 'hung',
       email: 'test@gmail.com',
       password: '12345',
     })
