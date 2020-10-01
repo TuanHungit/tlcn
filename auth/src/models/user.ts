@@ -1,14 +1,10 @@
 import mongoose from 'mongoose';
-
+import { Password } from '../services/password';
 //interface mô tả các thuộc tính của user model
 interface UserAttr {
   name: string;
   email: string;
-  photo: string;
-  role: string;
   password: string;
-  passwordChangeAt: Date;
-  passwordResetExpires: Date;
 }
 
 //interface mô tả các thuộc tính của user document
@@ -42,7 +38,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      required: true,
+      enum: ['user', 'guide', 'lead-guide', 'admin'],
+      default: 'user',
     },
     password: {
       type: String,
@@ -62,7 +59,13 @@ const userSchema = new mongoose.Schema(
     },
   }
 );
-
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    const hashed = await Password.toHash(this.get('password'));
+    this.set('password', hashed);
+  }
+  next();
+});
 userSchema.statics.build = (attr: UserAttr) => {
   return new User(attr);
 };
