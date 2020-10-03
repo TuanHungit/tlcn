@@ -3,7 +3,7 @@
 ### Đề tài: XÂY DỰNG WEBSITE VỀ DU LỊCH
 ### Thành viên: 
 * Nguyễn Tuấn Hùng 17110156 
-* Phan Thị Ngọc Tuyền
+* Phan Thị Ngọc Tuyền 17110187
 ### Công nghệ phát triển:
   * Mern stack
   * Kiến trúc microservice
