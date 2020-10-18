@@ -10,7 +10,6 @@ import { signupRouter } from './routes/signup';
 import { errorHandler, NotFoundError } from '@thticket/common';
 
 const app = express();
-app.set('trust proxy', true);
 app.use(json());
 app.use(
   cookieSession({
