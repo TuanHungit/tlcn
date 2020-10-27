@@ -6,7 +6,13 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.footer{
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #282c34;
+  
+  }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +41,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+#responsive-navbar-nav  .mr-auto   :hover{
+  background-color: brown;
+}
+#responsive-navbar-nav .justify-content-end  :hover{
+  background-color: brown;
+} 
+#responsive-navbar-nav:hover .dropdown{
+  color: white;
+  display: block;
+} 
+
+figure:hover {
+  color: black;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.el-wrapper:hover .img {
+  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+  filter: blur(5px);
+}
+.el-wrapper :hover figure {
+  color: black;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
