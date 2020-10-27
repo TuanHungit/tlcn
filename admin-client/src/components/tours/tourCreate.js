@@ -18,10 +18,8 @@ import {
   required,
   FileInput,
   FileField,
-  ReferenceArrayInput,
-  SelectArrayInput,
-} from 'admin-on-rest';
-import RichTextInput from 'aor-rich-text-input';
+} from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
 import Button from '@material-ui/core/Button';
 
 const backlinksDefaultValue = [new Date()];

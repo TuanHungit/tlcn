@@ -17,7 +17,7 @@ import {
   required,
   FileInput,
   FileField,
-} from 'admin-on-rest';
+} from 'react-admin';
 import Button from '@material-ui/core/Button';
 
 const TourShow = (props) => {

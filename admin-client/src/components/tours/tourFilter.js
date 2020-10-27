@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReferenceInput, SelectInput, TextInput, Filter } from 'admin-on-rest';
+import { ReferenceInput, SelectInput, TextInput, Filter } from 'react-admin';
 export const TourFilter = (props) => (
   <Filter {...props}>
     <TextInput label='Search' source='q' alwaysOn />
