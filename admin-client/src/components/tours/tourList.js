@@ -1,24 +1,23 @@
 import React from 'react';
 import {
-  Show,
-  ShowButton,
-  SimpleShowLayout,
-  RichTextField,
-  DateField,
-  List,
-  Edit,
+  ArrayInput,
+  AutocompleteInput,
+  BooleanInput,
   Create,
-  Datagrid,
-  ReferenceField,
-  TextField,
-  EditButton,
-  DeleteButton,
+  DateInput,
+  FormDataConsumer,
+  NumberInput,
   ReferenceInput,
+  SaveButton,
   SelectInput,
   SimpleForm,
+  SimpleFormIterator,
   TextInput,
-  Filter,
-} from 'admin-on-rest';
+  Toolbar,
+  required,
+  FileInput,
+  FileField,
+} from 'react-admin';
 
 import { TourFilter } from './tourFilter';
 export const TourList = (props) => (

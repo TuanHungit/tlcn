@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 // interface startLocationAttr {
 //   type: String;
@@ -81,7 +81,7 @@ const tourSchema = new mongoose.Schema(
     },
     imageCover: {
       type: String,
-      required: [true, "A tour must have a cover image"],
+      required: [true, 'A tour must have a cover image'],
     },
     images: [String],
     createdAt: {
@@ -94,8 +94,8 @@ const tourSchema = new mongoose.Schema(
       // GeoJSON
       type: {
         type: String,
-        default: "Point",
-        enum: ["Point"],
+        default: 'Point',
+        enum: ['Point'],
       },
       coordinates: [Number],
       address: String,
@@ -105,8 +105,8 @@ const tourSchema = new mongoose.Schema(
       {
         type: {
           type: String,
-          default: "Point",
-          enum: ["Point"],
+          default: 'Point',
+          enum: ['Point'],
         },
         coordinates: [Number],
         address: String,
@@ -129,5 +129,5 @@ const tourSchema = new mongoose.Schema(
 tourSchema.statics.build = (attr: TourAttrs) => {
   return new Tour(attr);
 };
-const Tour = mongoose.model<TourDoc, TourModel>("Tour", tourSchema);
+const Tour = mongoose.model<TourDoc, TourModel>('Tour', tourSchema);
 export { Tour };
