@@ -14,24 +14,28 @@ class App extends Component {
   render() {
     return (
       <div className='with-waypoint-sticky header-bg-white'>
-        <HeaderComponent/>
-        <TourDetail />
-      </div>
-    );
-  }
-}
-export default App;
-{
-  /* <Router>
+        <HeaderComponent />
+        {/* <Router>
           <Fragment>
-            <HeaderComponent />
+
             <Switch>
               <Route path='/a' component={Banner} />
               <Route path='/login' component={Login} />
               <Route path='/register' component={Register} />
               <Route path='/blog' component={BlogComponent} />
             </Switch>
-            <FooterComponent />
+
           </Fragment>
-        </Router> */
+        </Router> */}
+        <Banner />
+        <Login />
+        <FooterComponent />
+        {/* <TourDetail /> */}
+      </div>
+    );
+  }
+}
+export default App;
+{
+
 }
