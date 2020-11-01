@@ -355,7 +355,7 @@ export default () => {
               <div class='col-inner'>
                 <p class='footer-copy-right'>
                   {' '}
-                  &#169; 2005 – 2018{' '}
+                  &#169; 2020 – 2021{' '}
                   <span class='text-primary'>MyCompany Ltd.,</span> All Rights
                   Reserved.
                 </p>

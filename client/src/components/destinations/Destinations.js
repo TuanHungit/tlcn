@@ -33,12 +33,13 @@ class Destinations extends Component {
     }
     render() {
         return (
-            <div class="section-title">
-                <h2><span><span>Top</span> Destinations</span></h2>
+            <div >
+                <div class="section-title">
+                    <h2><span><span>Top</span> Destinations</span></h2>
+                </div>
                 <div class="row cols-1 cols-sm-2 cols-lg-4 gap-2 mb-20">
                     {this.state.country.map(c =>
                         <div key={c.id} class="col">
-
                             <figure class="destination-grid-item-01">
                                 <a href="index.html#">
                                     <div class="image">
@@ -50,11 +51,14 @@ class Destinations extends Component {
                                     </figcaption>
                                 </a>
                             </figure>
-
                         </div>
                     )}
                 </div>
-            </div>)
+            </div>
+
+
+
+        )
     }
 }
 export default Destinations
