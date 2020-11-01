@@ -2,16 +2,14 @@ import React from 'react';
 import './index.css';
 export default () => {
   return (
-    <header
-      id='header-waypoint-sticky'
-      class='header-main header-mobile-menu with-absolute-navbar'
-    >
-      <div class='header-outer clearfix'>
-        <div class='header-inner'>
-          <div class='row shrink-auto-lg gap-0 align-items-center'>
-            <div class='col-5 col-shrink'>
-              <div class='col-inner'>
-                <div class='main-logo'>
+    <header id='header-waypoint-sticky'
+      className='header-main header-mobile-menu with-absolute-navbar'>
+      <div className='header-outer clearfix'>
+        <div className='header-inner'>
+          <div className='row shrink-auto-lg gap-0 align-items-center'>
+            <div className='col-5 col-shrink'>
+              <div className='col-inner'>
+                <div className='main-logo'>
                   <a href='index.html'>
                     <img src='images/logo.png' alt='images' />
                   </a>
@@ -19,51 +17,46 @@ export default () => {
               </div>
             </div>
 
-            <div class='col-7 col-shrink order-last-lg'>
-              <div class='col-inner'>
-                <ul class='nav-mini-right'>
-                  <li class='d-none d-sm-block'>
-                    <a
-                      href='tour-detail-02.html#loginFormTabInModal-register'
+            <div className='col-7 col-shrink order-last-lg'>
+              <div className='col-inner'>
+                <ul className='nav-mini-right'>
+                  <li className='d-none d-sm-block'>
+                    <a href='tour-detail-02.html#loginFormTabInModal-register'
                       data-toggle='modal'
                       data-target='#loginFormTabInModal'
                       data-backdrop='static'
-                      data-keyboard='false'
-                    >
-                      <span class='icon-font'>
-                        <i class='icon-user-follow'></i>
+                      data-keyboard='false' >
+                      <span className='icon-font'>
+                        <i className='icon-user-follow'></i>
                       </span>{' '}
                       Register
                     </a>
                   </li>
-                  <li class='d-none d-sm-block'>
-                    <a
-                      href='tour-detail-02.html#loginFormTabInModal-login'
+                  <li className='d-none d-sm-block'>
+                    <a href='tour-detail-02.html#loginFormTabInModal-login'
                       data-toggle='modal'
                       data-target='#loginFormTabInModal'
                       data-backdrop='static'
-                      data-keyboard='false'
-                    >
-                      <span class='icon-font'>
-                        <i class='icon-login'></i>
+                      data-keyboard='false'>
+                      <span className='icon-font'>
+                        <i className='icon-login'></i>
                       </span>{' '}
                       Login
                     </a>
                   </li>
-                  <li class='d-block d-sm-none'>
+                  <li className='d-block d-sm-none'>
                     <a
                       href='tour-detail-02.html#loginFormTabInModal-register'
                       data-toggle='modal'
                       data-target='#loginFormTabInModal'
                       data-backdrop='static'
-                      data-keyboard='false'
-                    >
+                      data-keyboard='false' >
                       Login / Register
                     </a>
                   </li>
                   <li>
                     <button
-                      class='btn btn-toggle collapsed'
+                      className='btn btn-toggle collapsed'
                       data-toggle='collapse'
                       data-target='#mobileMenu'
                     ></button>
@@ -72,12 +65,12 @@ export default () => {
               </div>
             </div>
 
-            <div class='col-12 col-auto'>
-              <div class='navbar-wrapper'>
-                <div class='navbar navbar-expand-lg'>
-                  <div id='mobileMenu' class='collapse navbar-collapse'>
-                    <nav class='main-nav-menu main-menu-nav navbar-arrow'>
-                      <ul class='main-nav'>
+            <div className='col-12 col-auto'>
+              <div className='navbar-wrapper'>
+                <div className='navbar navbar-expand-lg'>
+                  <div id='mobileMenu' className='collapse navbar-collapse'>
+                    <nav className='main-nav-menu main-menu-nav navbar-arrow'>
+                      <ul className='main-nav'>
                         <li>
                           <a href='index.html'>Home</a>
                         </li>
@@ -89,11 +82,9 @@ export default () => {
                             <li>
                               <a href='tour-result-list.html'>Result - List</a>
                             </li>
-
                             <li>
                               <a href='tour-detail.html'>Detail 01</a>
                             </li>
-
                             <li>
                               <a href='tour-detail-empty-booking.html'>
                                 Detail - empty booking
