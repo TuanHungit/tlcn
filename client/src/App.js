@@ -3,19 +3,21 @@ import TourDetail from './components/tourDetail';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
-import LandingPage from './containers/landingPage/LandingPage';
+import LandingPage from './containers/LandingPage/LandingPage';
+import { Route, Switch, withRouter } from 'react-router-dom';
 function App() {
   return (
-    <div className='with-waypoint-sticky header-bg-white'>
-      <div className='body-inner'>
-        <Header />
-        <LandingPage />
-        {/* <TourDetail /> */}
-        <Footer />
-        <LoginModal />
-      </div>
+    <div>
+      <Header />
+      <Switch>
+        <Route path='/' exact component={LandingPage} />
+        <Route path='/tour' component={TourDetail} />
+      </Switch>
+      {/* <TourDetail /> */}
+      <Footer />
+      <LoginModal />
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

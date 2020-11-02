@@ -1,0 +1,12 @@
+export const FETCH_TOUR_SUCCESS = 'FETCH_TOUR_SUCCESS';
+export const FETCH_TOUR_START = 'FETCH_TOUR_START';
+export const FETCH_TOUR_FAILED = 'FETCH_TOUR_FAILED';
+export const SET_TOUR_LIST = 'SET_TOUR_LIST';
+
+export const AUTH_START = 'AUTH_START';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAILED = 'AUTH_FAILED';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_LOGIN = 'AUTH_LOGIN';
+
+export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';

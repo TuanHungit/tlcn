@@ -2,8 +2,10 @@ import React from 'react';
 import './index.css';
 export default () => {
   return (
-    <header id='header-waypoint-sticky'
-      className='header-main header-mobile-menu with-absolute-navbar'>
+    <header
+      id='header-waypoint-sticky'
+      className='header-main header-mobile-menu with-absolute-navbar'
+    >
       <div className='header-outer clearfix'>
         <div className='header-inner'>
           <div className='row shrink-auto-lg gap-0 align-items-center'>
@@ -21,26 +23,24 @@ export default () => {
               <div className='col-inner'>
                 <ul className='nav-mini-right'>
                   <li className='d-none d-sm-block'>
-                    <a href='tour-detail-02.html#loginFormTabInModal-register'
+                    <a
+                      href='tour-detail-02.html#loginFormTabInModal-register'
                       data-toggle='modal'
                       data-target='#loginFormTabInModal'
                       data-backdrop='static'
-                      data-keyboard='false' >
-                      <span className='icon-font'>
-                        <i className='icon-user-follow'></i>
-                      </span>{' '}
+                      data-keyboard='false'
+                    >
                       Register
                     </a>
                   </li>
                   <li className='d-none d-sm-block'>
-                    <a href='tour-detail-02.html#loginFormTabInModal-login'
+                    <a
+                      href='tour-detail-02.html#loginFormTabInModal-login'
                       data-toggle='modal'
                       data-target='#loginFormTabInModal'
                       data-backdrop='static'
-                      data-keyboard='false'>
-                      <span className='icon-font'>
-                        <i className='icon-login'></i>
-                      </span>{' '}
+                      data-keyboard='false'
+                    >
                       Login
                     </a>
                   </li>
@@ -50,7 +50,8 @@ export default () => {
                       data-toggle='modal'
                       data-target='#loginFormTabInModal'
                       data-backdrop='static'
-                      data-keyboard='false' >
+                      data-keyboard='false'
+                    >
                       Login / Register
                     </a>
                   </li>
@@ -72,12 +73,10 @@ export default () => {
                     <nav className='main-nav-menu main-menu-nav navbar-arrow'>
                       <ul className='main-nav'>
                         <li>
-                          <a href='index.html'>Home</a>
+                          <a href='/'>Home</a>
                         </li>
                         <li>
-                          <a href='http://crenoveative.com/envato/gijalan/result-grid.html'>
-                            Tour Package
-                          </a>
+                          <a href='/tour'>Tour Package</a>
                           <ul>
                             <li>
                               <a href='tour-result-list.html'>Result - List</a>
