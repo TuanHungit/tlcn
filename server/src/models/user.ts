@@ -13,6 +13,7 @@ interface UserDoc extends mongoose.Document {
   email: string;
   photo: string;
   role: string;
+  active: Boolean;
   password: string;
   passwordChangeAt: Date;
   passwordResetExpires: Date;
@@ -44,6 +45,10 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+    },
+    active: {
+      type: Boolean,
+      default: false,
     },
     passwordChangeAt: Date,
     passwordResetExpires: Date,

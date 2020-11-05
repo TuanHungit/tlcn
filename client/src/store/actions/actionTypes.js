@@ -10,3 +10,12 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 
 export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
+
+export const FETCH_BLOG_SUCCESS = 'FETCH_BLOG_SUCCESS';
+export const FETCH_BLOG_START = 'FETCH_BLOG_START';
+export const FETCH_BLOG_FAILED = 'FETCH_BLOG_FAILED';
+export const SET_BLOG_LIST = 'SET_BLOG_LIST';
+export const COMMENT_BLOG = '';
+export const DELETE_COMMENT_BLOG = '';
+export const LIKE_BLOG = '';
+export const UNLIKE_BLOG = '';

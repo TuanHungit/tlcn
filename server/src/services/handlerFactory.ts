@@ -24,6 +24,7 @@ export const updateOne = (Model: Model<any>) => {
     if (!doc) {
       throw new BadRequestError('No document found with that ID');
     }
+
     res.status(200).json(doc);
   };
 };

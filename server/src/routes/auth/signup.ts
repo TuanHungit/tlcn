@@ -4,9 +4,10 @@ import jwt from 'jsonwebtoken';
 import { User } from '../../models/user';
 import { BadRequestError, validateRequest } from '@thticket/common';
 
+import { Email } from './../../services/email';
 const router = express.Router();
 router.post(
-  '/api/users/signup',
+  '/api/v1/users/signup',
   [
     body('email').isEmail().withMessage('Email must be valid!'),
     body('password')
@@ -23,6 +24,9 @@ router.post(
       throw new BadRequestError('Email is use!');
     }
     const user = User.build({ name, email, password });
+
+    const url = `http://localhost:3000/api/v1/users/signup/${user.id}`;
+    await new Email(user, url).sendAuthencatedEmail();
     await user.save();
 
     //create jwt
@@ -31,14 +35,22 @@ router.post(
         id: user.id,
         email: user.email,
         name,
-        exp: Math.floor(Date.now() / 1000) + 60 * 60,
       },
-      process.env.JWT_KEY!
+      process.env.JWT_KEY!,
+      {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+      }
     );
     //store jwt in cookie session
-    req.session = {
-      jwt: token,
-    };
+
+    res.cookie('jwt', token, {
+      expires: new Date(
+        Date.now() +
+          (process.env.JWT_COOKIE_EXPIRES_IN as any) * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true,
+      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    });
     res.status(201).send(user);
   }
 );

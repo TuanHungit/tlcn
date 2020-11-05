@@ -27,6 +27,7 @@ interface TourAttrs {
   startLocation: String;
   locations: [String];
   duration: Number;
+  comments: [String];
 }
 
 interface TourDoc extends mongoose.Document {
@@ -43,6 +44,7 @@ interface TourDoc extends mongoose.Document {
   availableDate: [String];
   startLocation: String;
   locations: [String];
+  comments: [String];
 }
 
 interface TourModel extends mongoose.Model<TourDoc> {
@@ -113,6 +115,27 @@ const tourSchema = new mongoose.Schema(
         address: String,
         description: String,
         day: Number,
+      },
+    ],
+    comments: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+        },
+        text: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+        },
+        avatar: {
+          type: String,
+        },
+        date: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
   },

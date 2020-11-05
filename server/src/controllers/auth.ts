@@ -1,11 +1,87 @@
-import { Tour } from '../models/tour';
-import {
-  createOne,
-  getAll,
-  deleteOne,
-  updateOne,
-} from './../services/handlerFactory';
-export const getAllTour = getAll(Tour);
-export const createOneTour = createOne(Tour);
-export const deleteOneTour = deleteOne(Tour);
-export const updateOneTour = updateOne(Tour);
+import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+
+import { BadRequestError } from './../errors/bad-request-error';
+import { User } from '../models/user';
+import { Email } from '../services/email';
+import { Password } from '../services/password';
+declare global {
+  namespace Express {
+    interface Response {
+      cookie: any;
+    }
+    interface Request {
+      user: any;
+      cookie: any;
+    }
+  }
+}
+
+const signToken = (user: any) => {
+  return jwt.sign(
+    {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    },
+    process.env.JWT_KEY!,
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    }
+  );
+};
+
+const createSendToken = (user: any, req: Request, res: Response) => {
+  const token = signToken(user);
+  res.cookie('jwt', token, {
+    expires: new Date(
+      Date.now() +
+        (process.env.JWT_COOKIE_EXPIRES_IN as any) * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+  });
+
+  res.status(200).json({
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
+export const signup = async (req: Request, res: Response) => {
+  const { name, email, password } = req.body;
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    throw new BadRequestError('Email is use!');
+  }
+  const user = User.build({ name, email, password });
+
+  const url = `http://localhost:3000/api/v1/users/signup/${user.id}`;
+  //   await new Email(user, url).sendAuthencatedEmail();
+  await user.save();
+  createSendToken(user, req, res);
+};
+
+export const signin = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const existingUser = await User.findOne({ email }).select('+password');
+  if (!existingUser) {
+    throw new BadRequestError('Invalid credentials');
+  }
+  const passwordMatch = await Password.compare(existingUser.password, password);
+  if (!passwordMatch) {
+    throw new BadRequestError('Invalid credentials');
+  }
+
+  res.status(201).send(existingUser);
+};
+
+export const logout = (req: Request, res: Response) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({});
+};

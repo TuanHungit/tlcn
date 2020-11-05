@@ -41,7 +41,7 @@ export const auth = (email, password, isSignUp) => {
       password: password,
       returnSecureToken: true,
     };
-    let url = '/users/signup';
+    let url = '/api/users/signup';
     if (!isSignUp) {
       url = '/users/signin';
     }
