@@ -23,7 +23,7 @@ class Login extends Component {
     };
     handleClick = (event) => {
         event.prevenDefault();
-        axios.post('login', { email: this.state.email, password: this.state.password })
+        axios.post('users/signup', { email: this.state.email, password: this.state.password })
             .then(res => {
                 this.data = res.data
                 localStorage.setItem('token', this.data.token)
