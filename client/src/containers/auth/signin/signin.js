@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+
 import axios from 'axios';
+// import { BrowserRouter } from 'react-router-dom';
+// import { Redirect } from 'react-router'
 class Singin extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +14,7 @@ class Singin extends Component {
       token: null,
       user: []
     }
-    this.handleClose = this.handleClose.bind(this);
+    //  this.handleClose = this.handleClose.bind(this);
   }
   handleClick = (event) => {
     event.prevenDefault();
@@ -26,9 +29,9 @@ class Singin extends Component {
       .catch(err => {
         alert("Vui lòng kiểm tra lại thông tin đăng nhập");
       })
-    if (this.data.token != null) {
-      return <Redirect to="/" />
-    }
+    // if (this.data.token != null) {
+    //   return <Redirect to="/" />
+    // }
   };
   render() {
     return (
@@ -48,8 +51,7 @@ class Singin extends Component {
                       className='active'
                       data-toggle='tab'
                       href='tour-detail-02.html#loginFormTabInModal-login'>
-                      Sign-in
-              </a>
+                      Sign-in</a>
                   </li>
                   <li>
                     <a
@@ -67,7 +69,6 @@ class Singin extends Component {
                   </li>
                 </ul>
               </nav>
-
               <div className='tab-content'>
                 <div
                   role='tabpanel'
@@ -78,7 +79,6 @@ class Singin extends Component {
                       <h4>Welcome Back to SiteName</h4>
                       <p>Sign in to your account to continue using SiteName</p>
                     </div>
-
                     <div className='form-body'>
                       <form method='post' action='tour-detail-02.html#'>
                         <div className='d-flex flex-column flex-lg-row align-items-stretch'>
