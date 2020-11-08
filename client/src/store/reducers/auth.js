@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   token: null,
-  userId: null,
+  user: null,
   error: false,
   loadding: false,
   authRedirectPath: '/',
@@ -15,14 +15,14 @@ const authSuccess = (state, action) => {
     error: null,
     loadding: false,
     token: action.token,
-    userId: action.userId,
+    user: action.user,
   };
 };
 const authFailed = (state, action) => {
   return { ...state, error: action.error, loadding: false };
 };
 const authLogout = (state, action) => {
-  return { ...state, userId: null, token: null };
+  return { ...state, user: null, token: null };
 };
 const setAuthRedirectPath = (state, action) => {
   return { ...state, authRedirectPath: action.path };

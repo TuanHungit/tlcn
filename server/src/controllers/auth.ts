@@ -12,7 +12,7 @@ declare global {
     }
     interface Request {
       user: any;
-      cookie: any;
+      cookies: any;
     }
   }
 }
@@ -33,17 +33,16 @@ const signToken = (user: any) => {
 
 const createSendToken = (user: any, req: Request, res: Response) => {
   const token = signToken(user);
+  const expirationDate = Date.now() + 60 * 60 * 1000;
   res.cookie('jwt', token, {
-    expires: new Date(
-      Date.now() +
-        (process.env.JWT_COOKIE_EXPIRES_IN as any) * 24 * 60 * 60 * 1000
-    ),
+    expires: new Date(expirationDate),
     httpOnly: true,
     secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
   });
 
   res.status(200).json({
     token,
+    expirationDate,
     data: {
       user,
     },
@@ -75,7 +74,7 @@ export const signin = async (req: Request, res: Response) => {
     throw new BadRequestError('Invalid credentials');
   }
 
-  res.status(201).send(existingUser);
+  createSendToken(existingUser, req, res);
 };
 
 export const logout = (req: Request, res: Response) => {

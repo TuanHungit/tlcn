@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
-export default () => {
+import Navigation from './Navigation/Navigation';
+export default (props) => {
   return (
     <header
       id='header-waypoint-sticky'
@@ -21,48 +22,10 @@ export default () => {
 
             <div className='col-7 col-shrink order-last-lg'>
               <div className='col-inner'>
-                <ul className='nav-mini-right'>
-                  <li className='d-none d-sm-block'>
-                    <a
-                      href='tour-detail-02.html#loginFormTabInModal-register'
-                      data-toggle='modal'
-                      data-target='#loginFormTabInModal'
-                      data-backdrop='static'
-                      data-keyboard='false'
-                    >
-                      Register
-                    </a>
-                  </li>
-                  <li className='d-none d-sm-block'>
-                    <a
-                      href='tour-detail-02.html#loginFormTabInModal-login'
-                      data-toggle='modal'
-                      data-target='#loginFormTabInModal'
-                      data-backdrop='static'
-                      data-keyboard='false'
-                    >
-                      Login
-                    </a>
-                  </li>
-                  <li className='d-block d-sm-none'>
-                    <a
-                      href='tour-detail-02.html#loginFormTabInModal-register'
-                      data-toggle='modal'
-                      data-target='#loginFormTabInModal'
-                      data-backdrop='static'
-                      data-keyboard='false'
-                    >
-                      Login / Register
-                    </a>
-                  </li>
-                  <li>
-                    <button
-                      className='btn btn-toggle collapsed'
-                      data-toggle='collapse'
-                      data-target='#mobileMenu'
-                    ></button>
-                  </li>
-                </ul>
+                <Navigation
+                  isAuthencated={props.isAuthencated}
+                  user={props.user}
+                />
               </div>
             </div>
 
