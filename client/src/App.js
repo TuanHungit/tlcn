@@ -3,19 +3,30 @@ import TourDetail from './components/tourDetail';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
-import LandingPage from './containers/LandingPage/LandingPage';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import Register from './containers/auth/signup/signup';
+import LandingPage from './containers/landingPage/LandingPage';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Singup from './containers/auth/signup/signup';
 function App() {
   return (
-    <div>
-      <Header />
-      <Switch>
-        <Route path='/' exact component={LandingPage} />
-        <Route path='/tour' component={TourDetail} />
-      </Switch>
-      {/* <TourDetail /> */}
-      <Footer />
-      <LoginModal />
+    <div className='with-waypoint-sticky header-bg-white'>
+      <div className='body-inner'>
+        <Router>
+          <Header />
+
+          <Switch>
+            <Route exact path='/' component={LandingPage}></Route>
+
+            <Route path='/register' component={Singup}></Route>
+          </Switch>
+          {/* <TourDetail /> */}
+
+          <Footer />
+          <LoginModal />
+        </Router>
+
+
+      </div>
     </div>
   );
 }

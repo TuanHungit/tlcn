@@ -1,5 +1,7 @@
 import React from 'react';
 import './index.css';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+
 export default () => {
   return (
     <header
@@ -22,17 +24,25 @@ export default () => {
             <div className='col-7 col-shrink order-last-lg'>
               <div className='col-inner'>
                 <ul className='nav-mini-right'>
-                  <li className='d-none d-sm-block'>
-                    <a
-                      href='tour-detail-02.html#loginFormTabInModal-register'
-                      data-toggle='modal'
-                      data-target='#loginFormTabInModal'
-                      data-backdrop='static'
-                      data-keyboard='false'
-                    >
+                  <li>
+                    <Link to="/register">
                       Register
-                    </a>
+                    </Link>
                   </li>
+                  {/* <li className='d-none d-sm-block'>
+                    <a href='tour-detail-02.html#loginFormTabInModal-register'></a>
+                    //  <Link to="/register">
+
+                      //    data-toggle='modal'
+                      //    data-target='#loginFormTabInModal'
+                      //    data-backdrop='static'
+                      //   // data-keyboard='false' >
+                    //   // <span className='icon-font'>
+                        //     //   <i className='icon-user-follow'></i>
+                    //   </span>{' '}
+                    //   Register
+                    // </Link>
+                  </li> */}
                   <li className='d-none d-sm-block'>
                     <a
                       href='tour-detail-02.html#loginFormTabInModal-login'
