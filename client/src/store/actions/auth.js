@@ -59,11 +59,10 @@ export const authSignin = (email, password) => {
         dispatch(authLogout(expirationDate - new Date().getTime()));
       })
       .catch((error) => {
-        console.log(error);
         const errors = error.response.data.errors;
 
         if (errors) {
-          errors.forEach((error) => dispatch(authFailed(error)));
+          dispatch(authFailed(errors[0].message));
         }
       });
   };

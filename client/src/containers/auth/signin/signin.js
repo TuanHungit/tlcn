@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import * as actionCreator from '../../../store/actions';
-import axios from 'axios';
+
 import { connect } from 'react-redux';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import alertify from 'alertifyjs';
+
 class Signin extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +21,17 @@ class Signin extends Component {
     console.log(this.state.email, this.state.password);
     this.props.onAuthLognin(this.state.email, this.state.password);
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.isAuthencated !== nextProps.isAuthencated) {
+      this.buttonElement.click();
+      alertify.success('Login susscess!');
+    }
+  }
+
   render() {
+    const status = this.props.loadding ? <Spinner /> : null;
+    const errors = this.props.error ? <p>{this.props.error}</p> : null;
     return (
       <div>
         {this.props.isAuthencated ? <Redirect to='/' /> : null}
@@ -30,10 +43,43 @@ class Signin extends Component {
           role='dialog'
           aria-hidden='true'
         >
-          <div className='modal-dialog'>
+          <div className='modal-dialog' role='document'>
             <div className='modal-content shadow-lg'>
+              <nav className='d-none'>
+                <ul className='nav external-link-navs clearfix'>
+                  <li>
+                    <a
+                      className='active'
+                      data-toggle='tab'
+                      href='tour-detail-02.html#loginFormTabInModal-login'
+                    >
+                      Sign-in
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      data-toggle='tab'
+                      href='tour-detail-02.html#loginFormTabInModal-register'
+                    >
+                      Register{' '}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      data-toggle='tab'
+                      href='tour-detail-02.html#loginFormTabInModal-forgot-pass'
+                    >
+                      Forgot Password{' '}
+                    </a>
+                  </li>
+                </ul>
+              </nav>
               <div className='tab-content'>
-                <div>
+                <div
+                  role='tabpanel'
+                  className='tab-pane active'
+                  id='loginFormTabInModal-login'
+                >
                   <div className='form-login'>
                     <div className='form-header'>
                       <h4>Welcome Back to SiteName</h4>
@@ -46,7 +92,7 @@ class Signin extends Component {
                           <div className='flex-md-grow-1 bg-primary-light'>
                             <div className='form-inner'>
                               <div className='form-group'>
-                                <label>Email adress</label>
+                                <label>Email adress:</label>
                                 <input
                                   type='text'
                                   name='email'
@@ -102,7 +148,6 @@ class Signin extends Component {
                               </a>
                             </div>
                           </div>
-
                           <div className='form-login-socials'>
                             <div className='login-socials-inner'>
                               <h5 className='mb-20'>
@@ -121,44 +166,46 @@ class Signin extends Component {
                           </div>
                         </div>
                       </form>
+                      {errors}
                     </div>
 
                     <div className='form-footer'>
                       <p>
-                        {' '}
-                        Not a member yet?{' '}
+                        Already a member?{' '}
                         <a
-                          href='tour-detail-02.html#loginFormTabInModal-register'
+                          href='tour-detail-02.html#loginFormTabInModal-login'
                           className='tab-external-link font600'
                         >
-                          Sign up
-                        </a>{' '}
-                        for free
+                          Sign in
+                        </a>
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className='text-center pb-20'>
-                <button
-                  type='button'
-                  className='close'
-                  data-dismiss='modal'
-                  aria-labelledby='Close'
-                >
-                  <span aria-hidden='true'>
-                    <i className='far fa-times-circle'></i>
-                  </span>
-                </button>
+                <div className='text-center pb-20'>
+                  <button
+                    type='button'
+                    className='close'
+                    data-dismiss='modal'
+                    aria-labelledby='Close'
+                    ref={(button) => (this.buttonElement = button)}
+                  >
+                    <span aria-hidden='true'>
+                      <i className='far fa-times-circle'></i>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        {status}
       </div>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     loadding: state.auth.loadding,

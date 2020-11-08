@@ -59,15 +59,7 @@ const navigationItems = (props) => (
           </a>
         </li>
         <li className='d-none d-sm-block'>
-          <a
-            href='tour-detail-02.html#loginFormTabInModal-login'
-            data-toggle='modal'
-            data-target='#loginFormTabInModal'
-            data-backdrop='static'
-            data-keyboard='false'
-          >
-            Logout
-          </a>
+          <a href='/logout'>Logout</a>
         </li>
         <li className='d-block d-sm-none'>
           <a

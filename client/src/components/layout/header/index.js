@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+
 import Navigation from './Navigation/Navigation';
 export default (props) => {
   return (
@@ -22,10 +23,11 @@ export default (props) => {
 
             <div className='col-7 col-shrink order-last-lg'>
               <div className='col-inner'>
+
                 <Navigation
                   isAuthencated={props.isAuthencated}
                   user={props.user}
-                />
+                />  
               </div>
             </div>
 
