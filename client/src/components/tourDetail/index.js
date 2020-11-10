@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Carousel from '../carousel/carousel';
 import PageTitle from '../layout/PageTitle/PageTile';
-import BookingTour from './bookingTour/bookingTour';
-import ContentDetail from './detailContent/detailContent';
+import BookingTour from './BookingTour/BookingTour';
+import ContentDetail from './DetailContent/DetailContent';
 import Sticky from './sticky/sticky';
 import Schedule from './schedule/shedule';
 import Map from './map/map';

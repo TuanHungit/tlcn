@@ -8,6 +8,7 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILED = 'AUTH_FAILED';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_LOGIN = 'AUTH_LOGIN';
+export const AUTH_REGISTER = 'AUTH_REGISTER'
 export const AUTH_LOAD_USER = 'AUTH_LOAD_USER';
 
 export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';

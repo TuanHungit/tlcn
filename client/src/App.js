@@ -1,35 +1,16 @@
-import { connect } from 'react-redux';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import { randomBytes } from 'crypto';
-import React, { useEffect } from 'react';
-import './App.css';
-import TourDetail from './components/tourDetail';
-import Header from './components/layout/header';
-import Footer from './components/layout/footer';
-import LoginModal from './containers/auth/signin/signin';
-<<<<<<< HEAD
-=======
-import LandingPage from './containers/landingPage/LandingPage';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Singup from './containers/auth/signup/signup';
-function App() {
-  return (
-    <div className='with-waypoint-sticky header-bg-white'>
-      <div className='body-inner'>
-        <Router>
-          <Header />
+import { connect } from "react-redux";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import { randomBytes } from "crypto";
+import React, { useEffect } from "react";
+import "./App.css";
+import TourDetail from "./components/tourDetail";
+import Header from "./components/layout/header";
+import Footer from "./components/layout/footer";
+import LoginModal from "./containers/auth/signin/signin";
 
-          <Switch>
-            <Route exact path='/' component={LandingPage}></Route>
-
-            <Route path='/register' component={Singup}></Route>
-          </Switch>
-          {/* <TourDetail /> */}
->>>>>>> Tuyen
-
-import LandingPage from './containers/LandingPage/LandingPage';
-import * as actionCreator from './store/actions';
-import Logout from './containers/auth/signout/signout';
+import LandingPage from "./containers/landingPage/LandingPage";
+import * as actionCreator from "./store/actions";
+import Logout from "./containers/auth/signout/signout";
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -37,34 +18,30 @@ function App(props) {
 
   let routes = (
     <Switch>
-      <Route path='/' exact component={LandingPage} />
-      <Route path='/tour' component={TourDetail} />
-      <Route path='/logout' component={Logout} />
-      <Redirect to='/' />
+      <Route path="/" exact component={LandingPage} />{" "}
+      <Route path="/tour" component={TourDetail} />{" "}
+      <Route path="/logout" component={Logout} /> <Redirect to="/" />
     </Switch>
   );
   if (props.isAuthencated) {
     routes = (
       <Switch>
-        <Route path='/' exact component={LandingPage} />
-        <Route path='/tour' component={TourDetail} />
-        <Route path='/logout' component={Logout} />
-        <Redirect to='/' />
+        <Route path="/" exact component={LandingPage} />{" "}
+        <Route path="/tour" component={TourDetail} />{" "}
+        <Route path="/logout" component={Logout} /> <Redirect to="/" />
       </Switch>
     );
   }
   return (
     <div>
-      <Header isAuthencated={props.isAuthencated} user={props.user} />
-      {routes}
+      <Header isAuthencated={props.isAuthencated} user={props.user} /> {routes}{" "}
       <LoginModal />
       <Footer />
     </div>
   );
 }
-export default App;
+// export default App;
 
-<<<<<<< HEAD
 const mapStateToProps = (state) => {
   return {
     isAuthencated: state.auth.token !== null,
@@ -78,6 +55,3 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
-=======
-// export default withRouter(App);
->>>>>>> Tuyen
