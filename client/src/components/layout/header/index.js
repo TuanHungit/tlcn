@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.css';
 
 import Navigation from './Navigation/Navigation';
+import { Link, NavLink } from 'react-router-dom';
 export default (props) => {
   return (
     <header
@@ -23,11 +24,10 @@ export default (props) => {
 
             <div className='col-7 col-shrink order-last-lg'>
               <div className='col-inner'>
-
                 <Navigation
                   isAuthencated={props.isAuthencated}
                   user={props.user}
-                />  
+                />
               </div>
             </div>
 

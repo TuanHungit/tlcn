@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Carousel from '../carousel/carousel';
-import PageTitle from '../layout/PageTitle/PageTile';
+
+import PageTitle from '../../layout/PageTitle/PageTile';
 import BookingTour from './bookingTour/bookingTour';
 import ContentDetail from './detailContent/detailContent';
 import Sticky from './sticky/sticky';
@@ -15,7 +15,7 @@ class TourDetail extends Component {
             <div class='pt-0 pt-xl-15'></div>
 
             <Sticky />
-            <Carousel />
+
             <PageTitle />
 
             <div class='container pt-30'>

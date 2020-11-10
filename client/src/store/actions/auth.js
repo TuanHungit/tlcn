@@ -25,6 +25,11 @@ const authFailed = (error) => {
   };
 };
 
+const authSignupSuccess = () => {
+  return {
+    type: actionTypes.AUTH_SIGNUP_SUCCESS,
+  };
+};
 export const Logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
@@ -61,6 +66,22 @@ export const authSignin = (email, password) => {
       .catch((error) => {
         const errors = error.response.data.errors;
 
+        if (errors) {
+          dispatch(authFailed(errors[0].message));
+        }
+      });
+  };
+};
+
+export const authSignup = (authData) => {
+  return (dispatch) => {
+    axios
+      .post('users/signup', authData)
+      .then((response) => {
+        dispatch(authSignupSuccess());
+      })
+      .catch((error) => {
+        const errors = error.response.data.errors;
         if (errors) {
           dispatch(authFailed(errors[0].message));
         }

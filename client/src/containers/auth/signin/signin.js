@@ -5,24 +5,94 @@ import * as actionCreator from '../../../store/actions';
 import { connect } from 'react-redux';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import alertify from 'alertifyjs';
-
+import Input from '../../../components/UI/Input/Input';
 class Signin extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: true,
-      setShow: false,
-      email: ' ',
-      password: ' ',
-    };
+  state = {
+    controls: {
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'email',
+          placeholder: 'Email Address',
+        },
+        value: '',
+        validation: {
+          required: true,
+          isEmail: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      password: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'password',
+          placeholder: 'Password',
+        },
+        value: '',
+        validation: {
+          required: true,
+          minLength: 6,
+        },
+        valid: false,
+        touched: false,
+      },
+    },
+    formIsValid: false,
+    isSignUp: true,
+  };
+  checkValidity(value, rules) {
+    let isValid = true;
+    if (!rules) {
+      return true;
+    }
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid;
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+
+    return isValid;
   }
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedControls = {
+      ...this.state.controls,
+    };
+    const updatedControlsElement = {
+      ...updatedControls[inputIdentifier],
+    };
+    updatedControlsElement.value = event.target.value;
+    updatedControlsElement.valid = this.checkValidity(
+      updatedControlsElement.value,
+      updatedControlsElement.validation
+    );
+    updatedControlsElement.touched = true;
+    updatedControls[inputIdentifier] = updatedControlsElement;
+
+    let formIsValid = true;
+    for (let inputIdentifier in updatedControls) {
+      formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+    }
+    this.setState({ controls: updatedControls, formIsValid: formIsValid });
+  };
   handleClick = (event) => {
     event.preventDefault();
-    console.log(this.state.email, this.state.password);
-    this.props.onAuthLognin(this.state.email, this.state.password);
+    console.log(
+      this.state.controls.email.value,
+      this.state.controls.password.value
+    );
+    this.props.onAuthLognin(
+      this.state.controls.email.value,
+      this.state.controls.password.value
+    );
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
+  componentDidUpdate(nextProps, nextState) {
     if (this.props.isAuthencated !== nextProps.isAuthencated) {
       this.buttonElement.click();
       alertify.success('Login susscess!');
@@ -32,9 +102,30 @@ class Signin extends Component {
   render() {
     const status = this.props.loadding ? <Spinner /> : null;
     const errors = this.props.error ? <p>{this.props.error}</p> : null;
+    const formElementsArray = [];
+    for (let key in this.state.controls) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.controls[key],
+      });
+    }
+    let form = formElementsArray.map((formElement) => (
+      <div className='form-group'>
+        <Input
+          key={formElement.id}
+          elementType={formElement.config.elementType}
+          elementConfig={formElement.config.elementConfig}
+          value={formElement.config.value}
+          invalid={!formElement.config.valid}
+          shouldValidate={formElement.config.validation}
+          touched={formElement.config.touched}
+          changed={(event) => this.inputChangedHandler(event, formElement.id)}
+        />
+      </div>
+    ));
     return (
       <div>
-        {this.props.isAuthencated ? <Redirect to='/' /> : null}
+        {/* {this.props.isAuthencated ? <Redirect to='/' /> : null} */}
         <div
           className='modal fade modal-with-tabs form-login-modal'
           id='loginFormTabInModal'
@@ -91,38 +182,16 @@ class Signin extends Component {
                         <div className='d-flex flex-column flex-lg-row align-items-stretch'>
                           <div className='flex-md-grow-1 bg-primary-light'>
                             <div className='form-inner'>
-                              <div className='form-group'>
-                                <label>Email adress:</label>
-                                <input
-                                  type='text'
-                                  name='email'
-                                  onChange={(event) =>
-                                    this.setState({ email: event.target.value })
-                                  }
-                                  className='form-control'
-                                />
-                              </div>
-                              <div className='form-group'>
-                                <label>Password</label>
-                                <input
-                                  type='password'
-                                  name='password'
-                                  onChange={(event) =>
-                                    this.setState({
-                                      password: event.target.value,
-                                    })
-                                  }
-                                  className='form-control'
-                                />
-                              </div>
-                              <div className='d-flex flex-column flex-md-row mt-25'>
+                              {form}
+                              <div className='d-flex flex-column flex-md-row mt-25 pl-5'>
                                 <div className='flex-shrink-0'>
-                                  <a
-                                    className='btn btn-primary'
+                                  <button
+                                    className='btn btn-success btn-wide'
                                     onClick={this.handleClick}
+                                    disabled={!this.state.formIsValid}
                                   >
                                     Sign-in
-                                  </a>
+                                  </button>
                                 </div>
                                 <div className='ml-0 ml-md-15 mt-15 mt-md-0'>
                                   <div className='custom-control custom-checkbox'>
@@ -200,7 +269,6 @@ class Signin extends Component {
             </div>
           </div>
         </div>
-        {status}
       </div>
     );
   }

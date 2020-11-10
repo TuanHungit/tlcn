@@ -1,4 +1,5 @@
 import React from 'react';
+import Carousel from '../../../carousel/carousel';
 export default () => {
   return (
     <div>
@@ -36,7 +37,7 @@ export default () => {
             </div>
           </div>
         </div>
-
+        <Carousel />
         <p class='lead'>
           In friendship diminution instrument in we forfeited. Tolerably an
           unwilling of determine. Beyond rather sooner so if up wishes.

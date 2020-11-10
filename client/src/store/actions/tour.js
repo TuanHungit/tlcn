@@ -7,10 +7,10 @@ export const fetchTourStart = () => {
   };
 };
 
-const setTourList = (productList) => {
+const setTourList = (tourList) => {
   return {
     type: actionTypes.SET_TOUR_LIST,
-    productList: productList,
+    tourList: tourList,
   };
 };
 const fetchTourFailed = () => {
@@ -19,11 +19,11 @@ const fetchTourFailed = () => {
   };
 };
 
-export const fetchTour = () => {
+export const fetchTour = (page = 0, limit = 9) => {
   fetchTourStart();
   return (dispatch) => {
     axios
-      .get('/tours')
+      .get(`/tours?page=${page}&limit=${limit}`)
       .then((response) => {
         dispatch(setTourList(response.data));
       })

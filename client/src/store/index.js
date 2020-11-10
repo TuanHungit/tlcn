@@ -1,10 +1,11 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import auth from './reducers/auth';
-
+import { authReducer } from './reducers/auth';
+import { tourReducer } from './reducers/tour';
 const rootReducer = combineReducers({
-  auth: auth,
+  auth: authReducer,
+  tour: tourReducer,
 });
 const composeEnhancers =
   process.env.NODE_ENV === 'development'

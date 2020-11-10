@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import { randomBytes } from 'crypto';
+
 import React, { useEffect } from 'react';
 import './App.css';
-import TourDetail from './components/tourDetail';
+import TourDetail from './components/tour/tourDetail';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
