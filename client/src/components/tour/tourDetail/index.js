@@ -15,10 +15,8 @@ class TourDetail extends Component {
           <section class='page-wrapper page-detail pt-0'>
             <div class='pt-0 pt-xl-15'></div>
 
-            <Sticky />
-
             <PageTitle />
-
+            <Sticky />
             <div class='container pt-30'>
               <div class='row gap-20 gap-lg-40'>
                 <div class='col-12 col-lg-8'>

@@ -41,7 +41,7 @@ export default (props) => {
                           <a href='/'>Home</a>
                         </li>
                         <li>
-                          <a href='/tour'>Tour Package</a>
+                          <NavLink to='/tour'>Tour Package</NavLink>
                           <ul>
                             <li>
                               <a href='tour-result-list.html'>Result - List</a>
