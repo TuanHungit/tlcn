@@ -43,6 +43,28 @@ export const authLogout = (expirationTime) => {
     }, expirationTime);
   };
 };
+// export const authSignup = (name, email, password) => {
+//     return (dispatch) => {
+//         dispatch(authStart());
+//         const authUser = {
+//             name,
+//             email,
+//             password,
+//         };
+//         let url = '/users/signup';
+//         axios.post(`${url}`, authUser)
+//             .then((response) => {
+//                 JSON.stringify(authUser);
+//                 console.log(response.data);
+//             })
+//             .catch((error) => {
+//                 const errors = error.response.data.errors;
+//                 if (errors) {
+//                     dispatch(authFailed(errors[0].message));
+//                 }
+//             });
+//     };
+// };
 export const authSignin = (email, password) => {
   return (dispatch) => {
     dispatch(authStart());

@@ -125,7 +125,6 @@ class Signin extends Component {
     ));
     return (
       <div>
-        {/* {this.props.isAuthencated ? <Redirect to='/' /> : null} */}
         <div
           className='modal fade modal-with-tabs form-login-modal'
           id='loginFormTabInModal'

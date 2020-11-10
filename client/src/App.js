@@ -18,31 +18,29 @@ function App(props) {
 
   let routes = (
     <Switch>
-      <Route path='/' exact component={LandingPage} />
-      <Route path='/tour' component={TourDetail} />
-      <Route path='/logout' component={Logout} />
-      <Redirect to='/' />
+      <Route path='/' exact component={LandingPage} />{' '}
+      <Route path='/tour' component={TourDetail} />{' '}
+      <Route path='/logout' component={Logout} /> <Redirect to='/' />
     </Switch>
   );
   if (props.isAuthencated) {
     routes = (
       <Switch>
-        <Route path='/' exact component={LandingPage} />
-        <Route path='/tour' component={TourDetail} />
-        <Route path='/logout' component={Logout} />
-        <Redirect to='/' />
+        <Route path='/' exact component={LandingPage} />{' '}
+        <Route path='/tour' component={TourDetail} />{' '}
+        <Route path='/logout' component={Logout} /> <Redirect to='/' />
       </Switch>
     );
   }
   return (
     <div>
-      <Header isAuthencated={props.isAuthencated} user={props.user} />
-      {routes}
+      <Header isAuthencated={props.isAuthencated} user={props.user} /> {routes}{' '}
       <LoginModal />
       <Footer />
     </div>
   );
 }
+// export default App;
 
 const mapStateToProps = (state) => {
   return {

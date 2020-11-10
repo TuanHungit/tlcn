@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PageTitle from '../../layout/PageTitle/PageTile';
 import BookingTour from './bookingTour/bookingTour';
 import ContentDetail from './detailContent/detailContent';
+
 import Sticky from './sticky/sticky';
 import Schedule from './schedule/shedule';
 import Map from './map/map';
