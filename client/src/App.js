@@ -3,7 +3,6 @@ import TourDetail from './components/tourDetail';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
-import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/landingPage/LandingPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Singup from './containers/auth/signup/signup';
@@ -30,5 +29,6 @@ function App() {
     </div>
   );
 }
+export default App;
 
-export default withRouter(App);
+// export default withRouter(App);
