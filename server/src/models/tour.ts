@@ -1,54 +1,13 @@
 import mongoose from 'mongoose';
+import {
+  ILocationsDOC,
+  IStartLocationDOC,
+  ITourAttrs,
+  ITourDoc,
+} from '../interfaces/tour';
 
-// interface startLocationAttr {
-//   type: String;
-//   coordinates: [Number];
-//   address: String;
-//   description: String;
-// }
-// interface locationsAttr {
-//   type: String;
-//   coordinates: [Number];
-//   address: String;
-//   description: String;
-//   day: Number;
-// }
-interface TourAttrs {
-  name: String;
-  price: Number;
-  priceDiscount: Number;
-  ratingsAverage: Number;
-  ratingsQuantity: Number;
-  summary: String;
-  description: String;
-  imageCover: String;
-  images: [String];
-  availableDate: [String];
-  startLocation: String;
-  locations: [String];
-  duration: Number;
-  comments: [String];
-}
-
-interface TourDoc extends mongoose.Document {
-  name: String;
-  price: Number;
-  priceDiscount: Number;
-  duration: Number;
-  ratingsAverage: Number;
-  ratingsQuantity: Number;
-  summary: String;
-  description: String;
-  imageCover: String;
-  images: [String];
-  availableDate: [String];
-  startLocation: String;
-  locations: [String];
-  comments: [String];
-}
-
-interface TourModel extends mongoose.Model<TourDoc> {
-  build(attr: TourAttrs): TourDoc;
+interface ITourModel extends mongoose.Model<ITourDoc> {
+  build(attr: ITourAttrs): ITourDoc;
 }
 const tourSchema = new mongoose.Schema(
   {
@@ -117,27 +76,11 @@ const tourSchema = new mongoose.Schema(
         day: Number,
       },
     ],
-    comments: [
-      {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-        },
-        text: {
-          type: String,
-          required: true,
-        },
-        name: {
-          type: String,
-        },
-        avatar: {
-          type: String,
-        },
-        date: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-    ],
+    destination: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Destination',
+      required: [true, 'Tour must belong a Destination!s'],
+    },
   },
   {
     toJSON: {
@@ -150,8 +93,8 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
-tourSchema.statics.build = (attr: TourAttrs) => {
+tourSchema.statics.build = (attr: ITourAttrs) => {
   return new Tour(attr);
 };
-const Tour = mongoose.model<TourDoc, TourModel>('Tour', tourSchema);
+const Tour = mongoose.model<ITourDoc, ITourModel>('Tour', tourSchema);
 export { Tour };

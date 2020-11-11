@@ -38,7 +38,7 @@ export default (props) => {
                     <nav className='main-nav-menu main-menu-nav navbar-arrow'>
                       <ul className='main-nav'>
                         <li>
-                          <a href='/'>Home</a>
+                          <Link to='/'>Home</Link>
                         </li>
                         <li>
                           <NavLink to='/tour'>Tour Package</NavLink>

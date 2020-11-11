@@ -1,24 +1,23 @@
 import mongoose from 'mongoose';
-import { Type } from 'typescript';
-export interface Comments {
+export interface IComments {
   user: mongoose.Schema.Types.ObjectId;
   text: String;
   name: String;
   avatar: String;
 }
-export interface BlogAttr {
+export interface IBlogAttr {
   title: String;
   user: mongoose.Schema.Types.ObjectId;
   createAt: Date;
   active: Boolean;
-  likes: { user: mongoose.Types.ObjectId }[];
-  comments: [Comments];
+  likes: { user: mongoose.Schema.Types.ObjectId }[];
+  comments: [IComments];
 }
-export interface BlogDoc extends mongoose.Document {
+export interface IBlogDoc extends mongoose.Document {
   title: String;
   user: mongoose.Schema.Types.ObjectId;
   createAt: Date;
   active: Boolean;
-  likes: [{ user: mongoose.Types.ObjectId }];
-  comments: [Comments];
+  likes: [{ user: mongoose.Schema.Types.ObjectId }];
+  comments: [IComments];
 }

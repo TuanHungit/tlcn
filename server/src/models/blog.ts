@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { BlogAttr, BlogDoc } from '../interfaces/blog';
+import { IBlogAttr, IBlogDoc } from '../interfaces/blog';
 
-interface BlogModel extends mongoose.Model<BlogDoc> {
-  build(att: BlogAttr): BlogDoc;
+interface IBlogModel extends mongoose.Model<IBlogDoc> {
+  build(att: IBlogAttr): IBlogDoc;
 }
 const blogSchema = new mongoose.Schema(
   {
@@ -68,10 +68,10 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
-blogSchema.statics.build = (attr: BlogAttr) => {
+blogSchema.statics.build = (attr: IBlogAttr) => {
   return new Blog(attr);
 };
 
-const Blog = mongoose.model<BlogDoc, BlogModel>('Blog', blogSchema);
+const Blog = mongoose.model<IBlogDoc, IBlogModel>('Blog', blogSchema);
 
 export default Blog;
