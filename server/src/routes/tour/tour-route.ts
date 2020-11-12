@@ -1,13 +1,40 @@
-import express, { Request, Response } from 'express';
-import { Tour } from '../../models/tour';
-import { requireAuth, validateRequest } from '@thticket/common';
+import express from 'express';
 import { body } from 'express-validator';
-import { createOne, getAll } from './../../services/handlerFactory';
-// @request POST /api/tour
-// @response status 201
+import { validateRequest } from '../../middlewares/validate-request';
+import { protectRoute } from '../../middlewares/protect-route';
+import { reviewRouter } from '../review/review-route';
+import {
+  getAllTour,
+  updateOneTour,
+  createOneTour,
+  deleteOneTour,
+  getOneTour,
+  getTourByDestination,
+} from '../../controllers/tour';
+
 const router = express.Router();
+
+// @Route GET /api/v1/tours
+// @desc get all tours
+// @access PUBLIC
+router.get('/tours', getAllTour);
+
+// @Route GET /api/v1/tours/:desId
+// @desc get all tours by destination
+// @access PUBLIC
+router.get('/tours/:desId', getTourByDestination);
+// @Route GET /api/v1/tours/:id
+
+// @desc get a tour
+// @access PUBLIC
+router.get('/tours/:id', getOneTour);
+
+// @Route POST /api/v1/tours
+// @desc create a tour
+// @access PRIVATE
 router.post(
-  '/api/v1/tours',
+  '/tours',
+  protectRoute,
   [
     body('name').notEmpty().trim().withMessage('Name must be defined!'),
     body('price').isFloat().withMessage('Price must be valid!'),
@@ -40,7 +67,17 @@ router.post(
     body('locations').notEmpty().withMessage('Locations must be defined!'),
   ],
   validateRequest,
-  createOne(Tour)
+  createOneTour
 );
 
-export { router as createOneTourRoute };
+// @Route PUT /api/v1/tours/:id
+// @desc update a tour
+// @access PRIVATE
+router.put('/tours/:id', protectRoute, updateOneTour);
+
+// @Route POST /api/v1/tours/:id
+// @desc delete a tour
+// @access PRIVATE
+router.delete('/tours/:id', protectRoute, deleteOneTour);
+
+export { router as tourRouter };

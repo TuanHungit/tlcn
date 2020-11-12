@@ -36,7 +36,7 @@ export const createOne = (Model: Model<any>) => {
   };
 };
 
-export const getOne = (Model: Model<any>, popOptions: Object) => {
+export const getOne = (Model: Model<any>, popOptions?: Object) => {
   return async (req: Request, res: Response) => {
     let query = Model.findById(req.params.id);
     if (popOptions) query = query.populate(popOptions);

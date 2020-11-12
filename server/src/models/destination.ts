@@ -33,4 +33,4 @@ const Destination = mongoose.model<IDestinationDoc, IDestinationModel>(
   destinationSchema
 );
 
-export default Destination;
+export { Destination };

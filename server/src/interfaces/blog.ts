@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 export interface IComments {
   user: mongoose.Schema.Types.ObjectId;
-  text: String;
-  name: String;
-  avatar: String;
+  text: string;
+  name: string;
+  avatar: string;
 }
 export interface IBlogAttr {
-  title: String;
+  title: string;
   user: mongoose.Schema.Types.ObjectId;
   createAt: Date;
   active: Boolean;
@@ -14,10 +14,10 @@ export interface IBlogAttr {
   comments: [IComments];
 }
 export interface IBlogDoc extends mongoose.Document {
-  title: String;
+  title: string;
   user: mongoose.Schema.Types.ObjectId;
   createAt: Date;
-  active: Boolean;
+  active: boolean;
   likes: [{ user: mongoose.Schema.Types.ObjectId }];
   comments: [IComments];
 }

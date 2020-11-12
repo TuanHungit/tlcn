@@ -37,6 +37,8 @@
     "mongoose": "^5.10.5",
     "nodemailer": "^6.4.14",
     "redux-thunk": "^2.3.0",
+    "slugify": "^1.4.6",
+    "stripe": "^8.121.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   },

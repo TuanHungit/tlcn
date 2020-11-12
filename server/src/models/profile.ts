@@ -38,4 +38,4 @@ const Profile = mongoose.model<IProfileDoc, IProfileModel>(
   profileSchema
 );
 
-export default Profile;
+export { Profile };

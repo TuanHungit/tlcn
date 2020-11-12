@@ -1,47 +1,49 @@
 import mongoose from 'mongoose';
 export interface IStartLocationDOC extends mongoose.Document {
-  type: String;
-  coordinates: [Number];
-  address: String;
-  description: String;
+  type: string;
+  coordinates: [number];
+  address: string;
+  description: string;
 }
 export interface ILocationsDOC extends mongoose.Document {
-  type: String;
-  coordinates: [Number];
-  address: String;
-  description: String;
-  day: Number;
+  type: string;
+  coordinates: [number];
+  address: string;
+  description: string;
+  day: number;
 }
 export interface ITourAttrs {
-  name: String;
-  price: Number;
-  priceDiscount: Number;
-  ratingsAverage: Number;
-  ratingsQuantity: Number;
-  summary: String;
-  description: String;
-  imageCover: String;
-  images: [String];
-  availableDate: [String];
+  name: string;
+  slug: string;
+  price: number;
+  priceDiscount: number;
+  ratingsAverage: number;
+  ratingsQuantity: number;
+  summary: string;
+  description: string;
+  imageCover: string;
+  images: [string];
+  availableDate: [string];
   startLocation: IStartLocationDOC;
   locations: [ILocationsDOC];
-  duration: Number;
-  comments: [String];
+  duration: number;
+  comments: [string];
 }
 
 export interface ITourDoc extends mongoose.Document {
-  name: String;
-  price: Number;
-  priceDiscount: Number;
-  duration: Number;
-  ratingsAverage: Number;
-  ratingsQuantity: Number;
-  summary: String;
-  description: String;
-  imageCover: String;
-  images: [String];
-  availableDate: [String];
+  name: string;
+  price: number;
+  slug: string;
+  priceDiscount: number;
+  duration: number;
+  ratingsAverage: number;
+  ratingsQuantity: number;
+  summary: string;
+  description: string;
+  imageCover: string;
+  images: [string];
+  availableDate: [string];
   startLocation: IStartLocationDOC;
   locations: [ILocationsDOC];
-  comments: [String];
+  comments: [string];
 }

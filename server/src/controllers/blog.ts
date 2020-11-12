@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError } from '@thticket/common';
 
-import Blog from '../models/blog';
+import { Blog } from '../models/blog';
 import { User } from '../models/user';
 import {
   createOne,
@@ -9,8 +9,7 @@ import {
   deleteOne,
   getAll,
 } from '../services/handlerFactory';
-import { BlogDoc } from '../interfaces/blog';
-import { json } from 'body-parser';
+import { IBlogDoc } from '../interfaces/blog';
 
 // @Controller CRUD
 // @desc     CRUD a blog
@@ -24,7 +23,7 @@ export const getAllBlog = getAll(Blog);
 // @desc     Like a blog
 // @access   Private
 export const likeBlog = async (req: any, res: Response) => {
-  const blog = (await Blog.findById(req.params.id)) as BlogDoc;
+  const blog = (await Blog.findById(req.params.id)) as IBlogDoc;
 
   // Check if the post has already been liked
   if (blog.likes.some((like) => like.user.toString() === req.user.id)) {

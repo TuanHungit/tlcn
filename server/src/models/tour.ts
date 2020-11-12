@@ -5,7 +5,7 @@ import {
   ITourAttrs,
   ITourDoc,
 } from '../interfaces/tour';
-
+import slugify from 'slugify';
 interface ITourModel extends mongoose.Model<ITourDoc> {
   build(attr: ITourAttrs): ITourDoc;
 }
@@ -14,6 +14,11 @@ const tourSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      unique: true,
+    },
+    slug: {
+      type: String,
+      unique: true,
     },
     price: {
       type: Number,
@@ -96,5 +101,10 @@ const tourSchema = new mongoose.Schema(
 tourSchema.statics.build = (attr: ITourAttrs) => {
   return new Tour(attr);
 };
+tourSchema.pre<ITourDoc>('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
 const Tour = mongoose.model<ITourDoc, ITourModel>('Tour', tourSchema);
 export { Tour };

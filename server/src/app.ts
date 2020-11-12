@@ -1,20 +1,20 @@
 import express from 'express';
 import 'express-async-errors';
-import { json } from 'body-parser';
+import { json, raw } from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import { userRouter } from './routes/user/user-router';
 
-import { getAllTours } from './routes/tour/index';
-import { createOneTourRoute } from './routes/tour/new';
-import { removeOneTourRoute } from './routes/tour/remove';
-import { updateOneTourRoute } from './routes/tour/update';
-import { authEmailRoute } from './routes/auth/auth-email';
 import { errorHandler } from './middlewares';
 import { NotFoundError } from './errors';
 import { blogRouter } from './routes/blog/blog-router';
 import { authRouter } from './routes/auth/auth-router';
+import { destinationRouter } from './routes/destination/destination-route';
+import { webhookCheckout } from './controllers/booking';
+import { bookingRouter } from './routes/booking/booking-route';
+import { tourRouter } from './routes/tour/tour-route';
+import { reviewRouter } from './routes/review/review-route';
 const app = express();
 
 const options: cors.CorsOptions = {
@@ -32,20 +32,27 @@ const options: cors.CorsOptions = {
 };
 app.use(cors(options));
 app.set('trust proxy', 1);
-
+app.use(cookieParser());
 app.use(json());
+app.post(
+  '/webhook-checkout',
+  raw({ type: 'application/json' }),
+  webhookCheckout
+);
 app.use(cookieParser());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use(getAllTours);
-app.use(createOneTourRoute);
-app.use(removeOneTourRoute);
-app.use(updateOneTourRoute);
-app.use(blogRouter);
-app.use(authRouter);
-app.use(userRouter);
+const baseURL = '/api/v1';
+
+app.use(baseURL, blogRouter);
+app.use(baseURL, authRouter);
+app.use(baseURL, userRouter);
+app.use(baseURL, destinationRouter);
+app.use(baseURL, tourRouter);
+app.use(baseURL, bookingRouter);
+app.use(baseURL, reviewRouter);
 app.all('*', async () => {
   throw new NotFoundError();
 });

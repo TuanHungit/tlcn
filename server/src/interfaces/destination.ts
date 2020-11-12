@@ -1,18 +1,18 @@
 import mongoose from 'mongoose';
 export interface ICountryDoc extends mongoose.Document {
-  country: String;
-  description: String;
+  country: string;
+  description: string;
 }
 export interface IDestinationAttr {
-  name: String;
-  summary: String;
-  images: [String];
+  name: string;
+  summary: string;
+  images: [string];
   destination: [ICountryDoc];
 }
 export interface IDestinationDoc extends mongoose.Document {
-  name: String;
-  summary: String;
-  images: [String];
+  name: string;
+  summary: string;
+  images: [string];
   destination: [ICountryDoc];
 }
 export interface IDestinationModel extends mongoose.Model<IDestinationDoc> {

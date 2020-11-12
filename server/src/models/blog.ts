@@ -74,4 +74,4 @@ blogSchema.statics.build = (attr: IBlogAttr) => {
 
 const Blog = mongoose.model<IBlogDoc, IBlogModel>('Blog', blogSchema);
 
-export default Blog;
+export { Blog };
