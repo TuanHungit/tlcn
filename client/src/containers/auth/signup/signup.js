@@ -1,180 +1,348 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import * as actionCreator from "../../../store/actions";
 
-const Signup = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        password1: '',
+import { connect } from "react-redux";
+import Spinner from "../../../components/UI/Spinner/Spinner";
+import alertify from "alertifyjs";
+import Input from "../../../components/UI/Input/Input";
+import propTypes from "prop-types";
+class Signup extends Component {
+  state = {
+    controls: {
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Full Name",
+        },
+        value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      email: {
+        elementType: "input",
+        elementConfig: {
+          type: "email",
+          placeholder: "Email Address",
+        },
+        value: "",
+        validation: {
+          required: true,
+          isEmail: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      password: {
+        elementType: "input",
+        elementConfig: {
+          type: "password",
+          placeholder: "Password",
+        },
+        value: "",
+        validation: {
+          required: true,
+          minLength: 6,
+        },
+        valid: false,
+        touched: false,
+      },
+      password1: {
+        elementType: "input",
+        elementConfig: {
+          type: "password",
+          placeholder: "Confirm Password",
+        },
+        value: "",
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+    },
+    formIsValid: false,
+    isSignUp: false,
+  };
+  checkValidity(value, rules) {
+    let isValid = true;
+    if (!rules) {
+      return true;
+    }
+    if (rules.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
 
-    });
-    const { name, email, password, password1 } = formData;
-    const onchange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-    const onSubmit = async e => {
-        e.preventDefault();
-        if (password !== password1) {
-            console.log('Password is not correct');
-
-        }
-        else {
-            const newUser = {
-                name,
-                email,
-                password,
-            }
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'Application/json'
-                    }
-                }
-                const body = JSON.stringify(newUser);
-                const res = await axios.post('users/signup', body,config);
-                console.log(res.data);
-            } 
-            catch (err) {
-                console.error(err.response.data)
-            }
-        }
+    return isValid;
+  }
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedControls = {
+      ...this.state.controls,
     };
+    const updatedControlsElement = {
+      ...updatedControls[inputIdentifier],
+    };
+    updatedControlsElement.value = event.target.value;
+    updatedControlsElement.valid = this.checkValidity(
+      updatedControlsElement.value,
+      updatedControlsElement.validation
+    );
+    updatedControlsElement.touched = true;
+    updatedControls[inputIdentifier] = updatedControlsElement;
+
+    let formIsValid = true;
+    for (let inputIdentifier in updatedControls) {
+      formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+    }
+    this.setState({ controls: updatedControls, formIsValid: formIsValid });
+  };
+  handleClick = (event) => {
+    event.preventDefault();
+    if (this.state.controls.password.value !== this.state.controls.password1.value) {
+      console.log("Password is not correct");
+    } else {
+        this.props.onAuthRegister(
+            this.state.controls.name.value,
+          this.state.controls.email.value,
+          this.state.controls.password.value
+        );
+    //  actionCreator.authSignup({name, email, password });
+      alertify.success("Register susscess!");
+    }
+    // if (isAuthenticated) {
+    //     return <Redirect to="/tour" />;
+    //   }
+    console.log(
+      this.state.controls.name.value,
+      this.state.controls.email.value,
+      this.state.controls.password.value
+    );
+  
+  };
+
+  componentDidUpdate(nextProps, nextState) {
+    if (this.props.isAuthencated !== nextProps.isAuthencated) {
+      this.buttonElement.click();
+      alertify.success("Register susscess!");
+    }
+  }
+
+  render() {
+    const status = this.props.loadding ? <Spinner /> : null;
+    const errors = this.props.error ? <p>{this.props.error}</p> : null;
+    const formElementsArray = [];
+    for (let key in this.state.controls) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.controls[key],
+      });
+    }
+    let form = formElementsArray.map((formElement) => (
+      <div className="form-group">
+        <Input
+          key={formElement.id}
+          elementType={formElement.config.elementType}
+          elementConfig={formElement.config.elementConfig}
+          value={formElement.config.value}
+          invalid={!formElement.config.valid}
+          shouldValidate={formElement.config.validation}
+          touched={formElement.config.touched}
+          changed={(event) => this.inputChangedHandler(event, formElement.id)}
+        />
+      </div>
+    ));
     return (
-        <div className=' container'>
-            <form onSubmit={e => onSubmit(e)}>
-                <h1>dshgfjsdfg</h1>
-                <h2>jdjkfhhfh</h2>
-                <div className='form-group'>
-                    <label>Full name</label>
-                    <input type='text' name='name' value={name} onChange={e => onchange(e)} required className='form-control' />
-                </div>
-                <div className='form-group'>
-                    <label>Email adress</label>
-                    <input type='email' name='email' value={email} onChange={e => onchange(e)} required className='form-control' />
-                </div>
-                <div className='row cols-2 gap-10'>
-                    <div className='col'>
-                        <div className='form-group'>
-                            <label>Password</label>
-                            <input type='password' name='password' value={password} onChange={e => onchange(e)} className='form-control' />
-                        </div>
+      <div>
+        <div
+          className="modal fade modal-with-tabs form-login-modal"
+          id="registerFormTabInModal"
+          aria-labelledby="modalWIthTabsLabel"
+          tabindex="0"
+          role="dialog"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content shadow-lg">
+              <nav className="d-none">
+                <ul className="nav external-link-navs clearfix">
+                  <li>
+                    <a
+                      className="active"
+                      data-toggle="tab"
+                      href="tour-detail-02.html#loginFormTabInModal-register"
+                    >
+                      Register{" "}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      data-toggle="tab"
+                      href="tour-detail-02.html#loginFormTabInModal-login"
+                    >
+                      Sign-in
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      data-toggle="tab"
+                      href="tour-detail-02.html#loginFormTabInModal-forgot-pass"
+                    >
+                      Forgot Password{" "}
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              <div className="tab-content">
+                <div
+                  role="tabpanel"
+                  className="tab-pane active"
+                  id="registerFormTabInModal-login"
+                >
+                  <div className="form-login">
+                    <div className="form-header">
+                      <h4>Welcome Back to SiteName</h4>
+                      <p>Sign in to your account to continue using SiteName</p>
                     </div>
-                    <div className='col'>
-                        <div className='form-group'>
-                            <label>Confirm password</label>
-                            <input type='password' name='password1' value={password1} onChange={e => onchange(e)} className='form-control' />
+
+                    <div className="form-body">
+                      <form>
+                        <div className="d-flex flex-column flex-lg-row align-items-stretch">
+                          <div className="flex-md-grow-1 bg-primary-light">
+                            <div className="form-inner">
+                              {form}
+                              <div className="d-flex flex-column flex-md-row mt-25 pl-5">
+                                <div className="flex-shrink-0">
+                                  <button
+                                    className="btn btn-success btn-wide"
+                                    onClick={this.handleClick}
+                                    disabled={!this.state.formIsValid}
+                                  >
+                                    Sign-up
+                                  </button>
+                                </div>
+                                <div className="ml-0 ml-md-15 mt-15 mt-md-0">
+                                  <div className="custom-control custom-checkbox">
+                                    <input
+                                      type="checkbox"
+                                      className="custom-control-input"
+                                      id="loginFormTabInModal-rememberMe"
+                                    />
+                                    <label
+                                      className="custom-control-label"
+                                      for="loginFormTabInModal-rememberMe"
+                                    >
+                                      Remember me
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <a
+                                href="tour-detail-02.html#loginFormTabInModal-forgot-pass"
+                                className="tab-external-link block mt-25 font600"
+                              >
+                                Forgot password?
+                              </a>
+                            </div>
+                          </div>
+                          <div className="form-login-socials">
+                            <div className="login-socials-inner">
+                              <h5 className="mb-20">
+                                Or sign-up with your socials
+                              </h5>
+                              <button className="btn btn-login-with btn-facebook btn-block">
+                                <i className="fab fa-facebook"></i> facebook
+                              </button>
+                              <button className="btn btn-login-with btn-google btn-block">
+                                <i className="fab fa-google"></i> google
+                              </button>
+                              <button className="btn btn-login-with btn-twitter btn-block">
+                                <i className="fab fa-twitter"></i> google
+                              </button>
+                            </div>
+                          </div>
                         </div>
+                      </form>
+                      {errors}
                     </div>
+
+                    <div className="form-footer">
+                      <p>
+                        Already a member?{" "}
+                        <a
+                          href="tour-detail-02.html#loginFormTabInModal-login"
+                          className="tab-external-link font600"
+                        >
+                          Sign in
+                        </a>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <button type="submit" className='btn btn-primary btn-wide mt-5' >
-                    Sign Up
-                </button>
-            </form >
 
-     </div >
-    //     <div role='tabpanel'
-    //     className='tab-pane fade in'
-    //     id='loginFormTabInModal-register' >
-    //     <div className='form-login'>
-    //       <div className='form-header'>
-    //         <h4>Join SiteName for Free</h4>
-    //         <p> Access thousands of online classNamees in design,
-    //           business, and more!
-    //       </p>
-    //       </div>
-    //       <div className='form-body'>
-    //         <form method='post' action='tour-detail-02.html#'>
-    //           <div className='d-flex flex-column flex-lg-row align-items-stretch'>
-    //             <div className='flex-grow-1 bg-primary-light'>
-    //               <div className='form-inner'>
-    //                 <div className='form-group'>
-    //                   <label>Full name</label>
-    //                   <input type='text' className='form-control' />
-    //                 </div>
-    //                 <div className='form-group'>
-    //                   <label>Email adress</label>
-    //                   <input type='text' className='form-control' />
-    //                 </div>
-    //                 <div className='row cols-2 gap-10'>
-    //                   <div className='col'>
-    //                     <div className='form-group'>
-    //                       <label>Password</label>
-    //                       <input
-    //                         type='password'
-    //                         className='form-control'
-    //                       />
-    //                     </div>
-    //                   </div>
-    //                   <div className='col'>
-    //                     <div className='form-group'>
-    //                       <label>Confirm password</label>
-    //                       <input
-    //                         type='password'
-    //                         className='form-control'
-    //                       />
-    //                     </div>
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div className='form-login-socials'>
-    //               <div className='login-socials-inner'>
-    //                 <h5 className='mb-20'>
-    //                   Or sign-in with your socials
-    //               </h5>
-    //                 <button className='btn btn-login-with btn-facebook btn-block'>
-    //                   <i className='fab fa-facebook'></i> facebook
-    //               </button>
-    //                 <button className='btn btn-login-with btn-google btn-block'>
-    //                   <i className='fab fa-google'></i> google
-    //               </button>
-    //                 <button className='btn btn-login-with btn-twitter btn-block'>
-    //                   <i className='fab fa-twitter'></i> google
-    //               </button>
-    //               </div>
-    //             </div>
-    //           </div>
-    //           <div className='d-flex flex-column flex-md-row mt-30 mt-lg-10'>
-    //             <div className='flex-shrink-0'>
-    //               <a
-    //                 href='tour-detail-02.html#'
-    //                 className='btn btn-primary btn-wide mt-5' >
-    //                 Sign-up
-    //             </a>
-    //             </div>
-    //             <div className='pt-1 ml-0 ml-md-15 mt-15 mt-md-0'>
-    //               <div className='custom-control custom-checkbox'>
-    //                 <input
-    //                   type='checkbox'
-    //                   className='custom-control-input'
-    //                   id='loginFormTabInModal-acceptTerm' />
-    //                 <label
-    //                   className='custom-control-label line-145'
-    //                   for='loginFormTabInModal-acceptTerm'>
-    //                   By clicking this, you are agree to to our{' '}
-    //                   <a href='tour-detail-02.html#'>terms of use</a>{' '}
-    //                 and{' '}
-    //                   <a href='tour-detail-02.html#'>privacy policy</a>{' '}
-    //                 including the use of cookies
-    //               </label>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </form>
-    //       </div>
-    //       <div className='form-footer'>
-    //         <p>
-    //           Already a member?{' '}
-    //           <a
-    //             href='tour-detail-02.html#loginFormTabInModal-login'
-    //             className='tab-external-link font600'>
-    //             Sign in
-    //         </a>
-    //         </p>
-    //       </div>
-    //     </div>
-    //   </div>
+                <div className="text-center pb-20">
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-labelledby="Close"
+                    ref={(button) => (this.buttonElement = button)}
+                  >
+                    <span aria-hidden="true">
+                      <i className="far fa-times-circle"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-
-    )
+// const mapStateToProps = (state) => {
+//   return {
+//     loadding: state.auth.loadding,
+//     error: state.auth.error,
+//     isAuthencated: state.auth.token !== null,
+//     authRedirectPath: state.auth.authRedirectPath,
+//   };
+// };
+Signup.propTypes = {
+  authSignup: propTypes.func.isRequired,
+  isAuthenticated: propTypes.bool,
 };
-export default Signup;
+
+const mapStateToProps = (state) => {
+    return {
+      loadding: state.auth.loadding,
+      error: state.auth.error,
+      isAuthencated: state.auth.token !== null,
+      authRedirectPath: '/',
+      
+    };
+  };
+// const mapStateToProps = (state) => ({
+//   isAuthenticated: state.auth.isAuthenticated,
+// });
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuthRegister: (name,email, password) =>
+      dispatch(actionCreator.authSignup(name,email, password)),
+  };
+};
+//export default connect(mapStateToProps, { authSignup })(Signup);
+
+export default connect(mapStateToProps, mapDispatchToProps )(Signup);

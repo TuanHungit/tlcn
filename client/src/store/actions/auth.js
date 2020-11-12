@@ -12,6 +12,7 @@ const authSuccess = (token, user) => {
     user: user,
   };
 };
+
 const loadUser = () => {
   return (dispatch) => {
     axios.get('/users/me').then((data) => {});
@@ -30,6 +31,7 @@ const authSignupSuccess = () => {
     type: actionTypes.AUTH_SIGNUP_SUCCESS,
   };
 };
+
 export const Logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
@@ -43,28 +45,27 @@ export const authLogout = (expirationTime) => {
     }, expirationTime);
   };
 };
-// export const authSignup = (name, email, password) => {
-//     return (dispatch) => {
-//         dispatch(authStart());
-//         const authUser = {
-//             name,
-//             email,
-//             password,
-//         };
-//         let url = '/users/signup';
-//         axios.post(`${url}`, authUser)
-//             .then((response) => {
-//                 JSON.stringify(authUser);
-//                 console.log(response.data);
-//             })
-//             .catch((error) => {
-//                 const errors = error.response.data.errors;
-//                 if (errors) {
-//                     dispatch(authFailed(errors[0].message));
-//                 }
-//             });
-//     };
-// };
+export const authSignup = (name, email, password) => {
+  return (dispatch) => {
+    const authUser = {
+      name,
+      email,
+      password,
+  };
+    axios
+      .post('/users/signup', authUser)
+      .then((response) => {
+        dispatch(authSignupSuccess());
+      })
+      .catch((error) => {
+        const errors = error.response.data.errors;
+        if (errors) {
+          dispatch(authFailed(errors[0].message));
+        }
+      });
+  };
+};
+
 export const authSignin = (email, password) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -95,21 +96,6 @@ export const authSignin = (email, password) => {
   };
 };
 
-export const authSignup = (authData) => {
-  return (dispatch) => {
-    axios
-      .post('users/signup', authData)
-      .then((response) => {
-        dispatch(authSignupSuccess());
-      })
-      .catch((error) => {
-        const errors = error.response.data.errors;
-        if (errors) {
-          dispatch(authFailed(errors[0].message));
-        }
-      });
-  };
-};
 export const setAuthRedirectPath = (path) => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT_PATH,

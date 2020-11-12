@@ -4,7 +4,7 @@ const navigationItems = (props) => (
   <div>
     {!props.isAuthencated ? (
       <ul className='nav-mini-right'>
-        <li className='d-none d-sm-block'>
+        {/* <li className='d-none d-sm-block'>
           <a
             href='tour-detail-02.html#loginFormTabInModal-register'
             data-toggle='modal'
@@ -14,7 +14,8 @@ const navigationItems = (props) => (
           >
             Register
           </a>
-        </li>
+        </li> */}
+        {/* <li><a href="/register"> Register</a></li> */}
         <li className='d-none d-sm-block'>
           <a
             href='tour-detail-02.html#loginFormTabInModal-login'
@@ -26,15 +27,15 @@ const navigationItems = (props) => (
             Login
           </a>
         </li>
-        <li className='d-block d-sm-none'>
+        <li className='d-block d-sm-block'>
           <a
             href='tour-detail-02.html#loginFormTabInModal-register'
             data-toggle='modal'
-            data-target='#loginFormTabInModal'
+            data-target='#registerFormTabInModal'
             data-backdrop='static'
             data-keyboard='false'
           >
-            Login / Register
+          Register
           </a>
         </li>
         <li>
