@@ -8,7 +8,7 @@ import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
-import LandingPage from './containers/landingPage/LandingPage';
+import LandingPage from './containers/LandingPage/LandingPage';
 import * as actionCreator from './store/actions';
 import Logout from './containers/auth/signout/signout';
 function App(props) {
@@ -21,7 +21,6 @@ function App(props) {
       <Route path='/' exact component={LandingPage} />{' '}
       <Route path='/tour' component={TourDetail} />{' '}
       {/* <Route path='/register' component={Register} /> */}
-
       <Route path='/logout' component={Logout} /> <Redirect to='/' />
     </Switch>
   );
@@ -37,7 +36,7 @@ function App(props) {
   return (
     <div>
       <Header isAuthencated={props.isAuthencated} user={props.user} /> {routes}{' '}
-     <Register/>
+      <Register />
       <LoginModal />
       <Footer />
     </div>

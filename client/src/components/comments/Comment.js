@@ -117,6 +117,32 @@ class Comment extends Component {
                                                 </div>
 
                                             </div>
+                                            <div class="slick-item">
+
+                                                <div class="testimonial-grid-01">
+
+                                                    <div class="content">
+
+                                                        <p class="saying">Ask especially collecting terminated may son expression. Extremely eagerness principle estimable cannot going laughing may you about water defer.</p>
+
+                                                    </div>
+
+                                                    <div class="man clearfix">
+
+                                                        <div class="image">
+                                                            <img src="images/image-man/03.jpg" alt="images" class="img-circle" />
+                                                        </div>
+
+                                                        <div class="texting">
+                                                            <h5>Suttira Ketkaew</h5>
+                                                            <p class="text-muted testimonial-cite">Travel on January 2017</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
                                         </div>
 
                                     </div>

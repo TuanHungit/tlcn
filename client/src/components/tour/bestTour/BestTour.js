@@ -27,7 +27,7 @@ class BestTour extends Component {
                     <li>
                       <div class='rating-item rating-sm rating-inline clearfix'>
                         <div class='rating-icons'>
-                          <StarRating />
+                          <StarRating size={20} isHover={false} />
                         </div>
                         <p class='rating-text font600 text-muted font-12 letter-spacing-1'>
                           26 reviews
@@ -70,7 +70,7 @@ class BestTour extends Component {
                     <li>
                       <div class='rating-item rating-sm rating-inline clearfix'>
                         <div class='rating-icons'>
-                          <StarRating />
+                          <StarRating size={20} isHover={false} />
                         </div>
                         <p class='rating-text font600 text-muted font-12 letter-spacing-1'>
                           53 reviews
@@ -111,7 +111,7 @@ class BestTour extends Component {
                     <li>
                       <div class='rating-item rating-sm rating-inline clearfix'>
                         <div class='rating-icons'>
-                          <StarRating />
+                          <StarRating size={20} isHover={false} />
                         </div>
                         <p class='rating-text font600 text-muted font-12 letter-spacing-2'>
                           44 reviews

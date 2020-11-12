@@ -16,13 +16,17 @@ const StarRating = (props) => {
               value={ratingValue}
               onClick={() => setRating(ratingValue)}
             />
-            <FaStar
-              size={30}
-              className='star'
-              color={ratingValue <= hover || rating ? '#ffc107' : '#e4e5e9'}
-              onMouseEnter={() => setHover(ratingValue)}
-              onMouseLeave={() => setHover(null)}
-            />
+            {props.isHover ? (
+              <FaStar
+                size={props.size}
+                className='star'
+                color={ratingValue <= hover || rating ? '#ffc107' : '#e4e5e9'}
+                onMouseEnter={() => setHover(ratingValue)}
+                onMouseLeave={() => setHover(null)}
+              />
+            ) : (
+              <FaStar size={props.size} className='star' color={'#ffc107'} />
+            )}
           </label>
         );
       })}
