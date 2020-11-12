@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface IProfileAttr {
-  dateOfbirth: Date;
+  dateOfBirth: Date;
   country: String;
   street: String;
   city: String;
@@ -12,8 +12,8 @@ export interface IProfileAttr {
   user: mongoose.Schema.Types.ObjectId;
 }
 
-export interface IProfileDoc {
-  dateOfbirth: Date;
+export interface IProfileDoc extends mongoose.Document {
+  dateOfdateOfBirthbirth: Date;
   country: String;
   street: String;
   city: String;

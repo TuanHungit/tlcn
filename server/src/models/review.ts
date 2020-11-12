@@ -55,7 +55,9 @@ reviewSchema.pre(/^find/, function (next) {
   //   });
   next();
 });
-
+reviewSchema.statics.build = (attr: IReviewAttr) => {
+  return new Review(attr);
+};
 reviewSchema.statics.calcAverageRatings = async function (tourId: any) {
   const stats = await this.aggregate([
     {
@@ -83,3 +85,24 @@ reviewSchema.statics.calcAverageRatings = async function (tourId: any) {
     });
   }
 };
+
+// reviewSchema.post('save', function () {
+//   // this points to current review
+//   this.constructor.calcAverageRatings(this.tour);
+// });
+
+// // findByIdAndUpdate
+// // findByIdAndDelete
+// reviewSchema.pre(/^findOneAnd/, async function (next) {
+//   this.r = await this.findOne();
+//   // console.log(this.r);
+//   next();
+// });
+
+// reviewSchema.post(/^findOneAnd/, async function () {
+//   // await this.findOne(); does NOT work here, query has already executed
+//   await this.r.constructor.calcAverageRatings(this.r.tour);
+// });
+
+const Review = mongoose.model<IReviewDoc, IReviewModel>('Review', reviewSchema);
+export default Review;
