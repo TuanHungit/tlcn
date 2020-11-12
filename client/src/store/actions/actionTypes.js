@@ -11,6 +11,8 @@ export const AUTH_LOGIN = 'AUTH_LOGIN';
 
 export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 export const AUTH_SIGNUP_SUCCESS = 'AUTH_SIGNUP_SUCCESS';
+export const AUTH_SIGNUP_FAIL = 'AUTH_SIGNUP_FAIL';
+
 export const AUTH_REGISTER = 'AUTH_REGISTER';
 export const AUTH_LOAD_USER = 'AUTH_LOAD_USER';
 
