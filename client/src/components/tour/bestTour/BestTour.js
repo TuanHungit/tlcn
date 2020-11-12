@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import StarRating from '../../star/star';
 class BestTour extends Component {
   render() {
     return (
@@ -27,15 +27,7 @@ class BestTour extends Component {
                     <li>
                       <div class='rating-item rating-sm rating-inline clearfix'>
                         <div class='rating-icons'>
-                          <input
-                            type='hidden'
-                            class='rating'
-                            data-filled='bi bi-star-fill rating-rated'
-                            data-empty=' bi bi-star'
-                            data-fractions='2'
-                            data-readonly
-                            value='4.5'
-                          />
+                          <StarRating />
                         </div>
                         <p class='rating-text font600 text-muted font-12 letter-spacing-1'>
                           26 reviews
@@ -78,15 +70,7 @@ class BestTour extends Component {
                     <li>
                       <div class='rating-item rating-sm rating-inline clearfix'>
                         <div class='rating-icons'>
-                          <input
-                            type='hidden'
-                            class='rating'
-                            data-filled='rating-icon ri-star rating-rated'
-                            data-empty='rating-icon ri-star-empty'
-                            data-fractions='2'
-                            data-readonly
-                            value='4.5'
-                          />
+                          <StarRating />
                         </div>
                         <p class='rating-text font600 text-muted font-12 letter-spacing-1'>
                           53 reviews
@@ -127,15 +111,7 @@ class BestTour extends Component {
                     <li>
                       <div class='rating-item rating-sm rating-inline clearfix'>
                         <div class='rating-icons'>
-                          <input
-                            type='hidden'
-                            class='rating'
-                            data-filled='rating-icon ri-star rating-rated'
-                            data-empty='rating-icon ri-star-empty'
-                            data-fractions='2'
-                            data-readonly
-                            value='4.5'
-                          />
+                          <StarRating />
                         </div>
                         <p class='rating-text font600 text-muted font-12 letter-spacing-2'>
                           44 reviews

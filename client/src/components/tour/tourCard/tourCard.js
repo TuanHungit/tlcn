@@ -1,4 +1,5 @@
 import React from 'react';
+import StartRating from '../../star/star';
 export default (props) => {
   return (
     <figure class='tour-grid-item-01'>
@@ -16,15 +17,7 @@ export default (props) => {
             <li>
               <div class='rating-item rating-sm rating-inline clearfix'>
                 <div class='rating-icons'>
-                  <input
-                    type='hidden'
-                    class='rating'
-                    data-filled='rating-icon bi bi-star-fill rating-rated'
-                    data-empty='rating-icon bi bi-star'
-                    data-fractions='2'
-                    data-readonly
-                    value='4.5'
-                  />
+                  <StartRating />
                 </div>
                 <p class='rating-text font600 text-muted font-12 letter-spacing-1'>
                   26 reviews

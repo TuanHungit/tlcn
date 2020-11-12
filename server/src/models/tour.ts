@@ -6,8 +6,10 @@ import {
   ITourDoc,
 } from '../interfaces/tour';
 import slugify from 'slugify';
+import { Destination } from './destination';
 interface ITourModel extends mongoose.Model<ITourDoc> {
   build(attr: ITourAttrs): ITourDoc;
+  calculateNumberOfTour(destinationId: any): ITourDoc;
 }
 const tourSchema = new mongoose.Schema(
   {
@@ -100,6 +102,31 @@ const tourSchema = new mongoose.Schema(
 
 tourSchema.statics.build = (attr: ITourAttrs) => {
   return new Tour(attr);
+};
+
+tourSchema.statics.calculateNumberOfTour = async function (destinationId: any) {
+  const stats = await this.aggregate([
+    {
+      $match: { destination: destinationId },
+    },
+    {
+      $group: {
+        _id: '$destination',
+        nid: { $sum: 1 },
+      },
+    },
+  ]);
+  // console.log(stats);
+
+  if (stats.length > 0) {
+    await Destination.findByIdAndUpdate(destinationId, {
+      numOfTour: stats[0].nid,
+    });
+  } else {
+    await Destination.findByIdAndUpdate(destinationId, {
+      numOfTour: 0,
+    });
+  }
 };
 tourSchema.pre<ITourDoc>('save', function (next) {
   this.slug = slugify(this.name, { lower: true });

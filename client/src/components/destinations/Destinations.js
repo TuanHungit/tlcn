@@ -1,64 +1,194 @@
 import React, { Component } from 'react';
 
 class Destinations extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            //  index:  useState(0),
-            //  setIndex: useState(0),
-            country: [
-                {
-                    id: 1,
-                    name: "Vịnh Hạ Long",
-                    image: "https://www.topcv.vn/v3/images/seo/du-lich/nganh-du-lich-lam-nhung-cong-viec-gi-fb.png"
-                },
-                {
-                    id: 2,
-                    name: "Sa Pa",
-                    image: "https://www.topcv.vn/v3/images/seo/du-lich/nganh-du-lich-lam-nhung-cong-viec-gi-fb.png"
-                },
-                {
-                    id: 3,
-                    name: "Hà Nội",
-                    image: "https://www.topcv.vn/v3/images/seo/du-lich/nganh-du-lich-lam-nhung-cong-viec-gi-fb.png"
-                },
-                {
-                    id: 4,
-                    name: "Đà Lạt",
-                    image: "https://www.topcv.vn/v3/images/seo/du-lich/nganh-du-lich-lam-nhung-cong-viec-gi-fb.png"
-                },
-            ]
-        };
-        // this.handleSelect = this.handleSelect.bind(this);
-    }
-    render() {
-        return (
-            <div >
-                <div class="section-title">
-                    <h2><span><span>Top</span> Destinations</span></h2>
+  render() {
+    return (
+      <div>
+        <div class='section-title'>
+          <h2>
+            <span>
+              <span>Top</span> Destinations
+            </span>
+          </h2>
+        </div>
+        <div class='row cols-1 cols-md-3 gap-5'>
+          <div class='col'>
+            <div class='col-inner'>
+              <a
+                href='index-05.html#'
+                class='destination-grid-item-02 caption-relative set-height-1'
+              >
+                <div class='image'>
+                  <img src='images/image-destination/01.jpg' alt='image' />
                 </div>
-                <div class="row cols-1 cols-sm-2 cols-lg-4 gap-2 mb-20">
-                    {this.state.country.map(c =>
-                        <div key={c.id} class="col">
-                            <figure class="destination-grid-item-01">
-                                <a href="index.html#">
-                                    <div class="image">
-                                        <img className=" img img-thumbnail" src={c.image} alt="image" />
-                                    </div>
-                                    <figcaption class="content">
-                                        <h5>{c.name}</h5>
 
-                                    </figcaption>
-                                </a>
-                            </figure>
+                <div class='content caption-holder'>
+                  <div class='caption-inner caption-bottom caption-gradient'>
+                    <div class='row shrink-auto gap-20 align-items-end'>
+                      <div class='col-auto'>
+                        <div class='col-inner'>
+                          <h6>Bangkok, Thailand</h6>
                         </div>
-                    )}
+                      </div>
+
+                      <div class='col-shrink'>
+                        <div class='col-inner'>
+                          <span class='caption-label'>15 tours</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </a>
+
+              <a
+                href='index-05.html#'
+                class='destination-grid-item-02 caption-relative set-height-3'
+              >
+                <div class='image'>
+                  <img src='images/image-destination/02.jpg' alt='image' />
+                </div>
+
+                <div class='content caption-holder'>
+                  <div class='caption-inner caption-bottom caption-gradient'>
+                    <div class='row shrink-auto gap-20 align-items-end'>
+                      <div class='col-auto'>
+                        <div class='col-inner'>
+                          <h6>Hong Kong , China</h6>
+                        </div>
+                      </div>
+
+                      <div class='col-shrink'>
+                        <div class='col-inner'>
+                          <span class='caption-label'>15 tours</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
+          </div>
 
+          <div class='col'>
+            <div class='col-inner'>
+              <a
+                href='index-05.html#'
+                class='destination-grid-item-02 caption-relative set-height-2'
+              >
+                <div class='image'>
+                  <img src='images/image-destination/03.jpg' alt='image' />
+                </div>
 
+                <div class='content caption-holder'>
+                  <div class='caption-inner caption-bottom caption-gradient'>
+                    <div class='row shrink-auto gap-20 align-items-end'>
+                      <div class='col-auto'>
+                        <div class='col-inner'>
+                          <h6>New York, USA</h6>
+                        </div>
+                      </div>
 
-        )
-    }
+                      <div class='col-shrink'>
+                        <div class='col-inner'>
+                          <span class='caption-label'>15 tours</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href='index-05.html#'
+                class='destination-grid-item-02 caption-relative set-height-2'
+              >
+                <div class='image'>
+                  <img src='images/image-destination/04.jpg' alt='image' />
+                </div>
+
+                <div class='content caption-holder'>
+                  <div class='caption-inner caption-bottom caption-gradient'>
+                    <div class='row shrink-auto gap-20 align-items-end'>
+                      <div class='col-auto'>
+                        <div class='col-inner'>
+                          <h6>London, UK</h6>
+                        </div>
+                      </div>
+
+                      <div class='col-shrink'>
+                        <div class='col-inner'>
+                          <span class='caption-label'>15 tours</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class='col'>
+            <div class='col-inner'>
+              <a
+                href='index-05.html#'
+                class='destination-grid-item-02 caption-relative set-height-3'
+              >
+                <div class='image'>
+                  <img src='images/image-destination/05.jpg' alt='image' />
+                </div>
+
+                <div class='content caption-holder'>
+                  <div class='caption-inner caption-bottom caption-gradient'>
+                    <div class='row shrink-auto gap-20 align-items-end'>
+                      <div class='col-auto'>
+                        <div class='col-inner'>
+                          <h6>Paris, France</h6>
+                        </div>
+                      </div>
+
+                      <div class='col-shrink'>
+                        <div class='col-inner'>
+                          <span class='caption-label'>15 tours</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href='index-05.html#'
+                class='destination-grid-item-02 caption-relative set-height-1'
+              >
+                <div class='image'>
+                  <img src='images/image-destination/06.jpg' alt='image' />
+                </div>
+
+                <div class='content caption-holder'>
+                  <div class='caption-inner caption-bottom caption-gradient'>
+                    <div class='row shrink-auto gap-20 align-items-end'>
+                      <div class='col-auto'>
+                        <div class='col-inner'>
+                          <h6>Rome, Italy</h6>
+                        </div>
+                      </div>
+
+                      <div class='col-shrink'>
+                        <div class='col-inner'>
+                          <span class='caption-label'>15 tours</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class='clear mb-100'></div>
+      </div>
+    );
+  }
 }
-export default Destinations
+export default Destinations;

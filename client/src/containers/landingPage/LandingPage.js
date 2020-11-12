@@ -1,16 +1,17 @@
 import React, { Component, useState } from 'react';
+import { connect } from 'react-redux';
+
 import Destinations from '../../components/destinations/Destinations';
 import Comment from '../../components/comments/Comment';
 import Blogs from '../../components/blogs/Blogs';
 import Search from '../../components/search/Search';
 import BestTour from './../../components/tour/bestTour/BestTour';
-
+import * as actionCreators from '../../store/actions';
+import Spinner from '../../components/UI/Spinner/Spinner';
 class LandingPage extends Component {
-  // this.handleSelect = this.handleSelect.bind(this);
-
-  // handleSelect = (selectedIndex,e) => {
-  //     setIndex(selectedIndex);
-  // };
+  componentDidMount() {
+    this.props.onFetchDestination();
+  }
   render() {
     return (
       <div class='main-wrapper scrollspy-container'>
@@ -66,7 +67,7 @@ class LandingPage extends Component {
 
             <div class='clear mb-100'></div>
 
-            <Destinations />
+            <Destinations destinationList={this.props.destinationList} />
             <BestTour />
           </div>
         </section>
@@ -78,12 +79,14 @@ class LandingPage extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    tourList: state.tour.tourList,
-    error: state.tour.error,
-    loading: state.tour.loading,
+    listDestination: state.destination.listDestination,
+    error: state.destination.error,
+    loading: state.destination.loading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onFetchDestination: () => dispatch(actionCreators.fetchDestination()),
+  };
 };
-export default LandingPage;
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
