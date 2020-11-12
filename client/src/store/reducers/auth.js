@@ -6,6 +6,7 @@ const initialState = {
   loadding: false,
   active: false,
   authRedirectPath: '/',
+  isAuthenticated: null,
 };
 const authStart = (state, action) => {
   return { ...state, loadding: true };
@@ -17,6 +18,19 @@ const authSuccess = (state, action) => {
     loadding: false,
     token: action.token,
     user: action.user,
+  };
+};
+
+const authSignupSuccess = (state, action) => {
+  return {
+    ...state,
+    error: null,
+    loadding: false,
+   // token: localStorage.getItem('token'),
+    user: null,
+    isAuthenticated: true,
+    authRedirectPath: '/',
+
   };
 };
 const authFailed = (state, action) => {
@@ -44,9 +58,8 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action);
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
-
     case actionTypes.AUTH_SIGNUP_SUCCESS:
-      return state;
+      return authSignupSuccess(state,action); 
     default:
       return state;
   }
