@@ -1,11 +1,11 @@
-import * as actionTypes from '../actions/actionTypes';
+import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   token: null,
   user: null,
   error: null,
   loadding: false,
   active: false,
-  authRedirectPath: '/',
+  authRedirectPath: "/",
   isAuthenticated: null,
 };
 const authStart = (state, action) => {
@@ -26,11 +26,10 @@ const authSignupSuccess = (state, action) => {
     ...state,
     error: null,
     loadding: false,
-   // token: localStorage.getItem('token'),
+    // token: localStorage.getItem("token"),
     user: null,
     isAuthenticated: true,
-    authRedirectPath: '/',
-
+    authRedirectPath: "/",
   };
 };
 const authFailed = (state, action) => {
@@ -59,7 +58,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
     case actionTypes.AUTH_SIGNUP_SUCCESS:
-      return authSignupSuccess(state,action); 
+      return authSignupSuccess(state, action);
     default:
       return state;
   }

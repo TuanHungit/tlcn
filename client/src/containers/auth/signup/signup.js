@@ -109,15 +109,17 @@ class Signup extends Component {
   };
   handleClick = (event) => {
     event.preventDefault();
-    if (this.state.controls.password.value !== this.state.controls.password1.value) {
-      console.log("Password is not correct");
+    if (
+      this.state.controls.password.value !== this.state.controls.password1.value
+    ) {
+      alertify.warning("Password is not correct!!");
     } else {
-        this.props.onAuthRegister(
-            this.state.controls.name.value,
-          this.state.controls.email.value,
-          this.state.controls.password.value
-        );
-    //  actionCreator.authSignup({name, email, password });
+      this.props.onAuthRegister(
+        this.state.controls.name.value,
+        this.state.controls.email.value,
+        this.state.controls.password.value
+      );
+      //  actionCreator.authSignup({name, email, password });
       alertify.success("Register susscess!");
     }
     // if (isAuthenticated) {
@@ -128,7 +130,6 @@ class Signup extends Component {
       this.state.controls.email.value,
       this.state.controls.password.value
     );
-  
   };
 
   componentDidUpdate(nextProps, nextState) {
@@ -312,37 +313,25 @@ class Signup extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     loadding: state.auth.loadding,
-//     error: state.auth.error,
-//     isAuthencated: state.auth.token !== null,
-//     authRedirectPath: state.auth.authRedirectPath,
-//   };
-// };
 Signup.propTypes = {
   authSignup: propTypes.func.isRequired,
   isAuthenticated: propTypes.bool,
 };
 
 const mapStateToProps = (state) => {
-    return {
-      loadding: state.auth.loadding,
-      error: state.auth.error,
-      isAuthencated: state.auth.token !== null,
-      authRedirectPath: '/',
-      
-    };
+  return {
+    loadding: state.auth.loadding,
+    error: state.auth.error,
+    isAuthencated: state.auth.token !== null,
   };
-// const mapStateToProps = (state) => ({
-//   isAuthenticated: state.auth.isAuthenticated,
-// });
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuthRegister: (name,email, password) =>
-      dispatch(actionCreator.authSignup(name,email, password)),
+    onAuthRegister: (name, email, password) =>
+      dispatch(actionCreator.authSignup(name, email, password)),
   };
 };
 //export default connect(mapStateToProps, { authSignup })(Signup);
 
-export default connect(mapStateToProps, mapDispatchToProps )(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
