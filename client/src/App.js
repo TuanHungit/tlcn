@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import alertify from 'alertifyjs';
+
 import React, { useEffect } from 'react';
 import './App.css';
 import TourDetail from './components/tour/tourDetail';
@@ -11,6 +11,7 @@ import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/LandingPage/LandingPage';
 import * as actionCreator from './store/actions';
 import Logout from './containers/auth/signout/signout';
+import Profile from './containers/Dashboard/Dashboard';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -20,6 +21,7 @@ function App(props) {
     <Switch>
       <Route path='/' exact component={LandingPage} />{' '}
       <Route path='/tour' component={TourDetail} />{' '}
+      <Route path='/profile' component={Profile} />{' '}
       {/* <Route path='/register' component={Register} /> */}
       <Route path='/logout' component={Logout} /> <Redirect to='/' />
     </Switch>

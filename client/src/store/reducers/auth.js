@@ -5,7 +5,6 @@ const initialState = {
   error: null,
   loadding: false,
   active: false,
-  isLogout: false,
   authRedirectPath: '/',
   isAuthenticated: null,
 };
@@ -28,10 +27,9 @@ const authSignupSuccess = (state, action) => {
     ...state,
     error: null,
     loadding: false,
-    // token: localStorage.getItem('token'),
+    // token: localStorage.getItem("token"),
     user: null,
     isAuthenticated: true,
-    isLogout: false,
     authRedirectPath: '/',
   };
 };

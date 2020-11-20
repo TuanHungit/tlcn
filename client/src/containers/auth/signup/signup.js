@@ -311,14 +311,6 @@ class Signup extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     loadding: state.auth.loadding,
-//     error: state.auth.error,
-//     isAuthencated: state.auth.token !== null,
-//     authRedirectPath: state.auth.authRedirectPath,
-//   };
-// };
 Signup.propTypes = {
   authSignup: propTypes.func.isRequired,
   isAuthenticated: propTypes.bool,
