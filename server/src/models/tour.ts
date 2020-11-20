@@ -93,41 +93,55 @@ const tourSchema = new mongoose.Schema(
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
-        delete ret._it;
+        delete ret._id;
         delete ret.__v;
       },
+      virtuals: true,
     },
+    toObject: { virtuals: true },
   }
 );
-
+tourSchema.index({ reviews: 1 }, { unique: true });
+tourSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'tour',
+  localField: '_id',
+  limit: 5,
+});
 tourSchema.statics.build = (attr: ITourAttrs) => {
   return new Tour(attr);
 };
 
-tourSchema.statics.calculateNumberOfTour = async function (destinationId: any) {
+tourSchema.statics.calculateNumberOfTour = async function (destId: any) {
   const stats = await this.aggregate([
     {
-      $match: { destination: destinationId },
+      $match: { destination: destId },
     },
     {
       $group: {
         _id: '$destination',
-        nid: { $sum: 1 },
+        nName: { $sum: 1 },
       },
     },
   ]);
   // console.log(stats);
 
   if (stats.length > 0) {
-    await Destination.findByIdAndUpdate(destinationId, {
-      numOfTour: stats[0].nid,
+    await Destination.findByIdAndUpdate(destId, {
+      numOfTour: stats[0].nName,
     });
   } else {
-    await Destination.findByIdAndUpdate(destinationId, {
+    await Destination.findByIdAndUpdate(destId, {
       numOfTour: 0,
     });
   }
 };
+
+tourSchema.post<ITourDoc>('save', function (this: any) {
+  // this points to current review
+  this.constructor.calculateNumberOfTour(this.destination);
+});
+
 tourSchema.pre<ITourDoc>('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();

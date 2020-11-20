@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios/axios-order';
+
+import alertify from 'alertifyjs';
 const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
@@ -20,6 +22,7 @@ const loadUser = () => {
 };
 
 const authFailed = (error) => {
+  alertify.success('Invalid credentials!');
   return {
     type: actionTypes.AUTH_FAILED,
     error: error,
@@ -27,6 +30,7 @@ const authFailed = (error) => {
 };
 
 const authSignupSuccess = () => {
+  alertify.success('Register susscess!');
   return {
     type: actionTypes.AUTH_SIGNUP_SUCCESS,
   };
@@ -36,6 +40,7 @@ export const Logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
   localStorage.removeItem('expirationDate');
+
   return { type: actionTypes.AUTH_LOGOUT };
 };
 export const authLogout = (expirationTime) => {
@@ -51,7 +56,7 @@ export const authSignup = (name, email, password) => {
       name,
       email,
       password,
-  };
+    };
     axios
       .post('/users/signup', authUser)
       .then((response) => {
@@ -84,6 +89,7 @@ export const authSignin = (email, password) => {
         localStorage.setItem('token', token);
         localStorage.setItem('expirationDate', expirationDate);
         dispatch(authSuccess(token, user));
+
         dispatch(authLogout(expirationDate - new Date().getTime()));
       })
       .catch((error) => {
@@ -116,6 +122,7 @@ export const authCheck = () => {
         dispatch(authSuccess(token, user));
         dispatch(authLogout(expirationDate - new Date().getTime()));
       } else {
+        alertify.success('You have logged out!');
         dispatch(Logout());
       }
     }

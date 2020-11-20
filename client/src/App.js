@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-
+import alertify from 'alertifyjs';
 import React, { useEffect } from 'react';
 import './App.css';
 import TourDetail from './components/tour/tourDetail';
@@ -49,6 +49,7 @@ const mapStateToProps = (state) => {
     isAuthencated: state.auth.token !== null,
     user: state.auth.user,
     error: state.auth.error,
+    isLogout: state.auth.isLogout,
   };
 };
 const mapDispatchToProps = (dispatch) => {

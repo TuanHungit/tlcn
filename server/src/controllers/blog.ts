@@ -19,6 +19,35 @@ export const updateOneBlog = updateOne(Blog);
 export const deleteOneBlog = deleteOne(Blog);
 export const getAllBlog = getAll(Blog);
 
+export const setUserId = (req: Request, res: Response, next: NextFunction) => {
+  req.body.user = req.user.id;
+  next();
+};
+
+export const getOneBlog = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  // 1) Get the data, for the requested tour (including reviews and guides)
+  const blog = await Blog.findById(req.params.id)
+    .populate('user', 'name photo')
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'user',
+        model: 'User',
+        select: { name: 1, photo: 1 },
+      },
+    });
+
+  if (!blog) {
+    throw new BadRequestError('There is no blog with that id.');
+  }
+
+  res.status(200).send(blog);
+};
+
 // @Controller
 // @desc     Like a blog
 // @access   Private

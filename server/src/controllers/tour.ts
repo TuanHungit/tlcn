@@ -21,7 +21,7 @@ export const getTourByDestination = async (
   res: Response,
   next: NextFunction
 ) => {
-  const destinationId = req.params.desId;
+  const destinationId = req.params.destId;
   const destination = await Destination.findById(destinationId);
   if (!destination) {
     throw new BadRequestError('Destination document not found with that ID!');
@@ -177,4 +177,31 @@ exports.getDistances = async (
   ]);
 
   res.status(200).json(distances);
+};
+
+export const setDestinationId = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  req.body.destination = req.params.destId;
+  next();
+};
+
+export const getTourForView = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  // 1) Get the data, for the requested tour (including reviews and guides)
+  const tour = await Tour.findById(req.params.id).populate({
+    path: 'reviews',
+    fields: 'review rating user',
+  });
+
+  if (!tour) {
+    throw new BadRequestError('There is no tour with that id.');
+  }
+
+  res.status(200).send(tour);
 };

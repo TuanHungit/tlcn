@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { validateRequest, protectRoute } from '../../middlewares';
-
+import { validateRequest, protectRoute, restrictTo } from '../../middlewares';
+import { tourRouter } from '../tour/tour-route';
 import {
   createOneDestination,
   getOneDestination,
@@ -12,12 +12,25 @@ import {
 
 const router = express.Router();
 
+router.use('/:destId/tours', tourRouter);
+
+// @Route GET /api/v1/destinations/:id
+// @desc get one destinations
+// @access Public
+router.get('/:id', getOneDestination);
+
+// @Route GET /api/v1/destinations
+// @desc get all destinations
+// @access Public
+router.get('/', getAllDestination);
+
 // @Route POST /api/v1/destinations
 // @desc create a destination
 // @access Private
 router.post(
-  '/destinations',
+  '/',
   protectRoute,
+  restrictTo('admin'),
   [
     body('name')
       .notEmpty()
@@ -30,24 +43,14 @@ router.post(
   createOneDestination
 );
 
-// @Route GET /api/v1/destinations/:id
-// @desc get one destinations
-// @access Public
-router.get('/destinations/:id', getOneDestination);
-
-// @Route GET /api/v1/destinations
-// @desc get all destinations
-// @access Public
-router.get('/destinations', getAllDestination);
-
-// @Route PUT /api/v1/destinations/:id
+// @Route PATCH /api/v1/destinations/:id
 // @desc update a destinations by id
 // @access Private
-router.put('/destinations/:id', protectRoute, updateOneDestination);
+router.patch('/:id', protectRoute, restrictTo('admin'), updateOneDestination);
 
 // @Route DELETE /api/v1/destinations
 // @desc delete a destinations by id
 // @access Private
-router.delete('/destinations/:id', protectRoute, deleteOneDestination);
+router.delete('/:id', protectRoute, restrictTo('admin'), deleteOneDestination);
 
 export { router as destinationRouter };

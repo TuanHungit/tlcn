@@ -2,7 +2,10 @@ import React from 'react';
 export default () => {
   return (
     <div class='col-12 col-lg-4'>
-      <aside class='sticky-kit-02 sidebar-wrapper no-border mt-20 mt-lg-0'>
+      <aside
+        class='sticky-kit-02 sidebar-wrapper no-border mt-20 mt-lg-0'
+        // style={{ position: 'fixed', height: '100%' }}
+      >
         <div class='booking-box'>
           <div class='box-heading'>
             <h3 class='h6 text-white text-uppercase'>Make a booking</h3>

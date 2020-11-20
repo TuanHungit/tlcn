@@ -1,35 +1,50 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
+import { protectRoute } from './../../middlewares/protect-route';
 import {
   createOneReview,
   getAllReview,
   updateOneReview,
   deleteOneReview,
   setTourUserId,
+  getOneReview,
+  getReviewByTour,
 } from '../../controllers/review';
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // @Route GET /api/v1/reviews
 // @desc get all review
 // @access Public
 
-router.get('/reviews', getAllReview);
+router.get('/', getAllReview);
 
-// @Route POST /api/v1/reviews
+// @Route GET /api/v1/tours/:tourId/reviews/review-tour
+// @desc get all review by tour
+// @access Public
+
+router.get('/reviews-tour', getReviewByTour);
+
+// @Route GET /api/v1/reviews:id
+// @desc get one a review
+// @access Public
+
+router.get('/:id', getOneReview);
+
+// @Route POST /api/v1/tours/:tourId/reviews
 // @desc create one review
 // @access Private
 
-router.post('/tours/:tourId/reviews', setTourUserId, createOneReview);
+router.post('/', protectRoute, setTourUserId, createOneReview);
 
-// @Route PUT /api/v1/reviews/:id
+// @Route patch /api/v1/reviews/:id
 // @desc update one review
 // @access Private
 
-router.put('/tours/:tourId/reviews/:id', updateOneReview);
+router.patch('/:id', protectRoute, updateOneReview);
 
 // @Route DELETE /api/v1/reviews/:id
 // @desc delete a review
 // @access Private
 
-router.delete('/tours/:tourId/reviews/:id', deleteOneReview);
+router.delete('/:id', protectRoute, deleteOneReview);
 
 export { router as reviewRouter };

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface IProfileAttr {
+  photo: string;
   dateOfBirth: Date;
   country: string;
   street: string;
@@ -13,6 +14,7 @@ export interface IProfileAttr {
 }
 
 export interface IProfileDoc extends mongoose.Document {
+  photo: string;
   dateOfdateOfBirthbirth: Date;
   country: string;
   street: string;

@@ -10,6 +10,8 @@ import {
   commentBlog,
   deleteOneBlog,
   getAllBlog,
+  setUserId,
+  getOneBlog,
 } from '../../controllers/blog';
 
 const router = express.Router();
@@ -19,11 +21,13 @@ const router = express.Router();
 // @access Private
 router.post(
   '/blogs',
+  protectRoute,
   [
     body('title').notEmpty().trim().withMessage('Blog title must be defined!'),
-    body('text').notEmpty().withMessage('Blog content must be defined!'),
+    body('content').notEmpty().withMessage('Blog content must be defined!'),
   ],
   validateRequest,
+  setUserId,
   createOneBlog
 );
 
@@ -32,34 +36,43 @@ router.post(
 // @access Public
 router.get('/blogs', getAllBlog);
 
-// @Route PUT /api/v1/blogs/:id
+// @Route GET /api/v1/blogs/:id
+// @desc get a blog
+// @access Public
+router.get('/blogs/:id', getOneBlog);
+
+// @Route PATCH /api/v1/blogs/:id
 // @desc update a blog by id
 // @access Private
-router.put('/blogs/:id', protectRoute, updateOneBlog);
+router.patch('/blogs/:id', protectRoute, updateOneBlog);
 
 // @Route DELETE /api/v1/blogs
 // @desc delete a blog by id
 // @access Private
 router.delete('/blogs/:id', protectRoute, deleteOneBlog);
 
-// @Route PUT /api/v1/blogs/likes/:id
+// @Route PATCH /api/v1/blogs/likes/:id
 // @desc like a blog
 // @access Private
-router.put('/blogs/like/:id', protectRoute, likeBlog);
+router.patch('/blogs/like/:id', protectRoute, likeBlog);
 
-// @Route PUT /api/v1/blog/likes/:id
+// @Route PATCH /api/v1/blog/likes/:id
 // @desc unlike a blog
 // @access Private
-router.put('/blogs/unlike/:id', protectRoute, unlikeBlog);
+router.patch('/blogs/unlike/:id', protectRoute, unlikeBlog);
 
-// @Route PUT /api/v1/blogs/likes/:id
-// @desc like a blog
+// @Route PATCH /api/v1/blogs/likes/:id
+// @desc comment a blog
 // @access Private
-router.put('/blogs/comments/:id', protectRoute, commentBlog);
+router.patch('/blogs/comments/:id', protectRoute, commentBlog);
 
-// @Route PUT /api/v1/blog/likes/:id
-// @desc unlike a blog
+// @Route PATCH /api/v1/blog/likes/:id
+// @desc delete a comment a blog
 // @access Private
-router.put('/blogs/comments/:id/:comment_id', protectRoute, deleteCommentBlog);
+router.patch(
+  '/blogs/comments/:id/:comment_id',
+  protectRoute,
+  deleteCommentBlog
+);
 
 export { router as blogRouter };

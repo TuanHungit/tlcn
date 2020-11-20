@@ -8,6 +8,7 @@ export interface IComments {
 export interface IBlogAttr {
   title: string;
   user: mongoose.Schema.Types.ObjectId;
+  content: string;
   createAt: Date;
   active: Boolean;
   likes: { user: mongoose.Schema.Types.ObjectId }[];
@@ -16,6 +17,7 @@ export interface IBlogAttr {
 export interface IBlogDoc extends mongoose.Document {
   title: string;
   user: mongoose.Schema.Types.ObjectId;
+  content: string;
   createAt: Date;
   active: boolean;
   likes: [{ user: mongoose.Schema.Types.ObjectId }];

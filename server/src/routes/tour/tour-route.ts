@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
 import { body } from 'express-validator';
 import { validateRequest } from '../../middlewares/validate-request';
-import { protectRoute } from '../../middlewares/protect-route';
+import { protectRoute, restrictTo } from '../../middlewares';
 import { reviewRouter } from '../review/review-route';
 import {
   getAllTour,
@@ -10,31 +10,36 @@ import {
   deleteOneTour,
   getOneTour,
   getTourByDestination,
+  setDestinationId,
+  getTourForView,
 } from '../../controllers/tour';
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
+router.use('/:tourId/reviews', reviewRouter);
 // @Route GET /api/v1/tours
 // @desc get all tours
 // @access PUBLIC
-router.get('/tours', getAllTour);
+router.get('/', getAllTour);
 
-// @Route GET /api/v1/tours/:desId
+// @Route GET /api/v1/:desId/tours
 // @desc get all tours by destination
 // @access PUBLIC
-router.get('/tours/:desId', getTourByDestination);
-// @Route GET /api/v1/tours/:id
+router.get('/tours-dest', getTourByDestination);
 
+// @Route GET /api/v1/tours/:id
 // @desc get a tour
 // @access PUBLIC
-router.get('/tours/:id', getOneTour);
+router.get('/:id', getTourForView);
 
 // @Route POST /api/v1/tours
 // @desc create a tour
 // @access PRIVATE
+
 router.post(
-  '/tours',
+  '/',
   protectRoute,
+  restrictTo('admin'),
   [
     body('name').notEmpty().trim().withMessage('Name must be defined!'),
     body('price').isFloat().withMessage('Price must be valid!'),
@@ -67,17 +72,17 @@ router.post(
     body('locations').notEmpty().withMessage('Locations must be defined!'),
   ],
   validateRequest,
+  setDestinationId,
   createOneTour
 );
 
-// @Route PUT /api/v1/tours/:id
+// @Route PATCH /api/v1/tours/:id
 // @desc update a tour
 // @access PRIVATE
-router.put('/tours/:id', protectRoute, updateOneTour);
+router.patch('/:id', protectRoute, restrictTo('admin'), updateOneTour);
 
 // @Route POST /api/v1/tours/:id
 // @desc delete a tour
 // @access PRIVATE
-router.delete('/tours/:id', protectRoute, deleteOneTour);
-
+router.delete('/:id', protectRoute, restrictTo('admin'), deleteOneTour);
 export { router as tourRouter };

@@ -7,6 +7,10 @@ interface IProfileModel extends mongoose.Model<IProfileDoc> {
 }
 const profileSchema = new mongoose.Schema(
   {
+    photo: {
+      type: String,
+      default: 'default.jpg',
+    },
     dateOfBirth: {
       type: Date,
     },
@@ -34,7 +38,7 @@ const profileSchema = new mongoose.Schema(
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
-        delete ret._it;
+        delete ret._id;
         delete ret.__v;
       },
     },

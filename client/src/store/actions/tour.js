@@ -19,11 +19,17 @@ const fetchTourFailed = () => {
   };
 };
 
-export const fetchTour = (page = 0, limit = 9) => {
+export const fetchTour = (page = 0, limit = 9, fields) => {
   fetchTourStart();
   return (dispatch) => {
+    let url = `/tours?page=${page}&limit=${limit}`;
+    if (fields) {
+      url = `/tours?page=${page}&limit=${limit}&fields=${fields.join(
+        ','
+      )}&sort=-ratingsAverage`;
+    }
     axios
-      .get(`/tours?page=${page}&limit=${limit}`)
+      .get(url)
       .then((response) => {
         dispatch(setTourList(response.data));
       })

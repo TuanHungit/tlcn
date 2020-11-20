@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  listDestination: null,
+  destinationList: null,
   loadding: false,
   error: false,
 };
@@ -19,17 +19,17 @@ const setDestinationList = (state, action) => {
     ...state,
     loadding: false,
     error: false,
-    listDestination: action.listDestination,
+    destinationList: action.destinationList,
   };
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_BLOG_START:
-      return fetchDestinationStart();
-    case actionTypes.FETCH_BLOG_FAILED:
-      return fetchDestinationFailed();
+    case actionTypes.FETCH_DESTINATION_START:
+      return fetchDestinationStart(state, action);
+    case actionTypes.FETCH_DESTINATION_FAILED:
+      return fetchDestinationFailed(state, action);
     case actionTypes.SET_DESTINATION_LIST:
-      return setDestinationList();
+      return setDestinationList(state, action);
     default:
       return state;
   }

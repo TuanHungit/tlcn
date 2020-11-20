@@ -26,7 +26,6 @@ export const protectRoute = async (
     token,
     process.env.JWT_KEY!
   )) as any;
-  console.log(decoded);
 
   // 3) Check if user still exists
   const currentUser = await User.findById(decoded.id);
@@ -38,5 +37,6 @@ export const protectRoute = async (
 
   // GRANT ACCESS TO PROTECTED ROUTE
   req.user = currentUser;
+
   next();
 };

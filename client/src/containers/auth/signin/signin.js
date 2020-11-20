@@ -93,7 +93,10 @@ class Signin extends Component {
   };
 
   componentDidUpdate(nextProps, nextState) {
-    if (this.props.isAuthencated !== nextProps.isAuthencated) {
+    if (
+      this.props.isAuthencated &&
+      this.props.isAuthencated !== nextProps.isAuthencated
+    ) {
       this.buttonElement.click();
       alertify.success('Login susscess!');
     }

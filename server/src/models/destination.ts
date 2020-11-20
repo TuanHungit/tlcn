@@ -25,13 +25,14 @@ const destinationSchema = new mongoose.Schema(
     ],
     numOfTour: {
       type: Number,
+      default: 0,
     },
   },
   {
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
-        delete ret._it;
+        delete ret._id;
         delete ret.__v;
       },
     },

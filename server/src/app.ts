@@ -15,6 +15,7 @@ import { webhookCheckout } from './controllers/booking';
 import { bookingRouter } from './routes/booking/booking-route';
 import { tourRouter } from './routes/tour/tour-route';
 import { reviewRouter } from './routes/review/review-route';
+
 const app = express();
 
 const options: cors.CorsOptions = {
@@ -46,13 +47,15 @@ if (process.env.NODE_ENV === 'development') {
 
 const baseURL = '/api/v1';
 
-app.use(baseURL, blogRouter);
 app.use(baseURL, authRouter);
+app.use(`${baseURL}/destinations`, destinationRouter);
+app.use(`${baseURL}/tours`, tourRouter);
+app.use(`${baseURL}/reviews`, reviewRouter);
+app.use(baseURL, blogRouter);
 app.use(baseURL, userRouter);
-app.use(baseURL, destinationRouter);
-app.use(baseURL, tourRouter);
+
 app.use(baseURL, bookingRouter);
-app.use(baseURL, reviewRouter);
+
 app.all('*', async () => {
   throw new NotFoundError();
 });

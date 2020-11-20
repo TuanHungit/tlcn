@@ -11,7 +11,6 @@ interface UserAttr {
 interface UserDoc extends mongoose.Document {
   name: string;
   email: string;
-  photo: string;
   role: string;
   active: Boolean;
   password: string;
@@ -33,10 +32,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    photo: {
-      type: String,
-      default: 'default.jpg',
-    },
+
     role: {
       type: String,
       enum: ['user', 'guide', 'lead-guide', 'admin'],
@@ -57,7 +53,7 @@ const userSchema = new mongoose.Schema(
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
-        delete ret._it;
+        delete ret._id;
         delete ret.password;
         delete ret.__v;
       },

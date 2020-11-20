@@ -19,15 +19,19 @@ const setDestinationList = (destinationList) => {
   };
 };
 
-export const fetchDestination = (page = 1, limit = 10) => {
+export const fetchDestination = (page = 1, limit = 6) => {
   return (dispatch) => {
     dispatch(fetchDestinationStart());
     axios
-      .get(`/destinations/?page=${page}&limit=${limit}`)
+      .get(
+        `/destinations/?page=${page}&limit=${limit}&sort=-numOfTour&fields=name,images,numOfTour`
+      )
       .then((response) => {
+        console.log(response);
         dispatch(setDestinationList(response.data));
       })
       .catch((err) => {
+        console.log(err);
         dispatch(fetchDestinationFailed());
       });
   };

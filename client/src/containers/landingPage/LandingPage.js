@@ -8,14 +8,43 @@ import Search from '../../components/search/Search';
 import BestTour from './../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
+
 class LandingPage extends Component {
   componentDidMount() {
     this.props.onFetchDestination();
+    this.props.onFetchTour(0, 9, [
+      'duration',
+      'name',
+      'price',
+      'ratingsQuantity',
+      'ratingsAverage',
+      'startLocation',
+    ]);
   }
   render() {
+    let destinations = this.props.destinationError ? (
+      <p>Destinations can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
+    if (this.props.destinationList) {
+      destinations = (
+        <Destinations destinationList={this.props.destinationList} />
+      );
+    }
+
+    let bestTour = this.props.tourError ? (
+      <p>Destinations can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
+    if (this.props.tourList) {
+      bestTour = <BestTour tourList={this.props.tourList} />;
+    }
     return (
       <div class='main-wrapper scrollspy-container'>
         <Search />
+
         <section class='pb-0'>
           <div class='container'>
             <div class='row cols-1 cols-lg-3 gap-20 gap-lg-40'>
@@ -66,9 +95,9 @@ class LandingPage extends Component {
             </div>
 
             <div class='clear mb-100'></div>
+            {destinations}
 
-            <Destinations destinationList={this.props.destinationList} />
-            <BestTour />
+            {bestTour}
           </div>
         </section>
         <Comment />
@@ -79,14 +108,17 @@ class LandingPage extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    listDestination: state.destination.listDestination,
-    error: state.destination.error,
-    loading: state.destination.loading,
+    destinationList: state.destination.destinationList,
+    destinationError: state.destination.error,
+    tourList: state.tour.tourList,
+    tourError: state.tour.error,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchDestination: () => dispatch(actionCreators.fetchDestination()),
+    onFetchTour: (page, limit, feilds) =>
+      dispatch(actionCreators.fetchTour(page, limit, feilds)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

@@ -11,6 +11,10 @@ const blogSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    content: {
+      type: String,
+      required: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -61,7 +65,7 @@ const blogSchema = new mongoose.Schema(
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
-        delete ret._it;
+        delete ret._id;
         delete ret.__v;
       },
     },

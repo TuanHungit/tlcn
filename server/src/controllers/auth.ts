@@ -33,7 +33,8 @@ const signToken = (user: any) => {
 
 const createSendToken = (user: any, req: Request, res: Response) => {
   const token = signToken(user);
-  const expirationDate = Date.now() + 60 * 60 * 1000;
+  const expirationDate =
+    Date.now() + (process.env.JWT_COOKIE_EXPIRES_IN as any) * 60 * 60 * 1000;
   res.cookie('jwt', token, {
     expires: new Date(expirationDate),
     httpOnly: true,

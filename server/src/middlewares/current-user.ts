@@ -6,5 +6,6 @@ export const currentUser = async (
   next: NextFunction
 ) => {
   const currentUser = req.user;
+  req.params.id = req.user.id;
   res.status(200).json({ currentUser });
 };

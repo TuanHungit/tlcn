@@ -25,7 +25,11 @@ const StarRating = (props) => {
                 onMouseLeave={() => setHover(null)}
               />
             ) : (
-              <FaStar size={props.size} className='star' color={'#ffc107'} />
+              <FaStar
+                size={props.size}
+                className='star'
+                color={ratingValue <= props.average ? '#ffc107' : '#e4e5e9'}
+              />
             )}
           </label>
         );

@@ -10,14 +10,13 @@ import Map from './map/map';
 class TourDetail extends Component {
   render() {
     return (
-      <div className='body-inner'>
+      <div className='body-inner '>
         <div class='main-wrapper scrollspy-container'>
           <section class='page-wrapper page-detail pt-0'>
             <div class='pt-0 pt-xl-15'></div>
-
             <PageTitle />
-            <Sticky />
-            <div class='container pt-30'>
+            {/* <Sticky /> */}
+            <div class='container'>
               <div class='row gap-20 gap-lg-40'>
                 <div class='col-12 col-lg-8'>
                   <div class='content-wrapper'>
