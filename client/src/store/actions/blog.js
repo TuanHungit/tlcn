@@ -7,10 +7,10 @@ export const fetchBlogStart = () => {
   };
 };
 
-const setBlogList = (blogtList) => {
+const setBlogList = (blogList) => {
   return {
     type: actionTypes.SET_BLOG_LIST,
-    blogList: blogtList,
+    blogList: blogList,
   };
 };
 const fetchBlogFailed = () => {
@@ -19,11 +19,15 @@ const fetchBlogFailed = () => {
   };
 };
 
-export const fetchBlog = () => {
+export const fetchBlog = (page = 0, limit = 3, options) => {
   fetchBlogStart();
   return (dispatch) => {
+    let url = `/blogs?page=${page}&limit=${limit}`;
+    if (options) {
+      url = `/blogs?page=${page}&limit=${limit}&fields=${options.join(',')}`;
+    }
     axios
-      .get('/blog')
+      .get(url)
       .then((response) => {
         dispatch(setBlogList(response.data));
       })

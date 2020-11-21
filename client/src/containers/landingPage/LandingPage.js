@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Destinations from '../../components/destinations/Destinations';
 import Reviews from '../../components/reviews/reviews';
-import Blogs from '../../components/blogs/Blogs';
+import Blogs from '../../components/blogs/blogs';
 import Search from '../../components/search/Search';
 import BestTour from './../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
@@ -21,8 +21,10 @@ class LandingPage extends Component {
       'startLocation',
     ]);
     this.props.onFetchREview(0, 15, ['review', 'user', 'createdAt']);
+    this.props.onFetchBlog(0, 3, ['images', 'title', 'createdAt']);
   }
   render() {
+    //fetch destination
     let destinations = this.props.destinationError ? (
       <p>Destinations can't be loaded!</p>
     ) : (
@@ -33,7 +35,7 @@ class LandingPage extends Component {
         <Destinations destinationList={this.props.destinationList} />
       );
     }
-
+    //fetch tour
     let bestTour = this.props.tourError ? (
       <p>Destinations can't be loaded!</p>
     ) : (
@@ -42,7 +44,7 @@ class LandingPage extends Component {
     if (this.props.tourList) {
       bestTour = <BestTour tourList={this.props.tourList} />;
     }
-
+    //fetch review
     let reviewList = this.props.reviewError ? (
       <p>Review can't be loaded!</p>
     ) : (
@@ -50,6 +52,15 @@ class LandingPage extends Component {
     );
     if (this.props.reviewList) {
       reviewList = <Reviews reviewList={this.props.reviewList} />;
+    }
+    //fetch blog
+    let blogList = this.props.blogError ? (
+      <p>Blog can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
+    if (this.props.blogList) {
+      blogList = <Blogs blogList={this.props.blogList} />;
     }
     return (
       <div class='main-wrapper scrollspy-container'>
@@ -111,7 +122,7 @@ class LandingPage extends Component {
           </div>
         </section>
         {reviewList}
-        <Blogs />
+        {blogList}
       </div>
     );
   }
@@ -124,6 +135,8 @@ const mapStateToProps = (state) => {
     tourError: state.tour.error,
     reviewList: state.review.reviewList,
     reviewError: state.review.error,
+    blogList: state.blog.blogList,
+    blogError: state.blog.error,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -133,6 +146,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionCreators.fetchTour(page, limit, feilds)),
     onFetchREview: (page, limit, feilds) =>
       dispatch(actionCreators.fetchReview(page, limit, feilds)),
+    onFetchBlog: (page, limit, feilds) =>
+      dispatch(actionCreators.fetchBlog(page, limit, feilds)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

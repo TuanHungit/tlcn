@@ -3,7 +3,6 @@ import * as actionTypes from '../actions/actionTypes';
 const initState = {
   blogList: null,
   error: false,
-  loading: false,
 };
 
 const reducer = (state = initState, action) => {
@@ -17,7 +16,6 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         error: false,
-        loading: true,
       };
     case actionTypes.SET_BLOG_LIST:
       return {

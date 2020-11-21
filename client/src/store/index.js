@@ -5,11 +5,13 @@ import { authReducer } from './reducers/auth';
 import { tourReducer } from './reducers/tour';
 import { destinationReducer } from './reducers/destination';
 import { reviewReducer } from './reducers/review';
+import { blogReducer } from './reducers/blog';
 const rootReducer = combineReducers({
   auth: authReducer,
   tour: tourReducer,
   destination: destinationReducer,
   review: reviewReducer,
+  blog: blogReducer,
 });
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
