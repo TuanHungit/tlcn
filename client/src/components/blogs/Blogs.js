@@ -3,7 +3,7 @@ import Blog from './blog/blog';
 class Blogs extends Component {
   render() {
     return (
-      <section className='pt-40 pb-100'>
+      <section className='pt-20 pb-100'>
         <div className='container'>
           <div className='section-title'>
             <h2>

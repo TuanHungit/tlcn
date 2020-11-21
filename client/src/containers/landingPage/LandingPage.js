@@ -8,11 +8,29 @@ import Search from '../../components/search/Search';
 import BestTour from './../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Intro from '../../components/intro/intro';
+import intro from '../../components/intro/intro';
 
 class LandingPage extends Component {
+  // state = {
+  //   destinationLoadding: false,
+  // };
   componentDidMount() {
+    //   window.onscroll = function () {
+    //     scrollFunction(...this.state);
+    //   };
+    //   function scrollFunction() {
+    //     if (
+    //       document.documentElement.scrollTop <= 600 &&
+    //       document.documentElement.scrollTop >= 500 &&
+    //       !this.state.destinationLoadding
+    //     ) {
+    //       this.setState({ destinationLoadding: true });
+    //       console.log(document.documentElement.scrollTop);
+    //     }
+    //   }
     this.props.onFetchDestination();
-    this.props.onFetchTour(0, 9, [
+    this.props.onFetchTour(0, 6, [
       'duration',
       'name',
       'price',
@@ -119,10 +137,12 @@ class LandingPage extends Component {
             {destinations}
 
             {bestTour}
+
+            {reviewList}
+            {blogList}
           </div>
         </section>
-        {reviewList}
-        {blogList}
+        <Intro />
       </div>
     );
   }

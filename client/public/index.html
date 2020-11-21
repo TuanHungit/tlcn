@@ -62,10 +62,26 @@
   </head>
   <body class="with-waypoint-sticky header-bg-white">
     
-  
+  <div id="myDIV"></div>
     <div id="root"></div>
 
-  
+  <script type="text/javascript">
+
+   window.onscroll = function () {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        alert(1);
+      } else {
+       alert(2);
+      }
+    }
+  </script>
   
     <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
