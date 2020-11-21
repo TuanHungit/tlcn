@@ -26,6 +26,9 @@ const tourSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    country: {
+      type: String,
+    },
     priceDiscount: {
       type: Number,
     },
@@ -72,11 +75,7 @@ const tourSchema = new mongoose.Schema(
     },
     locations: [
       {
-        type: {
-          type: String,
-          default: 'Point',
-          enum: ['Point'],
-        },
+        title: String,
         coordinates: [Number],
         address: String,
         description: String,

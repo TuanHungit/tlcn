@@ -205,3 +205,21 @@ export const getTourForView = async (
 
   res.status(200).send(tour);
 };
+
+export const getTourWithSlug = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  // 1) Get the data, for the requested tour (including reviews and guides)
+  const tour = await Tour.findOne({ slug: req.params.slug }).populate({
+    path: 'reviews',
+    fields: 'review rating user',
+  });
+
+  if (!tour) {
+    throw new BadRequestError('There is no tour with that slug.');
+  }
+
+  res.status(200).send(tour);
+};

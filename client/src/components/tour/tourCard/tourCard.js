@@ -13,7 +13,7 @@ export default (props) => {
             <ul class='item-meta'>
               <li>
                 <i class='elegent-icon-pin_alt text-warning'></i>{' '}
-                {props.tour.startLocation.address}
+                {props.tour.country}
               </li>
               <li>
                 <div class='rating-item rating-sm rating-inline clearfix'>
@@ -25,22 +25,26 @@ export default (props) => {
                     />
                   </div>
                   <p class='rating-text font600 text-muted font-12 letter-spacing-1'>
-                    {props.tour.ratingsQuantity} reviews
+                    {props.tour.ratingsQuantity} đánh giá
                   </p>
                 </div>
               </li>
             </ul>
             <ul class='item-meta mt-15'>
               <li>
-                <span class='font700 h6'>{props.tour.duration} days</span>
+                <span class='font700 h6'>
+                  {props.tour.duration} ngày &amp; {props.tour.duration - 1} đêm
+                </span>
               </li>
-              {/* <li>
-              Start: <span class='font600 h6 line-1 mv-0'> Rome</span> - End:{' '}
-              <span class='font600 h6 line-1 mv-0'> Naoples</span>
-            </li> */}
+              <li>
+                Bắt đầu:{' '}
+                <span class='font600 h6 line-1 mv-0'>
+                  {props.tour.startLocation.address}
+                </span>
+              </li>
             </ul>
             <p class='mt-3'>
-              Price from{' '}
+              Giá từ{' '}
               <span class='h6 line-1 text-primary font16'>
                 ${props.tour.price}
               </span>{' '}

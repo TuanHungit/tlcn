@@ -6,7 +6,7 @@ export interface IStartLocationDOC extends mongoose.Document {
   description: string;
 }
 export interface ILocationsDOC extends mongoose.Document {
-  type: string;
+  title: string;
   coordinates: [number];
   address: string;
   description: string;
@@ -34,6 +34,7 @@ export interface ITourDoc extends mongoose.Document {
   name: string;
   price: number;
   slug: string;
+  country: string;
   priceDiscount: number;
   duration: number;
   ratingsAverage: number;

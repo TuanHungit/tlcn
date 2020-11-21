@@ -12,6 +12,7 @@ import {
   getTourByDestination,
   setDestinationId,
   getTourForView,
+  getTourWithSlug,
 } from '../../controllers/tour';
 
 const router = express.Router({ mergeParams: true });
@@ -30,7 +31,12 @@ router.get('/tours-dest', getTourByDestination);
 // @Route GET /api/v1/tours/:id
 // @desc get a tour
 // @access PUBLIC
-router.get('/:id', getTourForView);
+//router.get('/:id', getTourForView);
+
+// @Route GET /api/v1/tours/:slug
+// @desc get a tour with slug
+// @access PUBLIC
+router.get('/:slug', getTourWithSlug);
 
 // @Route POST /api/v1/tours
 // @desc create a tour

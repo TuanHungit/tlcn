@@ -7,7 +7,7 @@ class Destinations extends Component {
         <div class='section-title'>
           <h2>
             <span>
-              <span>Top</span> Destinations
+              <span>Top điểm đến nổi bật</span>
             </span>
           </h2>
         </div>
@@ -56,14 +56,14 @@ class Destinations extends Component {
                     <div class='row shrink-auto gap-20 align-items-end'>
                       <div class='col-auto'>
                         <div class='col-inner'>
-                          <h6>{this.props.destinationList[0].name}</h6>
+                          <h6>{this.props.destinationList[1].name}</h6>
                         </div>
                       </div>
 
                       <div class='col-shrink'>
                         <div class='col-inner'>
                           <span class='caption-label'>
-                            {this.props.destinationList[0].numOfTour} Tours
+                            {this.props.destinationList[1].numOfTour} Tours
                           </span>
                         </div>
                       </div>
@@ -89,14 +89,14 @@ class Destinations extends Component {
                     <div class='row shrink-auto gap-20 align-items-end'>
                       <div class='col-auto'>
                         <div class='col-inner'>
-                          <h6>{this.props.destinationList[0].name}</h6>
+                          <h6>{this.props.destinationList[2].name}</h6>
                         </div>
                       </div>
 
                       <div class='col-shrink'>
                         <div class='col-inner'>
                           <span class='caption-label'>
-                            {this.props.destinationList[0].numOfTour} Tours
+                            {this.props.destinationList[2].numOfTour} Tours
                           </span>
                         </div>
                       </div>
@@ -118,14 +118,14 @@ class Destinations extends Component {
                     <div class='row shrink-auto gap-20 align-items-end'>
                       <div class='col-auto'>
                         <div class='col-inner'>
-                          <h6>{this.props.destinationList[0].name}</h6>
+                          <h6>{this.props.destinationList[3].name}</h6>
                         </div>
                       </div>
 
                       <div class='col-shrink'>
                         <div class='col-inner'>
                           <span class='caption-label'>
-                            {this.props.destinationList[0].numOfTour} Tours
+                            {this.props.destinationList[3].numOfTour} Tours
                           </span>
                         </div>
                       </div>
@@ -151,14 +151,14 @@ class Destinations extends Component {
                     <div class='row shrink-auto gap-20 align-items-end'>
                       <div class='col-auto'>
                         <div class='col-inner'>
-                          <h6>{this.props.destinationList[0].name}</h6>
+                          <h6>{this.props.destinationList[4].name}</h6>
                         </div>
                       </div>
 
                       <div class='col-shrink'>
                         <div class='col-inner'>
                           <span class='caption-label'>
-                            {this.props.destinationList[0].numOfTour} Tours
+                            {this.props.destinationList[4].numOfTour} Tours
                           </span>
                         </div>
                       </div>
@@ -180,14 +180,14 @@ class Destinations extends Component {
                     <div class='row shrink-auto gap-20 align-items-end'>
                       <div class='col-auto'>
                         <div class='col-inner'>
-                          <h6>{this.props.destinationList[0].name}</h6>
+                          <h6>{this.props.destinationList[5].name}</h6>
                         </div>
                       </div>
 
                       <div class='col-shrink'>
                         <div class='col-inner'>
                           <span class='caption-label'>
-                            {this.props.destinationList[0].numOfTour} Tours
+                            {this.props.destinationList[5].numOfTour} Tours
                           </span>
                         </div>
                       </div>

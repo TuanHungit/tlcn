@@ -5,6 +5,8 @@ import Navigation from './Navigation/Navigation';
 import { Link, NavLink } from 'react-router-dom';
 export default (props) => {
   useEffect(() => {
+    document.getElementById('header-waypoint-sticky').style.backgroundColor =
+      'rgba(255, 255, 255, 0)';
     window.onscroll = function () {
       scrollFunction();
     };
@@ -19,10 +21,10 @@ export default (props) => {
       } else {
         document.getElementById(
           'header-waypoint-sticky'
-        ).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+        ).style.backgroundColor = 'rgba(255, 255, 255, 0)';
       }
     }
-  });
+  }, []);
   return (
     <header
       id='header-waypoint-sticky'
@@ -57,10 +59,10 @@ export default (props) => {
                     <nav className='main-nav-menu main-menu-nav navbar-arrow'>
                       <ul className='main-nav'>
                         <li>
-                          <Link to='/'>Home</Link>
+                          <Link to='/'>Trang chủ</Link>
                         </li>
                         <li>
-                          <NavLink to='/tour'>Tour Package</NavLink>
+                          <NavLink to='/tour'>Tour</NavLink>
                           <ul>
                             <li>
                               <a href='tour-result-list.html'>Result - List</a>
@@ -97,7 +99,7 @@ export default (props) => {
                           <a href='javascript:void(0)'>Pages</a>
                           <ul>
                             <li>
-                              <a href='about-us.html'>About Us</a>
+                              <a href='about-us.html'>Về chúng tôi</a>
                             </li>
                             <li>
                               <a href='service.html'>Service</a>
@@ -116,7 +118,7 @@ export default (props) => {
                           </ul>
                         </li>
                         <li>
-                          <a href='contact-us.html'>Contact us</a>
+                          <a href='contact-us.html'>Về chúng tôi</a>
                         </li>
                         <li>
                           <Link to='/profile'>Profile</Link>

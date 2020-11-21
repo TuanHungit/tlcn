@@ -21,7 +21,7 @@ export default (props) => {
           </span>
           <h4>{props.blog.title}</h4>
           <a href='index.html#' className='h6'>
-            Read this <i className='elegent-icon-arrow_right'></i>
+            Nhấn để xem <i className='elegent-icon-arrow_right'></i>
           </a>
         </div>
       </article>

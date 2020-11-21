@@ -8,7 +8,7 @@ class Blogs extends Component {
           <div className='section-title'>
             <h2>
               <span>
-                <span>Travel</span> Articles
+                <span>Blog</span> du lịch
               </span>
             </h2>
           </div>

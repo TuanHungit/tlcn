@@ -12,23 +12,7 @@ import Intro from '../../components/intro/intro';
 import intro from '../../components/intro/intro';
 
 class LandingPage extends Component {
-  // state = {
-  //   destinationLoadding: false,
-  // };
   componentDidMount() {
-    //   window.onscroll = function () {
-    //     scrollFunction(...this.state);
-    //   };
-    //   function scrollFunction() {
-    //     if (
-    //       document.documentElement.scrollTop <= 600 &&
-    //       document.documentElement.scrollTop >= 500 &&
-    //       !this.state.destinationLoadding
-    //     ) {
-    //       this.setState({ destinationLoadding: true });
-    //       console.log(document.documentElement.scrollTop);
-    //     }
-    //   }
     this.props.onFetchDestination();
     this.props.onFetchTour(0, 6, [
       'duration',
@@ -37,6 +21,8 @@ class LandingPage extends Component {
       'ratingsQuantity',
       'ratingsAverage',
       'startLocation',
+      'country',
+      'slug',
     ]);
     this.props.onFetchREview(0, 15, ['review', 'user', 'createdAt']);
     this.props.onFetchBlog(0, 3, ['images', 'title', 'createdAt']);
@@ -137,11 +123,10 @@ class LandingPage extends Component {
             {destinations}
 
             {bestTour}
-
-            {reviewList}
-            {blogList}
           </div>
         </section>
+        {reviewList}
+        {blogList}
         <Intro />
       </div>
     );

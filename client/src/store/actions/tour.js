@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios/axios-order';
 
+//tour list actions
 export const fetchTourStart = () => {
   return {
     type: actionTypes.FETCH_TOUR_START,
@@ -36,6 +37,35 @@ export const fetchTour = (page = 0, limit = 9, fields) => {
       .catch((error) => {
         console.log(error);
         dispatch(fetchTourFailed());
+      });
+  };
+};
+
+//tour detail actions
+
+const fetchTourDetailFailed = () => {
+  return {
+    type: actionTypes.FETCH_TOUR_DETAIL_FAILED,
+  };
+};
+
+const setTourDetail = (tourDetail) => {
+  return {
+    type: actionTypes.SET_TOUR_DETAIL,
+    touDetail: tourDetail,
+  };
+};
+
+export const fetchTourDetail = (slug) => {
+  return (dispatch) => {
+    axios
+      .get(`/tours/${slug}`)
+      .then((response) => {
+        dispatch(setTourDetail(response.data));
+      })
+      .then((err) => {
+        console.log(err);
+        dispatch(fetchTourDetailFailed());
       });
   };
 };
