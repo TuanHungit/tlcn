@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Destinations from '../../components/destinations/Destinations';
-import Comment from '../../components/comments/Comment';
+import Reviews from '../../components/reviews/reviews';
 import Blogs from '../../components/blogs/Blogs';
 import Search from '../../components/search/Search';
 import BestTour from './../../components/tour/bestTour/BestTour';
@@ -20,6 +20,7 @@ class LandingPage extends Component {
       'ratingsAverage',
       'startLocation',
     ]);
+    this.props.onFetchREview(0, 15, ['review', 'user', 'createdAt']);
   }
   render() {
     let destinations = this.props.destinationError ? (
@@ -40,6 +41,15 @@ class LandingPage extends Component {
     );
     if (this.props.tourList) {
       bestTour = <BestTour tourList={this.props.tourList} />;
+    }
+
+    let reviewList = this.props.reviewError ? (
+      <p>Review can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
+    if (this.props.reviewList) {
+      reviewList = <Reviews reviewList={this.props.reviewList} />;
     }
     return (
       <div class='main-wrapper scrollspy-container'>
@@ -100,7 +110,7 @@ class LandingPage extends Component {
             {bestTour}
           </div>
         </section>
-        <Comment />
+        {reviewList}
         <Blogs />
       </div>
     );
@@ -112,6 +122,8 @@ const mapStateToProps = (state) => {
     destinationError: state.destination.error,
     tourList: state.tour.tourList,
     tourError: state.tour.error,
+    reviewList: state.review.reviewList,
+    reviewError: state.review.error,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -119,6 +131,8 @@ const mapDispatchToProps = (dispatch) => {
     onFetchDestination: () => dispatch(actionCreators.fetchDestination()),
     onFetchTour: (page, limit, feilds) =>
       dispatch(actionCreators.fetchTour(page, limit, feilds)),
+    onFetchREview: (page, limit, feilds) =>
+      dispatch(actionCreators.fetchReview(page, limit, feilds)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
