@@ -13,11 +13,9 @@ export default () => {
                   </a>
                 </li>
                 <li class='breadcrumb-item'>
-                  <a href='tour-detail-02.html#'>Country</a>
+                  <a href='tour-detail-02.html#'>Tour</a>
                 </li>
-                <li class='breadcrumb-item'>
-                  <a href='tour-detail-02.html#'>City</a>
-                </li>
+
                 <li class='breadcrumb-item active' aria-current='page'>
                   Tour detail
                 </li>

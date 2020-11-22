@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-
 import React, { useEffect } from 'react';
+
 import './App.css';
-import TourDetail from './components/tour/tourDetail';
+import * as actionCreator from './store/actions';
+import TourDetail from './containers/tourDetail/tourDetail';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
-import LandingPage from './containers/LandingPage/LandingPage';
-import * as actionCreator from './store/actions';
+import LandingPage from './containers/landingPage/landingPage';
 import Logout from './containers/auth/signout/signout';
-import Profile from './containers/Dashboard/Dashboard';
+import Profile from './containers/dashboard/dashboard';
+
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -19,25 +20,30 @@ function App(props) {
 
   let routes = (
     <Switch>
-      <Route path='/' exact component={LandingPage} />{' '}
-      <Route path='/tour' component={TourDetail} />{' '}
-      <Route path='/profile' component={Profile} />{' '}
+      <Route exact path='/' component={LandingPage} />
+      <Route path='/tour/:id' component={TourDetail} />
+      <Route path='/profile' component={Profile} />
+
       {/* <Route path='/register' component={Register} /> */}
-      <Route path='/logout' component={Logout} /> <Redirect to='/' />
+      <Route path='/logout' component={Logout} />
+      <Redirect to='/' />
     </Switch>
   );
   if (props.isAuthencated) {
     routes = (
       <Switch>
-        <Route path='/' exact component={LandingPage} />{' '}
-        <Route path='/tour' component={TourDetail} />{' '}
-        <Route path='/logout' component={Logout} /> <Redirect to='/' />
+        <Route exact path='/' component={LandingPage} />
+
+        <Route path='/logout' component={Logout} />
+        <Route path='/tour/:slug' component={TourDetail} />
+        <Redirect to='/' />
       </Switch>
     );
   }
   return (
     <div>
-      <Header isAuthencated={props.isAuthencated} user={props.user} /> {routes}{' '}
+      <Header isAuthencated={props.isAuthencated} user={props.user} />
+      {routes}
       <Register />
       <LoginModal />
       <Footer />

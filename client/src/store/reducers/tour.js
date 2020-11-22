@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initState = {
   tourList: null,
-  TourDetail: null,
+  tourDetail: null,
   tourDetailError: false,
   error: false,
   loading: false,

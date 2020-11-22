@@ -9,7 +9,7 @@ export default () => {
           <figure class='tour-grid-item-01'>
             <a href='tour-detail-02.html#'>
               <div class='image'>
-                <img src='images/image-bg/01.jpg' alt='images' />
+                <img src='/images/image-bg/01.jpg' alt='images' />
               </div>
 
               <figcaption class='content'>
@@ -60,7 +60,7 @@ export default () => {
           <figure class='tour-grid-item-01'>
             <a href='tour-detail-02.html#'>
               <div class='image'>
-                <img src='images/image-bg/02.jpg' alt='images' />
+                <img src='/images/image-bg/02.jpg' alt='images' />
               </div>
 
               <figcaption class='content'>

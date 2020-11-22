@@ -6,34 +6,34 @@ export default () => {
       <div id='myCarousel' class='carousel slide shadow'>
         <div class='carousel-inner'>
           <div class='active carousel-item' data-slide-number='0'>
-            <img src='images/image-gallery/01.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/01.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='1'>
-            <img src='images/image-gallery/02.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/02.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='2'>
-            <img src='images/image-gallery/03.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/03.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='3'>
-            <img src='images/image-gallery/04.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/04.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='4'>
-            <img src='images/image-gallery/05.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/05.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='5'>
-            <img src='images/image-gallery/06.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/06.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='6'>
-            <img src='images/image-gallery/07.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/07.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='7'>
-            <img src='images/image-gallery/08.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/08.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='8'>
-            <img src='images/image-gallery/09.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/09.jpg' class='img-fluid' />
           </div>
           <div class='carousel-item' data-slide-number='9'>
-            <img src='images/image-gallery/10.jpg' class='img-fluid' />
+            <img src='/images/image-gallery/10.jpg' class='img-fluid' />
           </div>
 
           <a
@@ -64,7 +64,7 @@ export default () => {
               data-slide-to='0'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/01.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/01.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -73,7 +73,7 @@ export default () => {
               data-slide-to='1'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/02.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/02.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -82,7 +82,7 @@ export default () => {
               data-slide-to='2'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/03.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/03.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -91,7 +91,7 @@ export default () => {
               data-slide-to='3'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/04.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/04.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -100,7 +100,7 @@ export default () => {
               data-slide-to='4'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/05.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/05.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -109,7 +109,7 @@ export default () => {
               data-slide-to='5'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/06.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/06.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -118,7 +118,7 @@ export default () => {
               data-slide-to='6'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/07.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/07.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -127,7 +127,7 @@ export default () => {
               data-slide-to='7'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/07.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/07.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -136,7 +136,7 @@ export default () => {
               data-slide-to='8'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/09.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/09.jpg' class='img-fluid' />
             </a>
           </li>
           <li class='list-inline-item'>
@@ -145,7 +145,7 @@ export default () => {
               data-slide-to='9'
               data-target='#myCarousel'
             >
-              <img src='images/image-gallery/10.jpg' class='img-fluid' />
+              <img src='/images/image-gallery/10.jpg' class='img-fluid' />
             </a>
           </li>
         </ul>

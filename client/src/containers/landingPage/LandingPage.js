@@ -5,11 +5,10 @@ import Destinations from '../../components/destinations/Destinations';
 import Reviews from '../../components/reviews/reviews';
 import Blogs from '../../components/blogs/blogs';
 import Search from '../../components/search/Search';
-import BestTour from './../../components/tour/bestTour/BestTour';
+import BestTour from '../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Intro from '../../components/intro/intro';
-import intro from '../../components/intro/intro';
 
 class LandingPage extends Component {
   componentDidMount() {

@@ -1,10 +1,12 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import StarRating from '../../star/star';
+import TourDetail from '../../../containers/tourDetail/tourDetail';
 export default (props) => {
   return (
     <div class='col'>
       <figure class='tour-grid-item-01'>
-        <a href={props.tour.id}>
+        <NavLink to={`/tour/${props.tour.slug}`}>
           <div class='image'>
             <img src='images/image-tour/01.jpg' alt='images' />
           </div>
@@ -51,7 +53,7 @@ export default (props) => {
               <span class='text-muted mr-5'></span>
             </p>
           </figcaption>
-        </a>
+        </NavLink>
       </figure>
     </div>
   );

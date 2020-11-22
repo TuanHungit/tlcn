@@ -52,7 +52,7 @@ const fetchTourDetailFailed = () => {
 const setTourDetail = (tourDetail) => {
   return {
     type: actionTypes.SET_TOUR_DETAIL,
-    touDetail: tourDetail,
+    tourDetail: tourDetail,
   };
 };
 
@@ -61,9 +61,10 @@ export const fetchTourDetail = (slug) => {
     axios
       .get(`/tours/${slug}`)
       .then((response) => {
+        console.log(response);
         dispatch(setTourDetail(response.data));
       })
-      .then((err) => {
+      .catch((err) => {
         console.log(err);
         dispatch(fetchTourDetailFailed());
       });

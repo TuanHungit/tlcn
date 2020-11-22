@@ -37,7 +37,7 @@ export default (props) => {
               <div className='col-inner'>
                 <div className='main-logo'>
                   <a href='index.html'>
-                    <img src='images/logo.png' alt='images' />
+                    <img src='/images/logo.png' alt='images' />
                   </a>
                 </div>
               </div>

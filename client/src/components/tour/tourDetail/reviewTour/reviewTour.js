@@ -12,7 +12,7 @@ export default () => {
           <div class='review-man d-flex'>
             <div class='image mr-15'>
               <img
-                src='images/image-man/01.jpg'
+                src='/images/image-man/01.jpg'
                 alt='image'
                 class='image-circle'
               />
@@ -55,7 +55,7 @@ export default () => {
           <div class='review-man d-flex'>
             <div class='image mr-15'>
               <img
-                src='images/image-man/02.jpg'
+                src='/images/image-man/02.jpg'
                 alt='image'
                 class='image-circle'
               />
@@ -96,7 +96,7 @@ export default () => {
           <div class='review-man d-flex'>
             <div class='image mr-15'>
               <img
-                src='images/image-man/03.jpg'
+                src='/images/image-man/03.jpg'
                 alt='image'
                 class='image-circle'
               />
@@ -134,7 +134,7 @@ export default () => {
           <div class='review-man d-flex'>
             <div class='image mr-15'>
               <img
-                src='images/image-man/04.jpg'
+                src='/images/image-man/04.jpg'
                 alt='image'
                 class='image-circle'
               />
@@ -176,7 +176,7 @@ export default () => {
           <div class='review-man d-flex'>
             <div class='image mr-15'>
               <img
-                src='images/image-man/05.jpg'
+                src='/images/image-man/05.jpg'
                 alt='image'
                 class='image-circle'
               />
