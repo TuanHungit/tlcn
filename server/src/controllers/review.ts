@@ -32,12 +32,11 @@ export const getReviewByTour = async (
   res: Response,
   next: NextFunction
 ) => {
-  const tourId = req.params.tourId;
-  console.log(tourId);
-  const tour = await Tour.findById(tourId);
+  const slug = req.params.slug;
+  const tour = await Tour.findOne({ slug });
   if (!tour) {
-    throw new BadRequestError('Tour document not found with that ID!');
+    throw new BadRequestError('Tour document not found with that slug!');
   }
-  const reviews = await Review.find({ tour: tourId });
+  const reviews = await Review.find({ tour: tour.id });
   res.status(200).send(reviews);
 };

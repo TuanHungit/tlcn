@@ -17,12 +17,6 @@ const router = express.Router({ mergeParams: true });
 
 router.get('/', getAllReview);
 
-// @Route GET /api/v1/tours/:tourId/reviews/review-tour
-// @desc get all review by tour
-// @access Public
-
-router.get('/reviews-tour', getReviewByTour);
-
 // @Route GET /api/v1/reviews:id
 // @desc get one a review
 // @access Public

@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from '../../../carousel/carousel';
 import Star from '../../../star/star';
+import Calendar from '../calendar/calender';
 export default (props) => {
   return (
     <div>
@@ -77,8 +78,11 @@ export default (props) => {
         {props.content.summary.split('<br/>').map((el, key) => (
           <p key={key}>{el}</p>
         ))}
-
-        <h5 class='mt-30'>Những điểm nổi bật làm Tour trở nên thú vị</h5>
+        <div class='mb-30'></div>
+        <Calendar />
+        <h5 class='mt-30'>
+          <i class='far fa-star'></i> Những điểm nổi bật làm Tour trở nên thú vị
+        </h5>
 
         <ul class='list-icon-data-attr font-ionicons'>
           {props.content.description.split('<br/>').map((el, key) => (

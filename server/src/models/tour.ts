@@ -100,12 +100,16 @@ const tourSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-tourSchema.index({ reviews: 1 }, { unique: true });
+tourSchema.index({ reviews: 1 });
+
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+tourSchema.index({ startLocation: '2dsphere' });
+
 tourSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'tour',
   localField: '_id',
-  limit: 5,
 });
 tourSchema.statics.build = (attr: ITourAttrs) => {
   return new Tour(attr);

@@ -11,8 +11,6 @@ import {
   getOneTour,
   getTourByDestination,
   setDestinationId,
-  getTourForView,
-  getTourWithSlug,
 } from '../../controllers/tour';
 
 const router = express.Router({ mergeParams: true });
@@ -26,6 +24,7 @@ router.get('/', getAllTour);
 // @Route GET /api/v1/:desId/tours
 // @desc get all tours by destination
 // @access PUBLIC
+
 router.get('/tours-dest', getTourByDestination);
 
 // @Route GET /api/v1/tours/:id
@@ -36,7 +35,7 @@ router.get('/tours-dest', getTourByDestination);
 // @Route GET /api/v1/tours/:slug
 // @desc get a tour with slug
 // @access PUBLIC
-router.get('/:slug', getTourWithSlug);
+router.get('/:id', getOneTour);
 
 // @Route POST /api/v1/tours
 // @desc create a tour

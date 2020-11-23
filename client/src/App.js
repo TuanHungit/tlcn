@@ -21,7 +21,7 @@ function App(props) {
   let routes = (
     <Switch>
       <Route exact path='/' component={LandingPage} />
-      <Route path='/tour/:id' component={TourDetail} />
+      <Route path='/tour/:slug' component={TourDetail} />
       <Route path='/profile' component={Profile} />
 
       {/* <Route path='/register' component={Register} /> */}

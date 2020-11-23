@@ -29,7 +29,9 @@ export default (props) => {
       id='detail-content-sticky-nav-03'
       class='fullwidth-horizon-sticky-section'
     >
-      <h4 class='heading-title'>Bản đồ</h4>
+      <h4 class='heading-title'>
+        <i class='fas fa-map-marker-alt'></i> Bản đồ
+      </h4>
 
       <div id='map' className='d-flex justify-content-between width-full'>
         <ReactMapGL

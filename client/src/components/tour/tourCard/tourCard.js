@@ -8,7 +8,7 @@ export default (props) => {
       <figure class='tour-grid-item-01'>
         <NavLink to={`/tour/${props.tour.slug}`}>
           <div class='image'>
-            <img src='images/image-tour/01.jpg' alt='images' />
+            <img src='/images/image-tour/01.jpg' alt='images' />
           </div>
           <figcaption class='content'>
             <h5>{props.tour.name}</h5>

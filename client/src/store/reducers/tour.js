@@ -2,8 +2,10 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initState = {
   tourList: null,
+  similarTourList: null,
   tourDetail: null,
   tourDetailError: false,
+  similarTourError: false,
   error: false,
   loading: false,
 };
@@ -40,13 +42,7 @@ const fetchTourDetailFailed = (state) => {
     tourDetailError: true,
   };
 };
-const fetchTourDetailStart = (state) => {
-  return {
-    ...state,
-    tourDetailError: false,
-    loading: true,
-  };
-};
+
 const setTourDetail = (state, action) => {
   return {
     ...state,
@@ -54,6 +50,24 @@ const setTourDetail = (state, action) => {
     loading: false,
     tourDetail: {
       ...action.tourDetail,
+    },
+  };
+};
+
+//tour similar
+const fetchSimilarTourFailed = (state) => {
+  return {
+    ...state,
+    similarTourError: true,
+  };
+};
+
+const setSimilarTourList = (state, action) => {
+  return {
+    ...state,
+    similarTourError: false,
+    similarTourList: {
+      ...action.similarTourList,
     },
   };
 };
@@ -69,6 +83,10 @@ const reducer = (state = initState, action) => {
       return fetchTourDetailFailed(state);
     case actionTypes.SET_TOUR_DETAIL:
       return setTourDetail(state, action);
+    case actionTypes.FETCH_TOUR__SIMILAR_FAILED:
+      return fetchSimilarTourFailed(state);
+    case actionTypes.SET_TOUR_SIMILAR_LIST:
+      return setSimilarTourList(state, action);
     default:
       return state;
   }

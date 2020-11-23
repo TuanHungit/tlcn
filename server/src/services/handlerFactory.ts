@@ -36,9 +36,15 @@ export const createOne = (Model: Model<any>) => {
   };
 };
 
-export const getOne = (Model: Model<any>, popOptions?: Object) => {
+export const getOne = (Model: Model<any>, popOptions?: any) => {
   return async (req: Request, res: Response) => {
-    let query = Model.findById(req.params.id);
+    let query: any = null;
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+      query = Model.findById(req.params.id);
+    } else {
+      query = Model.findOne({ slug: req.params.id });
+    }
+
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
 
@@ -53,8 +59,11 @@ export const getOne = (Model: Model<any>, popOptions?: Object) => {
 export const getAll = (Model: Model<any>) => {
   return async (req: Request, res: Response) => {
     // To allow for nested GET reviews on tour (hack)
+
     let filter = {};
-    if (req.params.tourId) filter = { tour: req.params.tourId };
+    if (req.params.tourId) {
+      filter = { tour: req.params.tourId };
+    }
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()

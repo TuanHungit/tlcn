@@ -70,3 +70,36 @@ export const fetchTourDetail = (slug) => {
       });
   };
 };
+
+//fetch fimilar tour
+const setSimilarTourList = (similarTourList) => {
+  return {
+    type: actionTypes.SET_TOUR_SIMILAR_LIST,
+    similarTourList,
+  };
+};
+const fetchSimilarTourFailed = () => {
+  return {
+    type: actionTypes.FETCH_TOUR__SIMILAR_FAILED,
+  };
+};
+
+export const fetchSimilarTour = (tourId, page = 0, limit = 4, fields) => {
+  return (dispatch) => {
+    let url = `/tours?page=${page}&limit=${limit}`;
+    if (fields) {
+      url = `/tours?page=${page}&limit=${limit}&fields=${fields.join(
+        ','
+      )}&sort=-ratingsAverage`;
+    }
+    axios
+      .get(url)
+      .then((response) => {
+        dispatch(setSimilarTourList(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(fetchSimilarTourFailed());
+      });
+  };
+};

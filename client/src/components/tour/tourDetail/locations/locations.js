@@ -7,7 +7,9 @@ export default (props) => {
       id='detail-content-sticky-nav-02'
       class='fullwidth-horizon-sticky-section'
     >
-      <h4 class='heading-title'>Hành trình</h4>
+      <h4 class='heading-title'>
+        <i class='fas fa-plane'></i> Hành trình
+      </h4>
 
       <h6>Giới thiệu</h6>
 
