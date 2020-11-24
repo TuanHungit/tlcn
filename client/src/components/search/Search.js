@@ -40,9 +40,10 @@ class Search extends Component {
                               <div className='form-group'>
                                 <label>Tour</label>
                                 <select
-                                  className='chosen-the-basic form-control form-control-sm'
+                                  className='form-control form-control-sm'
                                   placeholder='Select one'
                                   tabindex='2'
+                                  style={{ height: '22px' }}
                                 >
                                   <option>All</option>
                                   <option>Tiền Giang</option>
@@ -58,9 +59,10 @@ class Search extends Component {
                               <div className='form-group'>
                                 <label>Điểm đến</label>
                                 <select
-                                  className='chosen-the-basic form-control form-control-sm'
+                                  className=' form-control form-control-sm'
                                   placeholder='Select two'
                                   tabindex='2'
+                                  style={{ height: '22px' }}
                                 >
                                   <option>Châu Âu</option>
                                   <option>Nhật Bản</option>
@@ -77,7 +79,7 @@ class Search extends Component {
                                 <label>Thời gian</label>
                                 <input
                                   type='text'
-                                  className='form-control form-readonly-control air-datepicker'
+                                  className=' form-control form-control-sm form-readonly-control air-datepicker'
                                   placeholder='Chọn thời gian'
                                   data-min-view='months'
                                   data-view='months'
@@ -85,6 +87,7 @@ class Search extends Component {
                                   data-language='en'
                                   data-auto-close='true'
                                   readonly
+                                  style={{ height: '22px' }}
                                 />
                               </div>
                             </div>
@@ -96,9 +99,10 @@ class Search extends Component {
                       <div className='col-inner'>
                         <a
                           href='index.html#'
-                          className='btn btn-primary btn-block'
+                          className='btn btn-primary btn-block '
+                          style={{ height: '75px' }}
                         >
-                          <i className='ion-android-search'></i>
+                          <i class='fas fa-search'></i>
                         </a>
                       </div>
                     </div>

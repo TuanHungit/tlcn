@@ -2,7 +2,7 @@ import React from 'react';
 import './sticky.css';
 export default () => {
   return (
-    <div class='fullwidth-horizon-sticky none-sticky-hide'>
+    <div class='fullwidth-horizon-sticky'>
       <div class='fullwidth-horizon-sticky-inner'>
         <div class='container'>
           <div class='fullwidth-horizon-sticky-item clearfix'>

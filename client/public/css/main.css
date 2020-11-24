@@ -8165,6 +8165,7 @@ ul.list-inline-block li:last-child {
   padding-bottom: 6px;
   font-size: 13px;
   border-radius: 2px;
+  height: '22px';
 }
 
 .form-control-lg {

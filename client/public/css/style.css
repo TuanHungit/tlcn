@@ -188,12 +188,12 @@ section,
 
 .header-main .main-nav li a {
   font-size: 12px;
-  font-weight: 600;
+
   color: rgba(255, 255, 255, 0.7);
   display: block;
   line-height: 1.25;
   padding: 5px 0;
-  font-weight: 400;
+  font-weight: 550;
   position: relative;
 }
 
@@ -207,7 +207,7 @@ section,
   padding: 10px 0;
   padding-right: 15px;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 550;
   letter-spacing: 1px;
   color: #000;
 }
@@ -286,7 +286,7 @@ section,
   line-height: 1;
   font-size: 12px;
   text-transform: uppercase;
-  font-weight: 600;
+
   letter-spacing: 1px;
   color: #000;
   position: relative;
@@ -1492,8 +1492,8 @@ ul.horizon-sticky-nav > li.active a {
 }
 
 .footer-wrapper ul.footer-menu-list li:before {
-  font-family: 'Ionicons';
-  content: '\f10a';
+  font-family: 'Font Awesome 5 Free';
+  content: '\f007';
   position: absolute;
   left: 0;
   top: 4px;

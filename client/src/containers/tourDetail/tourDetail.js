@@ -69,13 +69,17 @@ class TourDetail extends Component {
           <div class='main-wrapper scrollspy-container'>
             <section class='page-wrapper page-detail pt-0'>
               <div class='pt-0 pt-xl-15'></div>
+
               <PageTitle />
-              <Sticky />
+
               <div class='container'>
                 <div class='row gap-20 gap-lg-40'>
                   <div class='col-12 col-lg-8'>
                     <div class='content-wrapper'>
-                      <ContentDetail content={data} />
+                      <ContentDetail
+                        content={data}
+                        availableDate={data.availableDate}
+                      />
                       <div class='mb-50'></div>
 
                       <Locations

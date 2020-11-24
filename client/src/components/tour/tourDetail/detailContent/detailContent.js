@@ -79,7 +79,7 @@ export default (props) => {
           <p key={key}>{el}</p>
         ))}
         <div class='mb-30'></div>
-        <Calendar />
+        <Calendar availableDate={props.availableDate} />
         <h5 class='mt-30'>
           <i class='far fa-star'></i> Những điểm nổi bật làm Tour trở nên thú vị
         </h5>
