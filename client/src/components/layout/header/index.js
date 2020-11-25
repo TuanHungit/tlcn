@@ -3,6 +3,7 @@ import "./index.css";
 
 import Navigation from "./Navigation/Navigation";
 import { Link, NavLink } from "react-router-dom";
+import Profile from "../../../containers/Dashboard/Dashboard";
 export default (props) => {
   return (
     <header
@@ -25,6 +26,10 @@ export default (props) => {
             <div className="col-7 col-shrink order-last-lg">
               <div className="col-inner">
                 <Navigation
+                  isAuthencated={props.isAuthencated}
+                  user={props.user}
+                />
+                <Profile
                   isAuthencated={props.isAuthencated}
                   user={props.user}
                 />
@@ -98,9 +103,6 @@ export default (props) => {
                         </li>
                         <li>
                           <a href="contact-us.html">Contact us</a>
-                        </li>
-                        <li>
-                          <Link to="/profile">Profile</Link>
                         </li>
                       </ul>
                     </nav>

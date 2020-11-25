@@ -11,7 +11,9 @@ import Register from "./containers/auth/signup/signup";
 import LandingPage from "./containers/LandingPage/LandingPage";
 import * as actionCreator from "./store/actions";
 import Logout from "./containers/auth/signout/signout";
+//import Profile from "./containers/Dashboard/Dashboard";
 import Profile from "./containers/Dashboard/Dashboard";
+
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -21,7 +23,6 @@ function App(props) {
     <Switch>
       <Route path="/" exact component={LandingPage} />{" "}
       <Route path="/tour" component={TourDetail} />{" "}
-      <Route path="/profile" component={Profile} />{" "}
       {/* <Route path='/register' component={Register} /> */}
       <Route path="/logout" component={Logout} /> <Redirect to="/" />
     </Switch>
@@ -30,7 +31,9 @@ function App(props) {
     routes = (
       <Switch>
         <Route path="/" exact component={LandingPage} />{" "}
-        <Route path="/tour" component={TourDetail} />{" "}
+        <Route path="/tour" component={TourDetail} /> //
+        <Route path="/profile" component={Profile} />{" "}
+        {/* <Route path="/profile" component={Profile} />{" "} */}
         <Route path="/logout" component={Logout} /> <Redirect to="/" />
       </Switch>
     );

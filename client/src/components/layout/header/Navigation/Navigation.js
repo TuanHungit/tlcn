@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const navigationItems = (props) => (
   <div>
     {!props.isAuthencated ? (
@@ -60,6 +60,9 @@ const navigationItems = (props) => (
               {props.user}
             </a>
           </ul>
+          <li>
+            <Link to="/profile"> Profile</Link>
+          </li>
         </li>
         <li className="d-none d-sm-block">
           <a href="/logout">Logout</a>
