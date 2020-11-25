@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Destinations from '../../components/destinations/Destinations';
 import Reviews from '../../components/reviews/reviews';
-import Blogs from '../../components/blogs/blogs';
+import Blogs from '../../components/blogs/Blogs';
 import Search from '../../components/search/Search';
 import BestTour from '../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
@@ -33,10 +33,19 @@ class LandingPage extends Component {
     ) : (
       <Spinner />
     );
+    let search = this.props.destinationError ? (
+      <p>Destinations can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
     if (this.props.destinationList) {
       destinations = (
         <Destinations destinationList={this.props.destinationList} />
       );
+    }
+    if (this.props.destinationList) {
+     
+      search =( <Search destinationList={this.props.destinationList} tourList={this.props.tourList}/>);
     }
     //fetch tour
     let bestTour = this.props.tourError ? (
@@ -67,8 +76,8 @@ class LandingPage extends Component {
     }
     return (
       <div class='main-wrapper scrollspy-container'>
-        <Search />
-
+       {/* <Search  /> */}
+{search}
         <section class='pb-0'>
           <div class='container'>
             <div class='row cols-1 cols-lg-3 gap-20 gap-lg-40'>

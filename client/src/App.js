@@ -9,9 +9,9 @@ import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
-import LandingPage from './containers/landingPage/landingPage';
+import LandingPage from './containers/LandingPage/LandingPage';
 import Logout from './containers/auth/signout/signout';
-import Profile from './containers/dashboard/dashboard';
+import Profile from './containers/Dashboard/Dashboard';
 
 function App(props) {
   useEffect(() => {
@@ -22,7 +22,7 @@ function App(props) {
     <Switch>
       <Route exact path='/' component={LandingPage} />
       <Route path='/tour/:slug' component={TourDetail} />
-      <Route path='/profile' component={Profile} />
+      
 
       {/* <Route path='/register' component={Register} /> */}
       <Route path='/logout' component={Logout} />
@@ -33,7 +33,7 @@ function App(props) {
     routes = (
       <Switch>
         <Route exact path='/' component={LandingPage} />
-
+        <Route path='/profile' component={Profile} />
         <Route path='/logout' component={Logout} />
         <Route path='/tour/:slug' component={TourDetail} />
         <Redirect to='/' />
