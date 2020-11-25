@@ -15,7 +15,7 @@ const profileStart = (state, action) => {
 };
 const profileSuccess = (state, action) => {
   return {
-    ...state,
+    ...state,   
     error: null,
     loadding: false,
     // user: action.user,

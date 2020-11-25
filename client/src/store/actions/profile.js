@@ -23,8 +23,8 @@ const profileSuccess = (user) => {
  export const getAuthProfile = () => {
    return (dispatch) => {
      dispatch(profileStart());
-//     axios
-//       .post("/users/signin")
+  axios
+     .post("/users/signin")
 //       .then((response) => {
 //         const user = response.data.data.user;
 //         // const user = response.data;
