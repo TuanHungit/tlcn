@@ -40,29 +40,26 @@ export const getCheckoutSession = async (
     // success_url: `${req.protocol}://${req.get('host')}/my-tours/?tour=${
     //   req.params.tourId
     // }&user=${req.user.id}&price=${tour.price}`,
-    success_url: `${req.protocol}://${req.get('host')}/my-tours?alert=booking`,
-    cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour!.slug}`,
+    // tour/${tour!.slug}
+    // `${req.protocol}://${req.get('host')}/img/tours/${tour.imageCover}`,
+    success_url: `${req.protocol}://${req.get('host')}/`,
+    cancel_url: `${req.protocol}://${req.get('host')}/`,
     customer_email: req.user.email,
     client_reference_id: req.params.tourId,
     line_items: [
       {
         name: `${tour.name} Tour`,
         description: tour.summary,
-        images: [
-          `${req.protocol}://${req.get('host')}/img/tours/${tour.imageCover}`,
-        ],
-        amount: parseFloat(tour.price as any) * 100,
-        currency: 'usd',
+        images: [`https://www.natours.dev/img/tours/tour-1-1.jpg`],
+        amount: tour.price,
+        currency: 'VND',
         quantity: 1,
       },
     ],
   });
 
   // 3) Create session as response
-  res.status(200).json({
-    status: 'success',
-    session,
-  });
+  res.json({ id: session.id });
 };
 
 export const webhookCheckout = (
@@ -87,4 +84,19 @@ export const webhookCheckout = (
     createBookingCheckout(event.data.object);
 
   res.status(200).json({ received: true });
+};
+
+export const createPaymentIntent = async (req: Request, res: Response) => {
+  const body = req.body;
+
+  const options = {
+    ...body,
+  };
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create(options);
+    res.json(paymentIntent);
+  } catch (err) {
+    res.json(err);
+  }
 };

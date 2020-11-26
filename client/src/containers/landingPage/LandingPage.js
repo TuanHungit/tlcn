@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Destinations from '../../components/destinations/Destinations';
 import Reviews from '../../components/reviews/reviews';
 import Blogs from '../../components/blogs/blogs';
-import Search from '../../components/search/Search';
+import Search from '../../components/UI/search/search';
 import BestTour from '../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -12,6 +12,7 @@ import Intro from '../../components/intro/intro';
 
 class LandingPage extends Component {
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.onFetchDestination();
     this.props.onFetchTour(0, 6, [
       'duration',

@@ -1,7 +1,10 @@
 import React from 'react';
 export default () => {
   return (
-    <footer class='footer-wrapper light scrollspy-footer'>
+    <footer
+      class='footer-wrapper light scrollspy-footer'
+      style={{ position: 'sticky' }}
+    >
       <div class='footer-top'>
         <div class='container'>
           <div class='row shrink-auto-md align-items-lg-center gap-10'>
@@ -35,7 +38,7 @@ export default () => {
           <div class='row gap-50'>
             <div class='col-12 col-lg-5'>
               <div class='footer-logo'>
-                <img src='images/logo.png' alt='images' />
+                <img src='/images/logo.png' alt='images' />
               </div>
 
               <p class='mt-20'>

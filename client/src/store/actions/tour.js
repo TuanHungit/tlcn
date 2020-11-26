@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios/axios-order';
+import axios from '../../common/axios-order';
 
 //tour list actions
 export const fetchTourStart = () => {

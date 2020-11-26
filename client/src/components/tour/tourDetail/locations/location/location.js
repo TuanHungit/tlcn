@@ -4,7 +4,7 @@ export default (props) => {
   return (
     <li>
       <div class='itinerary-day'>
-        <span>Ngày {props.location.day}</span>
+        <span style={{ fontSize: '17px' }}>Ngày {props.location.day}</span>
       </div>
 
       <h6>Điểm đến: {props.location.title}</h6>

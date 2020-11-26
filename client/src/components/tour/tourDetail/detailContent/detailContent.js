@@ -1,6 +1,6 @@
 import React from 'react';
-import Carousel from '../../../carousel/carousel';
-import Star from '../../../star/star';
+import Carousel from '../../../UI/carousel/carousel';
+import Star from '../../../UI/star/star';
 import Calendar from '../calendar/calender';
 export default (props) => {
   return (

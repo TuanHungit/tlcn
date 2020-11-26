@@ -1,5 +1,5 @@
 import React from 'react';
-export default () => {
+export default (props) => {
   return (
     <div class='page-title border-bottom pt-100 mb-0 border-bottom-0'>
       <div class='container'>
@@ -17,7 +17,10 @@ export default () => {
                 </li>
 
                 <li class='breadcrumb-item active' aria-current='page'>
-                  Tour detail
+                  Chi tiết Tour
+                </li>
+                <li class='breadcrumb-item active' aria-current='page'>
+                  {props.title}
                 </li>
               </ol>
             </nav>

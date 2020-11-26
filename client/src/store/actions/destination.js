@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios/axios-order';
+import axios from '../../common/axios-order';
 const fetchDestinationStart = () => {
   return {
     type: actionTypes.FETCH_DESTINATION_START,

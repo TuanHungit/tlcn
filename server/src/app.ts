@@ -28,10 +28,10 @@ const options: cors.CorsOptions = {
   ],
   credentials: true,
   methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-  origin: 'http://localhost:3000',
+  origin: '*',
   preflightContinue: false,
 };
-app.use(cors(options));
+app.use(cors());
 app.set('trust proxy', 1);
 app.use(cookieParser());
 app.use(json());
@@ -46,15 +46,13 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const baseURL = '/api/v1';
-
+app.use(`${baseURL}/booking`, bookingRouter);
 app.use(baseURL, authRouter);
 app.use(`${baseURL}/destinations`, destinationRouter);
 app.use(`${baseURL}/tours`, tourRouter);
 app.use(`${baseURL}/reviews`, reviewRouter);
 app.use(baseURL, blogRouter);
 app.use(baseURL, userRouter);
-
-app.use(baseURL, bookingRouter);
 
 app.all('*', async () => {
   throw new NotFoundError();

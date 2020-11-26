@@ -1,5 +1,6 @@
 import React from 'react';
 import ScheduleItem from './scheduleItem';
+import './schedule.css';
 export default (props) => {
   return (
     <div
@@ -34,15 +35,18 @@ export default (props) => {
             </div>
           </div>
         </div>
-
-        {props.start.map((el, key) => (
-          <ScheduleItem
-            start={el}
-            duration={props.duration}
-            price={props.price}
-            key={key}
-          />
-        ))}
+        <div className='list-schedule'>
+          {props.start.map((el, key) => (
+            <ScheduleItem
+              start={el}
+              duration={props.duration}
+              price={props.price}
+              key={key}
+              changeDateHandler={props.changeDateHandler}
+              closeModalHandler={props.closeModalHandler}
+            />
+          ))}
+        </div>
       </div>
       <div class='mb-50'></div>
     </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import StarRating from '../../star/star';
-import TourDetail from '../../../containers/tourDetail/tourDetail';
+import StarRating from '../../UI/star/star';
+import ToMoneyForView from '../../../common/convertPriceForView';
+
 export default (props) => {
   return (
     <div class='col'>
@@ -26,13 +27,13 @@ export default (props) => {
                       average={props.tour.ratingsAverage}
                     />
                   </div>
-                  <p class='rating-text font600 text-muted font-12 letter-spacing-1'>
+                  <p class='rating-text font600 text-muted font-10 letter-spacing-1'>
                     {props.tour.ratingsQuantity} đánh giá
                   </p>
                 </div>
               </li>
             </ul>
-            <ul class='item-meta mt-15'>
+            <ul class='item-meta'>
               <li>
                 <span class='font700 h6'>
                   {props.tour.duration} ngày &amp; {props.tour.duration - 1} đêm
@@ -48,7 +49,7 @@ export default (props) => {
             <p class='mt-3'>
               Giá từ{' '}
               <span class='h6 line-1 text-primary font16'>
-                ${props.tour.price}
+                {ToMoneyForView(props.tour.price, ' đ')}
               </span>{' '}
               <span class='text-muted mr-5'></span>
             </p>

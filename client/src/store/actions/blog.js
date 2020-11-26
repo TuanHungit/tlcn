@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios/axios-order';
+import axios from '../../common/axios-order';
 
 export const fetchBlogStart = () => {
   return {

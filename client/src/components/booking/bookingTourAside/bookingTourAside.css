@@ -1,0 +1,4 @@
+.stick-to-bottom {
+  top: initial !important;
+  bottom: 100;
+}

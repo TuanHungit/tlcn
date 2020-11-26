@@ -12,7 +12,7 @@ import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/landingPage/landingPage';
 import Logout from './containers/auth/signout/signout';
 import Profile from './containers/dashboard/dashboard';
-
+import Booking from './components/booking/booking';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -20,11 +20,11 @@ function App(props) {
 
   let routes = (
     <Switch>
-      <Route exact path='/' component={LandingPage} />
-      <Route path='/tour/:slug' component={TourDetail} />
+      <Route path='/' exact component={LandingPage} />
+      <Route path='/tour/:slug' exact component={TourDetail} />
+      <Route path={'/tour/:slug/booking'} component={Booking} />
       <Route path='/profile' component={Profile} />
-
-      {/* <Route path='/register' component={Register} /> */}
+      <Route path='/register' component={Register} />
       <Route path='/logout' component={Logout} />
       <Redirect to='/' />
     </Switch>
@@ -32,10 +32,10 @@ function App(props) {
   if (props.isAuthencated) {
     routes = (
       <Switch>
-        <Route exact path='/' component={LandingPage} />
-
+        <Route path='/' exact component={LandingPage} />
+        <Route path={'/tour/:slug/booking'} component={Booking} />
         <Route path='/logout' component={Logout} />
-        <Route path='/tour/:slug' component={TourDetail} />
+        <Route exact path='/tour/:slug' component={TourDetail} />
         <Redirect to='/' />
       </Switch>
     );
@@ -47,6 +47,7 @@ function App(props) {
       <Register />
       <LoginModal />
       <Footer />
+      {/* <Booking /> */}
     </div>
   );
 }

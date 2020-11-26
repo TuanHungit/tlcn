@@ -7,7 +7,7 @@ export default (props) => {
     day: 'numeric',
   };
   return (
-    <div class='item-text-long'>
+    <div class='item-text-long pr-3'>
       <div class='row align-items-center'>
         <div class='col-12 col-sm-7'>
           <div class='col-inner mb-10 mb-sm-0'>
@@ -48,10 +48,13 @@ export default (props) => {
         </div>
         <div class='col-4 col-sm-2'>
           <a
-            href='tour-detail-02.html#'
-            class='btn btn-primary btn-block btn-sm mt-3'
+            class='btn btn-primary btn-block btn-sm mt-3 text-light'
+            onClick={() => {
+              props.changeDateHandler(props.start);
+              props.closeModalHandler();
+            }}
           >
-            Đặt Tour ngay!
+            Chọn lịch!
           </a>
         </div>
       </div>

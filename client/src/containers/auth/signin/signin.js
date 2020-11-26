@@ -5,7 +5,7 @@ import * as actionCreator from '../../../store/actions';
 import { connect } from 'react-redux';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import alertify from 'alertifyjs';
-import Input from '../../../components/UI/Input/Input';
+import Input from '../../../components/UI/input/input';
 class Signin extends Component {
   state = {
     controls: {

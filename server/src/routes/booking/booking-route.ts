@@ -6,17 +6,17 @@ import {
   updateOneBooking,
   deleteOneBooking,
   createBookingCheckout,
+  createPaymentIntent,
 } from '../../controllers/booking';
 import { protectRoute } from '../../middlewares/protect-route';
 const router = express.Router();
-
-router.use(protectRoute);
 
 // @Route PUT /api/v1/get-session
 // @desc update a destinations by id
 // @access Private
 
-router.get('/checkout-session/:tourId', getCheckoutSession);
+router.get('/checkout-session/:tourId', protectRoute, getCheckoutSession);
+router.post('/create-payment-intent', protectRoute, createPaymentIntent);
 router.route('/').get(getAllBooking).post(createBookingCheckout);
 
 router

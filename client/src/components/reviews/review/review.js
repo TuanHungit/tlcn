@@ -1,12 +1,6 @@
 import react from 'react';
-
+import ToDateView from '../../../common/convertDateForView';
 export default (props) => {
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
   return (
     <div class='slick-item'>
       <div class='testimonial-grid-01'>
@@ -26,11 +20,7 @@ export default (props) => {
           <div class='texting'>
             <h5>{props.review.user.name}</h5>
             <p class='text-muted testimonial-cite'>
-              Travel on{' '}
-              {new Date(props.review.createdAt).toLocaleDateString(
-                undefined,
-                options
-              )}
+              Travel on {ToDateView(props.review.createdAt)}
             </p>
           </div>
         </div>

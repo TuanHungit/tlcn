@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import PageTitle from '../../components/layout/PageTitle/PageTile';
-import BookingTour from '../../components/tour/tourDetail/bookingTour/bookingTour';
+import BookingTour from '../../components/booking/bookingTourAside/bookingTourAside';
 import ContentDetail from '../../components/tour/tourDetail/detailContent/detailContent';
 import Locations from '../../components/tour/tourDetail/locations/locations';
 import Map from '../../components/tour/tourDetail/map/map';
-import Includes from '../../components/tour/tourDetail/includes/includes';
+
 import Sticky from '../../components/tour/tourDetail/sticky/sticky';
 import Schedule from '../../components/tour/tourDetail/schedule/schedule';
 import ReviewTour from '../../components/tour/tourDetail/reviewTour/reviewTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SimilarTour from '../../components/tour/tourDetail/similarTour/similarTour';
-import Calendar from '../../components/tour/tourDetail/calendar/calender';
+import BookingModal from '../../components/tour/tourDetail/bookingModal/bookingModal';
+import Booking from '../../components/booking/booking';
 class TourDetail extends Component {
+  state = {
+    dateChoose: null,
+    numOfPerson: 1,
+    total: 0,
+  };
   componentDidMount() {
+    window.scrollTo(0, 0);
     const {
       match: { params },
     } = this.props;
@@ -24,6 +31,11 @@ class TourDetail extends Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.tourDetail !== this.props.tourDetail) {
+      this.setState({
+        total: this.props.tourDetail.price,
+        date: this.props.tourDetail.availableDate[0],
+      });
+
       const tourId = this.props.tourDetail.id;
       this.props.onFetchReviewRourList(tourId, 0, 6, [
         'review',
@@ -43,6 +55,31 @@ class TourDetail extends Component {
       ]);
     }
   }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.match.params.slug !== this.props.match.params.slug) {
+  //     const {
+  //       match: { params },
+  //     } = this.props;
+  //     this.props.onFetchTourDetail(params.slug);
+  //   }
+  //   return true;
+  // }
+
+  changePersonHandler = (event) => {
+    const numOfPerson = event.target.value;
+    const price = this.props.tourDetail.price;
+    const total = numOfPerson * price;
+
+    this.setState({
+      numOfPerson: event.target.value,
+      total: total,
+    });
+  };
+  changeDateHandler = (date) => {
+    this.setState({
+      dateChoose: date,
+    });
+  };
   render() {
     const data = this.props.tourDetail;
     let tourDetail = this.props.tourDetailError ? (
@@ -65,12 +102,12 @@ class TourDetail extends Component {
     }
     if (data) {
       tourDetail = (
-        <div className='body-inner '>
+        <div className='body-inner'>
           <div class='main-wrapper scrollspy-container'>
             <section class='page-wrapper page-detail pt-0'>
               <div class='pt-0 pt-xl-15'></div>
 
-              <PageTitle />
+              <PageTitle title={data.name} />
 
               <div class='container'>
                 <div class='row gap-20 gap-lg-40'>
@@ -89,17 +126,27 @@ class TourDetail extends Component {
                         }}
                       />
                       <Map locations={data.locations} />
-
-                      <Schedule
-                        duration={data.duration}
-                        start={data.availableDate}
-                        price={data.price}
-                      />
                       {similarTourList}
                       <ReviewTour reviews={this.props.reviewTourList} />
                     </div>
                   </div>
-                  <BookingTour />
+                  <BookingTour
+                    numOfPerson={this.state.numOfPerson}
+                    total={this.state.total}
+                    price={this.props.tourDetail.price}
+                    duration={data.duration}
+                    changePersonHandler={(event) =>
+                      this.changePersonHandler(event)
+                    }
+                    date={this.state.dateChoose}
+                    slug={data.slug}
+                  />
+                  <BookingModal
+                    duration={data.duration}
+                    start={data.availableDate}
+                    price={data.price}
+                    changeDateHandler={this.changeDateHandler}
+                  />
                 </div>
               </div>
             </section>
@@ -107,7 +154,6 @@ class TourDetail extends Component {
         </div>
       );
     }
-
     return <div>{tourDetail}</div>;
   }
 }

@@ -1,12 +1,7 @@
 import React from 'react';
-import Star from '../../../../star/star';
+import Star from '../../../../UI/star/star';
+import ToDateView from '../../../../../common/convertDateForView';
 export default (props) => {
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
   return (
     <li>
       <div class='review-man d-flex'>
@@ -26,10 +21,7 @@ export default (props) => {
             </div>
           </div>
           <span class='text-muted font-sm font600'>
-            {new Date(props.review.createdAt).toLocaleDateString(
-              undefined,
-              options
-            )}
+            {ToDateView(props.review.createdAt)}
           </span>
         </div>
       </div>
