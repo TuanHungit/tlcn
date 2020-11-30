@@ -13,6 +13,9 @@ import LandingPage from './containers/landingPage/LandingPage';
 import Logout from './containers/auth/signout/signout';
 import Profile from './containers/dashboard/dashboard';
 import Booking from './containers/booking/booking';
+import BookingSuccess from './components/booking/bookingSuccess/bookingSuccess';
+import ScrollToTop from './components/UI/scrollTop/scrollTop';
+
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -22,7 +25,12 @@ function App(props) {
     <Switch>
       <Route path='/' exact component={LandingPage} />
       <Route path='/tour/:slug' exact component={TourDetail} />
-      <Route path={'/tour/:slug/booking'} component={Booking} />
+      <Route path={'/tour/:slug/booking'} exact component={Booking} />
+      <Route
+        path='/tour/:slug/booking/success'
+        exact
+        component={BookingSuccess}
+      />
       <Route path='/profile' component={Profile} />
       <Route path='/register' component={Register} />
       <Route path='/logout' component={Logout} />
@@ -33,9 +41,14 @@ function App(props) {
     routes = (
       <Switch>
         <Route path='/' exact component={LandingPage} />
-        <Route path={'/tour/:slug/booking'} component={Booking} />
+        <Route path={'/tour/:slug/booking'} exact component={Booking} />
         <Route path='/logout' component={Logout} />
         <Route exact path='/tour/:slug' component={TourDetail} />
+        <Route
+          path='/tour/:slug/booking/success'
+          exact
+          component={BookingSuccess}
+        />
         <Redirect to='/' />
       </Switch>
     );
@@ -50,6 +63,7 @@ function App(props) {
       {routes}
       <Register />
       <LoginModal />
+      <ScrollToTop />
       <Footer />
       {/* <Booking /> */}
     </div>

@@ -14,7 +14,10 @@ export default (props) => {
           class='page-wrapper page-detail'
           style={{ backgroundColor: '#f3f3f3' }}
         >
-          <div class='page-title border-bottom mb-5 border-bottom-0 pt-0'>
+          <div
+            class='page-title border-bottom mb-5 border-bottom-0 pt-0'
+            style={{ marginTop: '-30px' }}
+          >
             <div class='container'>
               <div class='row gap-15 align-items-center'>
                 <div class='col-12 col-md-7'>
@@ -104,60 +107,12 @@ export default (props) => {
 
                       <div class='mb-20'></div>
 
-                      <div class='row gap-15 mb-15'>
-                        <div class='w-100 d-block d-md-none'></div>
-
-                        <div class='col-8 col-sm-9 col-md-10'>
-                          <div class='form-group'>
-                            <label>Họ và Tên</label>
-                            <input
-                              type='text'
-                              class='form-control'
-                              placeholder='Tên'
-                              name='fullname'
-                              value={props.user ? props.user.name : null}
-                            />
-                          </div>
-                        </div>
-                        <div class='col-4 col-sm-3 col-md-2'>
-                          <div class='form-group'>
-                            <label>Tuổi</label>
-                            <input
-                              type='text'
-                              class='form-control'
-                              placeholder='Tuổi'
-                            />
-                          </div>
-                        </div>
-
-                        <div class='col-6 col-sm-6 col-md-7'>
-                          <div class='form-group'>
-                            <label>Email</label>
-                            <input
-                              type='email'
-                              class='form-control'
-                              name='email'
-                              placeholder='Địa chỉ Email'
-                              value={props.user ? props.user.email : null}
-                            />
-                          </div>
-                        </div>
-
-                        <div class='col-12 col-sm-6 col-md-5'>
-                          <div class='form-group'>
-                            <label>Số điện thoại</label>
-                            <input
-                              type='text'
-                              class='form-control'
-                              placeholder='Số điện thoại'
-                            />
-                          </div>
-                        </div>
+                      <div class='row cols-1 cols-md-2 gap-15 mb-15'>
+                        {props.form}
                       </div>
 
                       <div class='mb-60'></div>
-
-                      <Payment />
+                      {props.payment}
 
                       <hr class='mv-40' />
 

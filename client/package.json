@@ -15,7 +15,6 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-big-calendar": "^0.28.6",
-    "react-bootstrap": "^1.4.0",
     "react-collapse": "^5.1.0",
     "react-dom": "^17.0.1",
     "react-icons": "^3.11.0",
@@ -23,16 +22,17 @@
     "react-map-gl": "^5.2.10",
     "react-moment": "^1.0.0",
     "react-redux": "^7.2.2",
+    "react-responsive-carousel": "^3.2.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-scroll-to-top": "^1.0.5",
     "react-slick": "^0.27.13",
     "react-sticky": "^6.0.3",
     "react-stickynode": "^3.0.4",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "scroll-data-hook": "^1.0.4",
-    "web-vitals": "^0.2.4"
+    "scroll-data-hook": "^1.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

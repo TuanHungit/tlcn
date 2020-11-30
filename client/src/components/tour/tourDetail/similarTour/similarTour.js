@@ -7,7 +7,7 @@ export default (props) => {
         <i class='fas fa-torii-gate'></i> Các Tour liên quan
       </h4>
 
-      <div class='row equal-height cols-2 cols-sm-2 gap-30 mb-25'>
+      <div class='row equal-height cols-1 cols-sm-2 gap-30 mb-25'>
         {Object.values(props.tourSimilarList).map((el, key) => (
           <TourCard tour={el} key={key} />
         ))}

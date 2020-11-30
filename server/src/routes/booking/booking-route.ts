@@ -17,7 +17,7 @@ const router = express.Router();
 // @access Private
 
 router.get('/checkout-session/:tourId', paymentRequires, getCheckoutSession);
-router.post('/create-payment-intent', createPaymentIntent);
+router.post('/create-payment-intent', paymentRequires, createPaymentIntent);
 router.route('/').get(getAllBooking).post(createBookingCheckout);
 
 router

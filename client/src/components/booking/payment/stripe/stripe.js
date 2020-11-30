@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { Spinner } from 'react-bootstrap';
-import './stripe.css';
+import { Redirect } from 'react-router-dom';
+
 import axios from '../../../../common/axios-order';
+import './stripe.css';
+
 const createPaymentIntent = (options) => {
   return axios
     .post(`/booking/create-payment-intent`, options, {
@@ -26,7 +28,7 @@ const createPaymentIntent = (options) => {
       }
     });
 };
-export default function CheckoutForm() {
+export default function CheckoutForm(props) {
   const [clientSecret, setClientSecret] = useState(null);
   const [error, setError] = useState(null);
   const [metadata, setMetadata] = useState(null);
@@ -35,59 +37,54 @@ export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  useEffect(() => {
-    // Step 2: Create PaymentIntent over Stripe API
-    createPaymentIntent({
-      amount: 39000000,
-      currency: 'VND',
-    })
-      .then((clientSecret) => {
-        setClientSecret(clientSecret);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  }, []);
+  useEffect(() => {}, []);
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
 
     setProcessing(true);
 
-    // Step 3: Use clientSecret from PaymentIntent and the CardElement
-    // to confirm payment with stripe.confirmCardPayment()
+    createPaymentIntent({
+      amount: 39000000,
+      currency: 'VND',
+      ...props.bookingUserInfo,
+    })
+      .then(async (clientSecret) => {
+        setClientSecret(clientSecret);
+        const payload = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+            billing_details: {
+              name: ev.target.name.value,
+            },
+          },
+        });
 
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: ev.target.name.value,
-        },
-      },
-    });
-
-    if (payload.error) {
-      setError(`Payment failed: ${payload.error.message}`);
-      setProcessing(false);
-      console.log('[error]', payload.error);
-    } else {
-      setError(null);
-      setSucceeded(true);
-      setProcessing(false);
-      setMetadata(payload.paymentIntent);
-      console.log('[PaymentIntent]', payload.paymentIntent);
-    }
+        if (payload.error) {
+          setError(`Payment failed: ${payload.error.message}`);
+          setProcessing(false);
+          console.log('[error]', payload.error);
+        } else {
+          setError(null);
+          setSucceeded(true);
+          setProcessing(false);
+          setMetadata(payload.paymentIntent);
+          console.log('[PaymentIntent]', payload.paymentIntent);
+        }
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
   };
 
   const renderSuccess = () => {
     return (
-      <div className='sr-field-success message'>
-        <h1>Your test payment succeeded</h1>
-        <p>View PaymentIntent response:</p>
-        <pre className='sr-callout'>
-          <code>{JSON.stringify(metadata, null, 2)}</code>
-        </pre>
-      </div>
+      <Redirect
+        to={{
+          pathname: `/tour/Tour-DaNang/booking/success`,
+          state: { ...props.tourDetail },
+        }}
+      />
     );
   };
 
@@ -144,17 +141,15 @@ export default function CheckoutForm() {
         <button
           onClick={handleSubmit}
           className='btn btn-primary btn-block text-light'
-          disabled={processing || !stripe}
+          disabled={processing || !stripe || !props.formIsValid}
         >
           {processing ? (
             <div>
-              <Spinner
-                as='span'
-                animation='border'
-                size='sm'
+              <span
+                class='spinner-border spinner-border-sm'
                 role='status'
                 aria-hidden='true'
-              />
+              ></span>
               <span> Đang xử lý…</span>
             </div>
           ) : (

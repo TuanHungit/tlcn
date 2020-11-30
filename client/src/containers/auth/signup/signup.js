@@ -155,6 +155,7 @@ class Signup extends Component {
           elementConfig={formElement.config.elementConfig}
           value={formElement.config.value}
           invalid={!formElement.config.valid}
+          label={formElement.config.elementConfig.placeholder}
           shouldValidate={formElement.config.validation}
           touched={formElement.config.touched}
           changed={(event) => this.inputChangedHandler(event, formElement.id)}

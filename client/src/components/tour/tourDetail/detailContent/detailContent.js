@@ -3,15 +3,6 @@ import Carousel from '../../../UI/carousel/carousel';
 import Star from '../../../UI/star/star';
 import Calendar from '../calendar/calender';
 export default (props) => {
-  const items = [
-    { src: "src='/images/image-gallery/1.jpg", altText: ' ' },
-    { src: "src='/images/image-gallery/2.jpg", altText: ' ' },
-    { src: "src='/images/image-gallery/3.jpg", altText: ' ' },
-    { src: "src='/images/image-gallery/4.jpg", altText: ' ' },
-    { src: "src='/images/image-gallery/5.jpg", altText: ' ' },
-    { src: "src='/images/image-gallery/6.jpg", altText: ' ' },
-    { src: "src='/images/image-gallery/7.jpg", altText: ' ' },
-  ];
   return (
     <div className='pt-15'>
       <div id='detail-content-sticky-nav-01' class='detail-header mb-30'>
@@ -45,7 +36,7 @@ export default (props) => {
         </div>
         <Carousel />
 
-        <ul class='list-inline-block highlight-list mt-30'>
+        <ul class='list-inline-block highlight-list mt-30 text-center'>
           <li>
             <span class='icon-font d-block'>
               <i class='linea-icon-basic-chronometer'></i>

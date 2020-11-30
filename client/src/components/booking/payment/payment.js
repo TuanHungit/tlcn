@@ -8,7 +8,7 @@ const stripePromise = loadStripe(
   'pk_test_51GYOVxL6ceTfSxmONsG00SRGhgEy12v0le3Yu0MOOvsG1wFSerJMvZRlqZ8YSRWDwjPBTa9iToEmG260hVgjOzln00CVJ5foFx'
 );
 
-export default () => {
+export default (props) => {
   const [paypal, setPaypal] = useState(false);
   const [card, setCard] = useState(false);
   const clickPaypalHandler = () => {
@@ -112,7 +112,11 @@ export default () => {
             <div class='row gap-20 mb-15'>
               <div className='col'>
                 <Elements stripe={stripePromise}>
-                  <StripeCheckoutForm />
+                  <StripeCheckoutForm
+                    formIsValid={props.formIsValid}
+                    bookingUserInfo={props.bookingUserInfo}
+                    tourDetail={props.tourDetail}
+                  />
                 </Elements>
               </div>
             </div>
