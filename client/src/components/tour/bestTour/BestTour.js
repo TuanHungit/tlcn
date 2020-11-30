@@ -8,7 +8,7 @@ class BestTour extends Component {
         <div class='section-title'>
           <h2>
             <span>
-              <span>Tour</span> thu hút
+              <i class='fas fa-suitcase'></i> <span>Tour</span> thu hút
             </span>
           </h2>
         </div>

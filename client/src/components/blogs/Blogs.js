@@ -8,7 +8,7 @@ class Blogs extends Component {
           <div className='section-title'>
             <h2>
               <span>
-                <span>Blog</span> du lịch
+                <i class='fas fa-map-marker-alt'></i> <span>Blog</span> du lịch
               </span>
             </h2>
           </div>

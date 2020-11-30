@@ -44,6 +44,7 @@ function App(props) {
         <Route path={'/tour/:slug/booking'} exact component={Booking} />
         <Route path='/logout' component={Logout} />
         <Route exact path='/tour/:slug' component={TourDetail} />
+        <Route path='/profile' component={Profile} />
         <Route
           path='/tour/:slug/booking/success'
           exact

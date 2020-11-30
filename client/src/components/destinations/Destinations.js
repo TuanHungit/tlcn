@@ -7,6 +7,7 @@ class Destinations extends Component {
         <div class='section-title'>
           <h2>
             <span>
+              <i class='fas fa-suitcase-rolling'></i>{' '}
               <span>Top điểm đến nổi bật</span>
             </span>
           </h2>

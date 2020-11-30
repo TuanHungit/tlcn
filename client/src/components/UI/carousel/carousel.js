@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 export default () => {
   return (
-    <Carousel infiniteLoop autoPlay>
+    <Carousel infiniteLoop autoPlay interval={2000}>
       <div>
         <img src='/images/image-gallery/01.jpg' class='img-fluid' />
       </div>

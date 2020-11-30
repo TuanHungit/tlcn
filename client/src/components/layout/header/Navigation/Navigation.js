@@ -57,7 +57,7 @@ const navigationItems = (props) => (
               data-backdrop='static'
               data-keyboard='false'
             >
-              {props.user}
+              <i class='fas fa-user-circle'></i> {props.user.toUpperCase()}
             </a>
           </ul>
         </li>
