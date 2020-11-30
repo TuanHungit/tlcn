@@ -11,7 +11,7 @@ const authSuccess = (token, user) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: token,
-    user: user,
+    user,
   };
 };
 
@@ -83,9 +83,11 @@ export const authSignin = (email, password) => {
       .post(`${url}`, authData)
       .then((response) => {
         const token = response.data.token;
-        const user = response.data.data.user.name;
+        const user = response.data.data.user;
+
         const expirationDate = response.data.expirationDate;
-        localStorage.setItem('user', user);
+
+        localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', token);
         localStorage.setItem('expirationDate', expirationDate);
         dispatch(authSuccess(token, user));
@@ -118,7 +120,7 @@ export const authCheck = () => {
       const expirationDate = localStorage.getItem('expirationDate');
       console.log(expirationDate, new Date().getTime());
       if (expirationDate > new Date().getTime()) {
-        const user = localStorage.getItem('user');
+        const user = JSON.parse(localStorage.getItem('user'));
         dispatch(authSuccess(token, user));
         dispatch(authLogout(expirationDate - new Date().getTime()));
       } else {

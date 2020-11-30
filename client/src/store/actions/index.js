@@ -10,3 +10,5 @@ export { fetchTour, fetchTourDetail, fetchSimilarTour } from './tour';
 
 export { fetchBlog } from './blog';
 export { fetchDestination } from './destination';
+
+export { setBookingInfo } from './booking';

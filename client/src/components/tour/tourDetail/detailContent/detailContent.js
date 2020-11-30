@@ -3,8 +3,17 @@ import Carousel from '../../../UI/carousel/carousel';
 import Star from '../../../UI/star/star';
 import Calendar from '../calendar/calender';
 export default (props) => {
+  const items = [
+    { src: "src='/images/image-gallery/1.jpg", altText: ' ' },
+    { src: "src='/images/image-gallery/2.jpg", altText: ' ' },
+    { src: "src='/images/image-gallery/3.jpg", altText: ' ' },
+    { src: "src='/images/image-gallery/4.jpg", altText: ' ' },
+    { src: "src='/images/image-gallery/5.jpg", altText: ' ' },
+    { src: "src='/images/image-gallery/6.jpg", altText: ' ' },
+    { src: "src='/images/image-gallery/7.jpg", altText: ' ' },
+  ];
   return (
-    <div>
+    <div className='pt-15'>
       <div id='detail-content-sticky-nav-01' class='detail-header mb-30'>
         <h3>{props.content.name}</h3>
 

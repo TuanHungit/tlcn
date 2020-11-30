@@ -12,11 +12,11 @@ import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/landingPage/LandingPage';
 import Logout from './containers/auth/signout/signout';
 import Profile from './containers/dashboard/dashboard';
-import Booking from './components/booking/booking';
+import Booking from './containers/booking/booking';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
-  });
+  }, []);
 
   let routes = (
     <Switch>
@@ -40,9 +40,13 @@ function App(props) {
       </Switch>
     );
   }
+  let user = null;
+  if (props.user) {
+    user = props.user.name;
+  }
   return (
     <div>
-      <Header isAuthencated={props.isAuthencated} user={props.user} />
+      <Header isAuthencated={props.isAuthencated} user={user} />
       {routes}
       <Register />
       <LoginModal />

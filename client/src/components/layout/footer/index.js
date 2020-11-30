@@ -1,10 +1,8 @@
 import React from 'react';
+import './index.css';
 export default () => {
   return (
-    <footer
-      class='footer-wrapper light scrollspy-footer'
-      style={{ position: 'sticky' }}
-    >
+    <footer class='footer-wrapper dark scrollspy-footer fixed'>
       <div class='footer-top'>
         <div class='container'>
           <div class='row shrink-auto-md align-items-lg-center gap-10'>

@@ -1,17 +1,20 @@
-#myCarousel .list-inline {
+.list-inline {
   white-space: nowrap;
   overflow-x: auto;
 }
 
-#myCarousel .carousel-indicators {
+.carousel-indicators {
   position: static;
   left: initial;
   width: initial;
   margin-left: initial;
 }
 
-#myCarousel .carousel-indicators > li {
+.carousel-indicators > li {
   width: initial;
   height: initial;
   text-indent: initial;
+}
+.carousel-indicators li {
+  background-color: darkgray;
 }

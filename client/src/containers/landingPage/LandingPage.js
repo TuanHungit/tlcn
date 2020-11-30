@@ -14,7 +14,7 @@ class LandingPage extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.onFetchDestination();
-    this.props.onFetchTour(0, 6, [
+    this.props.onFetchTour(0, 4, [
       'duration',
       'name',
       'price',
@@ -134,12 +134,12 @@ class LandingPage extends Component {
 
             <div class='clear mb-100'></div>
             {destinations}
-
             {bestTour}
           </div>
+          {blogList}
+          {reviewList}
         </section>
-        {reviewList}
-        {blogList}
+
         <Intro />
       </div>
     );

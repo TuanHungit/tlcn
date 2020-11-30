@@ -8,20 +8,13 @@ import ContentDetail from '../../components/tour/tourDetail/detailContent/detail
 import Locations from '../../components/tour/tourDetail/locations/locations';
 import Map from '../../components/tour/tourDetail/map/map';
 
-import Sticky from '../../components/tour/tourDetail/sticky/sticky';
-import Schedule from '../../components/tour/tourDetail/schedule/schedule';
 import ReviewTour from '../../components/tour/tourDetail/reviewTour/reviewTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SimilarTour from '../../components/tour/tourDetail/similarTour/similarTour';
-import BookingModal from '../../components/tour/tourDetail/bookingModal/bookingModal';
-import Booking from '../../components/booking/booking';
+import BookingModal from '../../components/booking/bookingModal/bookingModal';
+
 class TourDetail extends Component {
-  state = {
-    dateChoose: null,
-    numOfPerson: 1,
-    total: 0,
-  };
   componentDidMount() {
     window.scrollTo(0, 0);
     const {
@@ -31,11 +24,11 @@ class TourDetail extends Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.tourDetail !== this.props.tourDetail) {
-      this.setState({
+      this.props.onSetBooking({
+        startDate: this.props.tourDetail.availableDate[0],
+        numOfPerson: 1,
         total: this.props.tourDetail.price,
-        date: this.props.tourDetail.availableDate[0],
       });
-
       const tourId = this.props.tourDetail.id;
       this.props.onFetchReviewRourList(tourId, 0, 6, [
         'review',
@@ -70,14 +63,14 @@ class TourDetail extends Component {
     const price = this.props.tourDetail.price;
     const total = numOfPerson * price;
 
-    this.setState({
+    this.props.onSetBooking({
       numOfPerson: event.target.value,
       total: total,
     });
   };
   changeDateHandler = (date) => {
-    this.setState({
-      dateChoose: date,
+    this.props.onSetBooking({
+      startDate: date,
     });
   };
   render() {
@@ -102,54 +95,64 @@ class TourDetail extends Component {
     }
     if (data) {
       tourDetail = (
-        <div className='body-inner'>
-          <div class='main-wrapper scrollspy-container'>
-            <section class='page-wrapper page-detail pt-0'>
-              <div class='pt-0 pt-xl-15'></div>
+        <div>
+          <div className='body-inner'>
+            <div class='main-wrapper scrollspy-container'>
+              <section
+                class='page-wrapper page-detail pt-0'
+                style={{ backgroundColor: '#f3f3f3' }}
+              >
+                <div class='pt-0 pt-xl-15'></div>
 
-              <PageTitle title={data.name} />
+                <PageTitle title={data.name} />
 
-              <div class='container'>
-                <div class='row gap-20 gap-lg-40'>
-                  <div class='col-12 col-lg-8'>
-                    <div class='content-wrapper'>
-                      <ContentDetail
-                        content={data}
-                        availableDate={data.availableDate}
-                      />
-                      <div class='mb-50'></div>
+                <div class='container'>
+                  <div class='row gap-20 gap-lg-40'>
+                    <div
+                      class='col-12 col-lg-8'
+                      style={{ backgroundColor: '#fff' }}
+                    >
+                      <div class='content-wrapper'>
+                        <ContentDetail
+                          content={data}
+                          availableDate={data.availableDate}
+                        />
+                        <div class='mb-50'></div>
 
-                      <Locations
-                        content={{
-                          summary: data.summary,
-                          locations: { ...data.locations },
-                        }}
-                      />
-                      <Map locations={data.locations} />
-                      {similarTourList}
-                      <ReviewTour reviews={this.props.reviewTourList} />
+                        <Locations
+                          content={{
+                            summary: data.summary,
+                            locations: { ...data.locations },
+                          }}
+                        />
+                        <Map locations={data.locations} />
+                        {similarTourList}
+                        <ReviewTour reviews={this.props.reviewTourList} />
+                      </div>
                     </div>
+                    {this.props.bookingInfo ? (
+                      <BookingTour
+                        numOfPerson={this.props.bookingInfo.numOfPerson}
+                        total={this.props.bookingInfo.total}
+                        price={this.props.tourDetail.price}
+                        duration={data.duration}
+                        changePersonHandler={(event) =>
+                          this.changePersonHandler(event)
+                        }
+                        date={this.props.bookingInfo.startDate}
+                        slug={data.slug}
+                      />
+                    ) : null}
+                    <BookingModal
+                      duration={data.duration}
+                      start={data.availableDate}
+                      price={data.price}
+                      changeDateHandler={this.changeDateHandler}
+                    />
                   </div>
-                  <BookingTour
-                    numOfPerson={this.state.numOfPerson}
-                    total={this.state.total}
-                    price={this.props.tourDetail.price}
-                    duration={data.duration}
-                    changePersonHandler={(event) =>
-                      this.changePersonHandler(event)
-                    }
-                    date={this.state.dateChoose}
-                    slug={data.slug}
-                  />
-                  <BookingModal
-                    duration={data.duration}
-                    start={data.availableDate}
-                    price={data.price}
-                    changeDateHandler={this.changeDateHandler}
-                  />
                 </div>
-              </div>
-            </section>
+              </section>
+            </div>
           </div>
         </div>
       );
@@ -166,6 +169,7 @@ const mapStateToProps = (state) => {
     tourDetail: state.tour.tourDetail,
     reviewTourListError: state.review.reviewTourListError,
     reviewTourList: state.review.reviewTourList,
+    bookingInfo: state.booking.bookingInfo,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -177,6 +181,9 @@ const mapDispatchToProps = (dispatch) => {
       ),
     onFetchSimilarTour: (tourId, page, limit, options) => {
       dispatch(actionCreators.fetchSimilarTour(tourId, page, limit, options));
+    },
+    onSetBooking: (data) => {
+      dispatch(actionCreators.setBookingInfo(data));
     },
   };
 };

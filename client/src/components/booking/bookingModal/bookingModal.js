@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Schedule from '../schedule/schedule';
+import Schedule from '../../tour/tourDetail/schedule/schedule';
 export default class extends Component {
   closeModalHandler = () => {
     this.buttonElement.click();

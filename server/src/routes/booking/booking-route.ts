@@ -8,15 +8,16 @@ import {
   createBookingCheckout,
   createPaymentIntent,
 } from '../../controllers/booking';
-import { protectRoute } from '../../middlewares/protect-route';
+
+import { paymentRequires } from './../../middlewares/payment-requires';
 const router = express.Router();
 
 // @Route PUT /api/v1/get-session
 // @desc update a destinations by id
 // @access Private
 
-router.get('/checkout-session/:tourId', protectRoute, getCheckoutSession);
-router.post('/create-payment-intent', protectRoute, createPaymentIntent);
+router.get('/checkout-session/:tourId', paymentRequires, getCheckoutSession);
+router.post('/create-payment-intent', createPaymentIntent);
 router.route('/').get(getAllBooking).post(createBookingCheckout);
 
 router

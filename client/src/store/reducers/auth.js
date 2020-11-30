@@ -17,7 +17,7 @@ const authSuccess = (state, action) => {
     error: null,
     loadding: false,
     token: action.token,
-    user: action.user,
+    user: { ...action.user },
     isLogout: false,
   };
 };

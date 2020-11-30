@@ -17,7 +17,10 @@ class Reviews extends Component {
       slidesToScroll: 3,
     };
     return (
-      <div class='bg-white-gradient-top-bottom pt-0 mt-20'>
+      <div
+        class='bg-white-gradient-top-bottom pt-0'
+        style={{ marginTop: '-160px' }}
+      >
         <div class='bg-gradient-top'></div>
         <div class='bg-gradient-bottom'></div>
 

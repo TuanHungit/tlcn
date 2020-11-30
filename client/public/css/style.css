@@ -488,7 +488,7 @@ section,
   -webkit-box-shadow: 0px 3px 8px -6px rgba(0, 0, 0, 0.43);
   -moz-box-shadow: 0px 3px 8px -6px rgba(0, 0, 0, 0.43);
   box-shadow: 0px 3px 8px -6px rgba(0, 0, 0, 0.43);
-  background-color: #fff;
+  background-color: #f3f3f3;
 }
 
 .header-bg-white .header-main .header-inner {

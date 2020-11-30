@@ -1,20 +1,12 @@
 import React from 'react';
-
+import './Spinner.css';
 const spinner = () => (
-  <div>
-    <div className='mt-100'></div>
-    <div className='mt-100'></div>
-    <div className='mt-100'></div>
-    <div className='mt-100'></div>
-    <div class='d-flex justify-content-center'>
+  <div className='container-spinner'>
+    <div class='text-center loader'>
       <div class='spinner-border' role='status'>
         <span class='sr-only'>Loading...</span>
       </div>
     </div>
-    <div className='mb-100'></div>
-    <div className='mb-100'></div>
-    <div className='mb-100'></div>
-    <div className='mb-100'></div>
   </div>
 );
 

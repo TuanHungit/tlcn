@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Spinner } from 'react-bootstrap';
 import './stripe.css';
 import axios from '../../../../common/axios-order';
 const createPaymentIntent = (options) => {
@@ -36,7 +37,6 @@ export default function CheckoutForm() {
 
   useEffect(() => {
     // Step 2: Create PaymentIntent over Stripe API
-
     createPaymentIntent({
       amount: 39000000,
       currency: 'VND',
@@ -51,6 +51,7 @@ export default function CheckoutForm() {
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
+
     setProcessing(true);
 
     // Step 3: Use clientSecret from PaymentIntent and the CardElement
@@ -111,25 +112,30 @@ export default function CheckoutForm() {
 
     return (
       <form onSubmit={handleSubmit}>
-        <h4>Pre-order the Pasha package</h4>
-
-        <div className='sr-combo-inputs'>
-          <div className='sr-combo-inputs-row'>
-            <input
-              type='text'
-              id='name'
-              name='name'
-              placeholder='Name'
-              autoComplete='cardholder'
-              className='sr-input'
-            />
+        <div className='row'>
+          <div className='col-md col-lg-5'>
+            <div class='form-group'>
+              <label>TÊN CHỦ THẺ</label>
+              <input
+                type='text'
+                id='name'
+                name='name'
+                placeholder='Tên chủ thẻ'
+                autoComplete='cardholder'
+                className='sr-input form-control'
+                style={{ height: '38px' }}
+              />
+            </div>
           </div>
 
-          <div className='sr-combo-inputs-row'>
-            <CardElement
-              className='sr-input sr-card-element'
-              options={options}
-            />
+          <div className='col-md col-lg-7'>
+            <div class='form-group'>
+              <label>SỐ THẺ</label>
+              <CardElement
+                className='sr-input sr-card-element form-control'
+                options={options}
+              />
+            </div>
           </div>
         </div>
 
@@ -137,10 +143,23 @@ export default function CheckoutForm() {
 
         <button
           onClick={handleSubmit}
-          className='btn btn-danger btn-wide'
-          disabled={processing || !clientSecret || !stripe}
+          className='btn btn-primary btn-block text-light'
+          disabled={processing || !stripe}
         >
-          {processing ? 'Processing…' : 'Pay'}
+          {processing ? (
+            <div>
+              <Spinner
+                as='span'
+                animation='border'
+                size='sm'
+                role='status'
+                aria-hidden='true'
+              />
+              <span> Đang xử lý…</span>
+            </div>
+          ) : (
+            'Thanh Toán'
+          )}
         </button>
       </form>
     );

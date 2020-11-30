@@ -61,16 +61,27 @@
 
     <title>React App</title>
   </head>
-  <body class="with-waypoint-sticky header-bg-white">
-    
-  <div id="myDIV"></div>
+  <body class="with-waypoint-sticky header-bg-dark">
+
     <div id="root"></div>
 
   
     <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="/js/plugins.js"></script>
       
+   
+  
 
+  <script src="js/bootstrap.bundle.min.js"></script>
+  
+  <script type="text/javascript">
+    var $ = jQuery.noConflict();s
+    $(document).ready(function () {
+      $('.carousel').carousel({
+        interval: 1000 
+      });
+    });
+  </script> 
     <script type="text/javascript" src="/js/custom-multiply-sticky.js"></script>
     <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="/js/plugins.js"></script>

@@ -1,0 +1,9 @@
+.container-spinner {
+  height: 800px;
+  width: 100%;
+}
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

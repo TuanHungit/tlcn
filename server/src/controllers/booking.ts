@@ -90,7 +90,8 @@ export const createPaymentIntent = async (req: Request, res: Response) => {
   const body = req.body;
 
   const options = {
-    ...body,
+    amount: body.amount,
+    currency: body.currency,
   };
 
   try {
