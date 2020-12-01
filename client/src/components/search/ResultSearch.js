@@ -1,8 +1,23 @@
-import React, { Component } from 'react';
-import tourCard from '../tour/tourCard/tourCard';
+import React, { Component } from "react";
+import tourCard from "../tour/tourCard/tourCard";
+import Search from "./Search";
+import Spinner from '../../components/UI/Spinner/Spinner';
+import * as actionCreators from '../../store/actions';
+
+import { connect } from 'react-redux';
+import BestTour from "../tour/bestTour/BestTour";
 
 class ResultSearch extends Component {
-  render() {
+  render(){  
+   
+    let bestTour = this.props.tourError ? (
+      <p>Destinations can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
+    if (this.props.tourList) {
+      bestTour = <BestTour tourList={this.props.tourList} />;
+    }
     return (
       <div classNameName='main-wrapper scrollspy-container'>
         <section className='page-wrapper page-result pb-0'>
@@ -29,8 +44,9 @@ class ResultSearch extends Component {
                     </ol>
                   </nav>
 
-                  <h4 className='mt-0 line-125'>
-                    36 Tour Packages in Thailand
+                  <h4 className="mt-0 line-125">
+                    36 Tour Packages in 
+                    {/* {this.props.destinationList[0].name} */}
                   </h4>
                 </div>
               </div>
@@ -45,10 +61,12 @@ class ResultSearch extends Component {
                     <h4 className=''>Search</h4>
 
                     <form>
-                      <div className='row'>
-                        <div className='col-12'>
-                          <div className='col-inner'>
-                            <div className='form-group'>
+                      <div className="row">
+                    {/* {search} */}
+
+                        <div className="col-12">
+                          <div className="col-inner">
+                            <div className="form-group">
                               <label>Tour Type</label>
                               <select
                                 className='chosen-the-basic form-control form-control-sm'
@@ -56,11 +74,9 @@ class ResultSearch extends Component {
                                 tabindex='2'
                               >
                                 <option>Tất cả</option>
-                                {/* {Object.values(this.props.tourList).map(
-                                  (el) => (
-                                    <option key={el.id}>{el.country}</option>
-                                  )
-                                )} */}
+                                {/* { Object.values(this.props.tourList).map((el)=>
+                                  <option key={el.id}>{el.country}</option>
+                                  )}  */}
                               </select>
                             </div>
                           </div>
@@ -75,20 +91,23 @@ class ResultSearch extends Component {
                                 placeholder='Select two'
                                 tabindex='2'
                               >
-                                <option></option>
-                                <option>All</option>
-                                <option>Asia</option>
+                      
+                                <option>Tất cả</option>
+                                
+                                {/* { Object.values(this.props.destinationList).map((el)=>
+                                  <option key={el.id}>{el.name}</option>
+                                  )}  */}
+                                 {/* <option>Asia</option>
                                 <option>Europe</option>
                                 <option>Africa</option>
-                                <option>America</option>
+                                <option>America</option>  */}
                               </select>
                             </div>
                           </div>
-                        </div>
-
-                        <div className='col-12'>
-                          <div className='col-inner'>
-                            <div className='form-group'>
+                                </div>
+                        <div className="col-12"> 
+                          <div className="col-inner">
+                            <div className="form-group">
                               <label>When</label>
                               <input
                                 type='text'
@@ -138,245 +157,9 @@ class ResultSearch extends Component {
                       <input id='star_range' />
                     </div>
                   </div>
-
-                  <div className='sidebar-box'>
-                    <div className='box-title'>
-                      <h5>Starting Point</h5>
-                    </div>
-
-                    <div className='box-content'>
-                      <div className='custom-control custom-checkbox'>
-                        <input
-                          type='checkbox'
-                          className='custom-control-input'
-                          id='filerStartPoint-01'
-                          name='filerStartPoint'
-                          checked
-                        />
-                        <label
-                          className='custom-control-label'
-                          for='filerStartPoint-01'
-                        >
-                          Berlin{' '}
-                          <span className='text-muted font-sm'>(854)</span>
-                        </label>
-                      </div>
-
-                      <div className='custom-control custom-checkbox'>
-                        <input
-                          type='checkbox'
-                          className='custom-control-input'
-                          id='filerStartPoint-02'
-                          name='filerStartPoint'
-                        />
-                        <label
-                          className='custom-control-label'
-                          for='filerStartPoint-02'
-                        >
-                          Paris <span className='checkbox-count'>(25)</span>
-                        </label>
-                      </div>
-
-                      <div id='filerStartPointShowHide' className='collapse'>
-                        <div className='collapse-inner'>
-                          <div className='custom-control custom-checkbox'>
-                            <input
-                              type='checkbox'
-                              className='custom-control-input'
-                              id='filerStartPoint-06'
-                              name='filerStartPoint'
-                            />
-                            <label
-                              className='custom-control-label'
-                              for='filerStartPoint-06'
-                            >
-                              Toulouse{' '}
-                              <span className='checkbox-count'>(3)</span>
-                            </label>
-                          </div>
-
-                          <div className='custom-control custom-checkbox'>
-                            <input
-                              type='checkbox'
-                              className='custom-control-input'
-                              id='filerStartPoint-06'
-                              name='filerStartPoint'
-                            />
-                            <label
-                              className='custom-control-label'
-                              for='filerStartPoint-06'
-                            >
-                              Graz <span className='checkbox-count'>(25)</span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className='clear mb-10'></div>
-
-                      <button
-                        className='btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0'
-                        type='buttom'
-                        data-toggle='collapse'
-                        data-target='#filerStartPointShowHide'
-                      >
-                        Show more (+)
-                      </button>
-                      <button
-                        className='btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0'
-                        type='buttom'
-                        data-toggle='collapse'
-                        data-target='#filerStartPointShowHide'
-                      >
-                        Show less (-)
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className='sidebar-box'>
-                    <div className='box-title'>
-                      <h5>Endong Point</h5>
-                    </div>
-
-                    <div className='box-content'>
-                      <div className='custom-control custom-checkbox'>
-                        <input
-                          type='checkbox'
-                          className='custom-control-input'
-                          id='filerEndPoint-01'
-                          name='filerEndPoint'
-                          checked
-                        />
-                        <label
-                          className='custom-control-label'
-                          for='filerEndPoint-01'
-                        >
-                          Berlin{' '}
-                          <span className='text-muted font-sm'>(854)</span>
-                        </label>
-                      </div>
-
-                      <div className='custom-control custom-checkbox'>
-                        <input
-                          type='checkbox'
-                          className='custom-control-input'
-                          id='filerEndPoint-02'
-                          name='filerEndPoint'
-                        />
-                        <label
-                          className='custom-control-label'
-                          for='filerEndPoint-02'
-                        >
-                          Paris <span className='checkbox-count'>(25)</span>
-                        </label>
-                      </div>
-
-                      <div id='filerStartPointShowHide' className='collapse'>
-                        <div className='collapse-inner'>
-                          <div className='custom-control custom-checkbox'>
-                            <input
-                              type='checkbox'
-                              className='custom-control-input'
-                              id='filerEndPoint-06'
-                              name='filerEndPoint'
-                            />
-                            <label
-                              className='custom-control-label'
-                              for='filerEndPoint-06'
-                            >
-                              Toulouse{' '}
-                              <span className='checkbox-count'>(3)</span>
-                            </label>
-                          </div>
-
-                          <div className='custom-control custom-checkbox'>
-                            <input
-                              type='checkbox'
-                              className='custom-control-input'
-                              id='filerEndPoint-07'
-                              name='filerEndPoint'
-                            />
-                            <label
-                              className='custom-control-label'
-                              for='filerEndPoint-07'
-                            >
-                              Graz <span className='checkbox-count'>(25)</span>
-                            </label>
-                          </div>
-
-                          <div className='custom-control custom-checkbox'>
-                            <input
-                              type='checkbox'
-                              className='custom-control-input'
-                              id='filerEndPoint-08'
-                              name='filerEndPoint'
-                            />
-                            <label
-                              className='custom-control-label'
-                              for='filerEndPoint-08'
-                            >
-                              Linz <span className='checkbox-count'>(2)</span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className='clear mb-10'></div>
-
-                      <button
-                        className='btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0'
-                        type='buttom'
-                        data-toggle='collapse'
-                        data-target='#filerStartPointShowHide'
-                      >
-                        Show more (+)
-                      </button>
-                      <button
-                        className='btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0'
-                        type='buttom'
-                        data-toggle='collapse'
-                        data-target='#filerStartPointShowHide'
-                      >
-                        Show less (-)
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className='sidebar-box'>
-                    <div className='box-title'>
-                      <h5>Filter Select</h5>
-                    </div>
-
-                    <div className='box-content'>
-                      <div className='form-group'>
-                        <select
-                          data-placeholder='Filter Select'
-                          className='chosen-the-basic form-control'
-                          tabindex='2'
-                        >
-                          <option value=''></option>
-                          <option value='filter-select-0'>
-                            Filter Select One
-                          </option>
-                          <option value='filter-select-1'>
-                            Filter Select Two
-                          </option>
-                          <option value='filter-select-2'>
-                            Filter Select Three
-                          </option>
-                          <option value='filter-select-3'>
-                            Filter Select Four
-                          </option>
-                          <option value='filter-select-4'>
-                            Filter Select Five
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='sidebar-box'>
-                    <div className='box-title'>
+   
+                  <div className="sidebar-box">
+                    <div className="box-title">
                       <h5>Filter Text</h5>
                     </div>
 
@@ -437,11 +220,11 @@ class ResultSearch extends Component {
                     </div>
                   </div>
 
-                  <div className='row equal-height cols-1 cols-sm-2 gap-20 mb-25'>
-                    <div className='col'>
-                      <tourCard />
-                    </div>
-                  </div>
+                  <div className="row equal-height cols-1 cols-sm-2 gap-20 mb-25">
+                    <div className="col">
+             {bestTour}
+                       </div> 
+                     </div>
 
                   <div className='pager-wrappper mt-40'>
                     <div className='pager-innner'>
@@ -467,15 +250,11 @@ class ResultSearch extends Component {
                               <li>
                                 <a href='tour-result-grid.html#'>2</a>
                               </li>
-                              <li>
-                                <a href='tour-result-grid.html#'>3</a>
-                              </li>
+                            
                               <li>
                                 <span>...</span>
                               </li>
-                              <li>
-                                <a href='tour-result-grid.html#'>11</a>
-                              </li>
+                             
                               <li>
                                 <a href='tour-result-grid.html#'>12</a>
                               </li>
@@ -505,4 +284,26 @@ class ResultSearch extends Component {
     );
   }
 }
-export default ResultSearch;
+// export default ResultSearch;
+const mapStateToProps = (state) => {
+  return {
+    destinationList: state.destination.destinationList,
+    destinationError: state.destination.error,
+    tourList: state.tour.tourList,
+    tourError: state.tour.error,
+    reviewList: state.review.reviewList,
+    reviewError: state.review.error,
+   
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchDestination: () => dispatch(actionCreators.fetchDestination()),
+    onFetchTour: (page, limit, feilds) =>
+      dispatch(actionCreators.fetchTour(page, limit, feilds)),
+    onFetchREview: (page, limit, feilds) =>
+      dispatch(actionCreators.fetchReview(page, limit, feilds)),
+ 
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ResultSearch);

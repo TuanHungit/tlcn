@@ -11,10 +11,8 @@ import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/landingPage/LandingPage';
 import Logout from './containers/auth/signout/signout';
-import Profile from './containers/dashboard/dashboard';
-import Booking from './containers/booking/booking';
-import BookingSuccess from './components/booking/bookingSuccess/bookingSuccess';
-import ScrollToTop from './components/UI/scrollTop/scrollTop';
+import Profile from './containers/Dashboard/Dashboard';
+import ResultSearch from './components/search/ResultSearch';
 
 function App(props) {
   useEffect(() => {
@@ -23,17 +21,12 @@ function App(props) {
 
   let routes = (
     <Switch>
-      <Route path='/' exact component={LandingPage} />
-      <Route path='/tour/:slug' exact component={TourDetail} />
-      <Route path={'/tour/:slug/booking'} exact component={Booking} />
-      <Route
-        path='/tour/:slug/booking/success'
-        exact
-        component={BookingSuccess}
-      />
-      <Route path='/profile' component={Profile} />
-      <Route path='/register' component={Register} />
-      <Route path='/logout' component={Logout} />
+      <Route exact path='/' component={LandingPage} />
+      <Route path='/tour/:slug' component={TourDetail} />
+      
+
+      {/* <Route path='/register' component={Register} /> */}
+      <Route path='/search' component={ResultSearch} />
       <Redirect to='/' />
     </Switch>
   );
