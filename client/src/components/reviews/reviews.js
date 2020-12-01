@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import Background from '../../img/01.jpg';
 import Slider from 'react-slick';
 import Review from './review/review';
-var sectionStyle = {
+import ReactPaginate from 'react-paginate';
+
+const sectionStyle = {
   backgroundImage: `url(${Background})`,
   // "url(" + { Background } + ")"
 };
 class Reviews extends Component {
+  state = {
+    data: [],
+    offset: 0,
+  };
   render() {
     const settings = {
       dots: true,
       infinite: true,
       speed: 500,
-
       slidesToShow: 3,
       slidesToScroll: 3,
     };

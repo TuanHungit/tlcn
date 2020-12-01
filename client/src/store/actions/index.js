@@ -5,7 +5,7 @@ export {
   authSignin,
   authSignup,
 } from './auth';
-export { fetchReview, fetchRevireTourList } from './review';
+export { fetchReview, fetchRevireTourList, reviewTour } from './review';
 export { fetchTour, fetchTourDetail, fetchSimilarTour } from './tour';
 
 export { fetchBlog } from './blog';

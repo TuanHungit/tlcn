@@ -45,29 +45,65 @@ const fetchReviewTourFailded = () => {
   };
 };
 
-const setReviewTourList = (reviewTourList) => {
+const setReviewTourList = (reviewTourList, limit) => {
   return {
     type: actionTypes.SET_REVIEW_TOUR_LIST,
     reviewTourList,
+    limit,
   };
 };
 
-export const fetchRevireTourList = (tourId, page = 0, limit = 6, options) => {
+const setReviewTourListStart = () => {
+  return {
+    type: actionTypes.SET_REVIEW_TOUR_LIST_START,
+  };
+};
+
+export const fetchRevireTourList = (tourId, page = 1, limit = 3, options) => {
   return (dispatch) => {
+    dispatch(setReviewTourListStart());
     let url = `/tours/${tourId}/reviews`;
     if (options) {
       url = `/tours/${tourId}/reviews?fields=${options.join(
         ','
-      )}&page=${page}&limit=${limit}&sort=createdAt`;
+      )}&limit=${limit}&page=${page}&sort=createdAt`;
     }
     axios
       .get(url)
       .then((response) => {
-        dispatch(setReviewTourList(response.data));
+        dispatch(setReviewTourList(response.data, limit));
       })
       .catch((err) => {
         console.log(err);
         dispatch(fetchReviewTourFailded());
+      });
+  };
+};
+
+//review tour
+const reviewTourStart = () => {
+  return {
+    type: actionTypes.REVIEW_TOUR_START,
+  };
+};
+
+const reviewTourFailed = () => {
+  return {
+    type: actionTypes.REVIEW_TOUR_FAILED,
+  };
+};
+
+export const reviewTour = (tourId, data) => {
+  return (dispatch) => {
+    dispatch(reviewTourStart());
+    const url = `/tours/${tourId}/reviews`;
+    axios
+      .post(url, data)
+      .then((response) => {
+        dispatch(fetchRevireTourList(tourId, 1, 3));
+      })
+      .catch((err) => {
+        dispatch(reviewTourFailed());
       });
   };
 };

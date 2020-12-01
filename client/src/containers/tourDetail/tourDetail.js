@@ -30,13 +30,13 @@ class TourDetail extends Component {
         total: this.props.tourDetail.price,
       });
       const tourId = this.props.tourDetail.id;
-      this.props.onFetchReviewRourList(tourId, 0, 6, [
+      this.props.onFetchReviewRourList(tourId, 1, 3, [
         'review',
         'user',
         'createdAt',
         'rating',
       ]);
-      this.props.onFetchSimilarTour(tourId, 0, 4, [
+      this.props.onFetchSimilarTour(tourId, 1, 4, [
         'duration',
         'name',
         'price',
@@ -127,7 +127,16 @@ class TourDetail extends Component {
                         />
                         <Map locations={data.locations} />
                         {similarTourList}
-                        <ReviewTour reviews={this.props.reviewTourList} />
+                        <ReviewTour
+                          reviews={this.props.reviewTourList}
+                          tourId={this.props.tourDetail.id}
+                          onFetchReviewRourList={
+                            this.props.onFetchReviewRourList
+                          }
+                          pageCount={this.props.pageCount}
+                          reviewLoading={this.props.reviewLoading}
+                          onReviewTour={this.props.onReviewTour}
+                        />
                       </div>
                     </div>
                     {this.props.bookingInfo ? (
@@ -169,7 +178,9 @@ const mapStateToProps = (state) => {
     tourDetail: state.tour.tourDetail,
     reviewTourListError: state.review.reviewTourListError,
     reviewTourList: state.review.reviewTourList,
+    pageCount: state.review.pageCount,
     bookingInfo: state.booking.bookingInfo,
+    reviewLoading: state.review.loading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -185,6 +196,8 @@ const mapDispatchToProps = (dispatch) => {
     onSetBooking: (data) => {
       dispatch(actionCreators.setBookingInfo(data));
     },
+    onReviewTour: (tourId, data) =>
+      dispatch(actionCreators.reviewTour(tourId, data)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TourDetail);

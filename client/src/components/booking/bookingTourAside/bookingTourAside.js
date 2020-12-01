@@ -9,7 +9,7 @@ export default (props) => {
 
   return (
     <div class='col-12 col-lg-4'>
-      <Sticky top={80} innerZ={2} bottomBoundary={7900}>
+      <Sticky top={80} innerZ={2} bottomBoundary={8500}>
         <aside class='sidebar-wrapper no-border mt-lg-0'>
           <div class='booking-box'>
             <div class='box-heading'>
