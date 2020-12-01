@@ -9,6 +9,7 @@ import BestTour from '../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Intro from '../../components/intro/intro';
+import ResultSearch from '../../components/search/ResultSearch';
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -37,7 +38,8 @@ class LandingPage extends Component {
       <p>Destinations can't be loaded!</p>
     ) : (
       <Spinner />
-    );
+    ); 
+   
     if (this.props.destinationList) {
       destinations = (
         <Destinations destinationList={this.props.destinationList} />
@@ -45,8 +47,9 @@ class LandingPage extends Component {
     }
     if (this.props.destinationList) {
      
-      search =( <Search destinationList={this.props.destinationList} tourList={this.props.tourList}/>);
+      search = ( <Search  destinationList={this.props.destinationList} tourList={this.props.tourList} />);
     }
+    
     //fetch tour
     let bestTour = this.props.tourError ? (
       <p>Destinations can't be loaded!</p>
@@ -76,8 +79,7 @@ class LandingPage extends Component {
     }
     return (
       <div class='main-wrapper scrollspy-container'>
-       {/* <Search  /> */}
-{search}
+        {search }
         <section class='pb-0'>
           <div class='container'>
             <div class='row cols-1 cols-lg-3 gap-20 gap-lg-40'>

@@ -12,6 +12,7 @@ import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/LandingPage/LandingPage';
 import Logout from './containers/auth/signout/signout';
 import Profile from './containers/Dashboard/Dashboard';
+import ResultSearch from './components/search/ResultSearch';
 
 function App(props) {
   useEffect(() => {
@@ -25,7 +26,7 @@ function App(props) {
       
 
       {/* <Route path='/register' component={Register} /> */}
-      <Route path='/logout' component={Logout} />
+      <Route path='/search' component={ResultSearch} />
       <Redirect to='/' />
     </Switch>
   );

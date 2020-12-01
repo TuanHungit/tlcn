@@ -44,16 +44,18 @@ class Search extends Component {
                                   placeholder="Select one"
                                   tabindex="2"
                                   style={{ height: "22px" }}
-                                  value={this.props.tourList.country}
+                                 
                                 >
-                                  <option>Tất cả</option>
-                                  { Object.values(this.props.tourList).map((el)=>
-                                  <option key={el.id}>{el.country}</option>
+                                 <option>Tất cả</option> 
+                                   
+                                      {/* <option>   {this.props.tourList[0].name}   </option> */}
+                                   { Object.values(this.props.tourList).map((el)=>
+                                  <option key={el.id}>{el.name}</option>
                                   )} 
-                                  <option>Tiền Giang</option>
+                                  {/* <option>Tiền Giang</option>
                                   <option>City tour</option>
                                   <option>Honeymoon</option>
-                                  <option>Cultural</option>
+                                  <option>Cultural</option> */}
                                 </select>
                               </div>
                             </div>
@@ -69,7 +71,7 @@ class Search extends Component {
                                   style={{ height: "22px" }}
                                 
                                 >
-                                 
+                                    <option>Tất cả</option>           
                                   { Object.values(this.props.destinationList).map((el)=>
                                   <option key={el.id}>{el.name}</option>
                                   )} 
@@ -115,7 +117,7 @@ class Search extends Component {
                     <div className="col-12 col-shrink">
                       <div className="col-inner">
                         <a type='submit'
-                          href="/"
+                          href="/search"
                           className="btn btn-primary btn-block "
                           style={{ height: "75px" }}
                         >
@@ -133,4 +135,6 @@ class Search extends Component {
     );
   }
 }
+
+
 export default Search;

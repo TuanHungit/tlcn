@@ -55,7 +55,27 @@ const setTourDetail = (tourDetail) => {
     tourDetail: tourDetail,
   };
 };
-
+// const searchTour = (tourDetail) => {
+//   return {
+//     type: actionTypes.SET_SEARCH_TOUR,
+//     tourDetail: tourDetail,
+//   };
+// };
+// export const searchTour = (destination) => {
+//   fetchTourStart();
+//   return (dispatch) => {
+//     axios
+//       .get(`/tours/${destination}`)
+//       .then((response) => {
+//         console.log(response);
+//         dispatch(searchTour(response.data));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         dispatch(fetchTourFailed());
+//       });
+//   };
+// };
 export const fetchTourDetail = (slug) => {
   return (dispatch) => {
     axios
