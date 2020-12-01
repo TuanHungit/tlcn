@@ -11,9 +11,11 @@ import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/landingPage/LandingPage';
 import Logout from './containers/auth/signout/signout';
-import Profile from './containers/Dashboard/Dashboard';
+import Profile from './containers/dashboard/dashboard';
 import ResultSearch from './components/search/ResultSearch';
-
+import Booking from './containers/booking/booking';
+import BookingSuccess from './components/booking/bookingSuccess/bookingSuccess';
+import ScrollToTop from './components/UI/scrollTop/scrollTop';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -23,7 +25,6 @@ function App(props) {
     <Switch>
       <Route exact path='/' component={LandingPage} />
       <Route path='/tour/:slug' component={TourDetail} />
-      
 
       {/* <Route path='/register' component={Register} /> */}
       <Route path='/search' component={ResultSearch} />
