@@ -23,10 +23,15 @@ function App(props) {
 
   let routes = (
     <Switch>
-      <Route exact path='/' component={LandingPage} />
-      <Route path='/tour/:slug' component={TourDetail} />
-
+      <Route path='/' exact component={LandingPage} />
+      <Route path='/tour/:slug' exact component={TourDetail} />
+      <Route path={'/tour/:slug/booking'} exact component={Booking} />
       {/* <Route path='/register' component={Register} /> */}
+      <Route
+        path='/tour/:slug/booking/success'
+        exact
+        component={BookingSuccess}
+      />
       <Route path='/search' component={ResultSearch} />
       <Redirect to='/' />
     </Switch>
