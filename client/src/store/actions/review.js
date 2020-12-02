@@ -66,7 +66,7 @@ export const fetchRevireTourList = (tourId, page = 1, limit = 3, options) => {
     if (options) {
       url = `/tours/${tourId}/reviews?fields=${options.join(
         ','
-      )}&limit=${limit}&page=${page}&sort=createdAt`;
+      )}&limit=${limit}&page=${page}&sort=-createdAt`;
     }
     axios
       .get(url)
@@ -117,10 +117,15 @@ const setUserReview = (data) => {
   };
 };
 export const checkUserReview = (slug) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     const url = `/reviews/users/${slug}`;
-    await axios.get(url).then((response) => {
-      dispatch(setUserReview(response.data));
-    });
+    axios
+      .get(url)
+      .then((response) => {
+        dispatch(setUserReview(response.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };

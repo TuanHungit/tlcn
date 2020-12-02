@@ -26,6 +26,7 @@ function App(props) {
       <Route path='/' exact component={LandingPage} />
       <Route path='/tour/:slug' exact component={TourDetail} />
       <Route path={'/tour/:slug/booking'} exact component={Booking} />
+      <Route path='/logout' exact component={Logout} />
       {/* <Route path='/register' component={Register} /> */}
       <Route
         path='/tour/:slug/booking/success'
@@ -41,7 +42,7 @@ function App(props) {
       <Switch>
         <Route path='/' exact component={LandingPage} />
         <Route path={'/tour/:slug/booking'} exact component={Booking} />
-        <Route path='/logout' component={Logout} />
+        <Route path='/logout' exact component={Logout} />
         <Route exact path='/tour/:slug' component={TourDetail} />
         <Route path='/profile' component={Profile} />
         <Route

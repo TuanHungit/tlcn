@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
@@ -14,29 +14,31 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import SimilarTour from '../../components/tour/tourDetail/similarTour/similarTour';
 import BookingModal from '../../components/booking/bookingModal/bookingModal';
 
-class TourDetail extends Component {
-  componentDidMount() {
-    window.scrollTo(0, 0);
+const TourDetail = (props) => {
+  useEffect(() => {
     const {
       match: { params },
-    } = this.props;
-    this.props.onFetchTourDetail(params.slug);
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.tourDetail !== this.props.tourDetail) {
-      this.props.onSetBooking({
-        startDate: this.props.tourDetail.availableDate[0],
+    } = props;
+    props.onFetchTourDetail(params.slug);
+    props.onCheckUserView(params.slug);
+    window.scrollTo(0, 0);
+  }, [props.match.params.slug]);
+
+  useEffect(() => {
+    if (props.tourDetail) {
+      props.onSetBooking({
+        startDate: props.tourDetail.availableDate[0],
         numOfPerson: 1,
-        total: this.props.tourDetail.price,
+        total: props.tourDetail.price,
       });
-      const tourId = this.props.tourDetail.id;
-      this.props.onFetchReviewRourList(tourId, 1, 3, [
+      const tourId = props.tourDetail.id;
+      props.onFetchReviewRourList(tourId, 1, 3, [
         'review',
         'user',
         'createdAt',
         'rating',
       ]);
-      this.props.onFetchSimilarTour(tourId, 1, 4, [
+      props.onFetchSimilarTour(tourId, 1, 4, [
         'duration',
         'name',
         'price',
@@ -47,129 +49,127 @@ class TourDetail extends Component {
         'slug',
       ]);
     }
-  }
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.match.params.slug !== this.props.match.params.slug) {
-  //     const {
-  //       match: { params },
-  //     } = this.props;
-  //     this.props.onFetchTourDetail(params.slug);
-  //   }
-  //   return true;
-  // }
+  }, [props.tourDetail, props.match.params.slug]);
 
-  changePersonHandler = (event) => {
+  useEffect(() => {
+    props.onCheckUserView(props.match.params.slug);
+  }, [props.isAuthencated, props.userReview]);
+
+  const changePersonHandler = (event) => {
     const numOfPerson = event.target.value;
-    const price = this.props.tourDetail.price;
+    const price = props.tourDetail.price;
     const total = numOfPerson * price;
 
-    this.props.onSetBooking({
+    props.onSetBooking({
       numOfPerson: event.target.value,
       total: total,
     });
   };
-  changeDateHandler = (date) => {
-    this.props.onSetBooking({
+  const changeDateHandler = (date) => {
+    props.onSetBooking({
       startDate: date,
     });
   };
-  render() {
-    const data = this.props.tourDetail;
-    let tourDetail = this.props.tourDetailError ? (
-      <p>Tour detail can't be loaded!</p>
-    ) : (
-      <div>
-        <div class='pt-0 pt-xl-15'></div>
-        <Spinner />
-      </div>
-    );
-    let similarTourList = this.props.similarTourError ? (
-      <p>Similar Tour can't be loaded!</p>
-    ) : (
+
+  const data = props.tourDetail;
+  let tourDetail = props.tourDetailError ? (
+    <p>Tour detail can't be loaded!</p>
+  ) : (
+    <div>
+      <div class='pt-0 pt-xl-15'></div>
       <Spinner />
-    );
-    if (this.props.similarTourList) {
-      similarTourList = (
-        <SimilarTour tourSimilarList={this.props.similarTourList} />
-      );
-    }
-    if (data) {
-      tourDetail = (
-        <div>
-          <div className='body-inner'>
-            <div class='main-wrapper scrollspy-container'>
-              <section
-                class='page-wrapper page-detail pt-0'
-                style={{ backgroundColor: '#f3f3f3' }}
-              >
-                <div class='pt-0 pt-xl-15'></div>
+    </div>
+  );
 
-                <PageTitle title={data.name} />
+  let similarTourList = props.similarTourError ? (
+    <p>Similar Tour can't be loaded!</p>
+  ) : (
+    <Spinner />
+  );
+  if (props.similarTourList) {
+    similarTourList = <SimilarTour tourSimilarList={props.similarTourList} />;
+  }
+  let userReview = {};
+  if (props.userReview !== null) {
+    userReview = props.userReview;
+  }
+  if (data) {
+    tourDetail = (
+      <div>
+        <div className='body-inner'>
+          <div class='main-wrapper scrollspy-container'>
+            <section
+              class='page-wrapper page-detail pt-0'
+              style={{ backgroundColor: '#f3f3f3' }}
+            >
+              <div class='pt-0 pt-xl-15'></div>
 
-                <div class='container'>
-                  <div class='row gap-20 gap-lg-40'>
-                    <div
-                      class='col-12 col-lg-8'
-                      style={{ backgroundColor: '#fff' }}
-                    >
-                      <div class='content-wrapper'>
-                        <ContentDetail
-                          content={data}
-                          availableDate={data.availableDate}
-                        />
-                        <div class='mb-50'></div>
+              <PageTitle title={data.name} />
 
-                        <Locations
-                          content={{
-                            summary: data.summary,
-                            locations: { ...data.locations },
-                          }}
-                        />
-                        <Map locations={data.locations} />
-                        {similarTourList}
-                        <ReviewTour
-                          reviews={this.props.reviewTourList}
-                          tourId={this.props.tourDetail.id}
-                          onFetchReviewRourList={
-                            this.props.onFetchReviewRourList
-                          }
-                          pageCount={this.props.pageCount}
-                          reviewLoading={this.props.reviewLoading}
-                          onReviewTour={this.props.onReviewTour}
-                        />
-                      </div>
-                    </div>
-                    {this.props.bookingInfo ? (
-                      <BookingTour
-                        numOfPerson={this.props.bookingInfo.numOfPerson}
-                        total={this.props.bookingInfo.total}
-                        price={this.props.tourDetail.price}
-                        duration={data.duration}
-                        changePersonHandler={(event) =>
-                          this.changePersonHandler(event)
-                        }
-                        date={this.props.bookingInfo.startDate}
-                        slug={data.slug}
+              <div class='container'>
+                <div class='row gap-20 gap-lg-40'>
+                  <div
+                    class='col-12 col-lg-8'
+                    style={{ backgroundColor: '#fff' }}
+                  >
+                    <div class='content-wrapper'>
+                      <ContentDetail
+                        content={data}
+                        availableDate={data.availableDate}
                       />
-                    ) : null}
-                    <BookingModal
-                      duration={data.duration}
-                      start={data.availableDate}
-                      price={data.price}
-                      changeDateHandler={this.changeDateHandler}
-                    />
+                      <div class='mb-50'></div>
+
+                      <Locations
+                        content={{
+                          summary: data.summary,
+                          locations: { ...data.locations },
+                        }}
+                      />
+                      <Map locations={data.locations} />
+                      {similarTourList}
+
+                      <ReviewTour
+                        reviews={props.reviewTourList}
+                        tourId={props.tourDetail.id}
+                        onFetchReviewRourList={props.onFetchReviewRourList}
+                        pageCount={props.pageCount}
+                        reviewLoading={props.reviewLoading}
+                        onReviewTour={props.onReviewTour}
+                        userReview={userReview}
+                        ratingsAverage={props.tourDetail.ratingsAverage}
+                        onCheckUserView={props.onCheckUserView}
+                      />
+                    </div>
                   </div>
+                  {props.bookingInfo ? (
+                    <BookingTour
+                      numOfPerson={props.bookingInfo.numOfPerson}
+                      total={props.bookingInfo.total}
+                      price={props.tourDetail.price}
+                      duration={data.duration}
+                      changePersonHandler={(event) =>
+                        changePersonHandler(event)
+                      }
+                      date={props.bookingInfo.startDate}
+                      slug={data.slug}
+                    />
+                  ) : null}
+                  <BookingModal
+                    duration={data.duration}
+                    start={data.availableDate}
+                    price={data.price}
+                    changeDateHandler={changeDateHandler}
+                  />
                 </div>
-              </section>
-            </div>
+              </div>
+            </section>
           </div>
         </div>
-      );
-    }
-    return <div>{tourDetail}</div>;
+      </div>
+    );
   }
-}
-
+  return <div>{tourDetail}</div>;
+};
 const mapStateToProps = (state) => {
   return {
     similarTourError: state.tour.similarTourError,
@@ -181,6 +181,8 @@ const mapStateToProps = (state) => {
     pageCount: state.review.pageCount,
     bookingInfo: state.booking.bookingInfo,
     reviewLoading: state.review.loading,
+    userReview: state.review.userReview,
+    isAuthencated: state.auth.token !== null,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -198,6 +200,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onReviewTour: (tourId, data) =>
       dispatch(actionCreators.reviewTour(tourId, data)),
+    onCheckUserView: (slug) => {
+      dispatch(actionCreators.checkUserReview(slug));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TourDetail);

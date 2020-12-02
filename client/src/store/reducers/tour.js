@@ -40,6 +40,7 @@ const fetchTourDetailFailed = (state) => {
   return {
     ...state,
     tourDetailError: true,
+    loading: false,
   };
 };
 

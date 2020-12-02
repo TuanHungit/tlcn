@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Star from '../../../../UI/star/star';
 export default (props) => {
   const [star, setStar] = useState(null);
+  const [content, setContent] = useState(null);
   const onChangeStar = (star) => {
     setStar(star);
   };
@@ -28,48 +29,57 @@ export default (props) => {
         <i class='fas fa-feather-alt'></i> <span>Viết đánh giá</span>
       </h4>
 
-      <form class='comment-form'>
-        <div className='row'>
-          <div class='col-3'>
-            <div class='form-group'>
-              <p for='comment-message'>
-                Bình chọn <span class='text-danger'>*</span>
-                {'  '}
-              </p>
-            </div>
-          </div>
-          <div className='col-9'>
-            <Star isHover={true} size={30} onChangeStar={onChangeStar} />
-            {status(star)}
+      <div className='row'>
+        <div class='col-3'>
+          <div class='form-group'>
+            <p for='comment-message'>
+              Bình chọn <span class='text-danger'>*</span>
+              {'  '}
+            </p>
           </div>
         </div>
-        <div class='row'>
-          <div class='col-3'>
-            <div class='form-group d-flex justify-content-start'>
-              <p for='comment-message'>
-                Nội dung <span class='text-danger'>*</span>
-                {'  '}
-              </p>
-            </div>
-          </div>
-          <div className='col-9'>
-            <textarea
-              name='message'
-              id='comment-message'
-              class='form-control'
-              rows='5'
-            ></textarea>
+        <div className='col-9'>
+          <Star isHover={true} size={30} onChangeStar={onChangeStar} />
+          {status(star)}
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-3'>
+          <div class='form-group d-flex justify-content-start'>
+            <p for='comment-message'>
+              Nội dung <span class='text-danger'>*</span>
+              {'  '}
+            </p>
           </div>
         </div>
-        <div class='row pt-10'>
-          <div className='col-3'></div>
-          <div class='col-9'>
-            <button type='submit' class='btn btn-primary btn-wide'>
-              Gửi
-            </button>
-          </div>
+        <div className='col-9'>
+          <textarea
+            name='message'
+            id='comment-message'
+            class='form-control'
+            rows='5'
+            onChange={(event) => {
+              setContent(event.target.value);
+            }}
+          ></textarea>
         </div>
-      </form>
+      </div>
+      <div class='row pt-10'>
+        <div className='col-3'></div>
+        <div class='col-9'>
+          <button
+            className='btn btn-primary text-light btn-wide'
+            onClick={() =>
+              props.onReviewTour(props.tourId, {
+                review: content,
+                rating: star,
+              })
+            }
+          >
+            Gửi
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

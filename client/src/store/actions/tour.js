@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../common/axios-order';
-
+import { fetchRevireTourList } from './review';
+import { setBookingInfo } from './booking';
 //tour list actions
 export const fetchTourStart = () => {
   return {
@@ -78,10 +79,10 @@ const setTourDetail = (tourDetail) => {
 // };
 export const fetchTourDetail = (slug) => {
   return (dispatch) => {
+    dispatch(fetchTourStart());
     axios
       .get(`/tours/${slug}`)
       .then((response) => {
-        console.log(response);
         dispatch(setTourDetail(response.data));
       })
       .catch((err) => {

@@ -4,6 +4,7 @@ const inititalState = {
   error: false,
   pageCount: 0,
   reviewTourList: [],
+  userReview: null,
   reviewTourListError: false,
   loading: false,
 };
@@ -35,6 +36,14 @@ const fetchReviewTourListFailed = (state) => {
     loading: false,
   };
 };
+
+const setUserReview = (state, action) => {
+  return {
+    ...state,
+    userReview: action.userReview,
+  };
+};
+
 const setReviewTourList = (state, action) => {
   // const reviews = state.reviewTourList;
   // const reviewTourListUpdated = reviews.concat(action.reviewTourList);
@@ -57,6 +66,8 @@ const reducer = (state = inititalState, action) => {
       return setReviewTourList(state, action);
     case actionTypes.SET_REVIEW_TOUR_LIST_START:
       return setReviewTourListStart(state);
+    case actionTypes.SET_USER_REVIEW:
+      return setUserReview(state, action);
     default:
       return state;
   }
