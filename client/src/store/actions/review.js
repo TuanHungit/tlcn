@@ -94,7 +94,7 @@ const reviewTourFailed = () => {
 };
 
 export const reviewTour = (tourId, data) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(reviewTourStart());
     const url = `/tours/${tourId}/reviews`;
     axios
@@ -105,5 +105,22 @@ export const reviewTour = (tourId, data) => {
       .catch((err) => {
         dispatch(reviewTourFailed());
       });
+  };
+};
+
+//user review
+
+const setUserReview = (data) => {
+  return {
+    type: actionTypes.SET_USER_REVIEW,
+    userReview: { ...data },
+  };
+};
+export const checkUserReview = (slug) => {
+  return async (dispatch) => {
+    const url = `/reviews/users/${slug}`;
+    await axios.get(url).then((response) => {
+      dispatch(setUserReview(response.data));
+    });
   };
 };

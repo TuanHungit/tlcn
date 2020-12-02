@@ -8,6 +8,7 @@ import {
   setTourUserId,
   getOneReview,
   getReviewByTour,
+  getReviewByTourAndUser,
 } from '../../controllers/review';
 const router = express.Router({ mergeParams: true });
 
@@ -22,6 +23,12 @@ router.get('/', getAllReview);
 // @access Public
 
 router.get('/:id', getOneReview);
+
+// @Route POST /api/v1/reviews/users/:slug
+// @desc create one review
+// @access Private
+
+router.get('/users/:slug', protectRoute, getReviewByTourAndUser);
 
 // @Route POST /api/v1/tours/:tourId/reviews
 // @desc create one review

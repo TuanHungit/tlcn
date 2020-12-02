@@ -10,6 +10,7 @@ import {
   getAll,
   getOne,
 } from '../services/handlerFactory';
+import { userRouter } from '../routes/user/user-router';
 
 export const createOneReview = createOne(Review);
 export const getOneReview = getOne(Review);
@@ -39,4 +40,22 @@ export const getReviewByTour = async (
   }
   const reviews = await Review.find({ tour: tour.id });
   res.status(200).send(reviews);
+};
+
+export const getReviewByTourAndUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const slug = req.params.slug;
+  const userId = req.user.id;
+
+  const tour = await Tour.findOne({ slug });
+
+  if (!tour) {
+    throw new BadRequestError('No document found with that slug');
+  }
+  const review = await Review.findOne({ tour: tour.id, user: { _id: userId } });
+  console.log(review);
+  res.status(200).send(review);
 };
