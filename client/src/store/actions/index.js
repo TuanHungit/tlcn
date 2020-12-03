@@ -13,7 +13,7 @@ export {
 } from './review';
 export { fetchTour, fetchTourDetail, fetchSimilarTour } from './tour';
 
-export { fetchBlog } from './blog';
+export { fetchBlog, fetchBlogDetail } from './blog';
 export { fetchDestination } from './destination';
 
 export { setBookingInfo } from './booking';

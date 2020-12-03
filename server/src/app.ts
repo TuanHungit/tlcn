@@ -46,6 +46,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const baseURL = '/api/v1';
+app.use('/uploads', express.static('uploads'));
 app.use(`${baseURL}/booking`, bookingRouter);
 app.use(baseURL, authRouter);
 app.use(`${baseURL}/destinations`, destinationRouter);

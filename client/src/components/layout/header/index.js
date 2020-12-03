@@ -4,27 +4,27 @@ import './index.css';
 import Navigation from './Navigation/Navigation';
 import { Link, NavLink } from 'react-router-dom';
 export default (props) => {
-  useEffect(() => {
-    document.getElementById('header-waypoint-sticky').style.backgroundColor =
-      'rgba(255, 255, 255, 0)';
-    window.onscroll = function () {
-      scrollFunction();
-    };
-    function scrollFunction() {
-      if (
-        document.body.scrollTop > 20 ||
-        document.documentElement.scrollTop > 20
-      ) {
-        document.getElementById(
-          'header-waypoint-sticky'
-        ).style.backgroundColor = 'rgba(255, 255, 255, 1)';
-      } else {
-        document.getElementById(
-          'header-waypoint-sticky'
-        ).style.backgroundColor = 'rgba(255, 255, 255, 0)';
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   document.getElementById('header-waypoint-sticky').style.backgroundColor =
+  //     'rgba(255, 255, 255, 0)';
+  //   window.onscroll = function () {
+  //     scrollFunction();
+  //   };
+  //   function scrollFunction() {
+  //     if (
+  //       document.body.scrollTop > 20 ||
+  //       document.documentElement.scrollTop > 20
+  //     ) {
+  //       document.getElementById(
+  //         'header-waypoint-sticky'
+  //       ).style.backgroundColor = 'rgba(255, 255, 255, 1)';
+  //     } else {
+  //       document.getElementById(
+  //         'header-waypoint-sticky'
+  //       ).style.backgroundColor = 'rgba(255, 255, 255, 0)';
+  //     }
+  //   }
+  // }, []);
   return (
     <header
       id='header-waypoint-sticky'
@@ -88,7 +88,7 @@ export default (props) => {
                           </ul>
                         </li>
                         <li>
-                          <a href='javascript:void(0)'>Blog</a>
+                          <Link to='/blogs'>Blog</Link>
                           <ul>
                             <li>
                               <a href='blog-01.html'> Blog - Grid Full 01</a>

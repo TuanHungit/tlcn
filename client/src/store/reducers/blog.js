@@ -3,6 +3,21 @@ import * as actionTypes from '../actions/actionTypes';
 const initState = {
   blogList: null,
   error: false,
+  blogDetail: null,
+  blogDetailError: false,
+};
+const fetchBlogDetailFailed = (state) => {
+  return {
+    ...state,
+    blogDetailError: true,
+  };
+};
+const setBlogDetail = (state, action) => {
+  return {
+    ...state,
+    blogDetail: { ...action.blogDetail },
+    blogDetailError: false,
+  };
 };
 
 const reducer = (state = initState, action) => {
@@ -48,6 +63,10 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
       };
+    case actionTypes.FETCH_BLOG_DETAIL_FAILED:
+      return fetchBlogDetailFailed(state);
+    case actionTypes.SET_BLOG_DETAIL:
+      return setBlogDetail(state, action);
 
     default:
       return state;

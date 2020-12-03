@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Blog from './blog/blog';
+import Blog from './blogCard/blogCard';
 class Blogs extends Component {
   render() {
     return (

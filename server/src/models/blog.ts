@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { IBlogAttr, IBlogDoc } from '../interfaces/blog';
-
+import slugify from 'slugify';
 interface IBlogModel extends mongoose.Model<IBlogDoc> {
   build(att: IBlogAttr): IBlogDoc;
 }
@@ -15,6 +15,10 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      unique: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -22,7 +26,6 @@ const blogSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
-  
     },
     active: {
       type: Boolean,
@@ -54,6 +57,10 @@ const blogSchema = new mongoose.Schema(
         avatar: {
           type: String,
         },
+        slug: {
+          type: String,
+          unique: true,
+        },
         date: {
           type: Date,
           default: Date.now,
@@ -75,6 +82,10 @@ const blogSchema = new mongoose.Schema(
 blogSchema.statics.build = (attr: IBlogAttr) => {
   return new Blog(attr);
 };
+blogSchema.pre<IBlogDoc>('save', function (next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
+});
 
 const Blog = mongoose.model<IBlogDoc, IBlogModel>('Blog', blogSchema);
 

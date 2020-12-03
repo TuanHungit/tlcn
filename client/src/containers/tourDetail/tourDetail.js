@@ -49,11 +49,13 @@ const TourDetail = (props) => {
         'slug',
       ]);
     }
-  }, [props.tourDetail, props.match.params.slug]);
+  }, [props.tourDetail]);
 
   useEffect(() => {
-    props.onCheckUserView(props.match.params.slug);
-  }, [props.isAuthencated, props.userReview]);
+    if (props.isAuthencated) {
+      props.onCheckUserView(props.match.params.slug);
+    }
+  }, [props.isAuthencated, props.match.params.slug]);
 
   const changePersonHandler = (event) => {
     const numOfPerson = event.target.value;
@@ -95,76 +97,67 @@ const TourDetail = (props) => {
   }
   if (data) {
     tourDetail = (
-      <div>
-        <div className='body-inner'>
-          <div class='main-wrapper scrollspy-container'>
-            <section
-              class='page-wrapper page-detail pt-0'
-              style={{ backgroundColor: '#f3f3f3' }}
-            >
-              <div class='pt-0 pt-xl-15'></div>
+      <div class='main-wrapper scrollspy-container'>
+        <section
+          class='page-wrapper page-detail pt-0'
+          style={{ backgroundColor: '#f3f3f3' }}
+        >
+          <div class='pt-0 pt-xl-15'></div>
 
-              <PageTitle title={data.name} />
+          <PageTitle title={data.name} />
 
-              <div class='container'>
-                <div class='row gap-20 gap-lg-40'>
-                  <div
-                    class='col-12 col-lg-8'
-                    style={{ backgroundColor: '#fff' }}
-                  >
-                    <div class='content-wrapper'>
-                      <ContentDetail
-                        content={data}
-                        availableDate={data.availableDate}
-                      />
-                      <div class='mb-50'></div>
+          <div class='container'>
+            <div class='row gap-20 gap-lg-40'>
+              <div class='col-12 col-lg-8' style={{ backgroundColor: '#fff' }}>
+                <div class='content-wrapper'>
+                  <ContentDetail
+                    content={data}
+                    availableDate={data.availableDate}
+                  />
+                  <div class='mb-50'></div>
 
-                      <Locations
-                        content={{
-                          summary: data.summary,
-                          locations: { ...data.locations },
-                        }}
-                      />
-                      <Map locations={data.locations} />
-                      {similarTourList}
+                  <Locations
+                    content={{
+                      summary: data.summary,
+                      locations: { ...data.locations },
+                    }}
+                  />
+                  <Map locations={data.locations} />
+                  {similarTourList}
 
-                      <ReviewTour
-                        reviews={props.reviewTourList}
-                        tourId={props.tourDetail.id}
-                        onFetchReviewRourList={props.onFetchReviewRourList}
-                        pageCount={props.pageCount}
-                        reviewLoading={props.reviewLoading}
-                        onReviewTour={props.onReviewTour}
-                        userReview={userReview}
-                        ratingsAverage={props.tourDetail.ratingsAverage}
-                        onCheckUserView={props.onCheckUserView}
-                      />
-                    </div>
-                  </div>
-                  {props.bookingInfo ? (
-                    <BookingTour
-                      numOfPerson={props.bookingInfo.numOfPerson}
-                      total={props.bookingInfo.total}
-                      price={props.tourDetail.price}
-                      duration={data.duration}
-                      changePersonHandler={(event) =>
-                        changePersonHandler(event)
-                      }
-                      date={props.bookingInfo.startDate}
-                      slug={data.slug}
-                    />
-                  ) : null}
-                  <BookingModal
-                    duration={data.duration}
-                    start={data.availableDate}
-                    price={data.price}
-                    changeDateHandler={changeDateHandler}
+                  <ReviewTour
+                    reviews={props.reviewTourList}
+                    tourId={props.tourDetail.id}
+                    onFetchReviewRourList={props.onFetchReviewRourList}
+                    pageCount={props.pageCount}
+                    reviewLoading={props.reviewLoading}
+                    onReviewTour={props.onReviewTour}
+                    userReview={userReview}
+                    ratingsAverage={props.tourDetail.ratingsAverage}
+                    onCheckUserView={props.onCheckUserView}
                   />
                 </div>
               </div>
-            </section>
+              {props.bookingInfo ? (
+                <BookingTour
+                  numOfPerson={props.bookingInfo.numOfPerson}
+                  total={props.bookingInfo.total}
+                  price={props.tourDetail.price}
+                  duration={data.duration}
+                  changePersonHandler={(event) => changePersonHandler(event)}
+                  date={props.bookingInfo.startDate}
+                  slug={data.slug}
+                />
+              ) : null}
+              <BookingModal
+                duration={data.duration}
+                start={data.availableDate}
+                price={data.price}
+                changeDateHandler={changeDateHandler}
+              />
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   }

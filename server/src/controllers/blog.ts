@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import multer from 'multer';
 import { BadRequestError } from '@thticket/common';
 
 import { Blog } from '../models/blog';
@@ -21,6 +22,7 @@ export const getAllBlog = getAll(Blog);
 
 export const setUserId = (req: Request, res: Response, next: NextFunction) => {
   req.body.user = req.user.id;
+  console.log(req.body);
   next();
 };
 
@@ -30,7 +32,8 @@ export const getOneBlog = async (
   next: NextFunction
 ) => {
   // 1) Get the data, for the requested tour (including reviews and guides)
-  const blog = await Blog.findById(req.params.id)
+
+  const blog = await Blog.findOne({ slug: req.params.id })
     .populate('user', 'name photo')
     .populate({
       path: 'comments',
@@ -124,4 +127,28 @@ export const deleteCommentBlog = async (req: any, res: any) => {
   blog.comments = blog.comments.filter((el: any) => el.id !== comment.id);
   blog.save();
   res.status(200).json(blog.comments);
+};
+
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: storage }).single('file');
+
+export const uploadFile = (req: any, res: any, next: NextFunction) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+    return res.json({
+      success: true,
+      url: res.req.file.path,
+      fileName: res.req.file.filename,
+    });
+  });
 };

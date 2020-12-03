@@ -12,6 +12,7 @@ import {
   getAllBlog,
   setUserId,
   getOneBlog,
+  uploadFile,
 } from '../../controllers/blog';
 
 const router = express.Router();
@@ -75,4 +76,9 @@ router.patch(
   deleteCommentBlog
 );
 
+// @Route PATCH /api/v1/blog/likes/:id
+// @desc delete a comment a blog
+// @access Private
+
+router.post('/uploadfiles', uploadFile);
 export { router as blogRouter };

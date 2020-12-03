@@ -15,7 +15,10 @@ import Profile from './containers/dashboard/dashboard';
 import ResultSearch from './components/search/ResultSearch';
 import Booking from './containers/booking/booking';
 import BookingSuccess from './components/booking/bookingSuccess/bookingSuccess';
+import SingleBlog from './containers/singleBlog/singleBlog';
 import ScrollToTop from './components/UI/scrollTop/scrollTop';
+import BlogEditor from './containers/blogEditor/blogEditer';
+import BlogGrid from './containers/blogGrid/blogGrid';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -27,7 +30,10 @@ function App(props) {
       <Route path='/tour/:slug' exact component={TourDetail} />
       <Route path={'/tour/:slug/booking'} exact component={Booking} />
       <Route path='/logout' exact component={Logout} />
-      {/* <Route path='/register' component={Register} /> */}
+      <Route path='/register' exact component={Register} />
+      <Route path='/blogs/:slug' component={SingleBlog} />
+      <Route path='/blogs-editor' exact component={BlogEditor} />
+      <Route path='/blogs' exact component={BlogGrid} />
       <Route
         path='/tour/:slug/booking/success'
         exact
@@ -45,6 +51,9 @@ function App(props) {
         <Route path='/logout' exact component={Logout} />
         <Route exact path='/tour/:slug' component={TourDetail} />
         <Route path='/profile' component={Profile} />
+        <Route path='/blogs/:slug' exact component={SingleBlog} />
+        <Route path='/blogs-editor' exact component={BlogEditor} />
+        <Route path='/blogs' exact component={BlogGrid} />
         <Route
           path='/tour/:slug/booking/success'
           exact
@@ -66,7 +75,6 @@ function App(props) {
       <LoginModal />
       <ScrollToTop />
       <Footer />
-      {/* <Booking /> */}
     </div>
   );
 }

@@ -18,6 +18,7 @@ export interface IBlogDoc extends mongoose.Document {
   title: string;
   user: mongoose.Schema.Types.ObjectId;
   content: string;
+  slug: string;
   createAt: Date;
   active: boolean;
   likes: [{ user: mongoose.Schema.Types.ObjectId }];

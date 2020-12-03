@@ -15,7 +15,7 @@ class LandingPage extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.onFetchDestination();
-    this.props.onFetchTour(0, 4, [
+    this.props.onFetchTour(0, 6, [
       'duration',
       'name',
       'price',
@@ -39,8 +39,8 @@ class LandingPage extends Component {
       <p>Destinations can't be loaded!</p>
     ) : (
       <Spinner />
-    ); 
-   
+    );
+
     if (this.props.destinationList) {
       destinations = (
         <Destinations destinationList={this.props.destinationList} />
@@ -54,7 +54,7 @@ class LandingPage extends Component {
         />
       );
     }
-    
+
     //fetch tour
     let bestTour = this.props.tourError ? (
       <p>Destinations can't be loaded!</p>
@@ -84,7 +84,7 @@ class LandingPage extends Component {
     }
     return (
       <div class='main-wrapper scrollspy-container'>
-        {search }
+        {search}
         <section class='pb-0'>
           <div class='container'>
             <div class='row cols-1 cols-lg-3 gap-20 gap-lg-40'>

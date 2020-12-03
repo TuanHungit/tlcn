@@ -37,3 +37,32 @@ export const fetchBlog = (page = 0, limit = 3, options) => {
       });
   };
 };
+
+//BLOG - detail
+const fetchBlogDetailError = () => {
+  return {
+    type: actionTypes.FETCH_BLOG_DETAIL_FAILED,
+  };
+};
+
+const setBlogDetail = (blogDetail) => {
+  return {
+    type: actionTypes.SET_BLOG_DETAIL,
+    blogDetail,
+  };
+};
+
+export const fetchBlogDetail = (slug) => {
+  return (dispatch) => {
+    const url = `/blogs/${slug}`;
+    axios
+      .get(url)
+      .then((response) => {
+        dispatch(setBlogDetail(response.data));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchBlogDetailError());
+      });
+  };
+};
