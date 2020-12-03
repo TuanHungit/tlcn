@@ -31,7 +31,7 @@ router.post(
   setUserId,
   createOneBlog
 );
-
+router.post('/blogs/uploadfiles', protectRoute, uploadFile);
 // @Route GET /api/v1/blogs
 // @desc get all blog
 // @access Public
@@ -80,5 +80,4 @@ router.patch(
 // @desc delete a comment a blog
 // @access Private
 
-router.post('/uploadfiles', uploadFile);
 export { router as blogRouter };

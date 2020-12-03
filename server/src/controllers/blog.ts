@@ -141,6 +141,7 @@ let storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single('file');
 
 export const uploadFile = (req: any, res: any, next: NextFunction) => {
+  console.log(req);
   upload(req, res, (err) => {
     if (err) {
       return res.json({ success: false, err });
