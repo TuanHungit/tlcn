@@ -22,9 +22,15 @@ const tourSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
-    price: {
+    priceAdults: {
       type: Number,
       required: true,
+    },
+    priceChildren: {
+      type: Number,
+    },
+    priceBaby: {
+      type: Number,
     },
     country: {
       type: String,

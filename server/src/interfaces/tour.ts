@@ -15,7 +15,9 @@ export interface ILocationsDOC extends mongoose.Document {
 export interface ITourAttrs {
   name: string;
   slug: string;
-  price: number;
+  priceAdults: number;
+  priceChildren: number;
+  priceBaby: number;
   priceDiscount: number;
   ratingsAverage: number;
   ratingsQuantity: number;
@@ -32,7 +34,9 @@ export interface ITourAttrs {
 
 export interface ITourDoc extends mongoose.Document {
   name: string;
-  price: number;
+  priceAdults: number;
+  priceChildren: number;
+  priceBaby: number;
   slug: string;
   country: string;
   priceDiscount: number;

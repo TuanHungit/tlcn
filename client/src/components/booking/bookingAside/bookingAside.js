@@ -62,17 +62,22 @@ export default (props) => {
               <ul class='border-top mt-20 pt-15'>
                 <li class='clearfix'>
                   {ToMoneyForView(props.bookingInfo.total, ' đ')} x{' '}
-                  {props.bookingInfo.numOfPerson} người
-                  <span class='float-right'>
-                    {' '}
-                    {ToMoneyForView(props.bookingInfo.total, ' đ')}
-                  </span>
+                  {props.bookingInfo.numOfPersonAdults} người lớn{' '}
+                  {props.bookingInfo.numOfPersonChildren > 0
+                    ? `x ${props.bookingInfo.numOfPersonChildren} trẻ em`
+                    : null}{' '}
+                  {props.bookingInfo.numOfPersonBaby > 0
+                    ? `x ${props.bookingInfo.numOfPersonBaby} em bé`
+                    : null}
                 </li>
 
                 <li class='clearfix border-top font700'>
                   <div class='border-top mt-1'>
                     <span>Tổng cộng</span>
-                    <span class='float-right text-dark'>
+                    <span
+                      class='float-right text-dark h6 text-primary font16'
+                      style={{ marginTop: '3px' }}
+                    >
                       {ToMoneyForView(props.bookingInfo.total, ' đ')}
                     </span>
                   </div>

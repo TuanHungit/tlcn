@@ -28,7 +28,9 @@ const TourDetail = (props) => {
     if (props.tourDetail) {
       props.onSetBooking({
         startDate: props.tourDetail.availableDate[0],
-        numOfPerson: 1,
+        numOfPersonAdults: 1,
+        numOfPersonChildren: 0,
+        numOfPersonBaby: 0,
         total: props.tourDetail.price,
       });
       const tourId = props.tourDetail.id;
@@ -56,15 +58,44 @@ const TourDetail = (props) => {
       props.onCheckUserView(props.match.params.slug);
     }
   }, [props.isAuthencated, props.match.params.slug]);
-
-  const changePersonHandler = (event) => {
-    const numOfPerson = event.target.value;
-    const price = props.tourDetail.price;
-    const total = numOfPerson * price;
-
+  const calculateTotal = (
+    numOfPersonAdults,
+    numOfPersonChildren,
+    numOfPersonBaby
+  ) => {
+    const adultsTotal = numOfPersonAdults * props.tourDetail.priceAdults;
+    const childrenTotal = numOfPersonChildren * props.tourDetail.priceChildren;
+    const babyTotal = numOfPersonBaby * props.tourDetail.priceBaby;
+    return adultsTotal + childrenTotal + babyTotal;
+  };
+  const changePersonAdultsHandler = (event) => {
     props.onSetBooking({
-      numOfPerson: event.target.value,
-      total: total,
+      numOfPersonAdults: event.target.value,
+      total: calculateTotal(
+        event.target.value,
+        props.bookingInfo.numOfPersonChildren,
+        props.bookingInfo.numOfPersonBaby
+      ),
+    });
+  };
+  const changePersonChildrenHandler = (event) => {
+    props.onSetBooking({
+      numOfPersonChildren: event.target.value,
+      total: calculateTotal(
+        props.bookingInfo.numOfPersonAdults,
+        event.target.value,
+        props.bookingInfo.numOfPersonBaby
+      ),
+    });
+  };
+  const changePersonBabyHandler = (event) => {
+    props.onSetBooking({
+      numOfPersonBaby: event.target.value,
+      total: calculateTotal(
+        props.bookingInfo.numOfPersonAdults,
+        props.bookingInfo.numOfPersonChildren,
+        event.target.value
+      ),
     });
   };
   const changeDateHandler = (date) => {
@@ -140,11 +171,25 @@ const TourDetail = (props) => {
               </div>
               {props.bookingInfo ? (
                 <BookingTour
-                  numOfPerson={props.bookingInfo.numOfPerson}
+                  numOfPerson={[
+                    props.bookingInfo.numOfPersonAdults,
+                    props.bookingInfo.numOfPersonChildren,
+                    props.bookingInfo.numOfPersonBaby,
+                  ]}
                   total={props.bookingInfo.total}
-                  price={props.tourDetail.price}
+                  priceAdults={props.tourDetail.priceAdults}
+                  priceChildren={props.tourDetail.priceChildren}
+                  priceBaby={props.tourDetail.priceBaby}
                   duration={data.duration}
-                  changePersonHandler={(event) => changePersonHandler(event)}
+                  changePersonAdultsHandler={(event) =>
+                    changePersonAdultsHandler(event)
+                  }
+                  changePersonChildrenHandler={(event) =>
+                    changePersonChildrenHandler(event)
+                  }
+                  changePersonBabyHandler={(event) =>
+                    changePersonBabyHandler(event)
+                  }
                   date={props.bookingInfo.startDate}
                   slug={data.slug}
                 />

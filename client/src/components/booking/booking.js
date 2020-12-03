@@ -50,7 +50,7 @@ export default (props) => {
               <div class='col-12 col-lg-7' style={{ backgroundColor: '#fff' }}>
                 <div class='content-wrapper pt-15'>
                   <div class='form-draft-payment'>
-                    <h4 class='heading-title'>
+                    <h4 class='heading-title' className='font20'>
                       <i
                         class='fas fa-info-circle'
                         style={{ color: '#ff5454' }}
@@ -62,15 +62,31 @@ export default (props) => {
                     </h4>
                     <div className='row'>
                       <div className='col-6'>
-                        <h6>{props.tour.name}</h6>
-                      </div>
-                      <div className='col-3'>
-                        <label>Số người: {props.bookingInfo.numOfPerson}</label>
-                      </div>
-                      <div className='col-3'>
-                        <label>
+                        <p className='font14'>
+                          <strong>{props.tour.name}</strong>{' '}
+                        </p>
+                        <label className='font14'>
                           Ngày khởi hành:{' '}
                           {ToDateForView(props.bookingInfo.startDate)}
+                        </label>
+                      </div>
+                      <div className='col-2'>
+                        <p className='font14'>Số người lớn</p>
+                        <label className='font14'>
+                          {props.bookingInfo.numOfPersonAdults}
+                        </label>
+                      </div>
+                      <div className='col-2'>
+                        <p className='font14'>Số trẻ em</p>
+                        <label className='font14'>
+                          {' '}
+                          {props.bookingInfo.numOfPersonChildren}
+                        </label>
+                      </div>
+                      <div className='col-2'>
+                        <p className='font14'>Số em bé</p>
+                        <label className='font14'>
+                          {props.bookingInfo.numOfPersonBaby}
                         </label>
                       </div>
                     </div>
@@ -79,20 +95,22 @@ export default (props) => {
                       className='d-flex justify-content-end'
                       style={{ marginTop: '-15px' }}
                     >
-                      <p style={{ color: '#ff5454' }}>Sử dụng mã giảm giá</p>
+                      <p style={{ color: '#ff5454' }} className='font14'>
+                        Sử dụng mã giảm giá
+                      </p>
                     </div>
                   </div>
                   <div class='mb-20'></div>
                   <div class='form-draft-payment'>
                     <form>
-                      <h4 class='heading-title'>
+                      <h4 class='heading-title' className='font20'>
                         <i class='fas fa-user' style={{ color: '#ff5454' }}></i>
                         <span style={{ color: '#ff5454' }}>
                           {' '}
                           Thông tin người đặt dịch vụ
                         </span>
                       </h4>
-                      <p class='post-heading'>
+                      <p class='post-heading' className='font14'>
                         Nếu đã có tài khoản, vui lòng đăng nhập?{' '}
                         <a
                           href='tour-payment.html#loginFormTabInModal-login'

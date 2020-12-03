@@ -22,7 +22,7 @@ export default (props) => {
 
   return (
     <div>
-      <h4 class='heading-title'>
+      <h4 class='heading-title' className='font20'>
         <i class='fas fa-credit-card' style={{ color: '#ff5454' }}></i>
         <span style={{ color: '#ff5454' }}>
           {' '}
@@ -35,7 +35,7 @@ export default (props) => {
 
       <div class='alert alert-info line-145 padding-30' role='alert'>
         <h4 class='alert-heading line-125 mb-5'>Chúc mừng!</h4>
-        <p class='lead mb-10'>
+        <p class='lead mb-10 font18'>
           Bạn đã có mức giá tốt nhất chỉ{' '}
           <strong class='text-dark'>$37.71</strong> mỗi người
         </p>
@@ -102,8 +102,10 @@ export default (props) => {
 
         <Collapse isOpened={card}>
           <div class='payment-form '>
-            <h5>Tổng số tiền thanh toán của bạn là: $ 150.60 US</h5>
-            <p>
+            <h5 className='font16'>
+              Tổng số tiền thanh toán của bạn là: $ 150.60 US
+            </h5>
+            <p className='font14'>
               Số tiền thanh toán sẽ được ghi nợ vào tài khoản của bạn sau khi
               quá trình thanh toán đã hoàn tất.
             </p>
@@ -124,13 +126,15 @@ export default (props) => {
         </Collapse>
         <Collapse isOpened={paypal}>
           <div class='payment-form'>
-            <h5>Tổng số tiền thanh toán của bạn là: $ 150.60 US</h5>
-            <p>
+            <h5 className='font16'>
+              Tổng số tiền thanh toán của bạn là: $ 150.60 US
+            </h5>
+            <p className='font14'>
               Số tiền thanh toán sẽ được ghi nợ vào tài khoản của bạn sau khi
               quá trình thanh toán đã hoàn tất.
             </p>
 
-            <p>
+            <p className='font14'>
               Sau khi nhấp vào 'Đặt ngay', bạn sẽ được chuyển đến Paypal để hoàn
               tất thanh toán.{' '}
               <strong>
