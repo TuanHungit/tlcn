@@ -1,6 +1,7 @@
 import React, { lazy, useState, useEffect } from "react";
 import ToDateForView from "../../common/convertDateForView";
 import toPriceForView from "../../common/convertPriceForView";
+import TourCreate from "./tourCreate";
 import {
   CBadge,
   CCard,
@@ -20,7 +21,7 @@ import {
   CCol,
   CImg,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
+
 import { getAllTour } from "../../api/tourApi";
 const fields = [
   // { key: "id", label: "INDEX", _style: { width: "5%" } },
@@ -42,19 +43,17 @@ const fields = [
     filter: false,
   },
 ];
-const getBadge = (status) => {
-  switch (status) {
-    case "Active":
-      return "success";
-    case "Inactive":
-      return "secondary";
-    case "Pending":
-      return "warning";
-    case "Banned":
-      return "danger";
-
-    default:
-      return "primary";
+const getStar = (ratingsAverage) => {
+  if (ratingsAverage < 1) {
+    return "danger";
+  } else if (ratingsAverage < 2) {
+    return "danger";
+  } else if (ratingsAverage < 3) {
+    return "warning";
+  } else if (ratingsAverage < 4) {
+    return "secondary";
+  } else {
+    return "success";
   }
 };
 
@@ -62,6 +61,8 @@ function Tour() {
   const [tourList, setTourList] = useState(null);
   const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [collapse, setCollapse] = useState(false);
+  const [modal, setModal] = useState(false);
   useEffect(() => {
     const fetcData = async () => {
       try {
@@ -88,10 +89,25 @@ function Tour() {
     }
     setDetails(newDetails);
   };
+  const toggleCollapse = () => {
+    setCollapse(!collapse);
+  };
+  const toggleModal = () => {
+    setModal(!modal);
+  };
   return (
     <>
       <CCard>
-        <CCardHeader className="CCardHeader-title ">Tour</CCardHeader>
+        <CCardHeader className="CCardHeader-title ">
+          <CContainer>
+            <CRow className="d-flex justify-content-between">
+              <h1>Quản lý Tour</h1>
+              <CButton size="sm" color="info" onClick={toggleModal}>
+                + Thêm mới
+              </CButton>
+            </CRow>
+          </CContainer>
+        </CCardHeader>
         <CCardBody>
           <CDataTable
             items={tourList}
@@ -108,11 +124,20 @@ function Tour() {
             footer
             pagination
             scopedSlots={{
-              status: (item) => (
+              ratingsAverage: (item) => (
                 <td>
-                  <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+                  <CBadge color={getStar(item.ratingsAverage)}>
+                    {item.ratingsAverage} / 5
+                  </CBadge>
                 </td>
               ),
+              duration: (item) => (
+                <td>
+                  {item.duration} ngày &amp; {item.duration - 1} đêm
+                </td>
+              ),
+              price: (item) => <td>{toPriceForView(item.price)}</td>,
+              startLocation: (item) => <td>{item.startLocation.address}</td>,
               show_details: (item, index) => {
                 return (
                   <td className="py-2">
@@ -125,7 +150,7 @@ function Tour() {
                         toggleDetails(index);
                       }}
                     >
-                      {details.includes(index) ? "Hide" : "Show"}
+                      {details.includes(index) ? "Ẩn" : "Hiển thị"}
                     </CButton>
                   </td>
                 );
@@ -134,7 +159,7 @@ function Tour() {
                 return (
                   <CCollapse show={details.includes(index)}>
                     <CCardBody>
-                      <CTabs activeTab="home" active>
+                      <CTabs activeTab="info" active>
                         <CNav variant="tabs">
                           <CNavItem>
                             <CNavLink data-tab="info">
@@ -159,44 +184,63 @@ function Tour() {
                           <CTabPane data-tab="info">
                             <CContainer>
                               <CRow>
-                                <CCol lg="6">
+                                <CCol lg="3">
                                   <h6>{item.name}</h6>
                                   <CImg
                                     src="https://www.natours.dev/img/tours/tour-3-1.jpg"
                                     alt="img"
-                                    width="300px"
+                                    width="250px"
                                     height="200px"
                                   />
                                 </CCol>
-                                <CCol lg="6">
+                                <CCol lg="5">
                                   <CContainer>
                                     <CRow>
                                       <CCol lg="4">Tên Tour:</CCol>
                                       <CCol lg="8">{item.name}</CCol>
                                     </CRow>
+                                    <hr />
                                     <CRow>
                                       <CCol lg="4">Giá người lớn:</CCol>
                                       <CCol lg="8">{item.priceAdults}</CCol>
                                     </CRow>
+                                    <hr />
                                     <CRow>
                                       <CCol lg="4">Giá trẻ em:</CCol>
                                       <CCol lg="8">{item.priceChildren}</CCol>
                                     </CRow>
+                                    <hr />
                                     <CRow>
                                       <CCol lg="4">Giá em bé:</CCol>
                                       <CCol lg="8">{item.priceBaby}</CCol>
                                     </CRow>
+                                    <hr />
                                     <CRow>
                                       <CCol lg="4">Điểm khởi hành:</CCol>
                                       <CCol lg="8">
                                         {item.startLocation.address}
                                       </CCol>
                                     </CRow>
+                                    <hr />
                                     <CRow>
                                       <CCol lg="4">Điểm đến:</CCol>
                                       <CCol lg="8">{item.country}</CCol>
                                     </CRow>
                                   </CContainer>
+                                </CCol>
+                                <CCol lg="4">
+                                  <CRow>
+                                    <CCol lg="4">Số ngày:</CCol>
+                                    <CCol lg="8">
+                                      {item.duration} ngày &amp;{" "}
+                                      {item.duration - 1} đêm
+                                    </CCol>
+                                  </CRow>
+                                  <hr />
+                                  <CRow>
+                                    <CCol lg="4">Mô tả tóm tắt:</CCol>
+                                    <CCol lg="8">{item.summary}</CCol>
+                                  </CRow>
                                 </CCol>
                               </CRow>
                             </CContainer>
@@ -204,27 +248,65 @@ function Tour() {
                           <CTabPane data-tab="schedule">
                             <CContainer>
                               <CRow>
-                                <CCol lg="3">Lịch khởi hành</CCol>
-                                <CCol lg="9">
-                                  {item.availableDate.map((el, index) => {
-                                    return (
-                                      <p>
-                                        {ToDateForView(el)} <br />
-                                      </p>
-                                    );
-                                  })}
+                                <CCol lg="4">
+                                  <CRow>
+                                    <CCol lg="3">Lịch khởi hành:</CCol>
+                                    <CCol lg="8">
+                                      {item.availableDate.map((el, key) => {
+                                        return (
+                                          <p key={key}>
+                                            {ToDateForView(el)} <br />
+                                          </p>
+                                        );
+                                      })}
+                                    </CCol>
+                                  </CRow>
                                 </CCol>
-                              </CRow>
-                              <CRow>
-                                <CCol lg="3">Tóm tắt về Tour</CCol>
-                                <CCol lg="9">{item.summary}</CCol>
+                                <CCol lg="8">
+                                  <CRow>
+                                    <CCol lg="2">Các điểm hấp dẫn:</CCol>
+                                    <CCol lg="10">
+                                      <div
+                                        dangerouslySetInnerHTML={{
+                                          __html: item.description,
+                                        }}
+                                      />
+                                    </CCol>
+                                  </CRow>
+                                </CCol>
                               </CRow>
                             </CContainer>
                           </CTabPane>
-                          <CTabPane data-tab="startLocation">789</CTabPane>
+                          <CTabPane data-tab="startLocation">
+                            <CContainer>
+                              {item.locations.map((el, key) => (
+                                <CRow key={key}>
+                                  <h5 onClick={toggleCollapse} key={key}>
+                                    {el.title}
+                                  </h5>
+                                  <CCollapse show={collapse} key={key}>
+                                    <p key={key}>
+                                      {" "}
+                                      <div
+                                        dangerouslySetInnerHTML={{
+                                          __html: el.description,
+                                        }}
+                                      />
+                                    </p>
+                                  </CCollapse>
+                                </CRow>
+                              ))}
+                            </CContainer>
+                          </CTabPane>
                           <CTabPane data-tab="review">789</CTabPane>
                         </CTabContent>
                       </CTabs>
+                      <CButton size="sm" color="info">
+                        Cập nhật
+                      </CButton>
+                      <CButton size="sm" color="danger" className="ml-1">
+                        Xóa
+                      </CButton>
                     </CCardBody>
                   </CCollapse>
                 );
@@ -232,6 +314,7 @@ function Tour() {
             }}
           />
         </CCardBody>
+        <TourCreate modal={modal} toggleModal={toggleModal} />
       </CCard>
     </>
   );

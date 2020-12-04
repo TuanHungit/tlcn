@@ -6,3 +6,14 @@
 
 // If you want to add something do it here
 @import "custom";
+
+.inp {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  border-bottom: 2px solid gray;
+}
+input:focus {
+  outline: none;
+  border-bottom: 2px solid blue;
+}

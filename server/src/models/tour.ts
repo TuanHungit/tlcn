@@ -25,18 +25,22 @@ const tourSchema = new mongoose.Schema(
     priceAdults: {
       type: Number,
       required: true,
+      default: 0,
     },
     priceChildren: {
       type: Number,
+      default: 0,
     },
     priceBaby: {
       type: Number,
+      default: 0,
     },
     country: {
       type: String,
     },
     priceDiscount: {
       type: Number,
+      default: 0,
     },
     ratingsAverage: {
       type: Number,
