@@ -25,7 +25,7 @@ const tourSchema = new mongoose.Schema(
     priceAdults: {
       type: Number,
       required: true,
-      default: 0,
+        default: 0
     },
     priceChildren: {
       type: Number,
