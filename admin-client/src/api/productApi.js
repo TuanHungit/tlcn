@@ -1,9 +1,9 @@
-import axiosClient from "./axiosClient";
+import axios from "../common/axiosClient";
 // api/productApi.js
 class ProductApi {
   getAll = () => {
     const url = "/api/products";
-    return axiosClient.get(url);
+    return axios.get(url);
   };
 }
 const productApi = new ProductApi();

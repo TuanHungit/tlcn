@@ -1,4 +1,4 @@
-import axios from "./axiosClient";
+import axios from "../common/axiosClient";
 
 export const getAllTour = async (options) => {
   let url = `/tours`;
@@ -6,5 +6,13 @@ export const getAllTour = async (options) => {
     url = `/tours?fields=${options.join(",")}`;
   }
   const tourList = await axios.get(url);
-  return tourList;
+  return tourList.data;
 };
+
+export const createOnTour = async (desId, data) => {
+  const url = `/destinations/${desId}/tours`;
+  const tourCreated = await axios.post(url, data);
+  return tourCreated.data;
+};
+
+export const uploadImage = () => {};

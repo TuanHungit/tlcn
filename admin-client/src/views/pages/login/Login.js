@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { authSignin } from "../../../api/authApi";
 import {
   CButton,
   CCard,
@@ -18,8 +19,15 @@ import {
 import CIcon from "@coreui/icons-react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = () => {
+    authSignin(email, password);
+  };
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
+      {localStorage.getItem("token") ? <Redirect to="/" /> : null}
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md="8">
@@ -32,9 +40,9 @@ const Login = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <CForm>
-                    <h1>ADMIN LOGIN</h1>
-                    <p className="text-muted">Sign In to admin account</p>
+                  <CForm onSubmit={onSubmit}>
+                    <h1>ĐĂNG NHẬP TRANG QUẢN LÝ</h1>
+                    <p className="text-muted">Đăng nhập bằng tài khoản admin</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -43,8 +51,9 @@ const Login = () => {
                       </CInputGroupPrepend>
                       <CInput
                         type="text"
-                        placeholder="Username"
-                        autoComplete="username"
+                        placeholder="Email"
+                        autoComplete="Email"
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
@@ -57,11 +66,16 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="12">
-                        <CButton color="primary" style={{ width: "100%" }}>
+                        <CButton
+                          color="primary"
+                          style={{ width: "100%" }}
+                          onClick={onSubmit}
+                        >
                           Login
                         </CButton>
                       </CCol>

@@ -1,4 +1,7 @@
+const fs = require('fs');
+const mime = require('mime');
 import { Tour } from '../models/tour';
+
 import { Destination } from '../models/destination';
 import { Request, Response, NextFunction } from 'express';
 
@@ -223,3 +226,42 @@ export const getTourForView = async (
 
 //   res.status(200).send(tour);
 // };
+
+interface IResponse {
+  type?: any;
+  data?: any;
+}
+export const uploadBase64Image = async (
+  req: any,
+  res: Response,
+  next: NextFunction
+) => {
+  // to declare some path to store your converted image
+  if (req.body.images) {
+    console.log(req.body.images.length);
+    req.body.images.forEach((el: any, key: any) => {
+      let matches = el.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+        response: IResponse = {};
+
+      if (matches.length !== 3) {
+        return new Error('Invalid input string');
+      }
+
+      response.type = matches[1];
+      response.data = new Buffer(matches[2], 'base64');
+      let decodedImg = response;
+      let imageBuffer = decodedImg.data;
+      let type = decodedImg.type;
+      let extension = mime.extension(type);
+      let fileName = 'tours-' + Date.now() + '.' + extension;
+      try {
+        fs.writeFileSync('uploads/tours/' + fileName, imageBuffer, 'utf8');
+        req.body.images[key] = req.headers.host + '/uploads/tours/' + fileName;
+      } catch (e) {
+        console.log(e);
+        next(e);
+      }
+    });
+  }
+  next();
+};

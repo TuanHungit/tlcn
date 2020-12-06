@@ -18,6 +18,10 @@ const tourSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    price: {
+      type: Number,
+      default: 0,
+    },
     slug: {
       type: String,
       unique: true,
@@ -25,7 +29,7 @@ const tourSchema = new mongoose.Schema(
     priceAdults: {
       type: Number,
       required: true,
-        default: 0
+      default: 0,
     },
     priceChildren: {
       type: Number,
@@ -45,6 +49,7 @@ const tourSchema = new mongoose.Schema(
     ratingsAverage: {
       type: Number,
       set: (val: any) => Math.round(val * 10) / 10,
+      default: 0,
     },
     ratingsQuantity: {
       type: Number,
@@ -63,7 +68,6 @@ const tourSchema = new mongoose.Schema(
     },
     imageCover: {
       type: String,
-      required: [true, 'A tour must have a cover image'],
     },
     images: [String],
     createdAt: {

@@ -11,6 +11,7 @@ import {
   getOneTour,
   getTourByDestination,
   setDestinationId,
+  uploadBase64Image,
 } from '../../controllers/tour';
 
 const router = express.Router({ mergeParams: true });
@@ -47,26 +48,16 @@ router.post(
   restrictTo('admin'),
   [
     body('name').notEmpty().trim().withMessage('Name must be defined!'),
-    body('price').isFloat().withMessage('Price must be valid!'),
-    body('priceDiscount')
-      .isFloat()
-      .withMessage('Price discount must be valid!'),
-    body('ratingsAverage')
-      .isFloat()
-      .withMessage('Rating average must be valid!'),
-    body('ratingsQuantity')
-      .isNumeric()
-      .withMessage('Rating quantity must be valid!'),
+
+    body('priceAdults').isFloat().withMessage('price Adults must be valid!'),
+
     body('summary').trim().notEmpty().withMessage('Sumary must be defined!'),
+    body('images').isArray().notEmpty().withMessage('Images must be defined!'),
     body('description')
       .trim()
       .notEmpty()
       .withMessage('Description must be defined!'),
-    body('imageCover')
-      .trim()
-      .notEmpty()
-      .withMessage('ImageCover must be defined!'),
-    body('images').isArray().notEmpty().withMessage('Images must be defined!'),
+
     body('availableDate')
       .isArray()
       .notEmpty()
@@ -78,6 +69,7 @@ router.post(
   ],
   validateRequest,
   setDestinationId,
+  uploadBase64Image,
   createOneTour
 );
 

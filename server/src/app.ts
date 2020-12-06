@@ -1,5 +1,6 @@
 import express from 'express';
 import 'express-async-errors';
+import bodyParser from 'body-parser';
 import { json, raw } from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
@@ -34,7 +35,7 @@ const options: cors.CorsOptions = {
 app.use(cors());
 app.set('trust proxy', 1);
 app.use(cookieParser());
-app.use(json());
+app.use(bodyParser({ limit: '50mb' }));
 app.post(
   '/webhook-checkout',
   raw({ type: 'application/json' }),

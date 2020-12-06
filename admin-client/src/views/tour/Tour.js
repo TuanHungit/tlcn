@@ -62,6 +62,7 @@ function Tour() {
   const [details, setDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [collapse, setCollapse] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [modal, setModal] = useState(false);
   useEffect(() => {
     const fetcData = async () => {
@@ -115,7 +116,7 @@ function Tour() {
             striped
             responsive
             loading={loading}
-            itemsPerPage={8}
+            itemsPerPage={5}
             itemsPerPageSelect
             hover
             sorter
@@ -187,8 +188,9 @@ function Tour() {
                                 <CCol lg="3">
                                   <h6>{item.name}</h6>
                                   <CImg
-                                    src="https://www.natours.dev/img/tours/tour-3-1.jpg"
+                                    src={`http://${item.images[0]}`}
                                     alt="img"
+                                    alt="Image"
                                     width="250px"
                                     height="200px"
                                   />
@@ -239,7 +241,13 @@ function Tour() {
                                   <hr />
                                   <CRow>
                                     <CCol lg="4">Mô tả tóm tắt:</CCol>
-                                    <CCol lg="8">{item.summary}</CCol>
+                                    <CCol lg="8">
+                                      <div
+                                        dangerouslySetInnerHTML={{
+                                          __html: item.summary,
+                                        }}
+                                      />
+                                    </CCol>
                                   </CRow>
                                 </CCol>
                               </CRow>
@@ -314,7 +322,11 @@ function Tour() {
             }}
           />
         </CCardBody>
-        <TourCreate modal={modal} toggleModal={toggleModal} />
+        <TourCreate
+          modal={modal}
+          toggleModal={toggleModal}
+          setSuccess={setSuccess}
+        />
       </CCard>
     </>
   );

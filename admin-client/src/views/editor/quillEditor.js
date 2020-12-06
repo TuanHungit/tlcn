@@ -2,7 +2,7 @@ import React from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import axios from "../../api/axiosClient";
+import axios from "../../common/axiosClient";
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
 
 const BlockEmbed = Quill.import("blots/block/embed");

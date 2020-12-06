@@ -51,7 +51,7 @@ export const getCheckoutSession = async (
         name: `${tour.name} Tour`,
         description: tour.summary,
         images: [`https://www.natours.dev/img/tours/tour-1-1.jpg`],
-        amount: tour.price,
+        amount: tour.priceAdults,
         currency: 'VND',
         quantity: 1,
       },
