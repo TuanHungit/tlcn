@@ -281,6 +281,15 @@ export default (props) => {
 
                   <ul class='list-li-border-top'>
                     <li class='clearfix'>
+                      <span class='font600'>Phương thức thanh toán:</span>
+                      <span
+                        class='d-block float-sm-right'
+                        style={{ textTransform: 'uppercase' }}
+                      >
+                        {props.location.state.paymentMethod}
+                      </span>
+                    </li>
+                    <li class='clearfix'>
                       <span class='font600'>Phí Tour:</span>
                       <span class='d-block float-sm-right'>
                         {ToPriceForView(props.location.state.total)}

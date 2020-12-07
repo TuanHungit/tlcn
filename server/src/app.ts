@@ -16,7 +16,7 @@ import { webhookCheckout } from './controllers/booking';
 import { bookingRouter } from './routes/booking/booking-route';
 import { tourRouter } from './routes/tour/tour-route';
 import { reviewRouter } from './routes/review/review-route';
-
+import { emailPromotionRouter } from './routes/emailPromotion/emailPromotion-route';
 const app = express();
 
 const options: cors.CorsOptions = {
@@ -47,7 +47,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const baseURL = '/api/v1';
+
 app.use('/uploads', express.static('uploads'));
+app.use(`${baseURL}/email-promotions`, emailPromotionRouter);
 app.use(`${baseURL}/booking`, bookingRouter);
 app.use(baseURL, blogRouter);
 app.use(baseURL, authRouter);

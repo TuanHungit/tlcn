@@ -78,6 +78,7 @@ export default function CheckoutForm(props) {
     const bookingData = {
       ...props.bookingInfo,
       tour: props.tourDetail.id,
+      paymentMethod: 'stripe',
       user: {
         email: props.bookingUserInfo.email,
         name: props.bookingUserInfo.fullname,

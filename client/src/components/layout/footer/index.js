@@ -112,17 +112,19 @@ export default () => {
 
                   <div class='col-12 col-auto'>
                     <div class='col-inner'>
-                      <h5 class='footer-title'>Newsletter &amp; Social</h5>
+                      <h5 class='footer-title'>
+                        Đăng ký nhận khuyến mãi qua email
+                      </h5>
                       <p class='font12'>
-                        Savings her pleased are several started females met.
-                        Short her not among being any.
+                        Đăng ký nhận tin qua email để không bỏ lỡ bất kỳ khuyến
+                        mãi nào từ chúng tôi.
                       </p>
                       <form class='footer-newsletter mt-20'>
                         <div class='input-group'>
                           <input
                             type='email'
                             class='form-control'
-                            placeholder='Email address'
+                            placeholder='Địa chỉ Email'
                           />
                           <div class='input-group-append'>
                             <button class='btn btn-primary' type='button'>
