@@ -36,9 +36,6 @@ export default function CheckoutForm(props) {
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-
-  useEffect(() => {}, []);
-
   const handleSubmit = async (ev) => {
     ev.preventDefault();
 
@@ -78,11 +75,21 @@ export default function CheckoutForm(props) {
   };
 
   const renderSuccess = () => {
+    const bookingData = {
+      ...props.bookingInfo,
+      tour: props.tourDetail.id,
+      user: {
+        email: props.bookingUserInfo.email,
+        name: props.bookingUserInfo.fullname,
+        phone: props.bookingUserInfo.phone,
+      },
+    };
+    props.onCreateBooking(bookingData);
     return (
       <Redirect
         to={{
           pathname: `/tour/Tour-DaNang/booking/success`,
-          state: { ...props.tourDetail },
+          state: { ...props.tourDetail, ...bookingData },
         }}
       />
     );
@@ -120,7 +127,7 @@ export default function CheckoutForm(props) {
                 placeholder='Tên chủ thẻ'
                 autoComplete='cardholder'
                 className='sr-input form-control'
-                style={{ height: '38px' }}
+                style={{ height: '38px', textTransform: 'uppercase' }}
               />
             </div>
           </div>

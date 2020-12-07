@@ -2,7 +2,6 @@ import React from 'react';
 import ToPriceForView from '../../../common/convertPriceForView';
 import ToDateForView from '../../../common/convertDateForView';
 export default (props) => {
-  console.log(props.location.state);
   return (
     <section
       class='page-wrapper page-detail'
@@ -66,7 +65,9 @@ export default (props) => {
               <div class='mb-50'></div>
 
               <div class='text-center'>
-                <p class='lead mb-10'>Xin chào, Mr. Chaiyapatt Putsathit</p>
+                <p class='lead mb-10'>
+                  Xin chào, {props.location.state.user.name}
+                </p>
                 <h3 class='text-primary line-125 mv-10'>
                   Đặt chỗ của bạn đã được xác nhận và hoàn tất
                 </h3>
@@ -154,7 +155,9 @@ export default (props) => {
                             <p class='mt-3 mb-0'>
                               Giá từ{' '}
                               <span class='h6 line-1 text-primary font16'>
-                                {ToPriceForView(props.location.state.price)}
+                                {ToPriceForView(
+                                  props.location.state.priceAdults
+                                )}
                               </span>{' '}
                               <span class='text-muted mr-5'></span>
                             </p>
@@ -165,10 +168,40 @@ export default (props) => {
                   </figure>
 
                   <ul class='list-li-border-top mt-30'>
+                    <h6 style={{ color: '#ff1944' }}>
+                      <i class='fas fa-user' style={{ color: '#ff5454' }}></i>{' '}
+                      Thông tin khách hàng
+                    </h6>
                     <li class='clearfix'>
                       <span class='font600'>Booking ID:</span>
                       <span class='d-block float-sm-right'>#DSH544177</span>
                     </li>
+
+                    <li class='clearfix'>
+                      <span class='font600'>Tên khách hàng:</span>
+                      <span class='d-block float-sm-right'>
+                        {props.location.state.user.name}
+                      </span>
+                    </li>
+                    <li class='clearfix'>
+                      <span class='font600'>Email khách hàng:</span>
+                      <span class='d-block float-sm-right'>
+                        {props.location.state.user.email}
+                      </span>
+                    </li>
+                    <li class='clearfix'>
+                      <span class='font600'>Số điện thoại khách hàng:</span>
+                      <span class='d-block float-sm-right'>
+                        {props.location.state.user.phone}
+                      </span>
+                    </li>
+                    <h6 style={{ color: '#ff1944' }}>
+                      <i
+                        class='fas fa-info-circle'
+                        style={{ color: '#ff5454' }}
+                      ></i>{' '}
+                      Thông tin Tour đã đặt
+                    </h6>
                     <li class='clearfix'>
                       <span class='font600'>Ngày khởi hành:</span>
                       <span class='d-block float-sm-right'>
@@ -179,8 +212,7 @@ export default (props) => {
                     <li class='clearfix'>
                       <span class='font600'>Bắt đầu tại:</span>
                       <span class='d-block float-sm-right'>
-                        {ToDateForView(props.location.state.availableDate[0])}{' '}
-                        từ {props.location.state.startLocation.address}
+                        {props.location.state.startLocation.address}
                       </span>
                     </li>
                     <li class='clearfix'>
@@ -189,23 +221,70 @@ export default (props) => {
                         {props.location.state.country}
                       </span>
                     </li>
-
                     <li class='clearfix'>
-                      <span class='font600'>Số người</span>
-                      <span class='d-block float-sm-right'>2 người</span>
+                      <span class='font600'>Giá người lớn</span>
+                      <span class='d-block float-sm-right'>
+                        {ToPriceForView(props.location.state.priceAdults)}
+                      </span>
                     </li>
+                    {props.location.state.numOfPersonChildren > 0 ? (
+                      <li class='clearfix'>
+                        <span class='font600'>Giá trẻ em</span>
+                        <span class='d-block float-sm-right'>
+                          {ToPriceForView(props.location.state.priceChildren)}
+                        </span>
+                      </li>
+                    ) : null}
+
+                    {props.location.state.numOfPersonBaby > 0 ? (
+                      <li class='clearfix'>
+                        <span class='font600'>Giá em bé</span>
+                        <span class='d-block float-sm-right'>
+                          {ToPriceForView(props.location.state.priceBaby)}
+                        </span>
+                      </li>
+                    ) : null}
+                    <li class='clearfix'>
+                      <span class='font600'>Số người lớn</span>
+                      <span class='d-block float-sm-right'>
+                        {props.location.state.numOfPersonAdults}
+                      </span>
+                    </li>
+                    {props.location.state.numOfPersonChildren > 0 ? (
+                      <li class='clearfix'>
+                        <span class='font600'>Số trẻ em</span>
+                        <span class='d-block float-sm-right'>
+                          {props.location.state.numOfPersonChildren}
+                        </span>
+                      </li>
+                    ) : null}
+
+                    {props.location.state.numOfPersonBaby > 0 ? (
+                      <li class='clearfix'>
+                        <span class='font600'>Số em bé</span>
+                        <span class='d-block float-sm-right'>
+                          {props.location.state.numOfPersonBaby}
+                        </span>
+                      </li>
+                    ) : null}
                   </ul>
 
                   <div class='mb-40'></div>
 
                   <h6 style={{ color: '#ff1944' }}>
+                    <i
+                      class='fas fa-credit-card'
+                      style={{ color: '#ff5454' }}
+                    ></i>{' '}
                     Đặt phòng của bạn đã được thanh toán đầy đủ
                   </h6>
 
                   <ul class='list-li-border-top'>
                     <li class='clearfix'>
                       <span class='font600'>Phí Tour:</span>
-                      <span class='d-block float-sm-right'>$251.98</span>
+                      <span class='d-block float-sm-right'>
+                        {ToPriceForView(props.location.state.total)}
+                      </span>
                     </li>
                     {/* <li class='clearfix'>
                       <span class='font600'>Booking fee + tax:</span>
@@ -219,10 +298,14 @@ export default (props) => {
                       <span class='font600'>Phí khác</span>
                       <span class='d-block float-sm-right'>Free</span>
                     </li>
+                    <li class='clearfix'>
+                      <span class='font600'>Khuyến mãi</span>
+                      <span class='d-block float-sm-right'>0</span>
+                    </li>
                     <li class='clearfix text-uppercase border-double'>
                       <span class='font700'>Tổng cộng</span>
                       <span class='font700 d-block float-sm-right'>
-                        $248.58
+                        {ToPriceForView(props.location.state.total)}
                       </span>
                     </li>
                   </ul>

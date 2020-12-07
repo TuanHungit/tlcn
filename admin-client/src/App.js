@@ -1,5 +1,8 @@
-import React, { Component } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Redirect, Switch, Route, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
+import * as actionCreator from "./store/action";
 import "./scss/style.scss";
 
 const loading = (
@@ -17,41 +20,75 @@ const Register = React.lazy(() => import("./views/pages/register/Register"));
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
-class App extends Component {
-  render() {
-    return (
-      <HashRouter>
-        <React.Suspense fallback={loading}>
-          <Switch>
-            <Route
-              exacts
-              path="/login"
-              name="Login Page"
-              render={(props) => <Login {...props} />}
-            />
-            {/* <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} /> */}
-            <Route
-              exact
-              path="/404"
-              name="Page 404"
-              render={(props) => <Page404 {...props} />}
-            />
-            <Route
-              exact
-              path="/500"
-              name="Page 500"
-              render={(props) => <Page500 {...props} />}
-            />
-            <Route
-              path="/"
-              name="Home"
-              render={(props) => <TheLayout {...props} />}
-            />
-          </Switch>
-        </React.Suspense>
-      </HashRouter>
+function App(props) {
+  useEffect(() => {
+    props.onAuthCheck();
+  }, []);
+
+  let routes = (
+    <Switch>
+      <Route
+        exact
+        path="/404"
+        name="Page 404"
+        render={(props) => <Page404 {...props} />}
+      />
+      <Route
+        exact
+        path="/500"
+        name="Page 500"
+        render={(props) => <Page500 {...props} />}
+      />
+      <Route
+        exacts
+        path="/login"
+        name="Login Page"
+        render={(props) => <Login {...props} />}
+      />
+      {/* <Redirect to="/" /> */}
+    </Switch>
+  );
+  if (props.isAuthencated) {
+    routes = (
+      <Switch>
+        <Route
+          exact
+          path="/404"
+          name="Page 404"
+          render={(props) => <Page404 {...props} />}
+        />
+        <Route
+          exact
+          path="/500"
+          name="Page 500"
+          render={(props) => <Page500 {...props} />}
+        />
+        <Route
+          path="/"
+          name="Home"
+          render={(props) => <TheLayout {...props} />}
+        />
+      </Switch>
     );
   }
+  return (
+    <div>
+      <React.Suspense fallback={loading}>{routes}</React.Suspense>
+    </div>
+  );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthencated: state.auth.token !== null,
+    user: state.auth.user,
+    error: state.auth.error,
+    isLogout: state.auth.isLogout,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuthCheck: () => dispatch(actionCreator.authCheck()),
+  };
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

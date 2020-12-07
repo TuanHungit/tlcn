@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { authSignin } from "../../../api/authApi";
+import { connect } from "react-redux";
+import * as actionCreator from "../../../store/action";
+
 import {
   CButton,
   CCard,
@@ -17,13 +19,14 @@ import {
   CImg,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import store from "./../../../store/index";
 
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = () => {
-    authSignin(email, password);
+    props.onAuthLognin(email, password);
   };
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -124,5 +127,18 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    loadding: state.auth.loadding,
+    error: state.auth.error,
+    isAuthencated: state.auth.token !== null,
+    authRedirectPath: state.auth.authRedirectPath,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuthLognin: (email, password) =>
+      dispatch(actionCreator.authSignin(email, password)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

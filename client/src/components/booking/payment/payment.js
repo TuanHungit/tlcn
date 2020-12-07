@@ -118,6 +118,8 @@ export default (props) => {
                     formIsValid={props.formIsValid}
                     bookingUserInfo={props.bookingUserInfo}
                     tourDetail={props.tourDetail}
+                    onCreateBooking={props.onCreateBooking}
+                    bookingInfo={props.bookingInfo}
                   />
                 </Elements>
               </div>

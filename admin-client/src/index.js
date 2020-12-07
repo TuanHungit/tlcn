@@ -10,14 +10,17 @@ import * as serviceWorker from "./serviceWorker";
 
 import { icons } from "./assets/icons";
 
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store/index.js";
 
 React.icons = icons;
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

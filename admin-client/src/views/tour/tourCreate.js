@@ -26,10 +26,10 @@ import {
   CTooltip,
   CInput,
   CSelect,
+  CAlert,
 } from "@coreui/react";
 
 function TourCreate(props) {
-  const cancelButton = useRef(null);
   const [images, setImages] = useState({});
   const [name, setName] = useState("");
   const [priceAdults, setPriceAdults] = useState(0);
@@ -54,7 +54,7 @@ function TourCreate(props) {
       day: 1,
     },
   ]);
-  console.log(images);
+
   const [startLocation, setStartLocation] = useState({
     coordinates: [0, 0],
     address: "",
@@ -87,10 +87,11 @@ function TourCreate(props) {
           images: [...Object.values(images)],
           country,
         };
-        const tourCreated = await createOnTour(destination, createdData);
-        console.log(tourCreated);
+        await createOnTour(destination, createdData);
+
         props.setSuccess(true);
-        cancelButton.current.click();
+
+        props.toggleModal();
       } catch (err) {
         props.setSuccess(false);
         console.log(err);
@@ -143,13 +144,6 @@ function TourCreate(props) {
                   <CCol lg="8">
                     <CRow>
                       <CCol lg="3">
-                        <input
-                          type="file"
-                          name="myImage"
-                          onChange={(e) => {
-                            console.log(e.target.files[0]);
-                          }}
-                        />
                         Tên Tour {"  "}
                         <CTooltip content="Hello world! A tooltip example">
                           <i class="fas fa-info-circle"></i>
@@ -560,11 +554,7 @@ function TourCreate(props) {
         <CButton color="primary" onClick={onSubmit}>
           Thêm mới
         </CButton>{" "}
-        <CButton
-          color="secondary"
-          onClick={props.toggleModal}
-          ref={cancelButton}
-        >
+        <CButton color="secondary" onClick={props.toggleModal}>
           Bỏ qua
         </CButton>
       </CModalFooter>

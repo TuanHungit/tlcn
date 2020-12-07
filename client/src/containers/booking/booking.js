@@ -7,7 +7,7 @@ import BookingModal from '../../components/booking/bookingModal/bookingModal';
 import Notfound from '../../components/notFound/notFound';
 import Input from '../../components/UI/input/input';
 import Payment from '../../components/booking/payment/payment';
-import BookingSuccess from '../../components/booking/bookingSuccess/bookingSuccess';
+
 class Booking extends Component {
   state = {
     controls: {
@@ -106,9 +106,12 @@ class Booking extends Component {
     updatedControls[inputIdentifier] = updatedControlsElement;
 
     let formIsValid = true;
-    for (let inputIdentifier in updatedControls) {
-      formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+    if (!this.props.user) {
+      for (let inputIdentifier in updatedControls) {
+        formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+      }
     }
+
     this.setState({ controls: updatedControls, formIsValid: formIsValid });
   };
 
@@ -120,6 +123,19 @@ class Booking extends Component {
       startDate: date,
     });
   };
+  valueInput(type, value) {
+    if (this.props.user && (type === 'Họ và tên' || type === 'Địa chỉ Email')) {
+      switch (type) {
+        case 'Địa chỉ Email':
+          return this.props.user.email;
+        case 'Họ và tên':
+          return this.props.user.name;
+      }
+    }
+
+    return value;
+  }
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
@@ -136,7 +152,10 @@ class Booking extends Component {
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             label={formElement.config.elementConfig.placeholder}
-            value={formElement.config.value}
+            value={this.valueInput(
+              formElement.config.elementConfig.placeholder,
+              formElement.config.value
+            )}
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
@@ -146,9 +165,13 @@ class Booking extends Component {
       </div>
     ));
     const bookingUserInfo = {
-      fullname: this.state.controls.fullname.value,
+      fullname: this.props.user
+        ? this.props.user.name
+        : this.state.controls.fullname.value,
       age: this.state.controls.age.value,
-      email: this.state.controls.phone.value,
+      email: this.props.user
+        ? this.props.user.email
+        : this.state.controls.email.value,
       phone: this.state.controls.phone.value,
     };
     const payment = (
@@ -156,6 +179,8 @@ class Booking extends Component {
         formIsValid={this.state.formIsValid}
         bookingUserInfo={bookingUserInfo}
         tourDetail={this.props.tourDetail}
+        onCreateBooking={this.props.onCreateBooking}
+        bookingInfo={this.props.bookingInfo}
       />
     );
 
@@ -197,6 +222,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onSetBooking: (data) => {
       dispatch(actionCreators.setBookingInfo(data));
+    },
+    onCreateBooking: (data) => {
+      dispatch(actionCreators.createBooking(data));
     },
   };
 };

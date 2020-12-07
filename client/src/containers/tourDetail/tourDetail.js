@@ -31,7 +31,10 @@ const TourDetail = (props) => {
         numOfPersonAdults: 1,
         numOfPersonChildren: 0,
         numOfPersonBaby: 0,
-        total: props.tourDetail.price,
+        priceAdults: props.tourDetail.priceAdults,
+        priceChildren: props.tourDetail.priceChildren,
+        priceBaby: props.tourDetail.priceBaby,
+        total: props.tourDetail.priceAdults,
       });
       const tourId = props.tourDetail.id;
       props.onFetchReviewRourList(tourId, 1, 3, [

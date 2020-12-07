@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BookingAside from './bookingAside/bookingAside';
-import Payment from './payment/payment';
+import { Collapse } from 'react-collapse';
 import ToDateForView from '../../common/convertDateForView';
 import './booking.css';
 export default (props) => {
+  const [discount, setDiscount] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -95,10 +96,27 @@ export default (props) => {
                       className='d-flex justify-content-end'
                       style={{ marginTop: '-15px' }}
                     >
-                      <p style={{ color: '#ff5454' }} className='font14'>
+                      <p
+                        style={{ color: '#ff5454' }}
+                        className='font14'
+                        onClick={() => setDiscount(!discount)}
+                      >
                         Sử dụng mã giảm giá
                       </p>
                     </div>
+                    <Collapse isOpened={discount}>
+                      <div
+                        className='d-flex justify-content-center py-3'
+                        style={{ backgroundColor: 'rgba(255,25,68,0.3)' }}
+                      >
+                        <form>
+                          <input />
+                          <button className='btn btn-primary  text-light ml-3'>
+                            Áp dụng
+                          </button>
+                        </form>
+                      </div>
+                    </Collapse>
                   </div>
                   <div class='mb-20'></div>
                   <div class='form-draft-payment'>
@@ -111,7 +129,8 @@ export default (props) => {
                         </span>
                       </h4>
                       <p class='post-heading' className='font14'>
-                        Nếu đã có tài khoản, vui lòng đăng nhập?{' '}
+                        Vui lòng điền đầy đủ thông tin, nếu đã có tài khoản, vui
+                        lòng đăng nhập?{' '}
                         <a
                           href='tour-payment.html#loginFormTabInModal-login'
                           data-toggle='modal'

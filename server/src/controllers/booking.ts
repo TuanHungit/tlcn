@@ -11,18 +11,18 @@ import {
   getAll,
   getOne,
 } from '../services/handlerFactory';
-
+export const createOneBooking = createOne(Booking);
 export const getOneBooking = getOne(Booking);
 export const updateOneBooking = updateOne(Booking);
 export const deleteOneBooking = deleteOne(Booking);
 export const getAllBooking = getAll(Booking);
 
-export const createBookingCheckout = async (session: any) => {
-  const tour = session.client_reference_id;
-  const user = (await User.findOne({ email: session.customer_email }))!.id;
-  const price = session.display_items[0].amount / 100;
-  await Booking.create({ tour, user, price });
-};
+// export const createBookingCheckout = async (session: any) => {
+//   const tour = session.client_reference_id;
+//   const user = (await User.findOne({ email: session.customer_email }))!.id;
+//   const price = session.display_items[0].amount / 100;
+//   await Booking.create({ tour, user, price });
+// };
 export const getCheckoutSession = async (
   req: Request,
   res: Response,
@@ -67,23 +67,23 @@ export const webhookCheckout = (
   res: Response,
   next: NextFunction
 ) => {
-  const signature = req.headers['stripe-signature'];
+  // const signature = req.headers['stripe-signature'];
 
-  let event;
-  try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-  } catch (err) {
-    return res.status(400).send(`Webhook error: ${err.message}`);
-  }
+  // let event;
+  // try {
+  //   event = stripe.webhooks.constructEvent(
+  //     req.body,
+  //     signature,
+  //     process.env.STRIPE_WEBHOOK_SECRET
+  //   );
+  // } catch (err) {
+  //   return res.status(400).send(`Webhook error: ${err.message}`);
+  // }
 
-  if (event.type === 'checkout.session.completed')
-    createBookingCheckout(event.data.object);
+  // if (event.type === 'checkout.session.completed')
+  //   createBookingCheckout(event.data.object);
 
-  res.status(200).json({ received: true });
+  res.status(200).json(); //{ received: true }
 };
 
 export const createPaymentIntent = async (req: Request, res: Response) => {

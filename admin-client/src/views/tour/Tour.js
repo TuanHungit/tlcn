@@ -20,6 +20,7 @@ import {
   CRow,
   CCol,
   CImg,
+  CAlert,
 } from "@coreui/react";
 
 import { getAllTour } from "../../api/tourApi";
@@ -79,7 +80,23 @@ function Tour() {
     };
     fetcData();
   }, []);
+  useEffect(() => {
+    if (success) {
+      const fetcData = async () => {
+        try {
+          const tourList = await getAllTour();
 
+          setTourList(tourList);
+          setLoading(false);
+        } catch (err) {
+          setTourList(null);
+          setLoading(true);
+          console.log(err);
+        }
+      };
+      fetcData();
+    }
+  }, [success]);
   const toggleDetails = (index) => {
     const position = details.indexOf(index);
     let newDetails = details.slice();

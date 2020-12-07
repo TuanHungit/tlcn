@@ -5,7 +5,7 @@ import {
   getOneBooking,
   updateOneBooking,
   deleteOneBooking,
-  createBookingCheckout,
+  createOneBooking,
   createPaymentIntent,
 } from '../../controllers/booking';
 
@@ -18,7 +18,7 @@ const router = express.Router();
 
 router.get('/checkout-session/:tourId', paymentRequires, getCheckoutSession);
 router.post('/create-payment-intent', paymentRequires, createPaymentIntent);
-router.route('/').get(getAllBooking).post(createBookingCheckout);
+router.route('/').get(getAllBooking).post(createOneBooking);
 
 router
   .route('/bookings/:id')
