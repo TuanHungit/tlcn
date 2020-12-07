@@ -47,6 +47,7 @@ const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const Category = React.lazy(() => import("./views/category/Category"));
 const Account = React.lazy(() => import("./views/account/Account"));
 const Tour = React.lazy(() => import("./views/tour/Tour"));
+const Promotion = React.lazy(() => import("./views/promotion/promotion"));
 const Product = React.lazy(() => import("./views/product/Product"));
 const Bill = React.lazy(() => import("./views/bill/Bill"));
 const Shipper = React.lazy(() => import("./views/shipper/Shipper"));
@@ -71,6 +72,7 @@ const routes = [
   { path: "/category", name: "Category", component: Category },
   { path: "/account", name: "Account", component: Account },
   { path: "/tour", name: "Tour", component: Tour },
+  { path: "/promotion", name: "Khuyến mãi", component: Promotion },
   { path: "/product", name: "Product", component: Product },
   { path: "/bill", name: "Bill", component: Bill },
   { path: "/shipper", name: "Shipper", component: Shipper },

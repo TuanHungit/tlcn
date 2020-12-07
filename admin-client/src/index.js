@@ -2,6 +2,8 @@ import "react-app-polyfill/ie11"; // For IE 11 support
 import "react-app-polyfill/stable";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "react-datepicker/dist/react-datepicker.css";
+import "../node_modules/alertifyjs/build/css/alertify.css";
+import "../node_modules/alertifyjs/build/css/themes/semantic.css";
 import "./polyfill";
 import React from "react";
 import ReactDOM from "react-dom";

@@ -21,7 +21,7 @@ const PromotionSchema = new mongoose.Schema(
       type: Date,
       default: new Date(),
     },
-    endtDate: {
+    endDate: {
       type: Date,
       default: new Date(),
     },

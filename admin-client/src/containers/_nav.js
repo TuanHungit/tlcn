@@ -27,6 +27,12 @@ export default [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Khuyến mãi",
+    to: "/promotion",
+    icon: "cil-people",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Category",
     to: "/category",
     icon: "cil-layers",
