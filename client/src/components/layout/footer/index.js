@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
+import alertify from 'alertifyjs';
+import axios from '../../../common/axios-order';
 export default () => {
+  const [email, setEmail] = useState('');
+  const onSubmit = () => {
+    axios
+      .post(`/email-promotions`, { email: email })
+      .then((response) => {
+        setEmail('');
+        alertify.message('Đăng ký email thành công!');
+      })
+      .catch((err) => {
+        alertify.warning(err.response.data.errors[0].message);
+      });
+  };
   return (
     <footer class='footer-wrapper dark scrollspy-footer fixed'>
       <div class='footer-top'>
@@ -119,15 +133,21 @@ export default () => {
                         Đăng ký nhận tin qua email để không bỏ lỡ bất kỳ khuyến
                         mãi nào từ chúng tôi.
                       </p>
-                      <form class='footer-newsletter mt-20'>
+                      <form class='footer-newsletter mt-20' onSubmit={onSubmit}>
                         <div class='input-group'>
                           <input
                             type='email'
                             class='form-control'
                             placeholder='Địa chỉ Email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <div class='input-group-append'>
-                            <button class='btn btn-primary' type='button'>
+                            <button
+                              class='btn btn-primary'
+                              type='button'
+                              onClick={onSubmit}
+                            >
                               <i class='far fa-envelope'></i>
                             </button>
                           </div>

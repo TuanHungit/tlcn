@@ -4,31 +4,39 @@ import { validateRequest } from '../../middlewares/validate-request';
 import { protectRoute, restrictTo } from '../../middlewares';
 
 import {
-  getAllEmailPromotion,
-  updateOneEmailPromotion,
-  createOneEmailPromotion,
-} from '../../controllers/emailPromotion';
+  getAllPromotion,
+  createOnePromotion,
+  updateOnePromotion,
+  deleteOnePromotion,
+  checkCodeValids,
+} from '../../controllers/promotion';
 
 const router = express.Router();
 
 // @Route GET /api/v1/email-promotion/
 // @desc get all email promotion
 // @access Public
-router.get('/', getAllEmailPromotion);
+router.get('/', getAllPromotion);
 
 // @Route POST /api/v1/email-promotion/
 // @desc create one email promotion
 // @access Public
 router.post(
   '/',
-  [body('email').notEmpty().isEmail().withMessage('Email phải hợp lệ!')],
-  validateRequest,
-  createOneEmailPromotion
+
+  protectRoute,
+  restrictTo('admin'),
+  createOnePromotion
 );
 
 // @Route GET /api/v1/email-promotion/
 // @desc update one email promotion
 // @access Public
-router.patch('/:id', updateOneEmailPromotion);
+router.patch('/:id', protectRoute, restrictTo('admin'), updateOnePromotion);
 
-export { router as emailPromotionRouter };
+// @Route GET /api/v1/email-promotion/
+// @desc update one email promotion
+// @access Public
+router.delete('/:id', protectRoute, restrictTo('admin'), deleteOnePromotion);
+
+export { router as promotionRouter };

@@ -17,6 +17,7 @@ import { bookingRouter } from './routes/booking/booking-route';
 import { tourRouter } from './routes/tour/tour-route';
 import { reviewRouter } from './routes/review/review-route';
 import { emailPromotionRouter } from './routes/emailPromotion/emailPromotion-route';
+import { promotionRouter } from './routes/promotion/promotion-route';
 const app = express();
 
 const options: cors.CorsOptions = {
@@ -52,11 +53,12 @@ app.use('/uploads', express.static('uploads'));
 app.use(`${baseURL}/email-promotions`, emailPromotionRouter);
 app.use(`${baseURL}/booking`, bookingRouter);
 app.use(baseURL, blogRouter);
-app.use(baseURL, authRouter);
+
 app.use(`${baseURL}/destinations`, destinationRouter);
 app.use(`${baseURL}/tours`, tourRouter);
 app.use(`${baseURL}/reviews`, reviewRouter);
-
+app.use(`${baseURL}/promotions`, promotionRouter);
+app.use(baseURL, authRouter);
 app.use(baseURL, userRouter);
 
 app.all('*', async () => {
