@@ -6,6 +6,7 @@ import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 const SingleBlog = (props) => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     props.onFetchBlogDetail(props.match.params.slug);
   }, []);
   let blogDetail = props.blogDetailError ? (

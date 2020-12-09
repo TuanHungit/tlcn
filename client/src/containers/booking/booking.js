@@ -7,7 +7,7 @@ import BookingModal from '../../components/booking/bookingModal/bookingModal';
 import Notfound from '../../components/notFound/notFound';
 import Input from '../../components/UI/input/input';
 import Payment from '../../components/booking/payment/payment';
-
+import axios from '../../common/axios-order';
 class Booking extends Component {
   state = {
     controls: {
@@ -70,6 +70,7 @@ class Booking extends Component {
     },
     formIsValid: false,
     isSignUp: true,
+    checkCodeSuccess: false,
   };
 
   checkValidity(value, rules) {
@@ -135,7 +136,21 @@ class Booking extends Component {
 
     return value;
   }
-
+  checkPromotionCode = (code) => {
+    axios
+      .post(`/promotions/check/code`, { code })
+      .then((res) => {
+        console.log(res.data.discount);
+        this.setState({ checkCodeSuccess: true });
+        this.props.onSetBooking({
+          discount: res.data.discount,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+         this.setState({ checkCodeSuccess: false });
+      });
+  };
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
@@ -194,6 +209,8 @@ class Booking extends Component {
               user={this.props.user}
               form={form}
               payment={payment}
+              checkPromotionCode={this.checkPromotionCode}
+              checkCodeSuccess={this.state.checkCodeSuccess}
             />
             <BookingModal
               duration={this.props.tourDetail.duration}

@@ -19,6 +19,8 @@ import SingleBlog from './containers/singleBlog/singleBlog';
 import ScrollToTop from './components/UI/scrollTop/scrollTop';
 import BlogEditor from './containers/blogEditor/blogEditer';
 import BlogGrid from './containers/blogGrid/blogGrid';
+import Promotion from './containers/promotion/promotion';
+import PromotionDetail from './containers/promotionDetail/promotionDetail';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -34,6 +36,8 @@ function App(props) {
       <Route path='/blogs/:slug' component={SingleBlog} />
       <Route path='/blogs-editor' exact component={BlogEditor} />
       <Route path='/blogs' exact component={BlogGrid} />
+      <Route path='/promotions' exact component={Promotion} />
+      <Route path='/promotions/:slug' exact component={PromotionDetail} />
       <Route
         path='/tour/:slug/booking/success'
         exact
@@ -54,6 +58,8 @@ function App(props) {
         <Route path='/blogs/:slug' exact component={SingleBlog} />
         <Route path='/blogs-editor' exact component={BlogEditor} />
         <Route path='/blogs' exact component={BlogGrid} />
+        <Route path='/promotions' exact component={Promotion} />
+        <Route path='/promotions/:slug' exact component={PromotionDetail} />
         <Route
           path='/tour/:slug/booking/success'
           exact

@@ -49,6 +49,9 @@ const Account = React.lazy(() => import("./views/account/Account"));
 const Tour = React.lazy(() => import("./views/tour/Tour"));
 const Promotion = React.lazy(() => import("./views/promotion/promotion"));
 const Product = React.lazy(() => import("./views/product/Product"));
+const EmailPromotion = React.lazy(() =>
+  import("./views/emailPromotion/emailPromotion")
+);
 const Bill = React.lazy(() => import("./views/bill/Bill"));
 const Shipper = React.lazy(() => import("./views/shipper/Shipper"));
 const CoreUIIcons = React.lazy(() =>
@@ -73,6 +76,12 @@ const routes = [
   { path: "/account", name: "Account", component: Account },
   { path: "/tour", name: "Tour", component: Tour },
   { path: "/promotion", name: "Khuyến mãi", component: Promotion },
+  {
+    path: "/email-promotion",
+    name: "Email đăng ký khuyến mãi",
+    component: EmailPromotion,
+  },
+
   { path: "/product", name: "Product", component: Product },
   { path: "/bill", name: "Bill", component: Bill },
   { path: "/shipper", name: "Shipper", component: Shipper },

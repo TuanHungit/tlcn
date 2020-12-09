@@ -59,7 +59,7 @@ export default (props) => {
                 </small>
               </h4>
 
-              <ul class='border-top mt-20 pt-15'>
+              <ul class='border-top mt-20 py-15'>
                 <li class='clearfix'>
                   {ToMoneyForView(props.bookingInfo.total, ' đ')} x{' '}
                   {props.bookingInfo.numOfPersonAdults} người lớn{' '}
@@ -70,6 +70,19 @@ export default (props) => {
                     ? `x ${props.bookingInfo.numOfPersonBaby} em bé`
                     : null}
                 </li>
+                {props.bookingInfo.discount ? (
+                  <li class='clearfix'>
+                    <div class='border-top mt-1 py-15'>
+                      <span>Giảm giá: </span>
+                      <span
+                        class='float-right text-dark'
+                        style={{ marginTop: '3px' }}
+                      >
+                        {ToMoneyForView(props.bookingInfo.discount, ' đ')}
+                      </span>
+                    </div>
+                  </li>
+                ) : null}
 
                 <li class='clearfix border-top font700'>
                   <div class='border-top mt-1'>

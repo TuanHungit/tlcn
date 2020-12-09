@@ -6,13 +6,13 @@ const EmailPromotionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    sendedPromotion: {
-      type: Boolean,
-      default: false,
-    },
     createdAt: {
       type: Date,
       default: new Date(),
+    },
+    status: {
+      type: Boolean,
+      default: true,
     },
   },
   {

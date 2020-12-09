@@ -118,6 +118,9 @@ export default (props) => {
                           </ul>
                         </li>
                         <li>
+                          <Link to='/promotions'>Tin ưu đãi</Link>
+                        </li>
+                        <li>
                           <a href='contact-us.html'>Về chúng tôi</a>
                         </li>
                         <li>

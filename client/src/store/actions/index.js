@@ -17,3 +17,5 @@ export { fetchBlog, fetchBlogDetail } from './blog';
 export { fetchDestination } from './destination';
 
 export { setBookingInfo, createBooking } from './booking';
+
+export { fetchPromotionList, fetchPromotionDetail } from './promotion';

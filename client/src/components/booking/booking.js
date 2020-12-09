@@ -5,6 +5,8 @@ import ToDateForView from '../../common/convertDateForView';
 import './booking.css';
 export default (props) => {
   const [discount, setDiscount] = useState(false);
+  const [code, setCode] = useState('');
+  const [click, setClick] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -99,22 +101,47 @@ export default (props) => {
                       <p
                         style={{ color: '#ff5454' }}
                         className='font14'
-                        onClick={() => setDiscount(!discount)}
+                        onClick={() => {
+                          setDiscount(!discount);
+                          setClick(false);
+                        }}
                       >
                         Sử dụng mã giảm giá
                       </p>
                     </div>
                     <Collapse isOpened={discount}>
                       <div
-                        className='d-flex justify-content-center py-3'
+                        className='d-flex align-items-center flex-column py-3'
                         style={{ backgroundColor: 'rgba(255,25,68,0.3)' }}
                       >
-                        <form>
-                          <input />
-                          <button className='btn btn-primary  text-light ml-3'>
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            props.checkPromotionCode(code);
+                            setClick(true);
+                          }}
+                        >
+                          <input
+                            onChange={(e) => setCode(e.target.value)}
+                            value={code}
+                            required
+                          />
+                          <button
+                            className='btn btn-primary  text-light ml-3'
+                            type='submit'
+                          >
                             Áp dụng
                           </button>
                         </form>
+                        <div className='pt-1'>
+                          {click ? (
+                            props.checkCodeSuccess ? (
+                              <p>Mã khuyến mãi hợp lệ</p>
+                            ) : (
+                              <p>Mã khuyến mãi không hợp lệ</p>
+                            )
+                          ) : null}
+                        </div>
                       </div>
                     </Collapse>
                   </div>

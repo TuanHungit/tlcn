@@ -1,10 +1,16 @@
 import mongoose from 'mongoose';
-
+import slugify from 'slugify';
+import { IPromotionDoc } from '../interfaces/promotion';
 const PromotionSchema = new mongoose.Schema(
   {
     title: {
       type: String,
       required: true,
+    },
+    imageCovert: {
+      type: String,
+      default:
+        'https://staticproxy.mytourcdn.com/480x360,q90/resources/pictures/news/ems1606710467.jpg',
     },
     code: {
       type: String,
@@ -25,6 +31,9 @@ const PromotionSchema = new mongoose.Schema(
       type: Date,
       default: new Date(),
     },
+    slug: {
+      type: String,
+    },
   },
   {
     toJSON: {
@@ -36,6 +45,10 @@ const PromotionSchema = new mongoose.Schema(
     },
   }
 );
+PromotionSchema.pre<IPromotionDoc>('save', function (next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
+});
 
 const Promotion = mongoose.model('Promotion', PromotionSchema);
 

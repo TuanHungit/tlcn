@@ -7,6 +7,7 @@ import { destinationReducer } from './reducers/destination';
 import { reviewReducer } from './reducers/review';
 import { blogReducer } from './reducers/blog';
 import { bookingReducer } from './reducers/booking';
+import { promotionReducer } from './reducers/promotion';
 const rootReducer = combineReducers({
   auth: authReducer,
   tour: tourReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   review: reviewReducer,
   blog: blogReducer,
   booking: bookingReducer,
+  promotion: promotionReducer,
 });
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
