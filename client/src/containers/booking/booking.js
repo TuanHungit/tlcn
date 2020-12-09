@@ -144,11 +144,12 @@ class Booking extends Component {
         this.setState({ checkCodeSuccess: true });
         this.props.onSetBooking({
           discount: res.data.discount,
+          finalTotal: this.props.bookingInfo.total - res.data.discount,
         });
       })
       .catch((err) => {
         console.log(err);
-         this.setState({ checkCodeSuccess: false });
+        this.setState({ checkCodeSuccess: false });
       });
   };
   render() {

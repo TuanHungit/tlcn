@@ -61,18 +61,58 @@ export default (props) => {
 
               <ul class='border-top mt-20 py-15'>
                 <li class='clearfix'>
-                  {ToMoneyForView(props.bookingInfo.total, ' đ')} x{' '}
-                  {props.bookingInfo.numOfPersonAdults} người lớn{' '}
-                  {props.bookingInfo.numOfPersonChildren > 0
-                    ? `x ${props.bookingInfo.numOfPersonChildren} trẻ em`
-                    : null}{' '}
-                  {props.bookingInfo.numOfPersonBaby > 0
-                    ? `x ${props.bookingInfo.numOfPersonBaby} em bé`
-                    : null}
+                  <span>Giá người lớn: </span>
+                  <span
+                    class='float-right text-dark text-primary  font16'
+                    style={{ marginTop: '3px' }}
+                  >
+                    {ToMoneyForView(props.bookingInfo.priceAdults, ' đ')} x{' '}
+                    {props.bookingInfo.numOfPersonAdults} người lớn{' '}
+                  </span>
+                </li>
+
+                {props.bookingInfo.numOfPersonChildren > 0 ? (
+                  <li class='clearfix'>
+                    <span>Giá trẻ em: </span>
+                    <span
+                      class='float-right text-dark text-primary  font16'
+                      style={{ marginTop: '3px' }}
+                    >
+                      {`${ToMoneyForView(
+                        props.bookingInfo.priceChildren,
+                        ' đ'
+                      )}x ${props.bookingInfo.numOfPersonChildren} em bé`}
+                    </span>
+                  </li>
+                ) : null}
+                {props.bookingInfo.numOfPersonBaby > 0 ? (
+                  <li class='clearfix'>
+                    <span>Giá em bé: </span>
+                    <span
+                      class='float-right text-dark text-primary  font16'
+                      style={{ marginTop: '3px' }}
+                    >
+                      {`${ToMoneyForView(props.bookingInfo.priceBaby, ' đ')}x ${
+                        props.bookingInfo.numOfPersonBaby
+                      } em bé`}
+                    </span>
+                  </li>
+                ) : null}
+
+                <li class='clearfix'>
+                  <div class='border-top mt-1 py-15'>
+                    <span>Thành tiền: </span>
+                    <span
+                      class='float-right text-dark text-primary font16'
+                      style={{ marginTop: '3px' }}
+                    >
+                      {ToMoneyForView(props.bookingInfo.total, ' đ')}
+                    </span>
+                  </div>
                 </li>
                 {props.bookingInfo.discount ? (
                   <li class='clearfix'>
-                    <div class='border-top mt-1 py-15'>
+                    <div class='border-top py-15'>
                       <span>Giảm giá: </span>
                       <span
                         class='float-right text-dark'
@@ -88,10 +128,12 @@ export default (props) => {
                   <div class='border-top mt-1'>
                     <span>Tổng cộng</span>
                     <span
-                      class='float-right text-dark h6 text-primary font16'
+                      class='float-right text-dark h6 text-primary font20'
                       style={{ marginTop: '3px' }}
                     >
-                      {ToMoneyForView(props.bookingInfo.total, ' đ')}
+                      {props.bookingInfo.discount
+                        ? ToMoneyForView(props.bookingInfo.finalTotal, ' đ')
+                        : ToMoneyForView(props.bookingInfo.total, ' đ')}
                     </span>
                   </div>
                 </li>

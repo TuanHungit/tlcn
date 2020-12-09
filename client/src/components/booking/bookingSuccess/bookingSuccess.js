@@ -305,16 +305,27 @@ export default (props) => {
                     </li>  */}
                     <li class='clearfix'>
                       <span class='font600'>Phí khác</span>
-                      <span class='d-block float-sm-right'>Free</span>
+                      <span class='d-block float-sm-right'>Không</span>
                     </li>
                     <li class='clearfix'>
                       <span class='font600'>Khuyến mãi</span>
-                      <span class='d-block float-sm-right'>0</span>
+                      <span class='d-block float-sm-right'>
+                        {' '}
+                        {ToPriceForView(
+                          props.location.state.discount
+                            ? props.location.state.discount
+                            : 0
+                        )}
+                      </span>
                     </li>
                     <li class='clearfix text-uppercase border-double'>
                       <span class='font700'>Tổng cộng</span>
-                      <span class='font700 d-block float-sm-right'>
-                        {ToPriceForView(props.location.state.total)}
+                      <span class='font700 d-block float-sm-right text-primary'>
+                        {ToPriceForView(
+                          props.location.state.discount
+                            ? props.location.state.finalTotal
+                            : props.location.state.total
+                        )}
                       </span>
                     </li>
                   </ul>

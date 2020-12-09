@@ -62,6 +62,10 @@ const bookingSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    finalTotal: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     toJSON: {
