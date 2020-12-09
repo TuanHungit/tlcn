@@ -9,13 +9,14 @@ import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
-import LandingPage from './containers/landingPage/LandingPage';
+import LandingPage from './containers/landingPage/landingPage';
 import Logout from './containers/auth/signout/signout';
 import Profile from './containers/dashboard/dashboard';
 import ResultSearch from './components/search/ResultSearch';
 import Booking from './containers/booking/booking';
 import BookingSuccess from './components/booking/bookingSuccess/bookingSuccess';
 import ScrollToTop from './components/UI/scrollTop/scrollTop';
+import Form from './components/form/form';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -33,6 +34,7 @@ function App(props) {
         component={BookingSuccess}
       />
       <Route path='/search' component={ResultSearch} />
+      <Route path='/survey' component={Form} />
       <Redirect to='/' />
     </Switch>
   );
@@ -61,6 +63,7 @@ function App(props) {
     <div>
       <Header isAuthencated={props.isAuthencated} user={user} />
       {routes}
+      <Form/>
       <Register />
       <LoginModal />
       <ScrollToTop />

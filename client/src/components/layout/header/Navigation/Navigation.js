@@ -27,6 +27,17 @@ const navigationItems = (props) => (
             Đăng nhập
           </a>
         </li>
+        <li className='d-none d-sm-block'>
+          <a
+            href='tour-detail-02.html#loginFormTabInModal-survey'
+            data-toggle='modal'
+            data-target='#surveyFormTabInModal'
+            data-backdrop='static'
+            data-keyboard='false'
+          >
+          Khảo sát
+          </a>
+        </li>
         <li className='d-block d-sm-block'>
           <a
             href='tour-detail-02.html#loginFormTabInModal-register'

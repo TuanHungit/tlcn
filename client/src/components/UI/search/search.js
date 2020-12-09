@@ -49,7 +49,7 @@ class Search extends Component {
                                   <option>Tất cả</option>
                                   {/* {Object.values(this.props.tourList).map(
                                     (el) => (
-                                      <option key={el.id}>{el.country}</option>
+                                      <option key={el.id}>{el.name}</option>
                                     )
                                   )} */}
                                   <option>Tiền Giang</option>
@@ -95,6 +95,7 @@ class Search extends Component {
                             <div className='col-inner'>
                               <div className='form-group'>
                                 <label>Thời gian</label>
+                                
                                 <input
                                   type='text'
                                   className=' form-control form-control-sm form-readonly-control air-datepicker'
@@ -117,7 +118,7 @@ class Search extends Component {
                       <div className='col-inner'>
                         <a
                           type='submit'
-                          href='/'
+                          href='/search'
                           className='btn btn-primary btn-block '
                           style={{ height: '75px' }}
                         >
