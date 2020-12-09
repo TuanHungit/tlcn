@@ -9,7 +9,6 @@ import BestTour from '../../components/tour/bestTour/BestTour';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Intro from '../../components/intro/intro';
-import ResultSearch from '../../components/search/ResultSearch';
 
 class LandingPage extends Component {
   componentDidMount() {

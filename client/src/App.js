@@ -21,6 +21,7 @@ import BlogEditor from './containers/blogEditor/blogEditer';
 import BlogGrid from './containers/blogGrid/blogGrid';
 import Promotion from './containers/promotion/promotion';
 import PromotionDetail from './containers/promotionDetail/promotionDetail';
+import Form from './components/form/form';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -44,6 +45,7 @@ function App(props) {
         component={BookingSuccess}
       />
       <Route path='/search' component={ResultSearch} />
+      <Route path='/survey' component={Form} />
       <Redirect to='/' />
     </Switch>
   );
@@ -77,6 +79,7 @@ function App(props) {
     <div>
       <Header isAuthencated={props.isAuthencated} user={user} />
       {routes}
+      <Form />
       <Register />
       <LoginModal />
       <ScrollToTop />
