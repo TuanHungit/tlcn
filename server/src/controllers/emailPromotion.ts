@@ -16,6 +16,14 @@ export const createOneEmailPromotion = async (
   if (existingEmail) {
     throw new BadRequestError('Email đã được đăng ký!');
   }
+
   const doc = await EmailPromotion.create(req.body);
   res.status(201).json(doc);
+};
+
+export const getEmailArray = async () => {
+  const emailJSON = await EmailPromotion.find({ status: true });
+  const emailList: Array<String> = [];
+  emailJSON.forEach((el: any) => emailList.push(el.email));
+  return emailList;
 };

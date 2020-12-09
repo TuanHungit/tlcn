@@ -1,6 +1,7 @@
 import { Promotion } from '../models/promotion';
 import { Request, Response, NextFunction } from 'express';
 
+import { getEmailArray } from './emailPromotion';
 import { Email } from '../services/email';
 import {
   createOne,
@@ -22,12 +23,15 @@ export const createOnePromotion = async (
   next: NextFunction
 ) => {
   const doc: any = await Promotion.create(req.body);
-  new Email().sendPromotions({
-    src: doc.imageCovert,
-    title: doc.title,
-    discount: doc.discount,
-    link: 'http://localhost:3000/promotions',
-  });
+  new Email().sendPromotions(
+    {
+      src: doc.imageCovert,
+      title: doc.title,
+      discount: doc.discount,
+      link: 'http://localhost:3000/promotions',
+    },
+    await getEmailArray()
+  );
   res.status(201).send(doc);
 };
 export const checkCodeValids = async (

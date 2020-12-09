@@ -71,11 +71,11 @@ export class Email {
     await this.send('Authencation', subject);
   }
 
-  sendPromotions = async (data: any) => {
-    const emailArr = ['hung1444199@gmail.com', 'tuanhungit14@gmail.com'];
+  sendPromotions = async (data: any, emailArr: any) => {
+    console.log(emailArr);
     let emailPromiseArray = [];
     const renderFile = await ejs.renderFile(
-      path.join(__dirname, './template/promotion.hbs'),
+      path.join(__dirname, './template/promotion.ejs'),
       {
         link: data.url,
         src: data.src,
