@@ -33,6 +33,7 @@ export default [
   },
   {
     _tag: "CSidebarNavItem",
+<<<<<<< HEAD
     name: "Email đăng ký khuyến mãi",
     to: "/email-promotion",
     icon: "cil-people",
@@ -41,6 +42,10 @@ export default [
     _tag: "CSidebarNavItem",
     name: "Category",
     to: "/category",
+=======
+    name: "Điểm đến",
+    to: "/destination",
+>>>>>>> Tuyen
     icon: "cil-layers",
   },
   {
