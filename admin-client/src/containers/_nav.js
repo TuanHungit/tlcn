@@ -33,8 +33,8 @@ export default [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Category",
-    to: "/category",
+    name: "Điểm đến",
+    to: "/destination",
     icon: "cil-layers",
   },
   {
