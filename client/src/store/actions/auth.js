@@ -104,6 +104,35 @@ export const authSignin = (email, password) => {
   };
 };
 
+export const authSigninGoogle = (tokenId) => {
+  return (dispatch) => {
+    let url = '/users/signin-google';
+
+    axios
+      .post(`${url}`, { tokenId: tokenId })
+      .then((response) => {
+        const token = response.data.token;
+        const user = response.data.data.user;
+
+        const expirationDate = response.data.expirationDate;
+
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', token);
+        localStorage.setItem('expirationDate', expirationDate);
+        dispatch(authSuccess(token, user));
+
+        dispatch(authLogout(expirationDate - new Date().getTime()));
+      })
+      .catch((error) => {
+        const errors = error.response.data.errors;
+
+        if (errors) {
+          dispatch(authFailed(errors[0].message));
+        }
+      });
+  };
+};
+
 export const setAuthRedirectPath = (path) => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT_PATH,

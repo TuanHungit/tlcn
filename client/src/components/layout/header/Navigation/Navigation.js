@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Avatar from '../../../UI/avatar/avatar';
 const navigationItems = (props) => (
   <div>
     {!props.isAuthencated ? (
@@ -35,7 +35,7 @@ const navigationItems = (props) => (
             data-backdrop='static'
             data-keyboard='false'
           >
-          Khảo sát
+            Khảo sát
           </a>
         </li>
         <li className='d-block d-sm-block'>
@@ -67,8 +67,9 @@ const navigationItems = (props) => (
               data-target='#loginFormTabInModal'
               data-backdrop='static'
               data-keyboard='false'
+              className='d-flex'
             >
-              <i class='fas fa-user-circle'></i> {props.user.toUpperCase()}
+              <Avatar image={props.photo} /> {props.user.toUpperCase()}
             </a>
           </ul>
         </li>

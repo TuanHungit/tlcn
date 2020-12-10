@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import * as actionCreator from '../../../store/actions';
-
-import { connect } from 'react-redux';
-import Spinner from '../../../components/UI/Spinner/Spinner';
 import alertify from 'alertifyjs';
+import { connect } from 'react-redux';
+import { GoogleLogin } from 'react-google-login';
+
+import * as actionCreator from '../../../store/actions';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/input/input';
+import axios from '../../../common/axios-order';
 class Signin extends Component {
   state = {
     controls: {
@@ -101,7 +102,9 @@ class Signin extends Component {
       alertify.success('Login susscess!');
     }
   }
-
+  responseGoogle = (response) => {
+    this.props.onAuthLogninGoogle(response.tokenId);
+  };
   render() {
     const status = this.props.loadding ? <Spinner /> : null;
     const errors = this.props.error ? <p>{this.props.error}</p> : null;
@@ -228,11 +231,18 @@ class Signin extends Component {
                               <button className='btn btn-login-with btn-facebook btn-block'>
                                 <i className='fab fa-facebook'></i> facebook
                               </button>
-                              <button className='btn btn-login-with btn-google btn-block'>
-                                <i className='fab fa-google'></i> google
-                              </button>
+
+                              <GoogleLogin
+                                clientId='75939233417-t7f3tfifirqoprmu2b270ul95hplptqs.apps.googleusercontent.com'
+                                buttonText='Google'
+                                className='btn btn-login-with btn-google btn-block'
+                                onSuccess={this.responseGoogle}
+                                onFailure={this.responseGoogle}
+                                cookiePolicy={'single_host_origin'}
+                              />
+
                               <button className='btn btn-login-with btn-twitter btn-block'>
-                                <i className='fab fa-twitter'></i> google
+                                <i className='fab fa-twitter'></i> Twitter
                               </button>
                             </div>
                           </div>
@@ -289,6 +299,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAuthLognin: (email, password) =>
       dispatch(actionCreator.authSignin(email, password)),
+    onAuthLogninGoogle: (tokenId) =>
+      dispatch(actionCreator.authSigninGoogle(tokenId)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);

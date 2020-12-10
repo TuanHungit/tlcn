@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-
+import { OAuth2Client } from 'google-auth-library';
 import { BadRequestError } from './../errors/bad-request-error';
 import { User } from '../models/user';
 import { Email } from '../services/email';
@@ -17,6 +17,9 @@ declare global {
   }
 }
 
+const client = new OAuth2Client(
+  '75939233417-t7f3tfifirqoprmu2b270ul95hplptqs.apps.googleusercontent.com'
+);
 const signToken = (user: any) => {
   return jwt.sign(
     {
@@ -84,4 +87,37 @@ export const logout = (req: Request, res: Response) => {
     httpOnly: true,
   });
   res.status(200).json({});
+};
+
+export const signinWithGoogle = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { tokenId } = req.body;
+  client
+    .verifyIdToken({
+      idToken: tokenId,
+      audience:
+        '75939233417-t7f3tfifirqoprmu2b270ul95hplptqs.apps.googleusercontent.com',
+    })
+    .then((response) => {
+      const {
+        email_verified,
+        email,
+        name,
+        picture,
+      } = response.getPayload() as any;
+      if (email_verified) {
+        const user = {
+          photo: picture,
+          name,
+          email: email,
+        };
+        createSendToken(user, req, res);
+      }
+    })
+    .catch((err) => {
+      res.status(401).send('');
+    });
 };

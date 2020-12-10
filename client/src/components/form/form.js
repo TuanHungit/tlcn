@@ -1,22 +1,23 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import * as actionCreator from "../../store/actions";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import * as actionCreator from '../../store/actions';
 
-import { connect } from "react-redux";
-import Spinner from "../../components/UI/Spinner/Spinner";
+import { connect } from 'react-redux';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
-import alertify from "alertifyjs";
-import Input from "../../components/UI/input/input";
-import propTypes from "prop-types";
-import * as data from "./index";
+import alertify from 'alertifyjs';
+import Input from '../../components/UI/input/input';
+import propTypes from 'prop-types';
+import * as data from './index';
 class Survey extends Component {
   state = {
     place: '',
     email: '',
-    age:'',
+    age: '',
     time: '',
     month: '',
-    price:'',
+    price: '',
+    locations: '',
     formErrors: {
       email: '',
       age: '',
@@ -24,6 +25,7 @@ class Survey extends Component {
       time: '',
       month: '',
       price: '',
+      locations: '',
     },
     emailValid: false,
     placeValid: false,
@@ -41,7 +43,7 @@ class Survey extends Component {
     });
   };
 
-  validateField=(fieldName, value)=> {
+  validateField = (fieldName, value) => {
     let fieldValidationErrors = this.state.formErrors;
     let emailValid = this.state.emailValid;
     let placeValid = this.state.placeValid;
@@ -51,21 +53,21 @@ class Survey extends Component {
     let priceValid = this.state.priceValid;
     switch (fieldName) {
       case 'email':
-       emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         fieldValidationErrors.email = emailValid ? '' : 'is invalid';
         break;
       case 'place':
-        placeValid = value.length > 0 ;
+        placeValid = value.length > 0;
         fieldValidationErrors.place = placeValid ? '' : 'is not invalid';
         break;
       case 'age':
         ageValid = value.length > 0;
-        fieldValidationErrors.age = ageValid ? '' :  'is not invalid';
+        fieldValidationErrors.age = ageValid ? '' : 'is not invalid';
         break;
       case 'month':
         monthValid = value.length > 0;
         fieldValidationErrors.month = monthValid ? '' : 'is not invalid';
-        break;    
+        break;
       case 'price':
         priceValid = value.length > 0;
         fieldValidationErrors.price = priceValid ? '' : 'is not invalid';
@@ -85,15 +87,18 @@ class Survey extends Component {
       },
       this.validateForm
     );
-  }
-  validateForm =() =>{
-    this.setState({formValid: this.state.emailValid && this.state.placeValid && 
-      this.state.ageValid &&
-      this.state.timeValid &&
-      this.state.monthValid &&
-      this.state.priceValid 
+  };
+  validateForm = () => {
+    this.setState({
+      formValid:
+        this.state.emailValid &&
+        this.state.placeValid &&
+        this.state.ageValid &&
+        this.state.timeValid &&
+        this.state.monthValid &&
+        this.state.priceValid,
     });
-  }
+  };
 
   handleClick = (event) => {
     event.preventDefault();
@@ -101,21 +106,21 @@ class Survey extends Component {
 
     // if (!validationForms) {
     //   console.log("Email không đúng định dạng.");
-    
+
     // } else {
     //   //   this.props.onAuthRegister(
     //   //     this.state.controls.name.value,
     //   //     this.state.controls.email.value
     //   //   );
     //   // }
-      console.log(
-        this.state.email,
-        this.state.place,
-        this.state.age,
-        this.state.time,
-        this.state.price,
-        this.state.month
-      );
+    console.log(
+      this.state.email,
+      this.state.place,
+      this.state.age,
+      this.state.time,
+      this.state.price,
+      this.state.month
+    );
     // }
   };
 
@@ -131,87 +136,89 @@ class Survey extends Component {
     return (
       <div>
         <div
-          className="modal fade modal-with-tabs form-login-modal"
-          id="surveyFormTabInModal"
-          aria-labelledby="modalWIthTabsLabel"
-          tabindex="0"
-          role="dialog"
-          aria-hidden="true"
+          className='modal fade modal-with-tabs form-login-modal'
+          id='surveyFormTabInModal'
+          aria-labelledby='modalWIthTabsLabel'
+          tabindex='0'
+          role='dialog'
+          aria-hidden='true'
         >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content shadow-lg">
-              <nav className="d-none">
-                <ul className="nav external-link-navs clearfix">
+          <div className='modal-dialog' role='document'>
+            <div className='modal-content shadow-lg'>
+              <nav className='d-none'>
+                <ul className='nav external-link-navs clearfix'>
                   <li>
                     <a
-                      data-toggle="tab"
-                      href="tour-detail-02.html#loginFormTabInModal-register"
+                      data-toggle='tab'
+                      href='tour-detail-02.html#loginFormTabInModal-register'
                     >
-                      Register{" "}
+                      Register{' '}
                     </a>
                   </li>
                   <li>
                     <a
-                      data-toggle="tab"
-                      href="tour-detail-02.html#loginFormTabInModal-login"
+                      data-toggle='tab'
+                      href='tour-detail-02.html#loginFormTabInModal-login'
                     >
                       Sign-in
                     </a>
                   </li>
                   <li>
                     <a
-                      className="active"
-                      data-toggle="tab"
-                      href="tour-detail-02.html#loginFormTabInModal-survey"
+                      className='active'
+                      data-toggle='tab'
+                      href='tour-detail-02.html#loginFormTabInModal-survey'
                     >
-                      Surey{" "}
+                      Surey{' '}
                     </a>
                   </li>
                 </ul>
               </nav>
-              <div className="tab-content">
+              <div className='tab-content'>
                 <div
-                  role="tabpanel"
-                  className="tab-pane active"
-                  id="surveyFormTabInModal"
+                  role='tabpanel'
+                  className='tab-pane active'
+                  id='surveyFormTabInModal'
                 >
-                  <div className="form-login">
-                    <div className="form-header">
-                      <h4>Welcome Back to Survey</h4>
-                      <p>
-                        Khảo sát của bạn giúp cho dịch vụ của chúng tôi tốt hơn
+                  <div className='form-login'>
+                    <div className='form-header'>
+                      <h4>Khảo sát khách hàng</h4>
+                      <p className='font13'>
+                        Khảo sát của bạn giúp cho dịch vụ của chúng tôi tốt hơn.
+                        Xin quý khách dành chút thời gian của mình để hoàn thành
+                        phiếu đánh giá và nhận xét dịch vụ này.
                       </p>
                     </div>
 
-                    <div className="form-body">
+                    <div className='form-body'>
                       <form formErrors={this.state.formErrors}>
-                        <div className="d-flex flex-column flex-lg-row align-items-stretch">
-                          <div className="flex-md-grow-1 bg-primary-light">
-                            <div className="form-inner">
+                        <div className='d-flex flex-column flex-lg-row align-items-stretch'>
+                          <div className='flex-md-grow-1 bg-primary-light'>
+                            <div className='form-inner'>
                               {/* {form} */}
-                              <div className="form-group ">
-                                <label className={"Label"}> 1. Email</label>
+                              <div className='form-group '>
+                                <label className={'Label'}> 1. Email</label>
                                 <input
-                                  className={"Input"}
-                                  type="email"
-                                  placeholder="Email"
+                                  className={'Input'}
+                                  type='email'
+                                  placeholder='Email'
                                   required
-                                  name="email"
+                                  name='email'
                                   checked={this.validationForm}
                                   onChange={this.handleInput}
                                 />
                               </div>
-                              <div className="form-group ">
-                                <label className={"Label"}>
-                                  {" "}
+                              <div className='form-group '>
+                                <label className={'Label'}>
+                                  {' '}
                                   2. Độ tuổi của bạn
                                 </label>
                                 {data.age.map((el, index) => (
-                                  <div className="custom-control custom-radio border ">
+                                  <div className='custom-control custom-radio  '>
                                     <input
                                       key={el.id}
                                       type={el.type}
-                                      className="custom-control-input"
+                                      className='custom-control-input'
                                       id={el.id}
                                       value={el.value}
                                       name={el.name}
@@ -219,7 +226,7 @@ class Survey extends Component {
                                       onChange={this.handleInput}
                                     />
                                     <label
-                                      className="custom-control-label"
+                                      className='custom-control-label'
                                       for={el.id}
                                     >
                                       {el.value}
@@ -227,37 +234,37 @@ class Survey extends Component {
                                   </div>
                                 ))}
                               </div>
-                              <div className="form-group ">
-                                <label className={"Label"}>
-                                  {" "}
+                              <div className='form-group '>
+                                <label className={'Label'}>
+                                  {' '}
                                   3. Địa điểm du lịch bạn thích nhất
                                 </label>
                                 <input
-                                  className={"Input"}
-                                  type="text"
-                                  placeholder="Địa điểm du lịch"
+                                  className={'Input'}
+                                  type='text'
+                                  placeholder='Địa điểm du lịch'
                                   required
-                                  name="place"
+                                  name='place'
                                   checked={this.validationForm1}
                                   onChange={this.handleInput}
                                 />
                               </div>
-                              <div className="form-group">
-                                <label className={"Label"}>
+                              <div className='form-group'>
+                                <label className={'Label'}>
                                   4. Thời gian ở lại
                                 </label>
                                 {data.time.map((el, index) => (
-                                  <div key={el.id} className="form-check">
+                                  <div key={el.id} className='form-check'>
                                     <input
                                       type={el.type}
-                                      className="form-check-input"
+                                      className='form-check-input'
                                       id={el.id}
                                       value={el.value}
                                       name={el.name}
                                       onChange={this.handleInput}
                                     />
                                     <label
-                                      className="form-check-label"
+                                      className='form-check-label'
                                       for={el.id}
                                     >
                                       {el.value}
@@ -265,23 +272,23 @@ class Survey extends Component {
                                   </div>
                                 ))}
                               </div>
-                              <div className="form-group">
-                                <label className={"Label"}>
+                              <div className='form-group'>
+                                <label className={'Label'}>
                                   5. Bạn hay đi du lịch vào khoảng thời gian nào
                                 </label>
                                 {data.month.map((el, index) => (
-                                  <div class="custom-control custom-radio">
+                                  <div class='custom-control custom-radio'>
                                     <input
                                       key={el.id}
                                       type={el.type}
-                                      className="custom-control-input"
+                                      className='custom-control-input'
                                       id={el.id}
                                       name={el.name}
                                       value={el.value}
                                       onChange={this.handleInput}
                                     />
                                     <label
-                                      className="custom-control-label"
+                                      className='custom-control-label'
                                       for={el.id}
                                     >
                                       {el.value}
@@ -289,23 +296,23 @@ class Survey extends Component {
                                   </div>
                                 ))}
                               </div>
-                              <div className="form-group">
-                                <label className={"Label"}>
+                              <div className='form-group'>
+                                <label className={'Label'}>
                                   6. Khoảng giá mà bạn mong muốn
                                 </label>
                                 {data.price.map((el, index) => (
-                                  <div class="custom-control custom-radio">
+                                  <div class='custom-control custom-radio'>
                                     <input
                                       key={el.id}
                                       type={el.type}
-                                      className="custom-control-input"
+                                      className='custom-control-input'
                                       id={el.id}
                                       name={el.name}
                                       value={el.value}
                                       onChange={this.handleInput}
                                     />
                                     <label
-                                      className="custom-control-label"
+                                      className='custom-control-label'
                                       for={el.id}
                                     >
                                       {el.value}
@@ -313,13 +320,50 @@ class Survey extends Component {
                                   </div>
                                 ))}
                               </div>
+                              <div className='form-group'>
+                                <label className={'Label'}>
+                                  7. Các điểm tham quan
+                                </label>
+                                {data.locations.map((el, index) => (
+                                  <div class='custom-control custom-radio'>
+                                    <input
+                                      key={el.id}
+                                      type={el.type}
+                                      className='custom-control-input'
+                                      id={el.id}
+                                      name={el.name}
+                                      value={el.value}
+                                      onChange={this.handleInput}
+                                    />
+                                    <label
+                                      className='custom-control-label'
+                                      for={el.id}
+                                    >
+                                      {el.value}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                              <div className='form-group '>
+                                <label className={'Label'}>
+                                  {' '}
+                                  8. Góp ý chung
+                                </label>
+                                <textarea
+                                  className={'Input'}
+                                  placeholder='Góp ý của bạn'
+                                  required
+                                  name='feedback'
+                                  onChange={this.handleInput}
+                                />
+                              </div>
                             </div>
-                            <div className="d-flex flex-column flex-md-row mt-25 pl-5">
-                              <div className="flex-shrink-0">
-                                <button type="submit"
-                                  className="btn btn-success btn-wide"
+                            <div className='d-flex flex-column flex-md-row mt-25 pl-5'>
+                              <div className='flex-shrink-0'>
+                                <button
+                                  type='submit'
+                                  className='btn btn-success btn-wide'
                                   disabled={!this.state.formValid}
-                                
                                   onClick={this.handleClick}
                                 >
                                   Submit
@@ -333,16 +377,16 @@ class Survey extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="text-center pb-20">
+                <div className='text-center pb-20'>
                   <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-labelledby="Close"
+                    type='button'
+                    className='close'
+                    data-dismiss='modal'
+                    aria-labelledby='Close'
                     ref={(button) => (this.buttonElement = button)}
                   >
-                    <span aria-hidden="true">
-                      <i className="far fa-times-circle"></i>
+                    <span aria-hidden='true'>
+                      <i className='far fa-times-circle'></i>
                     </span>
                   </button>
                 </div>

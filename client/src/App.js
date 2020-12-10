@@ -72,12 +72,14 @@ function App(props) {
     );
   }
   let user = null;
+  let photo = null;
   if (props.user) {
     user = props.user.name;
+    photo = props.user.photo;
   }
   return (
     <div>
-      <Header isAuthencated={props.isAuthencated} user={user} />
+      <Header isAuthencated={props.isAuthencated} user={user} photo={photo} />
       {routes}
       <Form />
       <Register />

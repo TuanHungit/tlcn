@@ -18,6 +18,7 @@ import { tourRouter } from './routes/tour/tour-route';
 import { reviewRouter } from './routes/review/review-route';
 import { emailPromotionRouter } from './routes/emailPromotion/emailPromotion-route';
 import { promotionRouter } from './routes/promotion/promotion-route';
+import { surveyRouter } from './routes/survey/survey-route';
 const app = express();
 
 const options: cors.CorsOptions = {
@@ -50,6 +51,8 @@ if (process.env.NODE_ENV === 'development') {
 const baseURL = '/api/v1';
 
 app.use('/uploads', express.static('uploads'));
+
+app.use(`${baseURL}/surveys`, surveyRouter);
 app.use(`${baseURL}/email-promotions`, emailPromotionRouter);
 app.use(`${baseURL}/booking`, bookingRouter);
 app.use(baseURL, blogRouter);
@@ -60,7 +63,6 @@ app.use(`${baseURL}/reviews`, reviewRouter);
 app.use(`${baseURL}/promotions`, promotionRouter);
 app.use(baseURL, authRouter);
 app.use(baseURL, userRouter);
-
 app.all('*', async () => {
   throw new NotFoundError();
 });

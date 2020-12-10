@@ -4,6 +4,7 @@ export {
   authCheck,
   authSignin,
   authSignup,
+  authSigninGoogle,
 } from './auth';
 export {
   fetchReview,

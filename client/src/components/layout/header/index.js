@@ -48,6 +48,7 @@ export default (props) => {
                 <Navigation
                   isAuthencated={props.isAuthencated}
                   user={props.user}
+                  photo={props.photo}
                 />
               </div>
             </div>

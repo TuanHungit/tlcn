@@ -129,7 +129,7 @@ const TourDetail = (props) => {
   if (props.userReview !== null) {
     userReview = props.userReview;
   }
-  if (data) {
+  if (data && props.bookingInfo) {
     tourDetail = (
       <div class='main-wrapper scrollspy-container'>
         <section
