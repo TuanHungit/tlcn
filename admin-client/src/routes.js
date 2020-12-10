@@ -44,7 +44,7 @@ const ButtonGroups = React.lazy(() =>
 const Buttons = React.lazy(() => import("./views/buttons/buttons/Buttons"));
 const Charts = React.lazy(() => import("./views/charts/Charts"));
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
-const Category = React.lazy(() => import("./views/category/Category"));
+const Destination = React.lazy(() => import("./views/destination/Destination"));
 const Account = React.lazy(() => import("./views/account/Account"));
 const Tour = React.lazy(() => import("./views/tour/Tour"));
 const Promotion = React.lazy(() => import("./views/promotion/promotion"));
@@ -72,7 +72,7 @@ const User = React.lazy(() => import("./views/users/User"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
-  { path: "/category", name: "Category", component: Category },
+  { path: "/destination", name: "Điểm đến", component: Destination },
   { path: "/account", name: "Account", component: Account },
   { path: "/tour", name: "Tour", component: Tour },
   { path: "/promotion", name: "Khuyến mãi", component: Promotion },

@@ -12,15 +12,17 @@ const destinationSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    summary: {
-      type: String,
-      required: true,
-    },
+    // summary: {
+    //   type: String,
+    //   required: true,
+    // },
     images: [String],
     destination: [
       {
-        country: String,
-        description: String,
+        // country: String,
+        // description: String,
+        type: String,
+        // required: true,
       },
     ],
     numOfTour: {
