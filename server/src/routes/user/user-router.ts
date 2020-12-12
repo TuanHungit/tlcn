@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import {
   getAllUser,
   getOneUser,
@@ -7,13 +7,14 @@ import {
   deleteOneUser,
 } from '../../controllers/user';
 import { restrictTo, protectRoute } from '../../middlewares';
-
+import { profileRouter } from '../profile/profile-route';
 const router = express.Router();
-router.use(protectRoute);
-router.get('/users/me', getMe, getOneUser);
-
-router.use(restrictTo('admin'));
-router.route('/users').get(getAllUser);
-router.route('/users/:id').patch(updateOneUser).delete(deleteOneUser);
+router.use('/users/profile', protectRoute, getMe, profileRouter);
+router.get('/users/me', protectRoute, getMe, getOneUser);
+router.route('/users').get(protectRoute, restrictTo('admin'), getAllUser);
+router
+  .route('/users/:id')
+  .patch(protectRoute, restrictTo('admin'), updateOneUser)
+  .delete(protectRoute, restrictTo('admin'), deleteOneUser);
 
 export { router as userRouter };

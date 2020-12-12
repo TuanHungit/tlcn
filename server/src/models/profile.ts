@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import os from 'os';
 
 import { IProfileAttr, IProfileDoc } from '../interfaces/profile';
 
@@ -9,15 +10,12 @@ const profileSchema = new mongoose.Schema(
   {
     photo: {
       type: String,
-      default: 'default.jpg',
+      default: `${os.hostname()}/uploads/users/default-user.jpg`,
     },
     dateOfBirth: {
       type: Date,
     },
-    country: {
-      type: String,
-    },
-    street: {
+    address: {
       type: String,
     },
     phoneNumber: {
@@ -32,6 +30,7 @@ const profileSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+      required: [true, 'Profile must belong a user!'],
     },
   },
   {

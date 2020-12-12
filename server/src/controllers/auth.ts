@@ -62,7 +62,7 @@ export const signup = async (req: Request, res: Response) => {
   const user = User.build({ name, email, password });
 
   const url = `http://localhost:3000/api/v1/users/signup/${user.id}`;
-  //   await new Email(user, url).sendAuthencatedEmail();
+  //await new Email(user, url).sendAuthencatedEmail();
   await user.save();
   createSendToken(user, req, res);
 };

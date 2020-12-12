@@ -63,6 +63,8 @@ export const getAll = (Model: Model<any>) => {
     let filter = {};
     if (req.params.tourId) {
       filter = { tour: req.params.tourId };
+    } else if (req.params.userId) {
+      filter = { user: req.params.userId };
     }
 
     const features = new APIFeatures(Model.find(filter), req.query)

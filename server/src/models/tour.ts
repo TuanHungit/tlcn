@@ -39,6 +39,18 @@ const tourSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    numOfPerson: {
+      type: Number,
+      required: true,
+    },
+    vehicle: {
+      type: String,
+      required: true,
+    },
+    policy: {
+      type: String,
+      required: true,
+    },
     country: {
       type: String,
     },

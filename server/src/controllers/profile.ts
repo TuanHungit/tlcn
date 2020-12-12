@@ -14,10 +14,9 @@ exports.getMe = (req: Request, res: Response, next: NextFunction) => {
   req.params.id = req.user.id;
   next();
 };
-exports.getOneProfile = getOne(Profile);
-exports.updateOneProfile = updateOne(Profile);
-exports.createOneProfile = createOne(Profile);
-
+export const getOneProfile = getOne(Profile);
+export const createOneProfile = createOne(Profile);
+export const getAllProfile = getAll(Profile);
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req: Request, file: any, cb: any) => {
@@ -33,9 +32,9 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-exports.uploadPhoto = upload.single('photo');
+export const uploadPhoto = upload.single('photo');
 
-exports.resizeUserPhoto = async (
+export const resizeUserPhoto = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -48,7 +47,30 @@ exports.resizeUserPhoto = async (
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/users/${req.file.filename}`);
+    .toFile(`uploads/users/${req.file.filename}`);
 
   next();
+};
+
+export const setUserId = (req: Request, res: Response, next: NextFunction) => {
+  req.body.user = req.user.id;
+  req.params.userId = req.user.id;
+  next();
+};
+
+export const updateOneProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const doc = await Profile.findOneAndUpdate(
+    { user: req.params.userId as any },
+    req.body,
+    { new: true, runValidators: true }
+  );
+  if (!doc) {
+    throw new BadRequestError('Profile not found with user!');
+  }
+
+  res.status(200).json(doc);
 };
