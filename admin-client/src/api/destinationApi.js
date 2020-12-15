@@ -10,8 +10,8 @@ export const getAllDestinations = async (options) => {
 };
 export const createOneDestination = async (data) => {
   const url = `/destinations`;
-  const destinationCreate = await axios.post(url, data);
-  return destinationCreate.data;
+  const response = await axios.post(url, data);
+  return response.data;
 };
 
 
