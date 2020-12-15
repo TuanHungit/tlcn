@@ -9,7 +9,7 @@ import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
-import LandingPage from './containers/landingPage/landingPage';
+import LandingPage from './containers/landingPage/LandingPage';
 import Logout from './containers/auth/signout/signout';
 import Profile from './containers/profile/profile';
 import ResultSearch from './components/search/ResultSearch';
