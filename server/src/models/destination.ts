@@ -16,15 +16,14 @@ const destinationSchema = new mongoose.Schema(
     //   type: String,
     //   required: true,
     // },
-    images: [String],
-    destination: [
+   // images: [String],
+    destination: 
       {
         // country: String,
         // description: String,
         type: String,
         // required: true,
       },
-    ],
     numOfTour: {
       type: Number,
       default: 0,

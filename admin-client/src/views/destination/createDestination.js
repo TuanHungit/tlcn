@@ -34,7 +34,8 @@ function CreateDestination(props) {
   const [name, setName] = useState("");
   const [destination, setDestination] = useState("");
   const [images, setImages] = useState({});
-  const [numOfTour, setNumOfTour] = useState(0);
+  const [numOfTour, setNumOfTour] = useState({});
+
   const crop = {
     unit: "%",
     aspect: 4 / 3,
@@ -44,7 +45,7 @@ function CreateDestination(props) {
     event.preventDefault();
     const data = {
       name,
-      images: [...Object.values(images)],
+     // images: [...Object.values(images)],
       destination,
       numOfTour,
     };
@@ -61,7 +62,7 @@ function CreateDestination(props) {
     <>
       <CModal show={props.modal} onClose={props.toggleModal} size="xl">
         <CModalHeader closeButton>
-        {" "}
+          {" "}
           <h3>Thêm điểm đến </h3>
         </CModalHeader>
         <form onSubmit={onSubmit}>
@@ -71,7 +72,7 @@ function CreateDestination(props) {
                 <CCol lg="6">
                   <CRow>
                     <CCol lg="4" className="pt-2">
-                    Tên điểm đến {"  "}
+                      Tên điểm đến {"  "}
                       <CTooltip content="Hello world! A tooltip example">
                         <i class="fas fa-info-circle"></i>
                       </CTooltip>
@@ -89,31 +90,10 @@ function CreateDestination(props) {
                       />
                     </CCol>
                   </CRow>
-                <CRow>
-                  <CCol lg="4" className="pt-2">
-                      Số tour {"  "}
-                      <CTooltip content="Hello world! A tooltip example">
-                        <i class="fas fa-info-circle"></i>
-                      </CTooltip>
-                    </CCol>
-                    <CCol lg="8">
-                      <input
-                        type="number"
-                        placeholder="Nhập số tour"
-                        className="inp"
-                        onChange={(e) => {
-                          setNumOfTour(e.target.value);
-                        }}
-                        style={{ width: "100%" }}
-                        required
-                      />
-                    </CCol>
-                  </CRow> 
-         
                 </CCol>
                 <CCol lg="6" className="pt-2">
                   <QuillEditor
-                   title="Mô tả về điểm đến"
+                    title="Mô tả về điểm đến"
                     key={"toolbar5"}
                     placeholder={"Nhập mô tả về điểm đến"}
                     onEditorChange={(value) => setDestination(value)}
@@ -123,16 +103,16 @@ function CreateDestination(props) {
                   />
                 </CCol>
               </CRow>
-              <CRow>
-                  <CCol className="pt-3">
-                    <MultiImageInput
-                      images={images}
-                      setImages={setImages}
-                      theme={"light"}
-                      cropConfig={{ crop, ruleOfThirds: true }}
-                    />
-                  </CCol>
-                </CRow>
+              {/* <CRow>
+                <CCol className="pt-3">
+                  <MultiImageInput
+                    images={images}
+                    setImages={setImages}
+                    theme={"light"}
+                    cropConfig={{ crop, ruleOfThirds: true }}
+                  />
+                </CCol>
+              </CRow> */}
             </CContainer>
           </CModalBody>
           <CModalFooter>
