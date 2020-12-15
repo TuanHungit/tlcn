@@ -1,40 +1,51 @@
-import * as actionTypes from "./actionTypes";
-import axios from "../../axios/axios-order";
+import * as actionTypes from './actionTypes';
+import axios from '../../common/axios-order';
 
-const profileStart = () => {
+const setProfile = (profile) => {
   return {
-    type: actionTypes.PROFILE_START,
-  };
-};
-const profileFailed = (error) => {
-  return {
-    type: actionTypes.PROFILE_FAILED,
-    error: error,
+    type: actionTypes.SET_PROFILE,
+    profile,
   };
 };
 
-const profileSuccess = (user) => {
+const fetchProfileFailed = () => {
   return {
-    type: actionTypes.PROFILE_SUCCESS,
-    user: user,
+    type: actionTypes.FETCH_PROFILE_FAILED,
   };
 };
 
- export const getAuthProfile = () => {
-   return (dispatch) => {
-     dispatch(profileStart());
-  axios
-     .post("/users/signin")
-//       .then((response) => {
-//         const user = response.data.data.user;
-//         // const user = response.data;
-//        // dispatch(profileSuccess(user));
-//       })
-//       .catch((error) => {
-//         const errors = error.response.data.errors;
-//         if (errors) {
-//           dispatch(profileFailed(errors[0].message));
-//         }
-//       });
-   };
- };
+const createProfileSuccess = () => {
+  return {
+    type: actionTypes.CREATE_PROFILE_SUCCESS,
+  };
+};
+const createProfilefFailed = () => {
+  return {
+    type: actionTypes.CREATE_PROFILE_FAILED,
+  };
+};
+
+export const fetchProfile = () => {
+  return (dispatch) => {
+    axios
+      .get('/users/profile')
+      .then((res) => dispatch(setProfile(res.data[0])))
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchProfileFailed());
+      });
+  };
+};
+
+export const createProfile = () => {
+  return (dispatch) => {
+    axios
+      .post('/users/profile')
+      .then((res) => {
+        dispatch(createProfileSuccess());
+      })
+      .catch((err) => {
+        dispatch(createProfilefFailed());
+      });
+  };
+};

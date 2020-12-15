@@ -3,8 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import { BadRequestError } from './../errors/bad-request-error';
 import { User } from '../models/user';
+import { Profile } from '../models/profile';
 import { Email } from '../services/email';
 import { Password } from '../services/password';
+import { body } from 'express-validator';
+
 declare global {
   namespace Express {
     interface Response {
@@ -59,8 +62,9 @@ export const signup = async (req: Request, res: Response) => {
   if (existingUser) {
     throw new BadRequestError('Email is use!');
   }
-  const user = User.build({ name, email, password });
+  const user = User.build({ name, email, password }) as any;
 
+  await Profile.create<any>({ user: user.id });
   const url = `http://localhost:3000/api/v1/users/signup/${user.id}`;
   //await new Email(user, url).sendAuthencatedEmail();
   await user.save();

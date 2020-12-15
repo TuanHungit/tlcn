@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import os from 'os';
+import { Request } from 'express';
 
 import { IProfileAttr, IProfileDoc } from '../interfaces/profile';
 
@@ -10,22 +10,27 @@ const profileSchema = new mongoose.Schema(
   {
     photo: {
       type: String,
-      default: `${os.hostname()}/uploads/users/default-user.jpg`,
+      default: `/uploads/users/default-user.jpg`,
     },
     dateOfBirth: {
       type: Date,
+      default: Date.now(),
     },
     address: {
       type: String,
+      default: '',
     },
     phoneNumber: {
       type: String,
+      default: '',
     },
     facebookUrl: {
       type: String,
+      default: '',
     },
     twitterUrl: {
       type: String,
+      default: '',
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

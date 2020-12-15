@@ -119,6 +119,7 @@ class Signup extends Component {
         this.state.controls.email.value,
         this.state.controls.password.value
       );
+
       //  actionCreator.authSignup({name, email, password });
     }
     // if (isAuthenticated) {
@@ -132,7 +133,7 @@ class Signup extends Component {
   };
 
   componentDidUpdate(nextProps, nextState) {
-    if (this.props.isAuthencated !== nextProps.isAuthencated) {
+    if (this.props.signUpSuccess !== nextProps.signUpSuccess) {
       this.buttonElement.click();
     }
   }
@@ -321,8 +322,7 @@ const mapStateToProps = (state) => {
   return {
     loadding: state.auth.loadding,
     error: state.auth.error,
-    isAuthencated: state.auth.token !== null,
-    authRedirectPath: '/',
+    signUpSuccess: state.auth.signUpSuccess,
   };
 };
 // const mapStateToProps = (state) => ({

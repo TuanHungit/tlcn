@@ -22,11 +22,17 @@ import BlogGrid from './containers/blogGrid/blogGrid';
 import Promotion from './containers/promotion/promotion';
 import PromotionDetail from './containers/promotionDetail/promotionDetail';
 import Form from './components/form/form';
+import profile from './components/profile/profile';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
   }, []);
-
+  useEffect(() => {
+    if (!props.isAuthencated) {
+      return;
+    }
+    props.onFetchProfile();
+  }, [props.isAuthencated]);
   let routes = (
     <Switch>
       <Route path='/' exact component={LandingPage} />
@@ -39,7 +45,7 @@ function App(props) {
       <Route path='/blogs' exact component={BlogGrid} />
       <Route path='/promotions' exact component={Promotion} />
       <Route path='/promotions/:slug' exact component={PromotionDetail} />
-      <Route path='/profile' component={Profile} />
+
       <Route
         path='/tour/:slug/booking/success'
         exact
@@ -57,7 +63,12 @@ function App(props) {
         <Route path={'/tour/:slug/booking'} exact component={Booking} />
         <Route path='/logout' exact component={Logout} />
         <Route exact path='/tour/:slug' component={TourDetail} />
-        <Route path='/profile' component={Profile} />
+        <Route
+          path='/profile'
+          render={(props) => (
+            <Profile {...props} photo={photo} profile={profile} />
+          )}
+        />
         <Route path='/blogs/:slug' exact component={SingleBlog} />
         <Route path='/blogs-editor' exact component={BlogEditor} />
         <Route path='/blogs' exact component={BlogGrid} />
@@ -74,9 +85,14 @@ function App(props) {
   }
   let user = null;
   let photo = null;
+  let profile = null;
   if (props.user) {
     user = props.user.name;
     photo = props.user.photo;
+    if (props.profile) {
+      profile = props.profile;
+      photo = 'http://localhost:3001' + props.profile.photo;
+    }
   }
   return (
     <div>
@@ -98,11 +114,13 @@ const mapStateToProps = (state) => {
     user: state.auth.user,
     error: state.auth.error,
     isLogout: state.auth.isLogout,
+    profile: state.profile.profile,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuthCheck: () => dispatch(actionCreator.authCheck()),
+    onFetchProfile: () => dispatch(actionCreator.fetchProfile()),
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

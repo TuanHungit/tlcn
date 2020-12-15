@@ -53,6 +53,8 @@ const baseURL = '/api/v1';
 app.use('/uploads', express.static('uploads'));
 
 app.use(`${baseURL}/surveys`, surveyRouter);
+app.use(baseURL, authRouter);
+app.use(baseURL, userRouter);
 app.use(`${baseURL}/email-promotions`, emailPromotionRouter);
 app.use(`${baseURL}/booking`, bookingRouter);
 app.use(baseURL, blogRouter);
@@ -61,8 +63,7 @@ app.use(`${baseURL}/destinations`, destinationRouter);
 app.use(`${baseURL}/tours`, tourRouter);
 app.use(`${baseURL}/reviews`, reviewRouter);
 app.use(`${baseURL}/promotions`, promotionRouter);
-app.use(baseURL, authRouter);
-app.use(baseURL, userRouter);
+
 app.all('*', async () => {
   throw new NotFoundError();
 });

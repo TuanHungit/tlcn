@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../common/axios-order';
-
 import alertify from 'alertifyjs';
 const authStart = () => {
   return {

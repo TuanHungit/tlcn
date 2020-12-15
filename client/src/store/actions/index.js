@@ -20,3 +20,5 @@ export { fetchDestination } from './destination';
 export { setBookingInfo, createBooking } from './booking';
 
 export { fetchPromotionList, fetchPromotionDetail } from './promotion';
+
+export { fetchProfile, createProfile } from './profile';
