@@ -16,7 +16,7 @@ const destinationSchema = new mongoose.Schema(
     //   type: String,
     //   required: true,
     // },
-   // images: [String],
+    images: [String],
     destination: 
       {
         // country: String,

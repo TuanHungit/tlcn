@@ -34,7 +34,6 @@ function CreateDestination(props) {
   const [name, setName] = useState("");
   const [destination, setDestination] = useState("");
   const [images, setImages] = useState({});
-  const [numOfTour, setNumOfTour] = useState({});
 
   const crop = {
     unit: "%",
@@ -45,9 +44,9 @@ function CreateDestination(props) {
     event.preventDefault();
     const data = {
       name,
-     // images: [...Object.values(images)],
+      images: [...Object.values(images)],
       destination,
-      numOfTour,
+     // numOfTour,
     };
     try {
       await createOneDestination(data);
@@ -103,7 +102,7 @@ function CreateDestination(props) {
                   />
                 </CCol>
               </CRow>
-              {/* <CRow>
+              <CRow>
                 <CCol className="pt-3">
                   <MultiImageInput
                     images={images}
@@ -112,7 +111,7 @@ function CreateDestination(props) {
                     cropConfig={{ crop, ruleOfThirds: true }}
                   />
                 </CCol>
-              </CRow> */}
+              </CRow>
             </CContainer>
           </CModalBody>
           <CModalFooter>
