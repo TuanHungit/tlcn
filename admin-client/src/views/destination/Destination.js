@@ -35,20 +35,7 @@ const fields = [
   },
   { key: "action", label: "ACTION", _style: { width: "10%" } },
 ];
-const getBadge = (status) => {
-  switch (status) {
-    case "Active":
-      return "success";
-    case "Inactive":
-      return "secondary";
-    case "Pending":
-      return "warning";
-    case "Banned":
-      return "danger";
-    default:
-      return "primary";
-  }
-};
+
 function Destination() {
   const [destinationsList, setDestinationsList] = useState(null);
   const [details, setDetails] = useState([]);
@@ -121,16 +108,11 @@ function Destination() {
               index: (item) => <td>{item.id}</td>,
               name: (item) => (
                 <td>
-                  <CBadge color={getBadge(item.name)}>{item.name}</CBadge>
+                  <CBadge >{item.name}</CBadge>
                 </td>
               ),
-              // destination: (item) => (
-              //   <CBadge color={getBadge(item.destination)}>
-              //     {item.destination}
-              //   </CBadge>
-              // ),
               numOfTour: (item) => (
-                <CBadge color={getBadge(item.numOfTour)}>
+                <CBadge >
                   {item.numOfTour}
                 </CBadge>
               ),
