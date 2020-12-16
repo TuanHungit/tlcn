@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../common/axios-order';
-
+import alertify from 'alertifyjs';
 const setProfile = (profile) => {
   return {
     type: actionTypes.SET_PROFILE,
@@ -14,14 +14,15 @@ const fetchProfileFailed = () => {
   };
 };
 
-const createProfileSuccess = () => {
+const updateProfileSuccess = (profile) => {
   return {
-    type: actionTypes.CREATE_PROFILE_SUCCESS,
+    type: actionTypes.UPDATE_PROFILE_SUCCESS,
+    profile: { ...profile },
   };
 };
-const createProfilefFailed = () => {
+const updateProfilefFailed = () => {
   return {
-    type: actionTypes.CREATE_PROFILE_FAILED,
+    type: actionTypes.UPDATE_PROFILE_FAILED,
   };
 };
 
@@ -37,15 +38,17 @@ export const fetchProfile = () => {
   };
 };
 
-export const createProfile = () => {
+export const updateProfile = (body) => {
   return (dispatch) => {
     axios
-      .post('/users/profile')
+      .put('/users/profile', body)
       .then((res) => {
-        dispatch(createProfileSuccess());
+        alertify.success('Cập nhật thành công!');
+        dispatch(updateProfileSuccess(res.data));
       })
       .catch((err) => {
-        dispatch(createProfilefFailed());
+        alertify.danger('Cập nhật không thành công!');
+        dispatch(updateProfilefFailed());
       });
   };
 };

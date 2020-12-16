@@ -10,7 +10,7 @@ const profileSchema = new mongoose.Schema(
   {
     photo: {
       type: String,
-      default: `/uploads/users/default-user.jpg`,
+      default: `127.0.0.1:3001/uploads/users/default-user.jpg`,
     },
     dateOfBirth: {
       type: Date,

@@ -21,7 +21,7 @@ const loadUser = () => {
 };
 
 const authFailed = (error) => {
-  alertify.success('Invalid credentials!');
+  alertify.success('Đăng nhập thất bại!');
   return {
     type: actionTypes.AUTH_FAILED,
     error: error,
@@ -29,7 +29,7 @@ const authFailed = (error) => {
 };
 
 const authSignupSuccess = () => {
-  alertify.success('Register susscess!');
+  alertify.success('Đăng ký thành công!');
   return {
     type: actionTypes.AUTH_SIGNUP_SUCCESS,
   };
@@ -152,7 +152,7 @@ export const authCheck = () => {
         dispatch(authSuccess(token, user));
         dispatch(authLogout(expirationDate - new Date().getTime()));
       } else {
-        alertify.success('You have logged out!');
+        alertify.success('Bạn đã đăng xuất!');
         dispatch(Logout());
       }
     }

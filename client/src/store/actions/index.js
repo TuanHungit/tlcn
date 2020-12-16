@@ -17,8 +17,8 @@ export { fetchTour, fetchTourDetail, fetchSimilarTour } from './tour';
 export { fetchBlog, fetchBlogDetail } from './blog';
 export { fetchDestination } from './destination';
 
-export { setBookingInfo, createBooking } from './booking';
+export { setBookingInfo, createBooking, fetchBookingFromUser } from './booking';
 
 export { fetchPromotionList, fetchPromotionDetail } from './promotion';
 
-export { fetchProfile, createProfile } from './profile';
+export { fetchProfile, updateProfile } from './profile';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Avatar from '../../../UI/avatar/avatar';
 const navigationItems = (props) => (
   <div>
@@ -61,19 +62,12 @@ const navigationItems = (props) => (
       <ul className='nav-mini-right'>
         <li className='d-none d-sm-block'>
           <ul>
-            <a
-              href='tour-detail-02.html#loginFormTabInModal-login'
-              data-toggle='modal'
-              data-target='#loginFormTabInModal'
-              data-backdrop='static'
-              data-keyboard='false'
-              className='d-flex'
-            >
+            <Link to='/profile' className='d-flex pt-1'>
               <Avatar image={props.photo} /> {props.user.toUpperCase()}
-            </a>
+            </Link>
           </ul>
         </li>
-        <li className='d-none d-sm-block'>
+        <li className='d-none d-sm-block pt-1'>
           <a href='/logout'>Đăng xuất</a>
         </li>
         <li className='d-block d-sm-none'>

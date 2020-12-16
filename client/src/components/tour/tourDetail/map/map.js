@@ -3,8 +3,8 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import './map.css';
 export default (props) => {
   const [viewport, setViewport] = useState({
-    latitude: props.locations[2].coordinates[0],
-    longitude: props.locations[2].coordinates[1],
+    latitude: props.locations[2].coordinates[1],
+    longitude: props.locations[2].coordinates[0],
     width: '100%',
     height: '650px',
     zoom: 6,
@@ -44,13 +44,13 @@ export default (props) => {
         >
           {Object.values(
             props.locations.filter(
-              (loc) => loc.coordinates[0] && loc.coordinates[1]
+              (loc) => loc.coordinates[1] && loc.coordinates[0]
             )
           ).map((loc, key) => (
             <Marker
               key={key}
-              latitude={loc.coordinates[0]}
-              longitude={loc.coordinates[1]}
+              latitude={loc.coordinates[1]}
+              longitude={loc.coordinates[0]}
             >
               <h4>Ngày {key + 1}</h4>
               <img
@@ -67,8 +67,8 @@ export default (props) => {
 
           {selectedLoc ? (
             <Popup
-              latitude={selectedLoc.coordinates[0]}
-              longitude={selectedLoc.coordinates[1]}
+              latitude={selectedLoc.coordinates[1]}
+              longitude={selectedLoc.coordinates[0]}
               onClose={() => {
                 setSelectedLoc(null);
               }}

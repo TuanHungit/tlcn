@@ -6,7 +6,7 @@ import alertify from 'alertifyjs';
 class Logout extends Component {
   componentDidMount() {
     this.props.onLogout();
-    alertify.success('You have logged out!');
+    alertify.success('Bạn đã đăng xuất!');
   }
   render() {
     return <Redirect to='/' />;

@@ -46,7 +46,8 @@ const TourDetail = (props) => {
       props.onFetchSimilarTour(tourId, 1, 4, [
         'duration',
         'name',
-        'price',
+        'priceAdults',
+        'images',
         'ratingsQuantity',
         'ratingsAverage',
         'startLocation',

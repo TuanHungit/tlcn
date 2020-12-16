@@ -91,7 +91,7 @@ function App(props) {
     photo = props.user.photo;
     if (props.profile) {
       profile = props.profile;
-      photo = 'http://localhost:3001' + props.profile.photo;
+      photo = 'http://' + props.profile.photo;
     }
   }
   return (

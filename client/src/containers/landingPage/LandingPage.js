@@ -17,7 +17,8 @@ class LandingPage extends Component {
     this.props.onFetchTour(0, 6, [
       'duration',
       'name',
-      'price',
+      'priceAdults',
+      'images',
       'ratingsQuantity',
       'ratingsAverage',
       'startLocation',
@@ -93,10 +94,9 @@ class LandingPage extends Component {
                     <i class=' text-danger elegent-icon-gift_alt text-primary'></i>
                   </div>
                   <div class='content'>
-                    <h6>We ﬁnd better deals</h6>
+                    <h6>GIÁ TỐT - NHIỀU ƯU ĐÃI</h6>
                     <p class='text-muted'>
-                      Considered an invitation do introduced sufficient
-                      understood instrument it.{' '}
+                      CoƯu đãi và quà tặng hấp dẫn khi mua tour online.
                     </p>
                   </div>
                 </div>
@@ -108,10 +108,9 @@ class LandingPage extends Component {
                     <i class='text-danger elegent-icon-wallet text-primary'></i>
                   </div>
                   <div class='content'>
-                    <h6>Best price guaranteed</h6>
+                    <h6>THANH TOÁN AN TOÀN</h6>
                     <p class='text-muted'>
-                      Discovery sweetness principle discourse shameless bed one
-                      excellent.
+                      Được bảo mật bởi tổ chức quốc tế Global Sign.
                     </p>
                   </div>
                 </div>
@@ -123,10 +122,9 @@ class LandingPage extends Component {
                     <i class='text-danger elegent-icon-heart_alt text-primary'></i>
                   </div>
                   <div class='content'>
-                    <h6>Travellers love us</h6>
+                    <h6>THƯƠNG HIỆU UY TÍN</h6>
                     <p class='text-muted'>
-                      Sentiments of surrounded friendship dispatched connection
-                      john shed hope.
+                      Thương hiệu lữ hành hàng đầu Việt Nam.
                     </p>
                   </div>
                 </div>

@@ -99,7 +99,7 @@ class Signin extends Component {
       this.props.isAuthencated !== nextProps.isAuthencated
     ) {
       this.buttonElement.click();
-      alertify.success('Login susscess!');
+      alertify.success('Đăng nhập thành công!');
     }
   }
   responseGoogle = (response) => {

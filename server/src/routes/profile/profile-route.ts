@@ -5,6 +5,7 @@ import {
   updateOneProfile,
   createOneProfile,
   setUserId,
+  uploadBase64Image,
 } from '../../controllers/profile';
 import { protectRoute, restrictTo } from '../../middlewares';
 
@@ -14,7 +15,13 @@ router
   .route('/')
   .get(protectRoute, restrictTo('admin', 'user'), setUserId, getAllProfile)
   .post(protectRoute, restrictTo('admin', 'user'), setUserId, createOneProfile)
-  .put(protectRoute, restrictTo('admin', 'user'), setUserId, updateOneProfile);
+  .put(
+    protectRoute,
+    restrictTo('admin', 'user'),
+    setUserId,
+    uploadBase64Image,
+    updateOneProfile
+  );
 
 router
   .route('/:id')

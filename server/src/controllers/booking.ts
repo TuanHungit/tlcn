@@ -101,3 +101,14 @@ export const createPaymentIntent = async (req: Request, res: Response) => {
     res.json(err);
   }
 };
+
+export const getBookingFromUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email } = req.body;
+  console.log(email);
+  const doc = await Booking.find({ 'user.email': email });
+  res.status(200).send(doc);
+};

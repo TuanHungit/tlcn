@@ -12,7 +12,18 @@ const createBookingFailed = () => {
     type: actionTypes.CREATE_BOOKING_FAILED,
   };
 };
+const fetchBookingFromUserFailed = () => {
+  return {
+    type: actionTypes.FETCH_BOOKING_FROM_USER_FAILED,
+  };
+};
 
+const fetchBookingFromUserSuccess = (bookingList) => {
+  return {
+    type: actionTypes.FETCH_BOOKING_FROM_USER_SUCCESS,
+    bookingList,
+  };
+};
 export const createBooking = (data) => {
   return (dispatch) => {
     axios
@@ -21,6 +32,20 @@ export const createBooking = (data) => {
       .catch((err) => {
         console.log(err);
         dispatch(createBookingFailed());
+      });
+  };
+};
+
+export const fetchBookingFromUser = () => {
+  return (dispatch) => {
+    axios
+      .get('/users/booking')
+      .then((res) => {
+        dispatch(fetchBookingFromUserSuccess(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchBookingFromUserFailed());
       });
   };
 };

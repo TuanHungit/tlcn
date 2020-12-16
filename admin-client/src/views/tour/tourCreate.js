@@ -110,7 +110,7 @@ function TourCreate(props) {
   const crop = {
     unit: "%",
     aspect: 4 / 3,
-    width: "100",
+    width: "1000",
   };
   const convertToISOString = (list) => {
     return list.map((el) => el.toISOString());
@@ -335,6 +335,7 @@ function TourCreate(props) {
                       images={images}
                       setImages={setImages}
                       theme={"light"}
+                      max={10}
                       cropConfig={{ crop, ruleOfThirds: true }}
                     />
                   </CCol>

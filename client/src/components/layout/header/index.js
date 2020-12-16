@@ -125,9 +125,6 @@ export default (props) => {
                         <li>
                           <a href='contact-us.html'>Về chúng tôi</a>
                         </li>
-                        <li>
-                          <Link to='/profile'>Profile</Link>
-                        </li>
                       </ul>
                     </nav>
                   </div>

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import { IBookingDoc } from '../interfaces/booking';
 const bookingSchema = new mongoose.Schema(
   {
     tour: {
@@ -78,14 +78,14 @@ const bookingSchema = new mongoose.Schema(
   }
 );
 
-// bookingSchema.pre(/^find/, function (next) {
-//   this.populate('user').populate({
-//     path: 'tour',
-//     select: 'name',
-//   });
-//   next();
-// });
+bookingSchema.pre<IBookingDoc>(/^find/, function (next) {
+  this.populate({
+    path: 'tour',
+    select: 'name policy',
+  });
+  next();
+});
 
-const Booking = mongoose.model('Booking', bookingSchema);
+const Booking = mongoose.model<IBookingDoc>('Booking', bookingSchema);
 
 export { Booking };

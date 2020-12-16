@@ -9,7 +9,7 @@ export default (props) => {
       <figure class='tour-grid-item-01'>
         <NavLink to={`/tour/${props.tour.slug}`}>
           <div class='image'>
-            <img src='/images/image-tour/01.jpg' alt='images' />
+            <img src={`http://${props.tour.images[0]}`} alt='images' />
           </div>
           <figcaption class='content'>
             <h5>{props.tour.name}</h5>
@@ -49,7 +49,7 @@ export default (props) => {
             <p class='mt-3'>
               Giá từ{' '}
               <span class='h6 line-1 text-primary font16'>
-                {ToMoneyForView(props.tour.price, ' đ')}
+                {ToMoneyForView(props.tour.priceAdults, ' đ')}
               </span>{' '}
               <span class='text-muted mr-5'></span>
             </p>

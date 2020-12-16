@@ -8,10 +8,11 @@ export default (props) => {
       </div>
 
       <h6>Điểm đến: {props.location.title}</h6>
-
-      {props.location.description.split('<br/>').map((el, key) => (
-        <p key={key}>{el}</p>
-      ))}
+      <div
+        dangerouslySetInnerHTML={{
+          __html: props.location.description,
+        }}
+      />
 
       <ul class='itinerary-meta list-inline-block text-primary'>
         <li>

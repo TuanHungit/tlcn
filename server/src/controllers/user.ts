@@ -18,7 +18,7 @@ export const getMe = async (
   next: NextFunction
 ) => {
   req.params.id = req.user._id;
-  console.log(req.params.id);
+  req.body.email = req.user.email;
   next();
 };
 

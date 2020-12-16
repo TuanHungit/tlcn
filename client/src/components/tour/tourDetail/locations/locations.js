@@ -11,10 +11,6 @@ export default (props) => {
         <i class='fas fa-plane'></i> Hành trình
       </h4>
 
-      <h6>Giới thiệu</h6>
-
-      <p>{props.content.summary}</p>
-
       <ul class='itinerary-list mt-30'>
         {Object.values(props.content.locations).map((el, key) => (
           <Location location={el} key={key} />

@@ -34,7 +34,7 @@ export default (props) => {
             </div>
           </div>
         </div>
-        <Carousel />
+        <Carousel images={props.content.images} />
 
         <ul class='list-inline-block highlight-list mt-30 text-center'>
           <li>
@@ -74,10 +74,12 @@ export default (props) => {
         </ul>
 
         <div class='mb-30'></div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: props.content.summary,
+          }}
+        />
 
-        {props.content.summary.split('<br/>').map((el, key) => (
-          <p key={key}>{el}</p>
-        ))}
         <div class='mb-30'></div>
         <Calendar availableDate={props.availableDate} />
         <h5 class='mt-30'>
@@ -85,17 +87,11 @@ export default (props) => {
         </h5>
 
         <ul class='list-icon-data-attr font-ionicons'>
-          {props.content.description.split('<br/>').map((el, key) => (
-            <li key={key} className='inline'>
-              <p>
-                <span class='icon-font'>
-                  <i class='elegent-icon-check_alt2 text-primary'></i>
-                  {'    '}
-                </span>
-                {el}
-              </p>
-            </li>
-          ))}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: props.content.description,
+            }}
+          />
         </ul>
       </div>
     </div>

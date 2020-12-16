@@ -41,15 +41,12 @@ const tourSchema = new mongoose.Schema(
     },
     numOfPerson: {
       type: Number,
-      required: true,
     },
     vehicle: {
       type: String,
-      required: true,
     },
     policy: {
       type: String,
-      required: true,
     },
     country: {
       type: String,

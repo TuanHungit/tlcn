@@ -6,11 +6,15 @@ import {
   updateOneUser,
   deleteOneUser,
 } from '../../controllers/user';
+import { getBookingFromUser } from '../../controllers/booking';
 import { restrictTo, protectRoute } from '../../middlewares';
 import { profileRouter } from '../profile/profile-route';
+
 const router = express.Router();
 router.use('/users/profile', protectRoute, getMe, profileRouter);
+
 router.get('/users/me', protectRoute, getMe, getOneUser);
+router.get('/users/booking', protectRoute, getMe, getBookingFromUser);
 router.route('/users').get(protectRoute, restrictTo('admin'), getAllUser);
 router
   .route('/users/:id')
