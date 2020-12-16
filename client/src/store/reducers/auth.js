@@ -6,6 +6,7 @@ const initialState = {
   loadding: false,
   active: false,
   authRedirectPath: '/',
+  signUpSuccess: false,
   isAuthenticated: null,
 };
 const authStart = (state, action) => {
@@ -29,6 +30,7 @@ const authSignupSuccess = (state, action) => {
     loadding: false,
     // token: localStorage.getItem("token"),
     user: null,
+    signUpSuccess: true,
     isAuthenticated: true,
     authRedirectPath: '/',
   };
@@ -37,7 +39,14 @@ const authFailed = (state, action) => {
   return { ...state, error: action.error, loadding: false, isLogout: false };
 };
 const authLogout = (state, action) => {
-  return { ...state, user: null, token: null, error: null, isLogout: true };
+  return {
+    ...state,
+    user: null,
+    token: null,
+    error: null,
+    isLogout: true,
+    signUpSuccess: false,
+  };
 };
 const setAuthRedirectPath = (state, action) => {
   return { ...state, authRedirectPath: action.path };

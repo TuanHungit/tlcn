@@ -25,6 +25,7 @@ export default (props) => {
   //     }
   //   }
   // }, []);
+  console.log(props.photo);
   return (
     <header
       id='header-waypoint-sticky'

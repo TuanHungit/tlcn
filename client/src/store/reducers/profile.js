@@ -1,37 +1,28 @@
-import * as actionTypes from "../actions/actionTypes";
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   profile: null,
-  user: null,
-  loading: true,
-  profiles: [],
-  repos: [],
-  error: {},
-  isAuthenticated: true,
+  error: null,
 };
 
-const profileStart = (state, action) => {
-  return { ...state, loadding: true };
-};
-const profileSuccess = (state, action) => {
+const setProfile = (state, action) => {
   return {
-    ...state,   
+    ...state,
     error: null,
     loadding: false,
-    // user: action.user,
+    profile: { ...action.profile },
   };
 };
-const profileFailed = (state, action) => {
-  return { ...state, error: action.error, loadding: false };
+const fetchProfileFailed = (state, action) => {
+  return { ...state, error: true };
 };
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.PROFILE_START:
-      return profileStart(state, action);
-    case actionTypes.PROFILE_SUCCESS:
-      return profileSuccess(state, action);
-    case actionTypes.PROFILE_FAILED:
-      return profileFailed(state, action);
+    case actionTypes.SET_PROFILE:
+      return setProfile(state, action);
+    case actionTypes.FETCH_PROFILE_FAILED:
+      return fetchProfileFailed(state, action);
     default:
       return state;
   }
