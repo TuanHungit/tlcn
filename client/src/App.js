@@ -11,7 +11,7 @@ import LoginModal from './containers/auth/signin/signin';
 import Register from './containers/auth/signup/signup';
 import LandingPage from './containers/landingPage/landingPage';
 import Logout from './containers/auth/signout/signout';
-import Profile from './containers/profile/profile';
+//import Profile from './containers/profile/profile';
 import ResultSearch from './components/search/ResultSearch';
 import Booking from './containers/booking/booking';
 import BookingSuccess from './components/booking/bookingSuccess/bookingSuccess';
@@ -39,7 +39,7 @@ function App(props) {
       <Route path='/blogs' exact component={BlogGrid} />
       <Route path='/promotions' exact component={Promotion} />
       <Route path='/promotions/:slug' exact component={PromotionDetail} />
-      <Route path='/profile' component={Profile} />
+      {/* <Route path='/profile' component={Profile} /> */}
       <Route
         path='/tour/:slug/booking/success'
         exact
@@ -57,7 +57,7 @@ function App(props) {
         <Route path={'/tour/:slug/booking'} exact component={Booking} />
         <Route path='/logout' exact component={Logout} />
         <Route exact path='/tour/:slug' component={TourDetail} />
-        <Route path='/profile' component={Profile} />
+        {/* <Route path='/profile' component={Profile} /> */}
         <Route path='/blogs/:slug' exact component={SingleBlog} />
         <Route path='/blogs-editor' exact component={BlogEditor} />
         <Route path='/blogs' exact component={BlogGrid} />
