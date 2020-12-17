@@ -82,17 +82,6 @@ export default (props) => {
 
         <div class='mb-30'></div>
         <Calendar availableDate={props.availableDate} />
-        <h5 class='mt-30'>
-          <i class='far fa-star'></i> Những điểm nổi bật làm Tour trở nên thú vị
-        </h5>
-
-        <ul class='list-icon-data-attr font-ionicons'>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: props.content.description,
-            }}
-          />
-        </ul>
       </div>
     </div>
   );

@@ -4,8 +4,10 @@ import ProfileComponent from '../../components/profile/profile';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 const Profile = (props) => {
+  window.scrollTo(0, 0);
   let profile = props.error ? <p>Profile can't be loaded!</p> : <Spinner />;
-  if (props.profile) {
+
+  if (props.profile && props.user) {
     profile = (
       <ProfileComponent
         user={props.user}

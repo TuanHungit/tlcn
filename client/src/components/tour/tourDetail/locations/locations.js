@@ -1,12 +1,22 @@
 import React from 'react';
 import Location from './location/location';
 export default (props) => {
-  console.log(props);
   return (
     <div
       id='detail-content-sticky-nav-02'
       class='fullwidth-horizon-sticky-section'
     >
+      <h5 class='mt-30'>
+        <i class='far fa-star'></i> Những điểm nổi bật làm Tour trở nên thú vị
+      </h5>
+
+      <ul class='list-icon-data-attr font-ionicons'>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: props.content.description,
+          }}
+        />
+      </ul>
       <h4 class='heading-title'>
         <i class='fas fa-plane'></i> Hành trình
       </h4>

@@ -294,6 +294,15 @@ class QuillEditor extends React.Component {
           <button className="ql-italic" />
           <button className="ql-underline" />
           <button className="ql-strike" />
+          <select className="ql-color">
+            <option value="red" />
+            <option value="green" />
+            <option value="blue" />
+            <option value="orange" />
+            <option value="violet" />
+            <option value="#d0d1d2" />
+            <option selected />
+          </select>
           <button className="ql-insertImage">I</button>
           <button className="ql-insertVideo">V</button>
           <button className="ql-insertFile">F</button>
@@ -305,6 +314,12 @@ class QuillEditor extends React.Component {
           <button className="ql-list">
             <i class="fas fa-list"></i>
           </button>
+          <span class="ql-formats">
+            <button class="ql-align" value=""></button>
+            <button class="ql-align" value="center"></button>
+            <button class="ql-align" value="right"></button>
+            <button class="ql-align" value="justify"></button>
+          </span>
         </div>
         <ReactQuill
           ref={(el) => {
@@ -362,6 +377,8 @@ class QuillEditor extends React.Component {
     "blockquote",
     "clean",
     "list",
+    "color",
+    "align",
   ];
 }
 

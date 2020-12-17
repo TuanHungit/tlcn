@@ -150,14 +150,62 @@ const TourDetail = (props) => {
                     availableDate={data.availableDate}
                   />
                   <div class='mb-50'></div>
+                  <nav>
+                    <div class='nav nav-tabs' id='nav-tab' role='tablist'>
+                      <a
+                        class='nav-item nav-link active'
+                        id='nav-home-tab'
+                        data-toggle='tab'
+                        href='#nav-home'
+                        role='tab'
+                        aria-controls='nav-home'
+                        aria-selected='true'
+                      >
+                        Chương trình Tour
+                      </a>
+                      <a
+                        class='nav-item nav-link'
+                        id='nav-profile-tab'
+                        data-toggle='tab'
+                        href='#nav-profile'
+                        role='tab'
+                        aria-controls='nav-profile'
+                        aria-selected='false'
+                      >
+                        Chính sách Tour
+                      </a>
+                    </div>
+                  </nav>
+                  <div class='tab-content' id='nav-tabContent'>
+                    <div
+                      class='tab-pane fade show active'
+                      id='nav-home'
+                      role='tabpanel'
+                      aria-labelledby='nav-home-tab'
+                    >
+                      <Locations
+                        content={{
+                          summary: data.summary,
+                          description: data.description,
+                          locations: { ...data.locations },
+                        }}
+                      />
+                      <Map locations={data.locations} />
+                    </div>
+                    <div
+                      class='tab-pane fade'
+                      id='nav-profile'
+                      role='tabpanel'
+                      aria-labelledby='nav-profile-tab'
+                    >
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: data.policy,
+                        }}
+                      />
+                    </div>
+                  </div>
 
-                  <Locations
-                    content={{
-                      summary: data.summary,
-                      locations: { ...data.locations },
-                    }}
-                  />
-                  <Map locations={data.locations} />
                   {similarTourList}
 
                   <ReviewTour

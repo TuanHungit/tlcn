@@ -7,7 +7,7 @@ export default (props) => {
     longitude: props.locations[2].coordinates[0],
     width: '100%',
     height: '650px',
-    zoom: 6,
+    zoom: 2,
   });
   const [selectedLoc, setSelectedLoc] = useState(null);
 

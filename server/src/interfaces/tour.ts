@@ -30,6 +30,9 @@ export interface ITourAttrs {
   locations: [ILocationsDOC];
   duration: number;
   comments: [string];
+  policy: string;
+  numOfPerson: number;
+  vehicle: string;
 }
 
 export interface ITourDoc extends mongoose.Document {
@@ -51,4 +54,7 @@ export interface ITourDoc extends mongoose.Document {
   startLocation: IStartLocationDOC;
   locations: [ILocationsDOC];
   comments: [string];
+  policy: string;
+  numOfPerson: number;
+  vehicle: string;
 }
