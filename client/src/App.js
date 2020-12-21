@@ -22,7 +22,7 @@ import BlogGrid from './containers/blogGrid/blogGrid';
 import Promotion from './containers/promotion/promotion';
 import PromotionDetail from './containers/promotionDetail/promotionDetail';
 import Form from './components/form/form';
-
+import TourResultGrid from './containers/tourResultGrid/tourResultGrid';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -45,7 +45,7 @@ function App(props) {
       <Route path='/blogs' exact component={BlogGrid} />
       <Route path='/promotions' exact component={Promotion} />
       <Route path='/promotions/:slug' exact component={PromotionDetail} />
-
+      <Route path='/destination/:slug' exact component={TourResultGrid} />
       <Route
         path='/tour/:slug/booking/success'
         exact
@@ -75,6 +75,7 @@ function App(props) {
         <Route path='/blogs' exact component={BlogGrid} />
         <Route path='/promotions' exact component={Promotion} />
         <Route path='/promotions/:slug' exact component={PromotionDetail} />
+        <Route path='/destination/:slug' exact component={TourResultGrid} />
         <Route
           path='/tour/:slug/booking/success'
           exact

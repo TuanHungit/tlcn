@@ -54,17 +54,17 @@ export default () => {
               </div>
 
               <p class='mt-20'>
-                Excited him now natural saw passage offices you minuter. At by
-                asked being court hopes. Farther so friends am to detract.
-                Forbade concern do private be. Offending residence but men
-                engrossed shy.
+                Sứ mệnh của TH-Travel là giúp cho người Việt Nam đi du lịch dễ
+                dàng hơn. Các thông tin cẩm nang hướng dẫn du lịch, kinh nghiệm
+                du lịch, blog du lịch là kênh cung cấp thông tin hữu ích cho rất
+                nhiều khách du lịch Việt Nam.
               </p>
 
               <a
                 href='tour-detail-02.html#'
                 class='text-capitalize font14 h6 line-1 mb-0 font500 mt-30'
               >
-                read more{' '}
+                xem thêm{' '}
                 <i class='elegent-icon-arrow_right font18 inline-block-middle'></i>
               </a>
             </div>
@@ -74,25 +74,25 @@ export default () => {
                 <div class='row shrink-auto-sm gap-30'>
                   <div class='col-6 col-shrink'>
                     <div class='col-inner'>
-                      <h5 class='footer-title'>About company</h5>
+                      <h5 class='footer-title'>Sản phẩm / Dịch vụ</h5>
                       <ul class='footer-menu-list set-width'>
                         <li>
-                          <a href='tour-detail-02.html#'>Who we are</a>
+                          <a>Tour du lịch trong nước</a>
                         </li>
                         <li>
-                          <a href='tour-detail-02.html#'>Careers</a>
+                          <a>Tour du lịch nước ngoài</a>
                         </li>
                         <li>
-                          <a href='tour-detail-02.html#'>Company history</a>
+                          <a>Đặt vé online</a>
                         </li>
                         <li>
-                          <a href='tour-detail-02.html#'>Legal</a>
+                          <a href='tour-detail-02.html#'>Blog - Trao đổi</a>
                         </li>
                         <li>
-                          <a href='tour-detail-02.html#'>Partners</a>
+                          <a>Tour du lịch hấp dẫn</a>
                         </li>
                         <li>
-                          <a href='tour-detail-02.html#'>Privacy notice</a>
+                          <a>Bảo hiểm du lịch</a>
                         </li>
                       </ul>
                     </div>

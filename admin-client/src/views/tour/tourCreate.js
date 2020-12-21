@@ -44,6 +44,7 @@ function TourCreate(props) {
   const [country, setCountry] = useState("");
   const [desList, setDesList] = useState(null);
   const [policy, setPolicy] = useState("");
+  const [label, setLabel] = useState("");
   const [numOfPerson, setNumOfPerson] = useState(0);
   const [vehicle, setVehicle] = useState("");
   const [startLocation, setStartLocation] = useState({
@@ -82,6 +83,7 @@ function TourCreate(props) {
           duration,
           policy,
           vehicle,
+          label,
           numOfPerson,
           startLocation,
           summary,
@@ -111,15 +113,11 @@ function TourCreate(props) {
   const onChangeSummary = (value) => {
     setSummary(value);
   };
-
+  console.log(images);
   const crop = {
-    crop: {
-      aspect: 16 / 9,
-      unit: "%",
-      width: 30,
-      x: 1000,
-      y: 700,
-    },
+    unit: "%",
+    aspect: 4 / 3,
+    width: "100",
   };
   const convertToISOString = (list) => {
     return list.map((el) => el.toISOString());
@@ -183,7 +181,7 @@ function TourCreate(props) {
                             <i class="fas fa-info-circle"></i>
                           </CTooltip>
                         </CCol>
-                        <CCol lg="4">
+                        <CCol lg="2">
                           {" "}
                           <input
                             frameBorder={false}
@@ -194,8 +192,8 @@ function TourCreate(props) {
                             onChange={(e) => setDuration(e.target.value)}
                           />
                         </CCol>
-                        <CCol lg="1"></CCol>
-                        <CCol lg="2">
+                        <CCol lg="2"></CCol>
+                        <CCol lg="3">
                           Số người {"  "}
                           <CTooltip content="Hello world! A tooltip example">
                             <i class="fas fa-info-circle"></i>
@@ -326,7 +324,33 @@ function TourCreate(props) {
                           </CSelect>
                         </CCol>
                       </CRow>
+                      <CRow className="py-2">
+                        <CCol lg="5">
+                          Gắn nhãn {"  "}
+                          <CTooltip content="Hello world! A tooltip example">
+                            <i class="fas fa-info-circle"></i>
+                          </CTooltip>
+                        </CCol>
+                        <CCol lg="7">
+                          <CSelect
+                            class="form-select"
+                            onChange={(e) => setLabel(e.target.value)}
+                            required
+                          >
+                            <option selected>Chọn nhãn</option>
 
+                            <option key="1" value="Tour mới">
+                              Tour mới
+                            </option>
+                            <option key="1" value="Tour tết">
+                              Tour tết
+                            </option>
+                            <option key="1" value="Tour nổi bật">
+                              Tour nổi bật
+                            </option>
+                          </CSelect>
+                        </CCol>
+                      </CRow>
                       <CRow className="py-2">
                         <CCol lg="5">
                           Giá người lớn{"  "}
@@ -387,8 +411,7 @@ function TourCreate(props) {
                         setImages={setImages}
                         theme={"light"}
                         max={10}
-                        cropConfig={{ minWidth: 300 }}
-                        // cropConfig={{ crop, ruleOfThirds: true }}
+                        cropConfig={{ crop, ruleOfThirds: true }}
                       />
                     </CCol>
                   </CRow>

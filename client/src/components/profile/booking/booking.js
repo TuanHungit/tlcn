@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Spinner from '../../UI/Spinner/Spinner';
 import ConvertDateToView from '../../../common/convertDateForView';
 import ConvertPriceToView from '../../../common/convertPriceForView';
+import './booking.css';
 export default (props) => {
   const [tourName, setTourName] = useState();
+  const [policy, setPolicy] = useState();
+  const [checked, setChecked] = useState(false);
   useEffect(() => {
     if (props.bookingList == null) {
       props.onFetchBookingFromUser();
@@ -25,7 +28,7 @@ export default (props) => {
           <table class=' table-responsive table-sm  table-striped table-hover table-bordered'>
             <thead>
               <tr>
-                <th scope='col'>Stt</th>
+                <th scope='col'>STT</th>
                 <th scope='col'>Tour</th>
                 <th scope='col'>Ngày khởi hành</th>
                 <th scope='col'>Số người</th>
@@ -49,9 +52,13 @@ export default (props) => {
                       data-target='#cancelTourModal'
                       data-backdrop='static'
                       data-keyboard='false'
-                      onClick={(e) => setTourName(el.tour.name)}
+                      onClick={(e) => {
+                        setTourName(el.tour.name);
+                        setPolicy(el.tour.policy);
+                        setChecked(false);
+                      }}
                     >
-                      <i class='fas fa-backspace'></i> Hủy
+                      <i class='fas fa-backspace'></i>
                     </a>
                   </td>
                 </tr>
@@ -59,7 +66,7 @@ export default (props) => {
             </tbody>
           </table>
           <div
-            class='modal fade'
+            class='modal fade  form-login-modal'
             id='cancelTourModal'
             tabindex='-1'
             role='dialog'
@@ -81,17 +88,47 @@ export default (props) => {
                     <span aria-hidden='true'>&times;</span>
                   </button>
                 </div>
-                <div class='modal-body'>...</div>
+                <div class='modal-body'>
+                  <div className='policy'>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: policy,
+                      }}
+                    />
+                  </div>
+
+                  <div class='custom-control custom-checkbox pt-2'>
+                    <input
+                      id='formDraftPayment02-terms'
+                      name='formDraftPayment02-terms'
+                      type='checkbox'
+                      defaultChecked={checked}
+                      class='custom-control-input'
+                      value='paymentsCreditCard'
+                      onChange={(e) => setChecked(!checked)}
+                      required
+                    />
+                    <label
+                      class='custom-control-label'
+                      for='formDraftPayment02-terms'
+                    >
+                      Tôi đã đọc và đồng ý với <a>Điều khoản và Quy định</a>
+                    </label>
+                  </div>
+                </div>
                 <div class='modal-footer'>
+                  <button
+                    type='button'
+                    className={`btn btn-primary ${!checked ? 'disabled' : ''}`}
+                  >
+                    Hủy tour
+                  </button>
                   <button
                     type='button'
                     class='btn btn-secondary'
                     data-dismiss='modal'
                   >
-                    Close
-                  </button>
-                  <button type='button' class='btn btn-primary'>
-                    Save changes
+                    Bỏ qua
                   </button>
                 </div>
               </div>

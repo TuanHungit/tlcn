@@ -2,14 +2,21 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import StarRating from '../../UI/star/star';
 import ToMoneyForView from '../../../common/convertPriceForView';
-
+import './tourCard.css';
 export default (props) => {
   return (
-    <div class='col'>
-      <figure class='tour-grid-item-01'>
+    <div class='col '>
+      <figure class='container tour-grid-item-01 '>
         <NavLink to={`/tour/${props.tour.slug}`}>
           <div class='image'>
-            <img src={`http://${props.tour.images[0]}`} alt='images' />
+            <img
+              src={`http://${props.tour.images[0]}`}
+              alt='images'
+              class='figure-img img-fluid rounded'
+            />
+            {props.tour.label ? (
+              <div class='text-block'>{props.tour.label}</div>
+            ) : null}
           </div>
           <figcaption class='content'>
             <h5>{props.tour.name}</h5>

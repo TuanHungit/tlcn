@@ -1,0 +1,12 @@
+.image {
+  position: relative;
+}
+.text-block {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ff1944;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}

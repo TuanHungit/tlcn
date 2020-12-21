@@ -107,6 +107,9 @@ const tourSchema = new mongoose.Schema(
         day: Number,
       },
     ],
+    label: {
+      type: String,
+    },
     destination: {
       type: mongoose.Types.ObjectId,
       ref: 'Destination',

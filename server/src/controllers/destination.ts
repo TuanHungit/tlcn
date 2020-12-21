@@ -6,7 +6,7 @@ import {
   getAll,
   getOne,
 } from '../services/handlerFactory';
-
+import { BadRequestError } from '@thticket/common';
 export const createOneDestination = createOne(Destination);
 export const getOneDestination = getOne(Destination);
 export const updateOneDestination = updateOne(Destination);

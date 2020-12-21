@@ -45,7 +45,7 @@ function App(props) {
         name="Login Page"
         render={(props) => <Login {...props} />}
       />
-      {/* <Redirect to="/" /> */}
+      <Redirect to="/login" />
     </Switch>
   );
   if (props.isAuthencated) {

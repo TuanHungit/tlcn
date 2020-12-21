@@ -1,7 +1,7 @@
 import { BadRequestError } from '../errors';
 import { Request, Response, NextFunction } from 'express';
 import { APIFeatures } from './apiFeatures';
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Model, Types } from 'mongoose';
 
 export const deleteOne = (Model: Model<any>) => {
   return async (req: Request, res: Response) => {

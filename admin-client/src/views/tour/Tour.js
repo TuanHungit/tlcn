@@ -27,15 +27,16 @@ import { getAllTour } from "../../api/tourApi";
 const fields = [
   // { key: "id", label: "INDEX", _style: { width: "5%" } },
   { key: "name", label: "TÊN", _style: { width: "20%" } },
-  { key: "price", label: "GIÁ TỪ", _style: { width: "7%" } },
+  { key: "priceAdults", label: "GIÁ TỪ", _style: { width: "7%" } },
   { key: "duration", label: "SỐ NGÀY", _style: { width: "7%" } },
   { key: "ratingsAverage", label: "ĐÁNH GIÁ", _style: { width: "7%" } },
   {
     key: "startLocation",
-    label: "VỊ TRÍ BẮT ĐẦU",
+    label: "NƠI KHỞI HÀNH",
     _style: { width: "10%" },
   },
   { key: "country", label: "ĐIỂM ĐẾN", _style: { width: "10%" } },
+  { key: "label", label: "NHÃN", _style: { width: "5%" } },
   {
     key: "show_details",
     label: "",
@@ -154,8 +155,17 @@ function Tour() {
                   {item.duration} ngày &amp; {item.duration - 1} đêm
                 </td>
               ),
-              price: (item) => <td>{toPriceForView(item.price)}</td>,
+              priceAdults: (item) => (
+                <td>
+                  <strong> {toPriceForView(item.priceAdults)}</strong>
+                </td>
+              ),
               startLocation: (item) => <td>{item.startLocation.address}</td>,
+              label: (item) => (
+                <td>
+                  <CBadge color={"danger"}>{item.label}</CBadge>
+                </td>
+              ),
               show_details: (item, index) => {
                 return (
                   <td className="py-2">

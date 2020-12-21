@@ -1,5 +1,6 @@
 const fs = require('fs');
 const mime = require('mime');
+import { Types } from 'mongoose';
 import { Tour } from '../models/tour';
 
 import { Destination } from '../models/destination';
@@ -13,6 +14,7 @@ import {
   updateOne,
   getOne,
 } from '../services/handlerFactory';
+import { APIFeatures } from '../services/apiFeatures';
 export const getAllTour = getAll(Tour);
 export const createOneTour = createOne(Tour);
 export const deleteOneTour = deleteOne(Tour);
@@ -24,12 +26,28 @@ export const getTourByDestination = async (
   res: Response,
   next: NextFunction
 ) => {
-  const destinationId = req.params.destId;
-  const destination = await Destination.findById(destinationId);
-  if (!destination) {
+  let destinationId = req.params.destId;
+
+  let doc = null;
+  if (!Types.ObjectId.isValid(destinationId)) {
+    doc = await Destination.findOne({ slug: destinationId });
+  } else {
+    doc = await Destination.findById(destinationId);
+  }
+  if (!doc) {
     throw new BadRequestError('Destination document not found with that ID!');
   }
-  const tours = await Tour.find({ destination: destinationId });
+
+  const features = new APIFeatures(
+    Tour.find({ destination: doc._id }),
+    req.query
+  )
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  const tours = await features.query;
+
   res.status(200).send(tours);
 };
 

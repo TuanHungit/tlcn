@@ -24,7 +24,7 @@ export const fetchDestination = (page = 1, limit = 6) => {
     dispatch(fetchDestinationStart());
     axios
       .get(
-        `/destinations/?page=${page}&limit=${limit}&sort=-numOfTour&fields=name,images,numOfTour`
+        `/destinations/?page=${page}&limit=${limit}&sort=-numOfTour&fields=name,images,numOfTour,slug`
       )
       .then((response) => {
         console.log(response);

@@ -14,7 +14,7 @@ class Signin extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Email Address',
+          placeholder: 'Địa chỉ email',
         },
         value: '',
         validation: {
@@ -142,35 +142,6 @@ class Signin extends Component {
         >
           <div className='modal-dialog' role='document'>
             <div className='modal-content shadow-lg'>
-              <nav className='d-none'>
-                <ul className='nav external-link-navs clearfix'>
-                  <li>
-                    <a
-                      className='active'
-                      data-toggle='tab'
-                      href='tour-detail-02.html#loginFormTabInModal-login'
-                    >
-                      Sign-in
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      data-toggle='tab'
-                      href='tour-detail-02.html#loginFormTabInModal-register'
-                    >
-                      Register{' '}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      data-toggle='tab'
-                      href='tour-detail-02.html#loginFormTabInModal-forgot-pass'
-                    >
-                      Forgot Password{' '}
-                    </a>
-                  </li>
-                </ul>
-              </nav>
               <div className='tab-content'>
                 <div
                   role='tabpanel'
@@ -179,8 +150,11 @@ class Signin extends Component {
                 >
                   <div className='form-login'>
                     <div className='form-header'>
-                      <h4>Welcome Back to SiteName</h4>
-                      <p>Sign in to your account to continue using SiteName</p>
+                      <h4>Chào mừng đến website của chúng tôi</h4>
+                      <p>
+                        Đăng nhập vào tài khoản để tiếp tục sử dụng dịch vụ của
+                        chúng tôi.
+                      </p>
                     </div>
 
                     <div className='form-body'>
@@ -196,7 +170,7 @@ class Signin extends Component {
                                     onClick={this.handleClick}
                                     disabled={!this.state.formIsValid}
                                   >
-                                    Sign-in
+                                    Đăng nhập
                                   </button>
                                 </div>
                                 <div className='ml-0 ml-md-15 mt-15 mt-md-0'>
@@ -210,7 +184,7 @@ class Signin extends Component {
                                       className='custom-control-label'
                                       for='loginFormTabInModal-rememberMe'
                                     >
-                                      Remember me
+                                      Nhớ tôi
                                     </label>
                                   </div>
                                 </div>
@@ -219,14 +193,14 @@ class Signin extends Component {
                                 href='tour-detail-02.html#loginFormTabInModal-forgot-pass'
                                 className='tab-external-link block mt-25 font600'
                               >
-                                Forgot password?
+                                Quên mật khẩu?
                               </a>
                             </div>
                           </div>
                           <div className='form-login-socials'>
                             <div className='login-socials-inner'>
                               <h5 className='mb-20'>
-                                Or sign-up with your socials
+                                hoặc đăng nhập bằng tài khoản mạng xã hội
                               </h5>
                               <button className='btn btn-login-with btn-facebook btn-block'>
                                 <i className='fab fa-facebook'></i> facebook
@@ -253,12 +227,12 @@ class Signin extends Component {
 
                     <div className='form-footer'>
                       <p>
-                        Already a member?{' '}
+                        Bạn chưa có tài khoản?{' '}
                         <a
                           href='tour-detail-02.html#loginFormTabInModal-login'
                           className='tab-external-link font600'
                         >
-                          Sign in
+                          Đăng ký
                         </a>
                       </p>
                     </div>

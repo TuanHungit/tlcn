@@ -6,6 +6,7 @@ import Reviews from '../../components/reviews/reviews';
 import Blogs from '../../components/blogs/blogs';
 import Search from '../../components/UI/search/search';
 import BestTour from '../../components/tour/bestTour/BestTour';
+import TourCarousel from '../../components/tour/tourCarousel/tourCarousel';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Intro from '../../components/intro/intro';
@@ -23,6 +24,7 @@ class LandingPage extends Component {
       'ratingsAverage',
       'startLocation',
       'country',
+      'label',
       'slug',
     ]);
     this.props.onFetchREview(0, 15, ['review', 'user', 'createdAt']);
@@ -61,7 +63,13 @@ class LandingPage extends Component {
     ) : (
       <Spinner />
     );
+    let tourCarousel = this.props.tourError ? (
+      <p>Destinations can't be loaded!</p>
+    ) : (
+      <Spinner />
+    );
     if (this.props.tourList) {
+      tourCarousel = <TourCarousel tourList={this.props.tourList} />;
       bestTour = <BestTour tourList={this.props.tourList} />;
     }
     //fetch review
@@ -130,15 +138,13 @@ class LandingPage extends Component {
                 </div>
               </div>
             </div>
-
-            <div class='clear mb-100'></div>
-            {destinations}
-            {bestTour}
           </div>
+          {tourCarousel}
+          {destinations}
+          {/* {bestTour} */}
           {blogList}
           {reviewList}
         </section>
-
         <Intro />
       </div>
     );

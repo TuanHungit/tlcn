@@ -17,9 +17,39 @@ class Reviews extends Component {
     const settings = {
       dots: true,
       infinite: true,
-      speed: 500,
+      speed: 1000,
+      autoPlay: true,
       slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            autoPlay: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoPlay: true,
+            initialSlide: 1,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            autoPlay: true,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
     return (
       <div

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import slugify from 'slugify';
 import {
   ICountryDoc,
   IDestinationAttr,
@@ -17,16 +18,18 @@ const destinationSchema = new mongoose.Schema(
     //   required: true,
     // },
     images: [String],
-    destination: 
-      {
-        // country: String,
-        // description: String,
-        type: String,
-        // required: true,
-      },
+    destination: {
+      // country: String,
+      // description: String,
+      type: String,
+      // required: true,
+    },
     numOfTour: {
       type: Number,
       default: 0,
+    },
+    slug: {
+      type: String,
     },
   },
   {
@@ -43,7 +46,10 @@ const destinationSchema = new mongoose.Schema(
 destinationSchema.statics.build = (attr: IDestinationAttr) => {
   return new Destination(attr);
 };
-
+destinationSchema.pre<any>('save', function (next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
+});
 const Destination = mongoose.model<IDestinationDoc, IDestinationModel>(
   'Destination',
   destinationSchema
