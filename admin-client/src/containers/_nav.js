@@ -39,6 +39,12 @@ export default [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Hóa đơn",
+    to: "/booking",
+    icon: "cil-layers",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Product",
     to: "/product",
     icon: "cil-puzzle",

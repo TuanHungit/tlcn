@@ -1,4 +1,5 @@
 .policy {
+  padding-top: -10px;
   height: 370px;
   overflow: hidden;
   overflow-y: scroll;

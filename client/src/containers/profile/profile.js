@@ -16,6 +16,8 @@ const Profile = (props) => {
         onUpdateProfile={props.onUpdateProfile}
         onFetchBookingFromUser={props.onFetchBookingFromUser}
         bookingList={props.bookingList}
+        updateBookingSuccess={props.updateBookingSuccess}
+        onUpdateBooking={props.onUpdateBooking}
       />
     );
   }
@@ -28,6 +30,7 @@ const mapPropsToState = (state) => {
     error: state.profile.error,
     user: state.auth.user,
     bookingList: state.booking.bookingList,
+    updateBookingSuccess: state.booking.updateBookingSuccess,
   };
 };
 const mapDispatchToState = (dispatch) => {
@@ -35,6 +38,8 @@ const mapDispatchToState = (dispatch) => {
     onUpdateProfile: (body) => dispatch(actionCreators.updateProfile(body)),
     onFetchBookingFromUser: () =>
       dispatch(actionCreators.fetchBookingFromUser()),
+    onUpdateBooking: (bookingId, body) =>
+      dispatch(actionCreators.updateBooking(bookingId, body)),
   };
 };
 export default connect(mapPropsToState, mapDispatchToState)(Profile);

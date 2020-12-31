@@ -86,7 +86,6 @@ export const fetchTourDetail = (slug) => {
         dispatch(setTourDetail(response.data));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(fetchTourDetailFailed());
       });
   };

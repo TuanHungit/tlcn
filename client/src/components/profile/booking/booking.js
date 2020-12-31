@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Spinner from '../../UI/Spinner/Spinner';
 import ConvertDateToView from '../../../common/convertDateForView';
 import ConvertPriceToView from '../../../common/convertPriceForView';
 import './booking.css';
 export default (props) => {
   const [tourName, setTourName] = useState();
+  const [bookingId, setBookingId] = useState(0);
   const [policy, setPolicy] = useState();
   const [checked, setChecked] = useState(false);
+  const [updated, setUpdated] = useState(false);
+  const buttonRef = useRef(null);
   useEffect(() => {
-    if (props.bookingList == null) {
+    if (props.bookingList === null) {
       props.onFetchBookingFromUser();
     }
     return;
   }, [props.bookingList]);
+  useEffect(() => {
+    if (updated) {
+      props.onFetchBookingFromUser();
+      setUpdated(false);
+    }
+  }, [updated]);
+
   let bookingList = <Spinner />;
   if (props.bookingList) {
     bookingList = (
@@ -45,7 +55,7 @@ export default (props) => {
                   <td>{ConvertDateToView(el.startDate)}</td>
                   <td>{el.numOfPersonAdults}</td>
                   <td>{ConvertPriceToView(el.total)}</td>
-                  <td>Đang chờ</td>
+                  <td>{el.status}</td>
                   <td>
                     <a
                       data-toggle='modal'
@@ -54,6 +64,7 @@ export default (props) => {
                       data-keyboard='false'
                       onClick={(e) => {
                         setTourName(el.tour.name);
+                        setBookingId(el.id);
                         setPolicy(el.tour.policy);
                         setChecked(false);
                       }}
@@ -89,6 +100,7 @@ export default (props) => {
                   </button>
                 </div>
                 <div class='modal-body'>
+                  <h4>Vui lòng đọc kỹ chính sách Tour trước khi hủy</h4>
                   <div className='policy'>
                     <div
                       dangerouslySetInnerHTML={{
@@ -120,6 +132,11 @@ export default (props) => {
                   <button
                     type='button'
                     className={`btn btn-primary ${!checked ? 'disabled' : ''}`}
+                    onClick={(e) => {
+                      props.onUpdateBooking(bookingId, { status: 'cancel' });
+                      setUpdated((state) => !state);
+                      buttonRef.current.click();
+                    }}
                   >
                     Hủy tour
                   </button>
@@ -127,6 +144,7 @@ export default (props) => {
                     type='button'
                     class='btn btn-secondary'
                     data-dismiss='modal'
+                    ref={buttonRef}
                   >
                     Bỏ qua
                   </button>

@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import { userRouter } from './routes/user/user-router';
-
+const path = require('path');
 import { errorHandler } from './middlewares';
 import { NotFoundError } from './errors';
 import { blogRouter } from './routes/blog/blog-router';
@@ -64,6 +64,14 @@ app.use(`${baseURL}/tours`, tourRouter);
 app.use(`${baseURL}/reviews`, reviewRouter);
 app.use(`${baseURL}/promotions`, promotionRouter);
 
+if (process.env.NODE_ENV === 'development') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
 app.all('*', async () => {
   throw new NotFoundError();
 });

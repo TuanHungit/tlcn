@@ -1,5 +1,5 @@
 import React from 'react';
-import TourCard from '../../tour/tourCard/tourCard';
+import TourGrid from '../../../containers/tourResultGrid/tourGrid/tourGrid';
 export default (props) => {
   return (
     <div class='main-wrapper scrollspy-container'>
@@ -500,14 +500,14 @@ export default (props) => {
                             props.clickedSortHandler(e.target.value)
                           }
                         >
-                          <option value='name' selected>
+                          <option value='-name' selected>
                             Tên: A đến Z
                           </option>
-                          <option value='-name'>Tên: Z đến A</option>
-                          <option value='priceAdults'>Giá: Cao đến Thấp</option>
+                          <option value='name'>Tên: Z đến A</option>
                           <option value='-priceAdults'>
-                            Giá: Thấp đến Cao
+                            Giá: Cao đến Thấp
                           </option>
+                          <option value='priceAdults'>Giá: Thấp đến Cao</option>
                         </select>
                       </div>
                     </div>
@@ -533,15 +533,7 @@ export default (props) => {
                   </div>
                 </div>
 
-                <div class='row equal-height cols-1 cols-sm-2 gap-20 mb-25'>
-                  {props.tourList.length === 0 ? (
-                    <p>No tour found!</p>
-                  ) : (
-                    props.tourList.map((el, key) => (
-                      <TourCard key={key} tour={el} />
-                    ))
-                  )}
-                </div>
+                <TourGrid tourList={props.tourList} />
 
                 <div class='pager-wrappper mt-40'>
                   <div class='pager-innner'>

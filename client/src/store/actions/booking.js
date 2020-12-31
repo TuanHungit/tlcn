@@ -49,3 +49,17 @@ export const fetchBookingFromUser = () => {
       });
   };
 };
+
+export const updateBooking = (bookingId, data) => {
+  return (dispatch) => {
+    dispatch({ type: actionTypes.UPDATE_BOOKING_START });
+    axios
+      .patch(`/booking/${bookingId}`, data)
+      .then((res) => {
+        dispatch({ type: actionTypes.UPDATE_BOOKING_SUCCESS });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};

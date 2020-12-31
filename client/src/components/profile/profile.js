@@ -98,6 +98,8 @@ export default (props) => {
                   <Booking
                     onFetchBookingFromUser={props.onFetchBookingFromUser}
                     bookingList={props.bookingList}
+                    onUpdateBooking={props.onUpdateBooking}
+                    updateBookingSuccess={props.updateBookingSuccess}
                   />
                 )}
               />

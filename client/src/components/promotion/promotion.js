@@ -8,6 +8,7 @@ export default (props) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoPlay: true,
   };
   return (
     <div class='main-wrapper scrollspy-container'>

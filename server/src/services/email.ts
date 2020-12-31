@@ -104,4 +104,27 @@ export class Email {
         console.log(error);
       });
   };
+
+  sendBooking = async (data: any) => {
+    const renderFile = await ejs.renderFile(
+      path.join(__dirname, './template/invoice.ejs'),
+      {
+        ...data,
+        name: data.user.name,
+        phone: data.user.phone,
+        email: data.user.email,
+        date: Date.now(),
+        tourName: data.tour.name,
+        discount: data.discount || 0,
+      }
+    );
+
+    this.sendMail({
+      from: this.from,
+      to: data.user.email,
+      subject: 'Xác nhận thanh toán',
+      text: 'Xác nhận thanh toán',
+      html: renderFile,
+    });
+  };
 }

@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { Tour } from '../models/tour';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError } from './../errors/bad-request-error';
+import { Email } from '../services/email';
 import {
   createOne,
   updateOne,
@@ -11,7 +12,7 @@ import {
   getAll,
   getOne,
 } from '../services/handlerFactory';
-export const createOneBooking = createOne(Booking);
+// export const createOneBooking = createOne(Booking);
 export const getOneBooking = getOne(Booking);
 export const updateOneBooking = updateOne(Booking);
 export const deleteOneBooking = deleteOne(Booking);
@@ -23,6 +24,12 @@ export const getAllBooking = getAll(Booking);
 //   const price = session.display_items[0].amount / 100;
 //   await Booking.create({ tour, user, price });
 // };
+
+export const createOneBooking = async (req: Request, res: Response) => {
+  const doc = await Booking.create(req.body);
+  new Email().sendBooking(req.body);
+  res.status(201).json(doc);
+};
 export const getCheckoutSession = async (
   req: Request,
   res: Response,

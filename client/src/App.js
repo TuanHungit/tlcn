@@ -1,28 +1,41 @@
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import {
+  Route,
+  Switch,
+  withRouter,
+  Redirect,
+  BrowserRouter,
+} from 'react-router-dom';
 
+import React, { useEffect, lazy, Suspense } from 'react';
 import './App.css';
 import * as actionCreator from './store/actions';
-import TourDetail from './containers/tourDetail/tourDetail';
-import Header from './components/layout/header';
-import Footer from './components/layout/footer';
-import LoginModal from './containers/auth/signin/signin';
-import Register from './containers/auth/signup/signup';
-import LandingPage from './containers/landingPage/LandingPage';
-import Logout from './containers/auth/signout/signout';
-import Profile from './containers/profile/profile';
-import ResultSearch from './components/search/ResultSearch';
-import Booking from './containers/booking/booking';
-import BookingSuccess from './components/booking/bookingSuccess/bookingSuccess';
-import SingleBlog from './containers/singleBlog/singleBlog';
-import ScrollToTop from './components/UI/scrollTop/scrollTop';
-import BlogEditor from './containers/blogEditor/blogEditer';
-import BlogGrid from './containers/blogGrid/blogGrid';
-import Promotion from './containers/promotion/promotion';
-import PromotionDetail from './containers/promotionDetail/promotionDetail';
-import Form from './components/form/form';
-import TourResultGrid from './containers/tourResultGrid/tourResultGrid';
+import Loading from './components/UI/Spinner/loading';
+const TourDetail = lazy(() => import('./containers/tourDetail/tourDetail'));
+const Header = lazy(() => import('./components/layout/header'));
+const Footer = lazy(() => import('./components/layout/footer'));
+const LoginModal = lazy(() => import('./containers/auth/signin/signin'));
+const Register = lazy(() => import('./containers/auth/signup/signup'));
+const LandingPage = lazy(() => import('./containers/landingPage/LandingPage'));
+const Logout = lazy(() => import('./containers/auth/signout/signout'));
+const Profile = lazy(() => import('./containers/profile/profile'));
+const ResultSearch = lazy(() => import('./components/search/ResultSearch'));
+const Booking = lazy(() => import('./containers/booking/booking'));
+const BookingSuccess = lazy(() =>
+  import('./components/booking/bookingSuccess/bookingSuccess')
+);
+const SingleBlog = lazy(() => import('./containers/singleBlog/singleBlog'));
+const ScrollToTop = lazy(() => import('./components/UI/scrollTop/scrollTop'));
+const BlogEditor = lazy(() => import('./containers/blogEditor/blogEditer'));
+const BlogGrid = lazy(() => import('./containers/blogGrid/blogGrid'));
+const Promotion = lazy(() => import('./containers/promotion/promotion'));
+const PromotionDetail = lazy(() =>
+  import('./containers/promotionDetail/promotionDetail')
+);
+const Form = lazy(() => import('./components/form/form'));
+const TourResultGrid = lazy(() =>
+  import('./containers/tourResultGrid/tourResultGrid')
+);
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -97,15 +110,17 @@ function App(props) {
     }
   }
   return (
-    <div>
-      <Header isAuthencated={props.isAuthencated} user={user} photo={photo} />
-      {routes}
-      <Form />
-      <Register />
-      <LoginModal />
-      <ScrollToTop />
-      <Footer />
-    </div>
+    <>
+      <Suspense fallback={<Loading />}>
+        <Header isAuthencated={props.isAuthencated} user={user} photo={photo} />
+        {routes}
+        <Form />
+        <Register />
+        <LoginModal />
+        <ScrollToTop />
+        <Footer />
+      </Suspense>
+    </>
   );
 }
 // export default App;

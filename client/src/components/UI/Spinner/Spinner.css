@@ -1,6 +1,7 @@
 .container-spinner {
   height: 800px;
   width: 100%;
+  filter: brightness(50%);
 }
 .loader {
   position: absolute;

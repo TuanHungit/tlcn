@@ -4,6 +4,7 @@ const initialState = {
   bookingInfo: null,
   bookingError: false,
   bookingList: null,
+  updateBookingSuccess: false,
 };
 
 const setBookingInfo = (state, action) => {
@@ -35,6 +36,19 @@ const fetchBookingFromUserFailed = (state, action) => {
     error: true,
   };
 };
+const updateBookingSuccess = (state) => {
+  return {
+    ...state,
+    updateBookingSuccess: true,
+  };
+};
+
+const updateBookingStart = (state) => {
+  return {
+    ...state,
+    updateBookingSuccess: false,
+  };
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_BOOKING_INFO:
@@ -45,6 +59,10 @@ const reducer = (state = initialState, action) => {
       return fetchBookingFromUserFailed(state, action);
     case actionTypes.FETCH_BOOKING_FROM_USER_SUCCESS:
       return fetchBookingFromUserSuccess(state, action);
+    case actionTypes.UPDATE_BOOKING_SUCCESS:
+      return updateBookingSuccess(state);
+    case actionTypes.UPDATE_BOOKING_START:
+      return updateBookingStart(state);
     default:
       return state;
   }

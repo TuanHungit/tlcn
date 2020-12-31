@@ -21,7 +21,7 @@ router.post('/create-payment-intent', paymentRequires, createPaymentIntent);
 router.route('/').get(getAllBooking).post(createOneBooking);
 
 router
-  .route('/bookings/:id')
+  .route('/:id')
   .get(getOneBooking)
   .patch(updateOneBooking)
   .delete(deleteOneBooking);

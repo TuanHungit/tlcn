@@ -2,7 +2,7 @@ import { BadRequestError } from '../errors';
 import { Request, Response, NextFunction } from 'express';
 import { APIFeatures } from './apiFeatures';
 import mongoose, { Model, Types } from 'mongoose';
-
+import { pusher } from './pusher';
 export const deleteOne = (Model: Model<any>) => {
   return async (req: Request, res: Response) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
@@ -16,10 +16,17 @@ export const deleteOne = (Model: Model<any>) => {
 
 export const updateOne = (Model: Model<any>) => {
   return async (req: Request, res: Response) => {
-    const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const doc = await Model.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      },
+      (err, doc) => {
+        pusher.trigger('my-channel', 'doc_updated', doc);
+      }
+    );
 
     if (!doc) {
       throw new BadRequestError('No document found with that ID');

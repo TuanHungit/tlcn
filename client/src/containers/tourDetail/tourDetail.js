@@ -109,14 +109,7 @@ const TourDetail = (props) => {
   };
 
   const data = props.tourDetail;
-  let tourDetail = props.tourDetailError ? (
-    <p>Tour detail can't be loaded!</p>
-  ) : (
-    <div>
-      <div class='pt-0 pt-xl-15'></div>
-      <Spinner />
-    </div>
-  );
+  let tourDetail = <Spinner />;
 
   let similarTourList = props.similarTourError ? (
     <p>Similar Tour can't be loaded!</p>
@@ -130,7 +123,7 @@ const TourDetail = (props) => {
   if (props.userReview !== null) {
     userReview = props.userReview;
   }
-  if (data && props.bookingInfo) {
+  if (data && props.bookingInfo && !props.loading) {
     tourDetail = (
       <div class='main-wrapper scrollspy-container'>
         <section
@@ -262,7 +255,7 @@ const TourDetail = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    similarTourError: state.tour.similarTourError,
+    loading: state.tour.loading,
     similarTourList: state.tour.similarTourList,
     tourDetailError: state.tour.tourDetailError,
     tourDetail: state.tour.tourDetail,

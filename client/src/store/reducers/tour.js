@@ -15,6 +15,7 @@ const fetchTourFailed = (state) => {
   return {
     ...state,
     error: true,
+    loading: false,
   };
 };
 const fetchTourStart = (state) => {

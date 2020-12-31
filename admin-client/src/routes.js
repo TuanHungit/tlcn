@@ -47,6 +47,7 @@ const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const Destination = React.lazy(() => import("./views/destination/Destination"));
 const Account = React.lazy(() => import("./views/account/Account"));
 const Tour = React.lazy(() => import("./views/tour/Tour"));
+const Booking = React.lazy(() => import("./views/booking/booking"));
 const Promotion = React.lazy(() => import("./views/promotion/promotion"));
 const Product = React.lazy(() => import("./views/product/Product"));
 const EmailPromotion = React.lazy(() =>
@@ -81,7 +82,11 @@ const routes = [
     name: "Email đăng ký khuyến mãi",
     component: EmailPromotion,
   },
-
+  {
+    path: "/booking",
+    name: "Hóa đơn",
+    component: Booking,
+  },
   { path: "/product", name: "Product", component: Product },
   { path: "/bill", name: "Bill", component: Bill },
   { path: "/shipper", name: "Shipper", component: Shipper },
