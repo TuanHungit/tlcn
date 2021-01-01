@@ -36,16 +36,25 @@ export default (props) => {
           </div>
         </div>
         <div className='list-schedule'>
-          {props.start.map((el, key) => (
-            <ScheduleItem
-              start={el}
-              duration={props.duration}
-              price={props.price}
-              key={key}
-              changeDateHandler={props.changeDateHandler}
-              closeModalHandler={props.closeModalHandler}
-            />
-          ))}
+          {props.start.map((el, key) => {
+            if (
+              new Date(el).getTime() - new Date().getTime() > 0 &&
+              new Date(
+                new Date(el).getTime() - new Date().getTime()
+              ).getUTCDate() >= 10
+            ) {
+              return (
+                <ScheduleItem
+                  start={el}
+                  duration={props.duration}
+                  priceAdults={props.priceAdults}
+                  key={key}
+                  changeDateHandler={props.changeDateHandler}
+                  closeModalHandler={props.closeModalHandler}
+                />
+              );
+            }
+          })}
         </div>
       </div>
       <div class='mb-50'></div>

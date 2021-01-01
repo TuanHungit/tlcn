@@ -12,12 +12,17 @@ const DnDCalendar = withDragAndDrop(Calendar);
 class App extends Component {
   state = {
     events: this.props.availableDate.map((el) => {
-      return {
-        start: el,
-        end: el,
-        title: 'Còn chỗ',
-        allDay: true,
-      };
+      if (
+        new Date(el).getTime() - new Date().getTime() > 0 &&
+        new Date(new Date(el).getTime() - new Date().getTime()).getUTCDate() >=
+          10
+      )
+        return {
+          start: el,
+          end: el,
+          title: 'Còn chỗ',
+          allDay: true,
+        };
     }),
   };
 
@@ -41,7 +46,7 @@ class App extends Component {
             events={this.state.events}
             localizer={localizer}
             onEventDrop={this.onEventDrop}
-            style={{ height: '50vh', width: '100%' }}
+            style={{ height: '60vh', width: '100%' }}
           />
         </div>
         <div className='mb-50'></div>

@@ -86,7 +86,7 @@ const bookingSchema = new mongoose.Schema(
 bookingSchema.pre<IBookingDoc>(/^find/, function (next) {
   this.populate({
     path: 'tour',
-    select: 'name policy',
+    select: 'name policy slug',
   });
   next();
 });

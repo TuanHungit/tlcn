@@ -3,6 +3,7 @@ import { Collapse } from 'react-collapse';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import StripeCheckoutForm from './stripe/stripe';
+import ToPriceForView from '../../../common/convertPriceForView';
 import './payment.css';
 const stripePromise = loadStripe(
   'pk_test_51GYOVxL6ceTfSxmONsG00SRGhgEy12v0le3Yu0MOOvsG1wFSerJMvZRlqZ8YSRWDwjPBTa9iToEmG260hVgjOzln00CVJ5foFx'
@@ -37,7 +38,8 @@ export default (props) => {
         <h4 class='alert-heading line-125 mb-5'>Chúc mừng!</h4>
         <p class='lead mb-10 font18'>
           Bạn đã có mức giá tốt nhất chỉ{' '}
-          <strong class='text-dark'>$37.71</strong> mỗi người
+          {ToPriceForView(props.bookingInfo.total)}
+          <strong class='text-dark'></strong> mỗi người
         </p>
         <hr class='mt-0 mb-10' />
         <p class='mb-0'>
@@ -103,7 +105,8 @@ export default (props) => {
         <Collapse isOpened={card}>
           <div class='payment-form '>
             <h5 className='font16'>
-              Tổng số tiền thanh toán của bạn là: $ 150.60 US
+              Tổng số tiền thanh toán của bạn là:{' '}
+              {ToPriceForView(props.bookingInfo.total)}
             </h5>
             <p className='font14'>
               Số tiền thanh toán sẽ được ghi nợ vào tài khoản của bạn sau khi
@@ -129,7 +132,8 @@ export default (props) => {
         <Collapse isOpened={paypal}>
           <div class='payment-form'>
             <h5 className='font16'>
-              Tổng số tiền thanh toán của bạn là: $ 150.60 US
+              Tổng số tiền thanh toán của bạn là:{' '}
+              {ToPriceForView(props.bookingInfo.total)}
             </h5>
             <p className='font14'>
               Số tiền thanh toán sẽ được ghi nợ vào tài khoản của bạn sau khi

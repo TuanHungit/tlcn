@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Spinner from '../../UI/Spinner/Spinner';
 import ConvertDateToView from '../../../common/convertDateForView';
 import ConvertPriceToView from '../../../common/convertPriceForView';
+import { Link } from 'react-router-dom';
 import './booking.css';
 export default (props) => {
   const [tourName, setTourName] = useState();
@@ -22,7 +23,16 @@ export default (props) => {
       setUpdated(false);
     }
   }, [updated]);
-
+  const getValueStatus = (status) => {
+    switch (status) {
+      case 'cancel':
+        return 'Đã hủy';
+      case 'waiting':
+        return 'Đang chờ';
+      default:
+        return 'Đã xong';
+    }
+  };
   let bookingList = <Spinner />;
   if (props.bookingList) {
     bookingList = (
@@ -51,11 +61,13 @@ export default (props) => {
               {Object.values(props.bookingList).map((el, key) => (
                 <tr>
                   <th scope='row'>{key + 1}</th>
-                  <td>{el.tour.name}</td>
+                  <td>
+                    <Link to={`/tour/${el.tour.slug}`}>{el.tour.name}</Link>{' '}
+                  </td>
                   <td>{ConvertDateToView(el.startDate)}</td>
                   <td>{el.numOfPersonAdults}</td>
                   <td>{ConvertPriceToView(el.total)}</td>
-                  <td>{el.status}</td>
+                  <td>{getValueStatus(el.status)}</td>
                   <td>
                     <a
                       data-toggle='modal'

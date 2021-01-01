@@ -181,6 +181,7 @@ const TourDetail = (props) => {
                           summary: data.summary,
                           description: data.description,
                           locations: { ...data.locations },
+                          vehicle: data.vehicle,
                         }}
                       />
                       <Map locations={data.locations} />
@@ -242,7 +243,7 @@ const TourDetail = (props) => {
               <BookingModal
                 duration={data.duration}
                 start={data.availableDate}
-                price={data.price}
+                priceAdults={data.priceAdults}
                 changeDateHandler={changeDateHandler}
               />
             </div>

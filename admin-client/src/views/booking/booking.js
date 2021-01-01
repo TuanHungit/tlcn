@@ -28,7 +28,7 @@ const fields = [
   // { key: "id", label: "INDEX", _style: { width: "5%" } },
   { key: "tour", label: "TÊN TOUR", _style: { width: "20%" } },
   { key: "total", label: "THÀNH TIỀN", _style: { width: "7%" } },
-  { key: "discount", label: "GIẢM GIÁ", _style: { width: "7%" } },
+  { key: "createdAt", label: "NGÀY THANH TOÁN", _style: { width: "7%" } },
   { key: "startDate", label: "NGÀY BẮT ĐẦU", _style: { width: "7%" } },
   {
     key: "status",
@@ -167,7 +167,7 @@ function Booking() {
                   <CBadge color={"danger"}>{toPriceForView(item.total)}</CBadge>
                 </td>
               ),
-              discount: (item) => <td>{toPriceForView(item.discount)}</td>,
+              createdAt: (item) => <td>{ToDateForView(item.createdAt)}</td>,
               show_details: (item, index) => {
                 return (
                   <td className="py-2">
@@ -231,8 +231,6 @@ function Booking() {
                                     </CCol>
                                   </CRow>
                                   <hr />
-                                </CCol>
-                                <CCol lg="6">
                                   <CRow>
                                     <CCol lg="4">Số lượng người lớn:</CCol>
                                     <CCol lg="8">
@@ -252,6 +250,23 @@ function Booking() {
                                     <CCol lg="8">
                                       {item.numOfPersonBaby} người
                                     </CCol>
+                                  </CRow>
+                                  <hr />
+                                </CCol>
+                                <CCol lg="6">
+                                  <CRow>
+                                    <CCol lg="4">Tên người đặt:</CCol>
+                                    <CCol lg="8">{item.user.name}</CCol>
+                                  </CRow>
+                                  <hr />
+                                  <CRow>
+                                    <CCol lg="4">Email người đặt:</CCol>
+                                    <CCol lg="8">{item.user.email}</CCol>
+                                  </CRow>
+                                  <hr />
+                                  <CRow>
+                                    <CCol lg="4">Số điện thoại:</CCol>
+                                    <CCol lg="8">{item.user.phone}</CCol>
                                   </CRow>
                                   <hr />
                                 </CCol>

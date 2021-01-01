@@ -1,4 +1,5 @@
 import React from 'react';
+import ToPriceForView from '../../../../common/convertPriceForView';
 export default (props) => {
   const options = {
     weekday: 'long',
@@ -29,7 +30,8 @@ export default (props) => {
               <div class='col-5 text-right text-sm-left'>
                 <strong class='d-block'>
                   {new Date(
-                    new Date(props.start).getDate() + props.duration
+                    new Date(props.start).getTime() +
+                      props.duration * 24 * 60 * 60 * 1000
                   ).toLocaleDateString(undefined, options)}
                 </strong>
               </div>
@@ -40,7 +42,9 @@ export default (props) => {
           <div class='col-inner'>
             <div class='row gap-10 align-items-center'>
               <div class='col-6 text-left  text-sm-right'>
-                <strong class='d-block'>${props.price}</strong>
+                <strong class='d-block'>
+                  {props.priceAdults ? ToPriceForView(props.priceAdults) : null}
+                </strong>
                 <span class='font-sm'>/ người</span>
               </div>
             </div>

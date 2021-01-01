@@ -231,17 +231,23 @@ function Tour() {
                                     <hr />
                                     <CRow>
                                       <CCol lg="4">Giá người lớn:</CCol>
-                                      <CCol lg="8">{item.priceAdults}</CCol>
+                                      <CCol lg="8">
+                                        {toPriceForView(item.priceAdults)}
+                                      </CCol>
                                     </CRow>
                                     <hr />
                                     <CRow>
                                       <CCol lg="4">Giá trẻ em:</CCol>
-                                      <CCol lg="8">{item.priceChildren}</CCol>
+                                      <CCol lg="8">
+                                        {toPriceForView(item.priceChildren)}
+                                      </CCol>
                                     </CRow>
                                     <hr />
                                     <CRow>
                                       <CCol lg="4">Giá em bé:</CCol>
-                                      <CCol lg="8">{item.priceBaby}</CCol>
+                                      <CCol lg="8">
+                                        {toPriceForView(item.priceBaby)}
+                                      </CCol>
                                     </CRow>
                                     <hr />
                                     <CRow>

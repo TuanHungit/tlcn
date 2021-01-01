@@ -36,7 +36,7 @@ export default (props) => {
                   <span class='price'>
                     Giá chỉ từ{' '}
                     <span class='h6 line-1 text-primary number'>
-                      {ToMoneyForView(props.tour.price)}
+                      {ToMoneyForView(props.tour.priceAdults)}
                     </span>
                   </span>
                 </div>

@@ -33,7 +33,7 @@ const TheSidebar = () => {
           height={35}
         /> */}
         <div className="c-sidebar-brand-full" height={35}>
-          The Coffee Shop
+          The Travel
         </div>
         <CIcon
           className="c-sidebar-brand-minimized"

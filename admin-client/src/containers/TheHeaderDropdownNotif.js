@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 
 const TheHeaderDropdownNotif = () => {
   const [itemsCount, setItemsCount] = useState(0);
+  const [newBooking, setNewBooking] = useState(0);
   const [booking, setBooking] = useState(null);
   useEffect(() => {
     const pusher = new Pusher("c3acf5ea606cbffb9e16", {
@@ -21,6 +22,10 @@ const TheHeaderDropdownNotif = () => {
     const channel = pusher.subscribe("my-channel");
     channel.bind("doc_updated", (data) => {
       setBooking(data);
+      setItemsCount((state) => state + 1);
+    });
+    channel.bind("doc_created", (data) => {
+      setNewBooking(data);
       setItemsCount((state) => state + 1);
     });
   }, []);
@@ -53,14 +58,12 @@ const TheHeaderDropdownNotif = () => {
             </Link>
           </CDropdownItem>
         ) : null}
-
-        <CDropdownItem>
-          <CIcon name="cil-user-follow" className="mr-2 text-success" /> Người
-          dùng mới
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-chart-pie" className="mr-2 text-info" /> Hóa đơn mới
-        </CDropdownItem>
+        {newBooking ? (
+          <CDropdownItem>
+            <CIcon name="cil-user-follow" className="mr-2 text-success" /> Hóa
+            đơn mới
+          </CDropdownItem>
+        ) : null}
       </CDropdownMenu>
     </CDropdown>
   );

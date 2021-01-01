@@ -22,7 +22,7 @@ export default class extends Component {
                   <Schedule
                     duration={this.props.duration}
                     start={this.props.start}
-                    price={this.props.price}
+                    priceAdults={this.props.priceAdults}
                     changeDateHandler={this.props.changeDateHandler}
                     closeModalHandler={this.closeModalHandler}
                   />

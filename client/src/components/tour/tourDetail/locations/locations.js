@@ -7,6 +7,10 @@ export default (props) => {
       class='fullwidth-horizon-sticky-section'
     >
       <h5 class='mt-30'>
+        <i class='fas fa-plane'></i> Phương tiện di chuyển:{' '}
+        <span>{props.content.vehicle}</span>
+      </h5>
+      <h5 class='mt-30'>
         <i class='far fa-star'></i> Những điểm nổi bật làm Tour trở nên thú vị
       </h5>
 

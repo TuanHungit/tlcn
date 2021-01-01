@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from '../../../UI/carousel/carousel';
 import Star from '../../../UI/star/star';
 import Calendar from '../calendar/calender';
+import ToPriceForView from '../../../../common/convertPriceForView';
 export default (props) => {
   return (
     <div className='pt-15'>
@@ -69,8 +70,16 @@ export default (props) => {
             </span>
             Chỉ từ
             <br />
-            <strong>{props.content.price}</strong> / người
-          </li>
+            <strong>{ToPriceForView(props.content.priceAdults)}</strong> / người
+          </li>{' '}
+          {/* <li>
+            <span class='icon-font d-block'>
+              <i class='linea-icon-ecommerce-dollar'></i>
+            </span>
+            Phương tiện
+            <br />
+            <strong>{props.content.vehicle}</strong>
+          </li> */}
         </ul>
 
         <div class='mb-30'></div>

@@ -38,7 +38,9 @@ export const updateOne = (Model: Model<any>) => {
 
 export const createOne = (Model: Model<any>) => {
   return async (req: Request, res: Response) => {
-    const doc = await Model.create(req.body);
+    const doc = await Model.create(req.body, () => {
+      pusher.trigger('my-channel', 'doc_created', 'new doc');
+    });
     res.status(201).json(doc);
   };
 };
