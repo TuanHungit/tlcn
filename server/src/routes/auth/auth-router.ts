@@ -13,7 +13,14 @@ const router = express.Router();
 // @Route POST /api/v1/users/signin
 // @desc signin
 // @access Public
-router.post('/users/signin', signin);
+router.post(
+  '/users/signin',
+  body('email').isEmail().withMessage('Email must be valid!'),
+  body('password')
+    .isLength({ min: 5, max: 16 })
+    .withMessage('Password length must be between 5 and 16!'),
+  signin
+);
 
 // @Route POST /api/v1/users/signin-google
 // @desc signin
