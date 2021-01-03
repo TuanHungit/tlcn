@@ -11,7 +11,7 @@ it('return a 201 on successful signup', async () => {
     })
     .expect(201);
 });
-it('return a 400 with an valid email', async () => {
+it('return a 400 with an invalid email', async () => {
   return request(app)
     .post('/api/v1/users/signup')
     .send({
@@ -21,7 +21,7 @@ it('return a 400 with an valid email', async () => {
     })
     .expect(400);
 });
-it('return a 400 with an valid password', async () => {
+it('return a 400 with an invalid password', async () => {
   return request(app)
     .post('/api/v1/users/signup')
     .send({ name: 'hung', email: 'test@gmail.com', password: '1' })
@@ -30,7 +30,7 @@ it('return a 400 with an valid password', async () => {
 it('return a 400 with missing email and password', async () => {
   return request(app).post('/api/v1/users/signup').send({}).expect(400);
 });
-it('diallows duplicate emails', async () => {
+it('disallows duplicate emails', async () => {
   await request(app)
     .post('/api/v1/users/signup')
     .send({

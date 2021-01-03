@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Background from '../../img/01.jpg';
+import Background from '../../../img/01.jpg';
 import Slider from 'react-slick';
 import Review from './review/review';
-import ReactPaginate from 'react-paginate';
 
 const sectionStyle = {
   backgroundImage: `url(${Background})`,

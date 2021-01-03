@@ -6,7 +6,6 @@ import { User } from '../models/user';
 import { Profile } from '../models/profile';
 import { Email } from '../services/email';
 import { Password } from '../services/password';
-import { body } from 'express-validator';
 
 declare global {
   namespace Express {

@@ -1,5 +1,5 @@
-import react from 'react';
-import ToDateView from '../../../common/convertDateForView';
+import React from 'react';
+import ToDateView from '../../../../common/convertDateForView';
 export default (props) => {
   return (
     <div class='slick-item'>

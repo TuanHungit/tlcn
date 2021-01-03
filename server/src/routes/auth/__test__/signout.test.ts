@@ -13,6 +13,6 @@ it('clears cookie after sign out', async () => {
     .get('/api/v1/users/signout')
     .send({})
     .expect(200);
-  console.log(response.get('Set-Cookie')[0]);
+
   expect(response.get('Set-Cookie')[0]).toContain(`jwt=loggedout`);
 });

@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Destinations from '../../components/landingPage/destinations/Destinations';
-import Reviews from '../../components/reviews/reviews';
+import Reviews from '../../components/landingPage/reviews/reviews';
 import Blogs from '../../components/blogs/blogs';
 import Search from '../../components/UI/search/search';
 import BestTour from '../../components/tour/bestTour/BestTour';
