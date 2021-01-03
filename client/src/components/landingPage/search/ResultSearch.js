@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import tourCard from "../tour/tourCard/tourCard";
-import Search from "../UI/search/search";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import * as actionCreators from "../../store/actions";
-import Tour from "../search/Search";
+import tourCard from "../../tour/tourCard/tourCard";
+import Search from "../../UI/search/search";
+import Spinner from "../../UI/Spinner/Spinner";
+import * as actionCreators from "../../../store/actions";
+import Tour from "./Search";
 
 import { connect } from "react-redux";
 // import Tour from "../search/Search";

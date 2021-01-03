@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TourCard from '../tour/tourCard/tourCard';
+import TourCard from '../../tour/tourCard/tourCard';
 class search extends Component {
   render() {
     return (     

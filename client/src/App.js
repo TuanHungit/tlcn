@@ -19,7 +19,7 @@ const Register = lazy(() => import('./containers/auth/signup/signup'));
 const LandingPage = lazy(() => import('./containers/landingPage/LandingPage'));
 const Logout = lazy(() => import('./containers/auth/signout/signout'));
 const Profile = lazy(() => import('./containers/profile/profile'));
-const ResultSearch = lazy(() => import('./components/search/ResultSearch'));
+const ResultSearch = lazy(() => import('./components/landingPage/search/ResultSearch'));
 const Booking = lazy(() => import('./containers/booking/booking'));
 const BookingSuccess = lazy(() =>
   import('./components/booking/bookingSuccess/bookingSuccess')

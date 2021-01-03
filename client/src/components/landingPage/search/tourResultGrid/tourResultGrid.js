@@ -1,5 +1,5 @@
 import React from 'react';
-import TourGrid from '../../../containers/tourResultGrid/tourGrid/tourGrid';
+import TourGrid from '../../../../containers/tourResultGrid/tourGrid/tourGrid';
 export default (props) => {
   return (
     <div class='main-wrapper scrollspy-container'>

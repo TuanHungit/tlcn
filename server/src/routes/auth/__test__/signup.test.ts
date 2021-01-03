@@ -1,9 +1,9 @@
 import request from 'supertest'; //fake request in express
-import { app } from '../../app';
+import { app } from '../../../app';
 
 it('return a 201 on successful signup', async () => {
   return request(app)
-    .post('/api/users/signup')
+    .post('/api/v1/users/signup')
     .send({
       name: 'hung',
       email: 'test@gmail.com',
@@ -13,7 +13,7 @@ it('return a 201 on successful signup', async () => {
 });
 it('return a 400 with an valid email', async () => {
   return request(app)
-    .post('/api/users/signup')
+    .post('/api/v1/users/signup')
     .send({
       name: 'hung',
       email: 'testgmail.com',
@@ -23,16 +23,16 @@ it('return a 400 with an valid email', async () => {
 });
 it('return a 400 with an valid password', async () => {
   return request(app)
-    .post('/api/users/signup')
-    .send({ name: 'hung', email: 'testgmail.com', password: '1' })
+    .post('/api/v1/users/signup')
+    .send({ name: 'hung', email: 'test@gmail.com', password: '1' })
     .expect(400);
 });
 it('return a 400 with missing email and password', async () => {
-  return request(app).post('/api/users/signup').send({}).expect(400);
+  return request(app).post('/api/v1/users/signup').send({}).expect(400);
 });
 it('diallows duplicate emails', async () => {
   await request(app)
-    .post('/api/users/signup')
+    .post('/api/v1/users/signup')
     .send({
       name: 'hung',
       email: 'test@gmail.com',
@@ -40,7 +40,7 @@ it('diallows duplicate emails', async () => {
     })
     .expect(201);
   await request(app)
-    .post('/api/users/signup')
+    .post('/api/v1/users/signup')
     .send({
       name: 'hung',
       email: 'test@gmail.com',
@@ -51,7 +51,7 @@ it('diallows duplicate emails', async () => {
 
 it('sets a cookie after successful signup', async () => {
   const response = await request(app)
-    .post('/api/users/signup')
+    .post('/api/v1/users/signup')
     .send({
       name: 'hung',
       email: 'test1@gmail.com',

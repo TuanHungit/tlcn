@@ -14,7 +14,7 @@ declare global {
 let mongo: any;
 beforeAll(async () => {
   process.env.JWT_KEY = 'asdfasdf';
-
+  process.env.JWT_EXPIRES_IN = '1';
   mongo = new MongoMemoryServer();
   const mongoUri = await mongo.getUri();
 
@@ -39,12 +39,13 @@ afterAll(async () => {
 
 global.signup = async () => {
   const response = await request(app)
-    .post('/api/users/signup')
+    .post('/api/v1/users/signup')
     .send({
       name: 'hung',
       email: 'test@gmail.com',
       password: '12345',
     })
     .expect(201);
+
   return response.get('Set-Cookie');
 };

@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 
-import Destinations from '../../components/destinations/Destinations';
+import Destinations from '../../components/landingPage/destinations/Destinations';
 import Reviews from '../../components/reviews/reviews';
 import Blogs from '../../components/blogs/blogs';
 import Search from '../../components/UI/search/search';
@@ -9,7 +9,7 @@ import BestTour from '../../components/tour/bestTour/BestTour';
 import TourCarousel from '../../components/tour/tourCarousel/tourCarousel';
 import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import Intro from '../../components/intro/intro';
+import Intro from '../../components/landingPage/intro/intro';
 
 class LandingPage extends Component {
   componentDidMount() {

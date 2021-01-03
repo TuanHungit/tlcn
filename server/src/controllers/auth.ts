@@ -47,7 +47,7 @@ const createSendToken = (user: any, req: Request, res: Response) => {
     secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
   });
 
-  res.status(200).json({
+  res.status(201).json({
     token,
     expirationDate,
     data: {

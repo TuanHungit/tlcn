@@ -23,7 +23,18 @@ router.post('/users/signin-google', signinWithGoogle);
 // @Route POST /api/V1/users/signup
 // @desc signup
 // @access Public
-router.post('/users/signup', signup);
+router.post(
+  '/users/signup',
+  [
+    body('email').isEmail().withMessage('Email must be valid!'),
+    body('name').notEmpty().trim().withMessage('Name must be defined!'),
+    body('password')
+      .isLength({ min: 5, max: 16 })
+      .withMessage('Password length must be between 5 and 16!'),
+  ],
+  validateRequest,
+  signup
+);
 
 // @Route GET /api/users/logout
 // @desc signup
