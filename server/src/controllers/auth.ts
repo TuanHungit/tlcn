@@ -64,24 +64,55 @@ export const signup = async (req: Request, res: Response) => {
   const user = User.build({ name, email, password }) as any;
 
   await Profile.create<any>({ user: user.id });
-  const url = `http://localhost:3000/api/v1/users/signup/${user.id}`;
-  //await new Email(user, url).sendAuthencatedEmail();
+
   await user.save();
-  createSendToken(user, req, res);
+  const token = signToken(user);
+  const expirationDate =
+    Date.now() + (process.env.JWT_COOKIE_EXPIRES_IN as any) * 60 * 60 * 1000;
+  res.cookie('jwt', token, {
+    expires: new Date(expirationDate),
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+  });
+
+  res.status(201).json({
+    token,
+    expirationDate,
+    data: {
+      user,
+    },
+  });
 };
 
 export const signin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const existingUser = await User.findOne({ email }).select('+password');
+
   if (!existingUser) {
     throw new BadRequestError('Invalid credentials');
   }
+
   const passwordMatch = await Password.compare(existingUser.password, password);
   if (!passwordMatch) {
     throw new BadRequestError('Invalid credentials');
   }
 
-  createSendToken(existingUser, req, res);
+  const token = signToken(existingUser);
+  const expirationDate =
+    Date.now() + (process.env.JWT_COOKIE_EXPIRES_IN as any) * 60 * 60 * 1000;
+  res.cookie('jwt', token, {
+    expires: new Date(expirationDate),
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+  });
+
+  res.status(201).json({
+    token,
+    expirationDate,
+    data: {
+      existingUser,
+    },
+  });
 };
 
 export const logout = (req: Request, res: Response) => {
@@ -101,8 +132,7 @@ export const signinWithGoogle = async (
   client
     .verifyIdToken({
       idToken: tokenId,
-      audience:
-        '75939233417-t7f3tfifirqoprmu2b270ul95hplptqs.apps.googleusercontent.com',
+      audience: process.env.GoogleAPIKEY,
     })
     .then((response) => {
       const {
@@ -117,10 +147,28 @@ export const signinWithGoogle = async (
           name,
           email: email,
         };
-        createSendToken(user, req, res);
+
+        const token = signToken(user);
+        const expirationDate =
+          Date.now() +
+          (process.env.JWT_COOKIE_EXPIRES_IN as any) * 60 * 60 * 1000;
+        res.cookie('jwt', token, {
+          expires: new Date(expirationDate),
+          httpOnly: true,
+          secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+        });
+
+        res.status(201).json({
+          token,
+          expirationDate,
+          data: {
+            user,
+          },
+        });
       }
+      res.status(401).send('Unauthorized');
     })
     .catch((err) => {
-      res.status(401).send('');
+      res.status(401).send('Unauthorized');
     });
 };
