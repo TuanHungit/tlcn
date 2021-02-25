@@ -11,7 +11,7 @@ const LayoutContainer = (props) => {
   };
   return (
     <Layout className='layout' onScroll={onScroll}>
-      <Header className='header-top'></Header>
+      <Header className='top-header'></Header>
       <Header className='header'>
         <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['2']}>
           <Menu.Item key='1'>Logo</Menu.Item>

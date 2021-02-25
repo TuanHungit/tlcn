@@ -31,8 +31,9 @@
 /**
  * Reset
  */
+
 html {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -7294,7 +7295,7 @@ ul.col-5 li {
 }
 
 .border-bottom {
-  border-bottom: 1px solid #ccce5e5e;
+  border-bottom: 1px solid #CCCE5E5E5;
 }
 
 .border-top {
@@ -8165,7 +8166,6 @@ ul.list-inline-block li:last-child {
   padding-bottom: 6px;
   font-size: 13px;
   border-radius: 2px;
-  height: '22px';
 }
 
 .form-control-lg {

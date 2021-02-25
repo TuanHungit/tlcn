@@ -1,0 +1,44 @@
+.hero-inner .container h1 {
+  animation: 1.5s h1-slide-right forwards;
+  opacity: 0;
+  transform: translateX(-10%);
+  -webkit-animation: 1.5s h1-slide-right forwards;
+}
+
+@keyframes h1-slide-right {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-inner .container p {
+  animation: 1.5s p-slide-right 0.5s forwards;
+  -webkit-animation: 1.5s p-slide-right 0.5s forwards;
+  opacity: 0;
+  transform: translateX(-5%);
+}
+
+@keyframes p-slide-right {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes bottom-top {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-inner .search-form-main {
+  animation: 1.5s bottom-top forwards;
+  -webkit-animation: 1.5s bottom-top forwards;
+  opacity: 0;
+  transform: translateY(20%);
+}
+.hero-banner {
+  background-image: url(../../../img/01.jpg);
+  height: 100%;
+  background-position: top center;
+}

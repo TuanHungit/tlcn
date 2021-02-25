@@ -1,17 +1,98 @@
 import React, { Component } from 'react';
 import Background from '../../../img/01.jpg';
+import Slider from 'react-slick';
 
-var sectionStyle = {
-  backgroundImage: `url(${Background})`,
-  backgroundPosition: `top center`,
-};
+import './search.css';
+
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'absolute',
+        width: '85px',
+        height: '85px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: '0',
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function PrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'absolute',
+        left: '0',
+        width: '85px',
+        height: '85px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: '10',
+      }}
+      onClick={onClick}
+    />
+  );
+}
 class Search extends Component {
   render() {
+    const styles = {
+      backgroundImage: `url(${Background})`,
+      backgroundPosition: 'top center',
+    };
+    const settings = {
+      infinite: true,
+      speed: 2000,
+      autoplay: true,
+      vertical: true,
+      fade: true,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
+      verticalSwiping: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            autoPlay: true,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoPlay: true,
+            initialSlide: 1,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            autoPlay: true,
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    };
     return (
-      <div
-        className='hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03'
-        style={sectionStyle}
-      >
+      <div className='hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03'>
         <div className='overlay-holder bottom'></div>
         <div className='hero-inner'>
           <div className='container'>
@@ -44,14 +125,9 @@ class Search extends Component {
                                   placeholder='Select one'
                                   tabindex='2'
                                   style={{ height: '22px' }}
-                                  // value={this.props.tourList.country}
                                 >
                                   <option>Tất cả</option>
-                                  {/* {Object.values(this.props.tourList).map(
-                                    (el) => (
-                                      <option key={el.id}>{el.name}</option>
-                                    )
-                                  )} */}
+
                                   <option>Tiền Giang</option>
                                   <option>City tour</option>
                                   <option>Honeymoon</option>
@@ -75,17 +151,6 @@ class Search extends Component {
                                   ).map((el) => (
                                     <option key={el.id}>{el.name}</option>
                                   ))}
-
-                                  {/* <option>
-                                    {this.props.destinationList[0].name}
-                                  </option>
-                                  <option>
-                                    {this.props.destinationList[1].destination}
-                                  </option>
-
-                                  <option>Nhật Bản</option>
-                                  <option>Hàng Quốc</option>
-                                  <option>Mỹ</option> */}
                                 </select>
                               </div>
                             </div>
@@ -95,7 +160,7 @@ class Search extends Component {
                             <div className='col-inner'>
                               <div className='form-group'>
                                 <label>Thời gian</label>
-                                
+
                                 <input
                                   type='text'
                                   className=' form-control form-control-sm form-readonly-control air-datepicker'
