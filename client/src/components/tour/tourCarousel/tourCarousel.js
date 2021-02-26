@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 import TourCard from '../tourCard/tourCard';
-import Background from '../../../img/01.jpg';
+import Background from '../../../img/04.jpg';
 
 const sectionStyle = {
   backgroundImage: `url(${Background})`,

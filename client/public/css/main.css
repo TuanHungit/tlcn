@@ -33,7 +33,7 @@
  */
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Varela Round', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -463,7 +463,7 @@ hr.hr-lg {
 }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #636363;
   font-weight: 400;
   font-size: 13px;
@@ -484,7 +484,7 @@ h6,
 .h6,
 .btn,
 label {
-  font-family: 'Metropolis', sans-serif;
+  font-family: 'Varela Round', sans-serif;
   color: #212121;
 }
 
@@ -566,7 +566,7 @@ h6 a:hover,
 }
 
 .font-serif {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Varela Round', sans-serif;
 }
 
 .font-sm {
@@ -7471,7 +7471,7 @@ ul.list-icon-data-attr li[data-content]:before {
 }
 
 ul.list-icon-data-attr.font-ionicons li[data-content]:before {
-  font-family: 'Ionicons';
+  font-family: 'Varela Round', sans-serif;
 }
 
 ul.list-icon-data-attr.row li {
@@ -7640,7 +7640,7 @@ ul.list-inline-block li:last-child {
   padding: 12px 12px 10px;
   font-weight: 500;
   margin: 0 0 2px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Varela Round', sans-serif;
   color: #dc221a;
   background-color: transparent;
 }

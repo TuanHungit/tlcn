@@ -1,32 +1,11 @@
 import React from 'react';
-export default (props) => {
-  return (
-    <div class='page-title border-bottom pt-100 mb-0 border-bottom-0'>
-      <div class='container'>
-        <div class='row gap-15 align-items-center'>
-          <div class='col-12 col-md-7'>
-            <nav aria-label='breadcrumb'>
-              <ol class='breadcrumb'>
-                <li class='breadcrumb-item'>
-                  <a href='tour-detail-02.html#'>
-                    <i class='fas fa-home'></i>
-                  </a>
-                </li>
-                <li class='breadcrumb-item'>
-                  <a href='tour-detail-02.html#'>Tour</a>
-                </li>
+import './pageTitle.css';
 
-                <li class='breadcrumb-item active' aria-current='page'>
-                  Chi tiết Tour
-                </li>
-                <li class='breadcrumb-item active' aria-current='page'>
-                  {props.title}
-                </li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-      </div>
+export default ({ src, title, name }) => {
+  return (
+    <div className='page-title' style={{ backgroundImage: `url(${src})` }}>
+      {name ? <h2 className='page-title__name'>{name}</h2> : null}
+      {title ? <h2 className='page-title__title'>{title}</h2> : null}
     </div>
   );
 };

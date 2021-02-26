@@ -10,34 +10,10 @@ import {
 import React, { useEffect, lazy, Suspense } from 'react';
 import './App.css';
 import * as actionCreator from './store/actions';
-import Loading from './components/UI/Spinner/loading';
-const TourDetail = lazy(() => import('./containers/tourDetail/tourDetail'));
-const Header = lazy(() => import('./components/layout/header'));
-const Footer = lazy(() => import('./components/layout/footer'));
-const LoginModal = lazy(() => import('./containers/auth/signin/signin'));
-const Register = lazy(() => import('./containers/auth/signup/signup'));
-const LandingPage = lazy(() => import('./containers/landingPage/LandingPage'));
-const Logout = lazy(() => import('./containers/auth/signout/signout'));
-const Profile = lazy(() => import('./containers/profile/profile'));
-const ResultSearch = lazy(() =>
-  import('./components/landingPage/search/ResultSearch')
-);
-const Booking = lazy(() => import('./containers/booking/booking'));
-const BookingSuccess = lazy(() =>
-  import('./components/booking/bookingSuccess/bookingSuccess')
-);
-const SingleBlog = lazy(() => import('./containers/singleBlog/singleBlog'));
-const ScrollToTop = lazy(() => import('./components/UI/scrollTop/scrollTop'));
-const BlogEditor = lazy(() => import('./containers/blogEditor/blogEditer'));
-const BlogGrid = lazy(() => import('./containers/blogGrid/blogGrid'));
-const Promotion = lazy(() => import('./containers/promotion/promotion'));
-const PromotionDetail = lazy(() =>
-  import('./containers/promotionDetail/promotionDetail')
-);
-const Form = lazy(() => import('./components/form/form'));
-const TourResultGrid = lazy(() =>
-  import('./containers/tourResultGrid/tourResultGrid')
-);
+import Container from './containers';
+import Header from './components/layout/header';
+import Footer from './components/layout/footer';
+import ScrollToTop from './components/UI/scrollTop/scrollTop';
 function App(props) {
   useEffect(() => {
     props.onAuthCheck();
@@ -50,52 +26,73 @@ function App(props) {
   }, [props.isAuthencated]);
   let routes = (
     <Switch>
-      <Route path='/' exact component={LandingPage} />
-      <Route path='/tour/:slug' exact component={TourDetail} />
-      <Route path={'/tour/:slug/booking'} exact component={Booking} />
-      <Route path='/logout' exact component={Logout} />
-      <Route path='/register' exact component={Register} />
-      <Route path='/blogs/:slug' component={SingleBlog} />
-      <Route path='/blogs-editor' exact component={BlogEditor} />
-      <Route path='/blogs' exact component={BlogGrid} />
-      <Route path='/promotions' exact component={Promotion} />
-      <Route path='/promotions/:slug' exact component={PromotionDetail} />
-      <Route path='/destination/:slug' exact component={TourResultGrid} />
+      <Route path='/' exact component={Container.LandingPage} />
+      <Route path='/tour/:slug' exact component={Container.TourDetail} />
+      <Route path={'/tour/:slug/booking'} exact component={Container.Booking} />
+      <Route path='/logout' exact component={Container.Logout} />
+      Container.
+      <Route path='/register' exact component={Container.SignUp} />
+      <Route path='/blogs/:slug' component={Container.SingleBlog} />
+      <Route path='/blogs-editor' exact component={Container.BlogEditor} />
+      <Route path='/blogs' exact component={Container.BlogGrid} />
+      <Route path='/promotions' exact component={Container.Promotion} />
       <Route
+        path='/promotions/:slug'
+        exact
+        component={Container.PromotionDetail}
+      />
+      <Route
+        path='/destination/:slug'
+        exact
+        component={Container.TourResultGrid}
+      />
+      {/* <Route
         path='/tour/:slug/booking/success'
         exact
         component={BookingSuccess}
-      />
-      <Route path='/search' component={ResultSearch} />
-      <Route path='/survey' component={Form} />
+      /> */}
+      {/* <Route path='/search' component={Container.ResultSearch} />
+      <Route path='/survey' component={Container.Form} /> */}
       <Redirect to='/' />
     </Switch>
   );
   if (props.isAuthencated) {
     routes = (
       <Switch>
-        <Route path='/' exact component={LandingPage} />
-        <Route path={'/tour/:slug/booking'} exact component={Booking} />
-        <Route path='/logout' exact component={Logout} />
-        <Route exact path='/tour/:slug' component={TourDetail} />
-
+        <Route path='/' exact component={Container.LandingPage} />
         <Route
+          path={'/tour/:slug/booking'}
+          exact
+          component={Container.Booking}
+        />
+        <Route path='/logout' exact component={Container.Logout} />
+        <Route exact path='/tour/:slug' component={Container.TourDetail} />
+
+        {/* <Route
           path='/profile'
           render={(props) => (
             <Profile {...props} photo={photo} profile={profile} />
           )}
-        />
-        <Route path='/blogs/:slug' exact component={SingleBlog} />
-        <Route path='/blogs-editor' exact component={BlogEditor} />
-        <Route path='/blogs' exact component={BlogGrid} />
-        <Route path='/promotions' exact component={Promotion} />
-        <Route path='/promotions/:slug' exact component={PromotionDetail} />
-        <Route path='/destination/:slug' exact component={TourResultGrid} />
+        /> */}
+        <Route path='/blogs/:slug' exact component={Container.SingleBlog} />
+        <Route path='/blogs-editor' exact component={Container.BlogEditor} />
+        <Route path='/blogs' exact component={Container.BlogGrid} />
+        <Route path='/promotions' exact component={Container.Promotion} />
         <Route
+          path='/promotions/:slug'
+          exact
+          component={Container.PromotionDetail}
+        />
+        <Route
+          path='/destination/:slug'
+          exact
+          component={Container.TourResultGrid}
+        />
+        {/* <Route
           path='/tour/:slug/booking/success'
           exact
           component={BookingSuccess}
-        />
+        /> */}
         <Redirect to='/' />
       </Switch>
     );
@@ -111,18 +108,17 @@ function App(props) {
       photo = 'http://' + props.profile.photo;
     }
   }
+
   return (
-    <>
-      <Suspense fallback={<Loading />}>
-        <Header isAuthencated={props.isAuthencated} user={user} photo={photo} />
-        {routes}
-        <Form />
-        <Register />
-        <LoginModal />
-        <ScrollToTop />
-        <Footer />
-      </Suspense>
-    </>
+    <Suspense fallback={<div></div>}>
+      <Header isAuthencated={props.isAuthencated} user={user} photo={photo} />
+      {routes}
+      {/* <Form /> */}
+      {/* <Register /> */}
+      {/* <LoginModal /> */}
+      <ScrollToTop />
+      {!props.isLoadingTour ? <Footer /> : null}
+    </Suspense>
   );
 }
 // export default App;
@@ -132,6 +128,7 @@ const mapStateToProps = (state) => {
     isAuthencated: state.auth.token !== null,
     user: state.auth.user,
     error: state.auth.error,
+    isLoadingTour: state.tour.loading,
     isLogout: state.auth.isLogout,
     profile: state.profile.profile,
   };

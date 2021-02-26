@@ -5,10 +5,8 @@ import Calendar from '../calendar/calender';
 import ToPriceForView from '../../../../common/convertPriceForView';
 export default (props) => {
   return (
-    <div className='pt-15'>
+    <div>
       <div id='detail-content-sticky-nav-01' class='detail-header mb-30'>
-        <h3>{props.content.name}</h3>
-
         <div class='d-flex flex-column flex-sm-row align-items-sm-center mb-20'>
           <div class='mr-15 font-lg'>
             Quốc Gia, Thành Phố:{' '}
@@ -35,7 +33,6 @@ export default (props) => {
             </div>
           </div>
         </div>
-        <Carousel images={props.content.images} />
 
         <ul class='list-inline-block highlight-list mt-30 text-center'>
           <li>
@@ -90,7 +87,8 @@ export default (props) => {
         />
 
         <div class='mb-30'></div>
-        <Calendar availableDate={props.availableDate} />
+        {/* <Calendar availableDate={props.availableDate} /> */}
+        <Carousel images={props.content.images} />
       </div>
     </div>
   );

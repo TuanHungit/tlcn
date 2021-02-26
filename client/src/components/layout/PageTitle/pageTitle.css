@@ -1,0 +1,30 @@
+.page-title {
+  width: 100%;
+  height: 55vh;
+  background-position: center;
+  background-size: cover;
+}
+.page-title__title {
+  position: absolute;
+  bottom: 0;
+  font-weight: 700;
+  padding: 25px 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  white-space: nowrap;
+  align-items: center;
+  max-height: 160px;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+.page-title__name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+}

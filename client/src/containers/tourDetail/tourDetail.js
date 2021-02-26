@@ -126,17 +126,12 @@ const TourDetail = (props) => {
   if (data && props.bookingInfo && !props.loading) {
     tourDetail = (
       <div class='main-wrapper scrollspy-container'>
-        <section
-          class='page-wrapper page-detail pt-0'
-          style={{ backgroundColor: '#f3f3f3' }}
-        >
-          <div class='pt-0 pt-xl-15'></div>
-
-          <PageTitle title={data.name} />
+        <section class='page-wrapper page-detail pt-0'>
+          <PageTitle title={data.name} src={`http://${data.images[1]}`} />
 
           <div class='container'>
             <div class='row gap-20 gap-lg-40'>
-              <div class='col-12 col-lg-8' style={{ backgroundColor: '#fff' }}>
+              <div class='col-12 col-lg-8'>
                 <div class='content-wrapper'>
                   <ContentDetail
                     content={data}

@@ -188,12 +188,12 @@ section,
 
 .header-main .main-nav li a {
   font-size: 12px;
-  font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
   display: block;
   line-height: 1.25;
   padding: 5px 0;
   font-weight: 400;
+  font-family: 'Roboto', sans-serif;
   position: relative;
 }
 
@@ -206,8 +206,8 @@ section,
   font-size: 12px;
   padding: 10px 0;
   padding-right: 15px;
+  font-weight: 500;
   text-transform: uppercase;
-  font-weight: 600;
   letter-spacing: 1px;
   color: #000;
 }
@@ -228,7 +228,9 @@ section,
   left: 169px;
   top: 0;
 }
-
+.main-wrapper {
+  min-height: 1000px;
+}
 .header-main .main-nav li a:hover,
 .main-nav li ul > li:hover > a {
   color: rgba(255, 255, 255, 1);
@@ -285,8 +287,9 @@ section,
 .header-main ul.nav-mini-right > li > a {
   line-height: 1;
   font-size: 12px;
+  font-family: 'Roboto';
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 1px;
   color: #000;
   position: relative;
@@ -364,7 +367,6 @@ section,
 }
 
 .header-main .btn.btn-toggle:before {
-  font-family: 'Ionicons';
   content: '\f2d7';
   width: 18px;
   height: 18px;
@@ -1133,29 +1135,34 @@ ul.horizon-sticky-nav > li.active a {
   line-height: 1.45;
 }
 
-.hero-banner-01 .search-form-main {
-  margin-top: 30px;
+.search-form-main {
+  position: absolute;
   max-width: 93%;
+  width: 100%;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50%;
   -webkit-box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.23);
   box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.23);
 }
 
-.hero-banner-01 .search-form-main.width-full {
+.search-form-main.width-full {
   max-width: 100%;
 }
 
-.hero-banner-01 .search-form-main .form-group {
+.search-form-main .form-group {
   padding: 10px 15px;
   margin: 0;
   background-color: #fff;
 }
 
-.hero-banner-01 .search-form-main .row .row > div:first-child .form-group {
+.search-form-main .row .row > div:first-child .form-group {
   border-radius: 3px 3px 0 0;
 }
 
-.hero-banner-01 .search-form-main .form-group label {
+.search-form-main .form-group label {
   margin: 0;
   line-height: 1;
   font-size: 12px;
@@ -1164,8 +1171,7 @@ ul.horizon-sticky-nav > li.active a {
   display: block;
   margin: 8px 0 3px;
 }
-
-.hero-banner-01 .search-form-main .form-group .form-control {
+.search-form-main .form-group .form-control {
   border: 0;
   padding: 1px 0 0;
   border-radius: 3px;
@@ -1175,13 +1181,13 @@ ul.horizon-sticky-nav > li.active a {
   margin: 0;
 }
 
-.hero-banner-01 .search-form-main .form-group.set-width {
+.search-form-main .form-group.set-width {
   width: 200px;
   border-radius: 0 3px 3px 0;
   border-left: 1px solid #f5f5f5;
 }
 
-.hero-banner-01 .search-form-main .btn {
+.search-form-main .btn {
   font-size: 16px;
   margin: 0;
   width: 100%;
@@ -1197,8 +1203,7 @@ ul.horizon-sticky-nav > li.active a {
   top: auto;
   height: 300px;
 }
-
-.hero-banner-01 .search-form-main .chosen-container-single .chosen-single {
+.search-form-main .chosen-container-single .chosen-single {
   border: 0;
   border-radius: 0;
   color: #6c757d;
@@ -1211,17 +1216,12 @@ ul.horizon-sticky-nav > li.active a {
   font-size: 14px;
   margin: 0;
 }
-
-.hero-banner-01 .search-form-main .chosen-container-single .chosen-single div {
+.search-form-main .chosen-container-single .chosen-single div {
   top: 0px;
   right: -20px;
 }
 
-.hero-banner-01
-  .search-form-main
-  .chosen-container-single
-  .chosen-single
-  div:after {
+.search-form-main .chosen-container-single .chosen-single div:after {
   margin-right: -15px;
 }
 
@@ -1238,19 +1238,6 @@ ul.horizon-sticky-nav > li.active a {
 .hero-banner.hero-banner-01.alt-option-03 .overlay-holder {
   top: auto;
   height: 200px;
-}
-
-.hero-banner.hero-banner-01.alt-option-03 .search-form-main {
-  margin: 0;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -35px;
-  background-color: #e5e5e5;
-  -webkit-box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.4);
-  box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.4);
-  margin-left: 15px;
 }
 
 .slick-hero-wrapper {
@@ -1316,7 +1303,7 @@ ul.horizon-sticky-nav > li.active a {
 }
 
 @media (min-width: 576px) {
-  .hero-banner-01 .search-form-main {
+  .search-form-main {
     margin-top: 60px;
     max-width: 95%;
     height: 82px;
@@ -1325,10 +1312,10 @@ ul.horizon-sticky-nav > li.active a {
     padding-top: 240px;
     padding-bottom: 80px;
   }
-  .hero-banner-01 .search-form-main .row .row > div:first-child .form-group {
+  .search-form-main .row .row > div:first-child .form-group {
     border-radius: 3px 0 0 3px;
   }
-  .hero-banner-01 .search-form-main .btn {
+  .search-form-main .btn {
     width: 66px;
     border-radius: 0 3px 3px 0;
   }
@@ -1345,33 +1332,29 @@ ul.horizon-sticky-nav > li.active a {
     right: -10px;
   }
 
-  .hero-banner-01 .search-form-main .form-group {
+  .search-form-main .form-group {
     padding: 15px 20px;
   }
 
-  .hero-banner-01 .search-form-main .form-group .form-control {
+  .search-form-main .form-group .form-control {
     font-size: 18px;
     letter-spacing: 1px;
   }
 
-  .hero-banner-01 .search-form-main .btn {
+  .search-form-main .btn {
     font-size: 20px;
     height: 82px;
     line-height: 82px;
   }
 
-  .hero-banner-01 .search-form-main .chosen-container-single .chosen-single {
+  .search-form-main .chosen-container-single .chosen-single {
     height: auto;
     padding: 0;
     font-size: 18px;
     letter-spacing: 1px;
   }
 
-  .hero-banner-01
-    .search-form-main
-    .chosen-container-single
-    .chosen-single
-    div {
+  .search-form-main .chosen-container-single .chosen-single div {
     top: -4px;
   }
 }
@@ -1381,7 +1364,7 @@ ul.horizon-sticky-nav > li.active a {
     padding-top: 250px;
     padding-bottom: 250px;
   }
-  .hero-banner-01 .search-form-main {
+  .search-form-main {
     max-width: 75%;
   }
   .slick-list-visible .slick-hero-wrapper .slick-prev {
@@ -3313,7 +3296,7 @@ ul.post-small-list li .recent-post-sm-meta {
   font-size: 14px;
   color: #333;
   position: relative;
-  font-family: 'Metropolis', sans-serif;
+
   font-weight: 400;
 }
 
@@ -3388,7 +3371,7 @@ ul.post-small-list li .recent-post-sm-meta {
 
 .menu-vertical-01 ul li a {
   font-weight: 700;
-  font-family: 'Metropolis', sans-serif;
+
   color: #212121;
   display: block;
   border-bottom: 2px solid #eee;
@@ -3558,7 +3541,6 @@ ul.category-list li a span {
 }
 
 .testimonial-horizontal-01 .image:after {
-  font-family: 'ElegantIcons';
   content: '\7b';
   position: absolute;
   top: 0;

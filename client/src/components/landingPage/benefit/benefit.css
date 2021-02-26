@@ -1,0 +1,26 @@
+@keyframes slide-right {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.featured-1 {
+  animation: 1.5s slide-right 1s forwards;
+  opacity: 0;
+  transform: translateX(-10%);
+  -webkit-animation: 1.5s slide-right 1s forwards;
+}
+
+.featured-2 {
+  animation: 1.5s slide-right 1.5s forwards;
+  opacity: 0;
+  transform: translateX(-5%);
+  -webkit-animation: 1.5s slide-right 1.5s forwards;
+}
+
+.featured-3 {
+  animation: 1.5s slide-right 1.7s forwards;
+  opacity: 0;
+  transform: translateX(-2%);
+  -webkit-animation: 1.5s slide-right 1.7s forwards;
+}

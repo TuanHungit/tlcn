@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 
+import PageTitle from '../../components/layout/PageTitle/PageTile';
 import Presonality from './personality/personality';
 import Booking from './booking/booking';
+import Background from '../../img/02.jpg';
+
 export default (props) => {
   return (
     <div
@@ -10,27 +13,7 @@ export default (props) => {
       style={{ backgroundColor: '#f3f3f3' }}
     >
       <section class='page-wrapper page-detail'>
-        <div class='page-title border-bottom mb-0 border-bottom-0'>
-          <div class='container'>
-            <div class='row gap-15 align-items-center'>
-              <div class='col-12 col-md-7'>
-                <nav aria-label='breadcrumb'>
-                  <ol class='breadcrumb'>
-                    <li class='breadcrumb-item'>
-                      <a href='dashboard.html#'>
-                        <i class='fas fa-home'></i>
-                      </a>
-                    </li>
-                    <li class='breadcrumb-item active' aria-current='page'>
-                      Trang thông tin cá nhân
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <PageTitle src={Background} name='Trang thông tin cá nhân' />
         <div class='container pt-30' style={{ backgroundColor: '#fff' }}>
           <div class='row gap-20 gap-lg-40'>
             <div class='col-12 col-lg-3'>
