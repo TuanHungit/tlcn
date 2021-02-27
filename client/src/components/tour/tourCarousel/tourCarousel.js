@@ -10,10 +10,12 @@ export default ({ tourList }) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 1000,
+
     autoplay: true,
     slidesToShow: 3,
     slidesToScroll: 1,
+    lazyLoad: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -23,6 +25,7 @@ export default ({ tourList }) => {
           infinite: true,
           autoPlay: true,
           dots: true,
+          lazyLoad: true,
         },
       },
       {
@@ -32,6 +35,7 @@ export default ({ tourList }) => {
           slidesToScroll: 1,
           autoPlay: true,
           initialSlide: 1,
+          lazyLoad: true,
         },
       },
       {
@@ -40,6 +44,7 @@ export default ({ tourList }) => {
           slidesToShow: 1,
           autoPlay: true,
           slidesToScroll: 1,
+          lazyLoad: true,
         },
       },
     ],
@@ -67,7 +72,7 @@ export default ({ tourList }) => {
             {Object.values(tourList)
               .filter((el) => el.label)
               .map((el) => (
-                <TourCard key={el.id} tour={el} />
+                <TourCard key={el.id} tour={el} lazyLoad={true} />
               ))}
           </Slider>
         </div>

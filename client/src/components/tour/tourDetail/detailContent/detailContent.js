@@ -3,6 +3,7 @@ import Carousel from '../../../UI/carousel/carousel';
 import Star from '../../../UI/star/star';
 import Calendar from '../calendar/calender';
 import ToPriceForView from '../../../../common/convertPriceForView';
+
 export default (props) => {
   return (
     <div>
@@ -80,6 +81,7 @@ export default (props) => {
         </ul>
 
         <div class='mb-30'></div>
+
         <div
           dangerouslySetInnerHTML={{
             __html: props.content.summary,

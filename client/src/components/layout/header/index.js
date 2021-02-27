@@ -3,6 +3,7 @@ import './index.css';
 
 import Navigation from './Navigation/Navigation';
 import { Link, NavLink } from 'react-router-dom';
+
 export default ({ photo, isAuthencated, user }) => {
   return (
     <header

@@ -8,6 +8,7 @@ export default (props) => {
       </div>
 
       <h6>Điểm đến: {props.location.title}</h6>
+
       <div
         dangerouslySetInnerHTML={{
           __html: props.location.description,

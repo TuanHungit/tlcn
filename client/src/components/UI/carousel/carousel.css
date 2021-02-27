@@ -1,20 +1,10 @@
-.list-inline {
-  white-space: nowrap;
-  overflow-x: auto;
+.custom-slide {
+  padding: 20px;
+  height: 130px;
 }
-
-.carousel-indicators {
-  position: static;
-  left: initial;
-  width: initial;
-  margin-left: initial;
+.custom-slide:active img {
+  border: 3px solid rgba(255, 25, 68, 0.8);
 }
-
-.carousel-indicators > li {
-  width: initial;
-  height: initial;
-  text-indent: initial;
-}
-.carousel-indicators li {
-  background-color: darkgray;
+.custom-slide0 {
+  height: 450px;
 }

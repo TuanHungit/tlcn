@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../../UI/avatar/avatar';
-const navigationItems = (props) => (
+const navigationItems = ({ photo, isAuthencated, user }) => (
   <div>
-    {!props.isAuthencated ? (
+    {!isAuthencated ? (
       <ul className='nav-mini-right'>
         {/* <li className='d-none d-sm-block'>
           <a
@@ -63,7 +63,8 @@ const navigationItems = (props) => (
         <li className='d-none d-sm-block'>
           <ul>
             <Link to='/profile' className='d-flex pt-1'>
-              <Avatar image={props.photo} /> {props.user.toUpperCase()}
+              {photo ? <Avatar image={photo} /> : null}
+              {user ? user.toUpperCase() : null}
             </Link>
           </ul>
         </li>
@@ -78,7 +79,7 @@ const navigationItems = (props) => (
             data-backdrop='static'
             data-keyboard='false'
           >
-            {props.user} / Đăng xuất
+            {user} / Đăng xuất
           </a>
         </li>
         <li>

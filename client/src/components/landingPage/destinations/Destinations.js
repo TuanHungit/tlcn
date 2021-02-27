@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
+import LazyLoadImage from '../../lazyLoadImage/lazyLoadImage';
 class Destinations extends Component {
   render() {
     return (
@@ -22,7 +24,10 @@ class Destinations extends Component {
                 class='destination-grid-item-02 caption-relative set-height-1'
               >
                 <div class='image'>
-                  <img src='images/image-destination/01.jpg' alt='image' />
+                  <LazyLoadImage
+                    src='images/image-destination/01.jpg'
+                    alt='image'
+                  />
                 </div>
 
                 <div class='content caption-holder'>
@@ -51,7 +56,10 @@ class Destinations extends Component {
                 class='destination-grid-item-02 caption-relative set-height-3'
               >
                 <div class='image'>
-                  <img src='images/image-destination/02.jpg' alt='image' />
+                  <LazyLoadImage
+                    src='images/image-destination/02.jpg'
+                    alt='image'
+                  />
                 </div>
                 <div class='content caption-holder'>
                   <div class='caption-inner caption-bottom caption-gradient'>
@@ -83,7 +91,10 @@ class Destinations extends Component {
                 class='destination-grid-item-02 caption-relative set-height-2'
               >
                 <div class='image'>
-                  <img src='images/image-destination/03.jpg' alt='image' />
+                  <LazyLoadImage
+                    src='images/image-destination/03.jpg'
+                    alt='image'
+                  />
                 </div>
 
                 <div class='content caption-holder'>
@@ -112,7 +123,10 @@ class Destinations extends Component {
                 class='destination-grid-item-02 caption-relative set-height-2'
               >
                 <div class='image'>
-                  <img src='images/image-destination/04.jpg' alt='image' />
+                  <LazyLoadImage
+                    src='images/image-destination/04.jpg'
+                    alt='image'
+                  />
                 </div>
 
                 <div class='content caption-holder'>
@@ -145,7 +159,10 @@ class Destinations extends Component {
                 class='destination-grid-item-02 caption-relative set-height-3'
               >
                 <div class='image'>
-                  <img src='images/image-destination/05.jpg' alt='image' />
+                  <LazyLoadImage
+                    src='images/image-destination/05.jpg'
+                    alt='image'
+                  />
                 </div>
 
                 <div class='content caption-holder'>
@@ -174,7 +191,10 @@ class Destinations extends Component {
                 class='destination-grid-item-02 caption-relative set-height-1'
               >
                 <div class='image'>
-                  <img src='images/image-destination/06.jpg' alt='image' />
+                  <LazyLoadImage
+                    src='images/image-destination/06.jpg'
+                    alt='image'
+                  />
                 </div>
 
                 <div class='content caption-holder'>

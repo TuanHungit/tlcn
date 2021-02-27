@@ -1,0 +1,21 @@
+@keyframes loaded {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.lazy-load-img {
+  display: block;
+  object-fit: cover;
+  height: 100%;
+}
+.lazy-load-img .has-error {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII=);
+}
+
+.lazy-load-img .loaded:not(.has-error) {
+  animation: loaded 800ms ease-in-out;
+  -webkit-animation: loaded 800ms ease-in-out;
+}
